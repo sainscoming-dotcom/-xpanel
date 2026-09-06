@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>XPanel — Diazz_Kaneki</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:radial-gradient(circle at top,#152a4a 0,#070b13 45%,#03050a 100%);color:#fff;min-height:100vh}
+.container{max-width:1050px;margin:auto;padding:30px 20px}
+nav{display:flex;justify-content:space-between;align-items:center;padding:14px 0}
+.logo{font-size:25px;font-weight:800;color:#55cfff}
+.badge{padding:8px 14px;border:1px solid #28658a;border-radius:20px;background:#0b1c2b;color:#9edfff}
+.hero{text-align:center;padding:90px 0 55px}
+.hero h1{font-size:64px;margin:0 0 15px;background:linear-gradient(90deg,#43d9ff,#8b7cff,#ff5fcf);-webkit-background-clip:text;color:transparent}
+.hero p{font-size:20px;color:#aebbd0;max-width:650px;margin:0 auto 30px;line-height:1.6}
+.btn{display:inline-block;padding:15px 28px;border-radius:12px;text-decoration:none;font-weight:800;color:white;background:linear-gradient(90deg,#168bd1,#765cff);box-shadow:0 10px 35px #168bd144;transition:.2s}
+.btn:hover{transform:translateY(-3px);box-shadow:0 15px 40px #168bd166}
+.cardgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:30px 0}
+.card{background:#0b111d;border:1px solid #1b3048;border-radius:18px;padding:25px;box-shadow:0 10px 35px #0005}
+.card h3{margin-top:0;color:#7bddff}
+.card p{color:#9aa9bd;line-height:1.5}
+.download{margin:55px 0;background:linear-gradient(135deg,#0e2035,#11142a);border:1px solid #28547b;border-radius:24px;padding:45px;text-align:center}
+.download h2{font-size:32px;margin-top:0}
+.small{color:#718096;margin-top:18px}
+footer{text-align:center;padding:35px;color:#65748a}
+@media(max-width:750px){.cardgrid{grid-template-columns:1fr}.hero h1{font-size:44px}.hero{padding-top:55px}}
+</style>
+</head>
+<body>
+<div class="container">
+<nav>
+<div class="logo">XPanel</div>
+<div class="badge">Arizona RP • Server 20</div>
+</nav>
+
+<section class="hero">
+<h1>XPanel</h1>
+<p>Красивый игровой MoonLoader-скрипт от <b>Diazz_Kaneki</b> для удобного автонадевания маски и управления настройками прямо в игре.</p>
+<a class="btn" href="XPanel_ArizonaRP.lua" download>⬇ Скачать XPanel</a>
+</section>
+
+<section class="cardgrid">
+<div class="card"><h3>⏱ Автомаска</h3><p>Автоматическая отправка команды /mask каждые 10 минут с возможностью включения и выключения.</p></div>
+<div class="card"><h3>🎨 XPanel</h3><p>Современная красочная панель, открываемая командой /xpanel или .чзфтуд.</p></div>
+<div class="card"><h3>🔐 VIP</h3><p>Закрытый VIP-раздел с системой ключей доступа.</p></div>
+</section>
+
+<section class="download">
+<h2>Скачать последнюю версию</h2>
+<p>Версия 1.0 • MoonLoader • Diazz_Kaneki</p>
+<a class="btn" href="XPanel_ArizonaRP.lua" download>Скачать .LUA</a>
+<div class="small">Файл предназначен для папки moonloader</div>
+</section>
+
+<footer>
+© 2026 Diazz_Kaneki • XPanel • Arizona RP Server 20
+</footer>
+</div>
+</body>
+</html>
