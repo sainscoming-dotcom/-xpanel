@@ -1,1610 +1,281 @@
-<!DOCTYPE html>
-
-<html lang="ru">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>XPanel Arizona RP 2.1</title>
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
-
-body{
-font-family:Arial,sans-serif;
-color:#fff;
-background:
-radial-gradient(circle at 15% 20%,#7c3aed44,transparent 30%),
-radial-gradient(circle at 85% 10%,#ec489933,transparent 28%),
-#070711;
-min-height:100vh
-}
-
-button,a,input{font:inherit}
-button,a{cursor:pointer}
-
-.wrap{
-max-width:1150px;
-margin:auto;
-padding:0 20px
-}
-
-header{
-position:sticky;
-top:0;
-z-index:20;
-background:#070711dd;
-backdrop-filter:blur(18px);
-border-bottom:1px solid #ffffff12
-}
-
-.nav{
-min-height:70px;
-display:flex;
-align-items:center;
-justify-content:space-between;
-gap:15px
-}
-
-.logo{
-font-size:25px;
-font-weight:900;
-color:#b56cff
-}
-
-.navlinks{
-display:flex;
-gap:8px;
-flex-wrap:wrap
-}
-
-.btn{
-display:inline-flex;
-align-items:center;
-justify-content:center;
-border:0;
-border-radius:12px;
-padding:11px 16px;
-background:#171725;
-color:#fff;
-text-decoration:none;
-font-weight:800
-}
-
-.btn:hover{
-background:#29293d
-}
-
-.primary{
-background:linear-gradient(135deg,#6d28d9,#a855f7,#db2777)
-}
-
-.hidden{
-display:none!important
-}
-
-.hero{
-text-align:center;
-padding:95px 0 55px
-}
-
-.badge{
-display:inline-block;
-padding:8px 14px;
-border-radius:99px;
-border:1px solid #a855f755;
-background:#8b5cf61c;
-color:#d8b4fe;
-font-weight:800
-}
-
-.hero h1{
-font-size:clamp(65px,12vw,125px);
-line-height:.9;
-margin:22px 0;
-background:linear-gradient(
-90deg,
-#8b5cf6,
-#c026d3,
-#ec4899,
-#f43f5e
+create table if not exists public.roles (
+    id uuid primary key default gen_random_uuid(),
+    name text not null unique,
+    color text not null default '#8b5cf6',
+    special_key text unique,
+    created_at timestamptz not null default now()
 );
--webkit-background-clip:text;
-color:transparent
-}
 
-.hero h2{
-font-size:28px;
-color:#ddd
-}
-
-.hero p{
-max-width:700px;
-margin:17px auto;
-color:#999;
-line-height:1.6
-}
-
-.actions{
-display:flex;
-gap:12px;
-justify-content:center;
-flex-wrap:wrap;
-margin:28px 0
-}
-
-.author{
-color:#777
-}
-
-.author b{
-color:#bd8cff
-}
-
-.panel,
-.download{
-background:#0e0e1bd9;
-border:1px solid #ffffff10;
-border-radius:24px;
-padding:28px;
-margin:25px 0
-}
-
-.download{
-border-color:#a855f744
-}
-
-.panel h2,
-.download h2{
-margin-bottom:20px
-}
-
-.grid{
-display:grid;
-grid-template-columns:
-repeat(auto-fit,minmax(220px,1fr));
-gap:16px
-}
-
-.card{
-padding:23px;
-background:#10101d;
-border:1px solid #ffffff0d;
-border-radius:18px
-}
-
-.card:hover{
-border-color:#a855f755;
-transform:translateY(-3px)
-}
-
-.icon{
-font-size:30px;
-margin-bottom:12px
-}
-
-.card p{
-color:#999;
-line-height:1.5;
-margin-top:8px
-}
-
-.file{
-display:inline-block;
-margin:15px 0;
-padding:9px 13px;
-border-radius:9px;
-background:#090911;
-border:1px solid #ffffff12;
-color:#c4b5fd;
-font-family:monospace
-}
-
-.steps{
-display:grid;
-gap:12px
-}
-
-.step{
-display:flex;
-gap:14px;
-align-items:center;
-padding:15px;
-background:#10101c;
-border-radius:13px;
-color:#bbb
-}
-
-.num{
-min-width:36px;
-height:36px;
-border-radius:50%;
-display:grid;
-place-items:center;
-background:linear-gradient(135deg,#7c3aed,#a855f7);
-font-weight:900
-}
-
-.modal{
-position:fixed;
-inset:0;
-z-index:50;
-background:#000b;
-display:grid;
-place-items:center;
-padding:20px
-}
-
-.modalbox{
-width:min(650px,100%);
-max-height:90vh;
-overflow:auto;
-background:#11111f;
-border:1px solid #a855f744;
-border-radius:22px;
-padding:25px
-}
-
-.field{
-margin:10px 0
-}
-
-.field label{
-display:block;
-color:#aaa;
-margin-bottom:6px
-}
-
-.field input{
-width:100%;
-padding:12px;
-border-radius:11px;
-border:1px solid #ffffff15;
-background:#090912;
-color:#fff;
-outline:none
-}
-
-.modal-actions{
-display:flex;
-gap:10px;
-margin-top:18px;
-flex-wrap:wrap
-}
-
-.message{
-margin-top:12px;
-color:#fca5a5;
-min-height:20px
-}
-
-.success{
-color:#86efac
-}
-
-.account{
-display:grid;
-gap:15px
-}
-
-.status{
-color:#86efac
-}
-
-footer{
-text-align:center;
-color:#666;
-padding:45px 20px;
-border-top:1px solid #ffffff0a
-}
-
-footer b{
-color:#a855f7
-}
-
-@media(max-width:700px){
-
-.nav{
-flex-direction:column;
-padding:15px
-}
-
-.hero{
-padding-top:60px
-}
-
-.panel,
-.download{
-padding:21px
-}
-
-}
-
-.codebox{
-    background:#090912;
-    border:1px solid #a855f744;
-    border-radius:18px;
-    overflow:auto;
-    margin-top:18px;
-}
-
-.codebox pre{
-    margin:0;
-    padding:20px;
-    color:#d8b4fe;
-    font-family:Consolas,Monaco,monospace;
-    font-size:13px;
-    line-height:1.55;
-    white-space:pre;
-}
-
-</style>
-
-</head>
-
-<body>
-
-<header>
-<div class="wrap nav">
-
-<div class="logo">
-⚡ XPanel
-</div>
-
-<div class="navlinks">
-
-<button class="btn" onclick="go('home')">
-Главная
-</button>
-
-<button class="btn" onclick="go('features')">
-Возможности
-</button>
-
-<button class="btn" onclick="go('install')">
-Установка
-</button>
-
-<button class="btn" onclick="go('script-code')">
-Код
-</button>
-
-<button
-class="btn"
-id="loginBtn"
-onclick="openAuth()"
-
-
-
-Войти
-</button>
-
-<button
-class="btn primary hidden"
-id="cabBtn"
-onclick="openCabinet()"
-
-
-
-Личный кабинет
-</button>
-
-</div>
-</div>
-</header>
-
-<main class="wrap">
-
-<section id="home" class="hero">
-
-<span class="badge">
-⚡ XPanel Arizona RP • VERSION 2.1
-</span>
-
-<h1>
-XPanel
-</h1>
-
-<h2>
-Arizona RP • Server 20
-</h2>
-
-<p>
-Удобная игровая панель с автоматическим обновлением маски,
-таймером и быстрыми действиями.
-</p>
-
-<div class="actions">
-
-<a
-class="btn primary"
-href="./XPanel_Arizona_RP_2.1.lua"
-download="XPanel_Arizona_RP_2.1.lua"
-
-
-
-📥 Скачать XPanel 2.1
-</a>
-
-<button
-class="btn"
-onclick="go('features')"
-
-
-
-🚀 Возможности
-</button>
-
-</div>
-
-<div class="author">
-Автор: <b>Diazz_Kaneki</b> • Server 20
-</div>
-
-</section>
-
-<section class="download">
-
-<h2>
-🔥 XPanel Arizona RP 2.1
-</h2>
-
-<p style="color:#999">
-Последняя версия панели.
-Скачай файл и перемести его в папку
-<b>moonloader</b>.
-</p>
-
-<div class="file">
-XPanel_Arizona_RP_2.1.lua
-</div>
-
-<br>
-
-<a
-class="btn primary"
-href="./XPanel_Arizona_RP_2.1.lua"
-download="XPanel_Arizona_RP_2.1.lua"
-
-
-
-⬇ Скачать файл
-</a>
-
-</section>
-
-<section id="features" class="panel">
-
-<h2>
-🚀 Возможности XPanel 2.1
-</h2>
-
-<div class="grid">
-
-<div class="card">
-<div class="icon">🎭</div>
-<h3>Автомаска</h3>
-<p>
-Автоматическое обновление маски после окончания таймера.
-</p>
-</div>
-
-<div class="card">
-<div class="icon">⏱️</div>
-<h3>Таймер</h3>
-<p>
-По умолчанию 10 минут с возможностью настройки.
-</p>
-</div>
-
-<div class="card">
-<div class="icon">⚡</div>
-<h3>Игровая панель</h3>
-<p>
-Панель открывается командой <b>/xpanel</b>.
-</p>
-</div>
-
-<div class="card">
-<div class="icon">🎮</div>
-<h3>Быстрые действия</h3>
-<p>
-Управление функциями прямо из игры.
-</p>
-</div>
-
-</div>
-
-</section>
-
-<section id="install" class="panel">
-
-<h2>
-📦 Как установить
-</h2>
-
-<div class="steps">
-
-<div class="step">
-<span class="num">1</span>
-Нажми «Скачать XPanel 2.1».
-</div>
-
-<div class="step">
-<span class="num">2</span>
-Найди XPanel_Arizona_RP_2.1.lua.
-</div>
-
-<div class="step">
-<span class="num">3</span>
-Перемести файл в GTA San Andreas → moonloader.
-</div>
-
-<div class="step">
-<span class="num">4</span>
-Запусти Arizona RP и введи /xpanel.
-</div>
-
-</div>
-
-</section>
-
-<section class="panel" id="script-code">
-
-<h2>💻 Код XPanel 2.1</h2>
-
-<p style="color:#999;margin-bottom:15px">
-Полный исходный код текущей версии XPanel.
-</p>
-
-<div class="codebox">
-
-<pre><code>script_name("XPanel Arizona RP")
-script_author("Diazz_Kaneki | Server 20")
-script_version("2.1.0")
-script_description("XPanel Arizona RP - purple UI and automatic mask timer")
-
-require "lib.moonloader"
-
-local ok_imgui, imgui = pcall(require, "mimgui")
-local ok_encoding, encoding = pcall(require, "encoding")
-
-if not ok_imgui then
-
-    function main()
-
-        while not isSampAvailable() do
-            wait(100)
-        end
-
-        sampAddChatMessage(
-            "{FF4444}[XPanel] {FFFFFF}Не найдена библиотека mimgui в moonloader/lib.",
-            -1
-        )
-
-        while true do
-            wait(1000)
-        end
-
-    end
-
-    return
-
-end
-
-local u8 = function(s) return s end
-
-if ok_encoding then
-
-    encoding.default = "CP1251"
-    u8 = encoding.UTF8
-
-end
-
-local showWindow = imgui.new.bool(false)
-local autoMask = imgui.new.bool(true)
-local interval = imgui.new.int(10)
-
-local secondsLeft = 600
-local status = "Таймер запущен"
-local lastAppliedInterval = 10
-
-local function chat(text)
-
-    sampAddChatMessage(
-        "{9B6CFF}[XPanel] {FFFFFF}" .. text,
-        -1
-    )
-
-end
-
-local function resetTimer()
-
-    lastAppliedInterval =
-        math.max(
-            1,
-            math.min(
-                60,
-                interval[0]
-            )
-        )
-
-    secondsLeft =
-        lastAppliedInterval * 60
-
-    status = "Таймер запущен"
-
-end
-
-local function updateMask()
-
-    -- Если на вашем сервере команда маски другая, замените /mask здесь.
-    sampSendChat("/mask")
-
-    resetTimer()
-
-    status = "Маска обновлена"
-
-end
-
-local function timeText(sec)
-
-    sec = math.max(0, sec)
-
-    local m =
-        math.floor(sec / 60)
-
-    local s =
-        sec % 60
-
-    return string.format(
-        "%02d:%02d",
-        m,
-        s
-    )
-
-end
-
-local function setupStyle()
-
-    local style =
-        imgui.GetStyle()
-
-    style.WindowRounding = 14
-    style.ChildRounding = 12
-    style.FrameRounding = 9
-    style.PopupRounding = 10
-    style.ScrollbarRounding = 9
-    style.GrabRounding = 9
-    style.TabRounding = 9
-
-    style.WindowBorderSize = 1.0
-    style.ChildBorderSize = 1.0
-    style.FrameBorderSize = 1.0
-    style.PopupBorderSize = 1.0
-
-    style.WindowPadding =
-        imgui.ImVec2(18, 18)
-
-    style.FramePadding =
-        imgui.ImVec2(12, 9)
-
-    style.ItemSpacing =
-        imgui.ImVec2(10, 10)
-
-    style.ItemInnerSpacing =
-        imgui.ImVec2(8, 6)
-
-    style.ScrollbarSize = 12
-
-end
-
-local function beginPurpleTheme()
-
-    imgui.PushStyleColor(
-        imgui.Col.WindowBg,
-        imgui.ImVec4(
-            0.035,
-            0.018,
-            0.085,
-            0.985
-        )
-    )
-
-    imgui.PushStyleColor(
-        imgui.Col.ChildBg,
-        imgui.ImVec4(
-            0.055,
-            0.025,
-            0.120,
-            0.96
-        )
-    )
-
-    imgui.PushStyleColor(
-        imgui.Col.PopupBg,
-        imgui.ImVec4(
-            0.055,
-            0.025,
-            0.120,
-            0.98
-        )
-    )
-
-    imgui.PushStyleColor(
-        imgui.Col.Border,
-        imgui.ImVec4(
-            0.42,
-            0.18,
-            0.78,
-            0.70
-        )
-    )
-
-    imgui.PushStyleColor(
-        imgui.Col.FrameBg,
-        imgui.ImVec4(
-            0.10,
-            0.045,
-            0.22,
-            1.0
-        )
-    )
-
-    imgui.PushStyleColor(
-        imgui.Col.FrameBgHovered,
-        imgui.ImVec4(
-            0.19,
-            0.07,
-            0.38,
-            1.0
-        )
-    )
-
-    imgui.PushStyleColor(
-        imgui.Col.FrameBgActive,
-        imgui.ImVec4(
-            0.27,
-            0.10,
-            0.52,
-            1.0
-        )
-    )
-
-    imgui.PushStyleColor(
-        imgui.Col.Button,
-        imgui.ImVec4(
-            0.22,
-            0.08,
-            0.48,
-            1.0
-        )
-    )
-
-    imgui.PushStyleColor(
-        imgui.Col.ButtonHovered,
-        imgui.ImVec4(
-            0.38,
-            0.13,
-            0.72,
-            1.0
-        )
-    )
-
-    imgui.PushStyleColor(
-        imgui.Col.ButtonActive,
-        imgui.ImVec4(
-            0.52,
-            0.20,
-            0.88,
-            1.0
-        )
-    )
-
-    imgui.PushStyleColor(
-        imgui.Col.Header,
-        imgui.ImVec4(
-            0.25,
-            0.09,
-            0.52,
-            1.0
-        )
-    )
-
-    imgui.PushStyleColor(
-        imgui.Col.HeaderHovered,
-        imgui.ImVec4(
-            0.38,
-            0.13,
-            0.72,
-            1.0
-        )
-    )
-
-    imgui.PushStyleColor(
-        imgui.Col.HeaderActive,
-        imgui.ImVec4(
-            0.48,
-            0.18,
-            0.82,
-            1.0
-        )
-    )
-
-    imgui.PushStyleColor(
-        imgui.Col.CheckMark,
-        imgui.ImVec4(
-            0.70,
-            0.38,
-            1.0,
-            1.0
-        )
-    )
-
-    imgui.PushStyleColor(
-        imgui.Col.SliderGrab,
-        imgui.ImVec4(
-            0.62,
-            0.30,
-            0.95,
-            1.0
-        )
-    )
-
-    imgui.PushStyleColor(
-        imgui.Col.SliderGrabActive,
-        imgui.ImVec4(
-            0.80,
-            0.48,
-            1.0,
-            1.0
-        )
-    )
-
-    imgui.PushStyleColor(
-        imgui.Col.Text,
-        imgui.ImVec4(
-            0.95,
-            0.91,
-            1.0,
-            1.0
-        )
-    )
-
-    imgui.PushStyleColor(
-        imgui.Col.TextDisabled,
-        imgui.ImVec4(
-            0.63,
-            0.54,
-            0.75,
-            1.0
-        )
-    )
-
-end
-
-local function endPurpleTheme()
-
-    imgui.PopStyleColor(17)
-
-end
-
-sampRegisterChatCommand(
-    "xpanel",
-    function()
-
-        showWindow[0] =
-            not showWindow[0]
-
-    end
+create table if not exists public.user_roles (
+    user_id uuid not null references public.profiles(id) on delete cascade,
+    role_id uuid not null references public.roles(id) on delete cascade,
+    created_at timestamptz not null default now(),
+    primary key (user_id, role_id)
+);
+
+alter table public.roles enable row level security;
+alter table public.user_roles enable row level security;
+
+drop policy if exists "roles read" on public.roles;
+create policy "roles read"
+on public.roles for select
+to authenticated
+using (true);
+
+drop policy if exists "user roles read" on public.user_roles;
+create policy "user roles read"
+on public.user_roles for select
+to authenticated
+using (auth.uid() = user_id);
+
+insert into public.roles (name,color,special_key)
+values
+('Premium','#ffe04b','premium'),
+('Developer','#ff4d4d','developer')
+on conflict (name) do update
+set color=excluded.color,
+    special_key=excluded.special_key;
+
+create or replace function public.is_developer()
+returns boolean
+language sql
+security definer
+set search_path=public
+as $$
+select exists(
+    select 1
+    from public.profiles
+    where id=auth.uid()
+      and is_developer=true
+);
+$$;
+
+create or replace function public.get_my_roles()
+returns table(
+    id uuid,
+    name text,
+    color text,
+    special_key text
 )
+language sql
+security definer
+set search_path=public
+as $$
+select r.id,r.name,r.color,r.special_key
+from public.user_roles ur
+join public.roles r on r.id=ur.role_id
+where ur.user_id=auth.uid()
+order by r.created_at;
+$$;
 
-imgui.OnInitialize(
-    function()
-
-        setupStyle()
-
-    end
+create or replace function public.developer_get_roles()
+returns table(
+    id uuid,
+    name text,
+    color text,
+    special_key text,
+    created_at timestamptz
 )
-
-imgui.OnFrame(
-    function()
-
-        return showWindow[0]
-
-    end,
-
-    function()
-
-        imgui.SetNextWindowSize(
-            imgui.ImVec2(760, 600),
-            imgui.Cond.FirstUseEver
-        )
-
-        imgui.SetNextWindowSizeConstraints(
-            imgui.ImVec2(560, 430),
-            imgui.ImVec2(1400, 1000)
-        )
-
-        beginPurpleTheme()
-
-        imgui.Begin(
-            u8("XPanel Arizona RP 2.1"),
-            showWindow,
-            imgui.WindowFlags.NoCollapse
-        )
-
-        imgui.TextColored(
-            imgui.ImVec4(
-                0.72,
-                0.42,
-                1.0,
-                1.0
-            ),
-            u8("◆  XPANEL ARIZONA RP")
-        )
-
-        imgui.SameLine()
-
-        imgui.TextColored(
-            imgui.ImVec4(
-                0.63,
-                0.55,
-                0.75,
-                1.0
-            ),
-            u8("   |   Управление игровыми функциями")
-        )
-
-        imgui.SameLine()
-
-        imgui.TextColored(
-            imgui.ImVec4(
-                0.82,
-                0.65,
-                1.0,
-                1.0
-            ),
-            u8("Diazz_Kaneki  •  Server 20")
-        )
-
-        imgui.Separator()
-
-        imgui.Spacing()
-
-        imgui.BeginChild(
-            "settings",
-            imgui.ImVec2(0, 150),
-            true
-        )
-
-        imgui.TextColored(
-            imgui.ImVec4(
-                0.72,
-                0.42,
-                1.0,
-                1.0
-            ),
-            u8("⚙  НАСТРОЙКИ")
-        )
-
-        imgui.TextColored(
-            imgui.ImVec4(
-                0.63,
-                0.55,
-                0.75,
-                1.0
-            ),
-            u8("Автоматическое обновление маски")
-        )
-
-        imgui.Spacing()
-
-        imgui.Checkbox(
-            u8("Автоматически обновлять маску"),
-            autoMask
-        )
-
-        imgui.SameLine()
-
-        imgui.SetCursorPosX(
-            imgui.GetWindowWidth() - 335
-        )
-
-        imgui.Text(
-            u8("Интервал:")
-        )
-
-        imgui.SameLine()
-
-        imgui.PushItemWidth(80)
-
-        imgui.InputInt(
-            "##interval",
-            interval
-        )
-
-        imgui.PopItemWidth()
-
-        if interval[0] < 1 then
-            interval[0] = 1
-        end
-
-        if interval[0] > 60 then
-            interval[0] = 60
-        end
-
-        imgui.SameLine()
-
-        if imgui.Button(
-            u8("Применить##interval"),
-            imgui.ImVec2(115, 30)
-        ) then
-
-            resetTimer()
-
-            chat(
-                "Интервал установлен: "
-                .. interval[0]
-                .. " мин."
-            )
-
-        end
-
-        imgui.EndChild()
-
-        imgui.Spacing()
-
-        imgui.BeginChild(
-            "status",
-            imgui.ImVec2(0, 92),
-            true
-        )
-
-        imgui.TextColored(
-            imgui.ImVec4(
-                0.72,
-                0.42,
-                1.0,
-                1.0
-            ),
-            u8("◉  СОСТОЯНИЕ")
-        )
-
-        imgui.SameLine()
-
-        if autoMask[0] then
-
-            imgui.TextColored(
-                imgui.ImVec4(
-                    0.45,
-                    1.0,
-                    0.65,
-                    1.0
-                ),
-                u8("● АКТИВНО")
-            )
-
-        else
-
-            imgui.TextColored(
-                imgui.ImVec4(
-                    1.0,
-                    0.55,
-                    0.55,
-                    1.0
-                ),
-                u8("● ВЫКЛЮЧЕНО")
-            )
-
-        end
-
-        imgui.Spacing()
-
-        imgui.Text(
-            u8("До обновления:  ")
-        )
-
-        imgui.SameLine()
-
-        imgui.TextColored(
-            imgui.ImVec4(
-                0.82,
-                0.65,
-                1.0,
-                1.0
-            ),
-            timeText(secondsLeft)
-        )
-
-        imgui.SameLine()
-
-        imgui.TextColored(
-            imgui.ImVec4(
-                0.63,
-                0.55,
-                0.75,
-                1.0
-            ),
-            u8("   •   " .. status)
-        )
-
-        imgui.EndChild()
-
-        imgui.Spacing()
-
-        imgui.BeginChild(
-            "mask",
-            imgui.ImVec2(0, 128),
-            true
-        )
-
-        imgui.TextColored(
-            imgui.ImVec4(
-                0.72,
-                0.42,
-                1.0,
-                1.0
-            ),
-            u8("♢  МАСКА ПЕРСОНАЖА")
-        )
-
-        imgui.TextColored(
-            imgui.ImVec4(
-                0.63,
-                0.55,
-                0.75,
-                1.0
-            ),
-            u8("Быстрые действия")
-        )
-
-        imgui.Spacing()
-
-        local w =
-            (imgui.GetWindowWidth() - 30) / 2
-
-        if imgui.Button(
-            u8("НАДЕТЬ / ОБНОВИТЬ МАСКУ"),
-            imgui.ImVec2(w, 46)
-        ) then
-
-            updateMask()
-
-        end
-
-        imgui.SameLine()
-
-        if imgui.Button(
-            u8("СБРОСИТЬ ТАЙМЕР"),
-            imgui.ImVec2(w, 46)
-        ) then
-
-            resetTimer()
-
-            chat("Таймер сброшен.")
-
-        end
-
-        imgui.EndChild()
-
-        imgui.Spacing()
-
-        imgui.BeginChild(
-            "commands",
-            imgui.ImVec2(0, 0),
-            true
-        )
-
-        imgui.TextColored(
-            imgui.ImVec4(
-                0.72,
-                0.42,
-                1.0,
-                1.0
-            ),
-            u8("ℹ  ИНФОРМАЦИЯ И КОМАНДЫ")
-        )
-
-        imgui.TextColored(
-            imgui.ImVec4(
-                0.63,
-                0.55,
-                0.75,
-                1.0
-            ),
-            u8("Доступные команды панели")
-        )
-
-        imgui.Spacing()
-
-        if imgui.Button(
-            u8("/xpanel"),
-            imgui.ImVec2(120, 34)
-        ) then
-
-        end
-
-        imgui.SameLine()
-
-        imgui.Text(
-            u8("Открыть панель управления")
-        )
-
-        imgui.SameLine()
-
-        imgui.TextColored(
-            imgui.ImVec4(
-                0.55,
-                0.45,
-                0.68,
-                1.0
-            ),
-            u8("   Команда открытия XPanel")
-        )
-
-        if imgui.Button(
-            u8("/mask"),
-            imgui.ImVec2(120, 34)
-        ) then
-
-            updateMask()
-
-        end
-
-        imgui.SameLine()
-
-        imgui.Text(
-            u8("Надеть / обновить маску")
-        )
-
-        imgui.SameLine()
-
-        imgui.TextColored(
-            imgui.ImVec4(
-                0.55,
-                0.45,
-                0.68,
-                1.0
-            ),
-            u8("   Команда сервера")
-        )
-
-        imgui.Spacing()
-
-        imgui.TextColored(
-            imgui.ImVec4(
-                0.55,
-                0.45,
-                0.68,
-                1.0
-            ),
-            u8(
-                "Размер окна можно изменять мышью за нижний правый угол."
-            )
-        )
-
-        imgui.EndChild()
-
-        imgui.Spacing()
-
-        imgui.TextColored(
-            imgui.ImVec4(
-                0.55,
-                0.45,
-                0.68,
-                1.0
-            ),
-            u8("XPanel Arizona RP v2.1.0")
-        )
-
-        imgui.SameLine()
-
-        imgui.SetCursorPosX(
-            imgui.GetWindowWidth() - 155
-        )
-
-        imgui.TextColored(
-            imgui.ImVec4(
-                0.65,
-                0.50,
-                0.85,
-                1.0
-            ),
-            u8("Server 20  •  09:34")
-        )
-
-        imgui.End()
-
-        endPurpleTheme()
-
-    end
+language sql
+security definer
+set search_path=public
+as $$
+select r.id,r.name,r.color,r.special_key,r.created_at
+from public.roles r
+where public.is_developer()
+order by r.created_at;
+$$;
+
+create or replace function public.developer_create_role(
+    role_name text,
+    role_color text
 )
-
-function main()
-
-    while not isSampAvailable() do
-        wait(100)
-    end
-
-    wait(1000)
-
-    resetTimer()
-
-    chat(
-        "XPanel 2.1 загружен! Открытие панели: {C8B6FF}/xpanel"
-    )
-
-    while true do
-
-        wait(1000)
-
-        if autoMask[0] then
-
-            secondsLeft =
-                secondsLeft - 1
-
-            if secondsLeft <= 0 then
-
-                updateMask()
-
-            end
-
-        end
-
-    end
-
-end
-</code></pre>
-
-</div>
-
-</section>
-
-<section class="panel" style="text-align:center">
-
-<h2>
-📢 Telegram автора
-</h2>
-
-<p style="color:#999;margin:10px 0 20px">
-Новости, обновления XPanel и другие проекты.
-</p>
-
-<a
-class="btn primary"
-href="https://t.me/skypkaazinona"
-target="_blank"
-
-
-
-📱 Открыть Telegram
-</a>
-
-</section>
-
-</main>
-
-<footer>
-
-XPanel © 2026 • Arizona RP Server 20
-<br>
-Автор: <b>Diazz_Kaneki</b>
-
-</footer>
-
-<!-- LOGIN -->
-
-<div
-class="modal hidden"
-id="authModal"
->
-
-<div class="modalbox">
-
-<h2>
-🔐 Вход
-</h2>
-
-<div class="field">
-
-<label>
-Email
-</label>
-
-<input
-id="email"
-type="email"
-autocomplete="email"
-placeholder="example@mail.com"
-
-
-
-</div>
-
-<div class="field">
-
-<label>
-Пароль
-</label>
-
-<input
-id="password"
-type="password"
-autocomplete="current-password"
-placeholder="Пароль"
-
-
-
-</div>
-
-<div class="modal-actions">
-
-<button
-class="btn primary"
-onclick="login()"
-
-
-
-Войти
-</button>
-
-<button
-class="btn"
-onclick="register()"
-
-
-
-Регистрация
-</button>
-
-<button
-class="btn"
-onclick="closeModal('authModal')"
-
-
-
-Закрыть
-</button>
-
-</div>
-
-<div
-class="message"
-id="authMsg"
-></div>
-
-</div>
-</div>
-
-<!-- CABINET -->
-
-<div
-class="modal hidden"
-id="cabModal"
->
-
-<div class="modalbox">
-
-<h2>
-👤 Личный кабинет
-</h2>
-
-<div
-id="userInfo"
-class="account"
->
-</div>
-
-<br>
-
-<button
-class="btn"
-onclick="logout()"
-
-
-
-Выйти
-</button>
-
-<br><br>
-
-<button
-class="btn"
-onclick="closeModal('cabModal')"
-
-
-
-Закрыть
-</button>
-
-</div>
-</div>
-
-<script>
-
-// =====================================================
-// SUPABASE
-// =====================================================
-
-const SUPABASE_URL =
-'https://geimapwjvykzihwytjsu.supabase.co';
-
-
-// =====================================================
-// ВСТАВЬ СЮДА СВОЙ PUBLISHABLE KEY
-// =====================================================
-
-const SUPABASE_ANON_KEY =
-'sb_publishable_bw3marsbGsI_XFzwCV6W_g_t7tkGS3G';
-
-
-// =====================================================
-// СОЗДАНИЕ SUPABASE CLIENT
-// =====================================================
-
-let supabaseClient = null;
-
-let session = null;
-
-
-function initSupabase(){
-
-if(
-typeof window.supabase === 'undefined'
-){
-
-showConnectionError(
-'Supabase JS не загрузился. Проверь интернет или подключение CDN.'
-);
-
-return false;
-
-}
-
-
-if(
-!SUPABASE_ANON_KEY ||
-SUPABASE_ANON_KEY.includes(
-'ВСТАВЬ_СЮДА'
+returns uuid
+language plpgsql
+security definer
+set search_path=public
+as $$
+declare new_id uuid;
+begin
+    if not public.is_developer() then
+        raise exception 'Access denied';
+    end if;
+
+    insert into public.roles(name,color)
+    values(trim(role_name),lower(role_color))
+    returning id into new_id;
+
+    return new_id;
+end;
+$$;
+
+create or replace function public.developer_delete_role(
+    role_id uuid
 )
-){
+returns boolean
+language plpgsql
+security definer
+set search_path=public
+as $$
+begin
+    if not public.is_developer() then
+        raise exception 'Access denied';
+    end if;
 
-showConnectionError(
-'Вставь Publishable key в коде.'
-);
+    if exists(
+        select 1 from public.roles
+        where id=role_id and special_key is not null
+    ) then
+        raise exception 'Системную роль удалить нельзя';
+    end if;
 
-return false;
+    delete from public.roles where id=role_id;
 
-}
+    return true;
+end;
+$$;
 
+create or replace function public.developer_get_users_with_roles()
+returns jsonb
+language plpgsql
+security definer
+set search_path=public
+as $$
+declare result jsonb;
+begin
+    if not public.is_developer() then
+        raise exception 'Access denied';
+    end if;
 
-try{
+    select coalesce(jsonb_agg(
+        jsonb_build_object(
+            'id',p.id,
+            'username',p.username,
+            'roles',coalesce((
+                select jsonb_agg(
+                    jsonb_build_object(
+                        'id',r.id,
+                        'name',r.name,
+                        'color',r.color,
+                        'special_key',r.special_key
+                    )
+                )
+                from public.user_roles ur
+                join public.roles r on r.id=ur.role_id
+                where ur.user_id=p.id
+            ),'[]'::jsonb)
+        )
+    ),'[]'::jsonb)
+    into result
+    from public.profiles p;
 
-supabaseClient =
-window.supabase.createClient(
-SUPABASE_URL,
-SUPABASE_ANON_KEY
-);
+    return result;
+end;
+$$;
 
-return true;
+create or replace function public.developer_assign_role(
+    target_user_id uuid,
+    role_id uuid
+)
+returns boolean
+language plpgsql
+security definer
+set search_path=public
+as $$
+declare special text;
+begin
+    if not public.is_developer() then
+        raise exception 'Access denied';
+    end if;
 
-}catch(error){
+    select special_key
+    into special
+    from public.roles
+    where id=role_id;
 
-console.error(error);
+    if special is null and not exists(
+        select 1 from public.roles where id=role_id
+    ) then
+        raise exception 'Роль не найдена';
+    end if;
 
-showConnectionError(
-'Ошибка создания подключения Supabase.'
-);
+    insert into public.user_roles(user_id,role_id)
+    values(target_user_id,role_id)
+    on conflict do nothing;
 
-return false;
+    if special='premium' then
+        update public.profiles
+        set is_premium=true
+        where id=target_user_id;
+    end if;
 
-}
+    if special='developer' then
+        update public.profiles
+        set is_developer=true
+        where id=target_user_id;
+    end if;
 
-}
+    return true;
+end;
+$$;
 
+create or replace function public.developer_remove_role(
+    target_user_id uuid,
+    role_id uuid
+)
+returns boolean
+language plpgsql
+security definer
+set search_path=public
+as $$
+declare special text;
+begin
+    if not public.is_developer() then
+        raise exception 'Access denied';
+    end if;
 
-function showConnectionError(text){
+    select special_key
+    into special
+    from public.roles
+    where id=role_id;
 
-console.e
+    delete from public.user_roles
+    where user_id=target_user_id
+      and user_roles.role_id=developer_remove_role.role_id;
+
+    if special='premium' then
+        update public.profiles
+        set is_premium=false
+        where id=target_user_id;
+    end if;
+
+    if special='developer' then
+        update public.profiles
+        set is_developer=false
+        where id=target_user_id;
+    end if;
+
+    return true;
+end;
+$$;
+
+grant execute on function public.is_developer() to authenticated;
+grant execute on function public.get_my_roles() to authenticated;
+grant execute on function public.developer_get_roles() to authenticated;
+grant execute on function public.developer_create_role(text,text) to authenticated;
+grant execute on function public.developer_delete_role(uuid) to authenticated;
+grant execute on function public.developer_get_users_with_roles() to authenticated;
+grant execute on function public.developer_assign_role(uuid,uuid) to authenticated;
+grant execute on function public.developer_remove_role(uuid,uuid) to authenticated;
+
+update public.profiles
+set is_developer=true
+where username='Diazz_Kaneki';
+
+insert into public.user_roles(user_id,role_id)
+select p.id,r.id
+from public.profiles p
+cross join public.roles r
+where p.username='Diazz_Kaneki'
+and r.special_key='developer'
+on conflict do nothing;
