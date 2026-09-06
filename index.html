@@ -1,1491 +1,1249 @@
-```html
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XPanel — Arizona RP</title>
 
-<title>XPanel — Diazz_Kaneki</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-<style>
-*{box-sizing:border-box}
+        body {
+            font-family: Arial, sans-serif;
+            background:
+                radial-gradient(circle at 20% 20%, #29105c 0, transparent 30%),
+                radial-gradient(circle at 80% 10%, #401020 0, transparent 25%),
+                #070711;
+            color: #fff;
+            min-height: 100vh;
+        }
 
-body{
-    margin:0;
-    font-family:Arial,sans-serif;
-    color:white;
-    min-height:100vh;
-    background:
-    radial-gradient(circle at 20% 0%,#182b52 0,#080d18 42%,#03050a 100%);
-}
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(7, 7, 17, .85);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255,255,255,.08);
+        }
 
-.container{
-    max-width:1100px;
-    margin:auto;
-    padding:20px;
-}
+        nav {
+            max-width: 1150px;
+            margin: auto;
+            padding: 18px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
 
-nav{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:15px;
-    flex-wrap:wrap;
-    padding:15px 0;
-}
+        .logo {
+            font-size: 24px;
+            font-weight: 900;
+            color: #a855f7;
+            text-shadow: 0 0 20px #8b5cf6;
+        }
 
-.logo{
-    font-size:29px;
-    font-weight:900;
-    color:#55cfff;
-}
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
 
-.nav-buttons{
-    display:flex;
-    gap:8px;
-    flex-wrap:wrap;
-}
+        button,
+        .button {
+            border: none;
+            border-radius: 12px;
+            padding: 11px 17px;
+            background: #171725;
+            color: white;
+            cursor: pointer;
+            font-weight: 700;
+            transition: .2s;
+            text-decoration: none;
+            display: inline-block;
+        }
 
-.nav-btn{
-    background:#0b1421;
-    color:white;
-    border:1px solid #29445f;
-    padding:11px 16px;
-    border-radius:10px;
-    cursor:pointer;
-    font-weight:bold;
-}
+        button:hover,
+        .button:hover {
+            transform: translateY(-2px);
+            background: #242438;
+        }
 
-.nav-btn:hover{
-    background:#17283b;
-}
+        .purple {
+            background: linear-gradient(135deg, #7c3aed, #a855f7);
+            box-shadow: 0 0 25px rgba(168,85,247,.35);
+        }
 
-.server{
-    padding:8px 14px;
-    border-radius:20px;
-    background:#0b1c2b;
-    border:1px solid #28658a;
-    color:#9edfff;
-}
+        .red {
+            background: #7f1d1d;
+        }
 
-.hero{
-    text-align:center;
-    padding:80px 0 55px;
-}
+        .green {
+            background: #166534;
+        }
 
-.hero h1{
-    margin:0;
-    font-size:68px;
-    background:linear-gradient(90deg,#43d9ff,#8b7cff,#ff5fcf);
-    -webkit-background-clip:text;
-    color:transparent;
-}
+        main {
+            max-width: 1150px;
+            margin: auto;
+            padding: 70px 20px;
+        }
 
-.hero p{
-    max-width:720px;
-    margin:20px auto 30px;
-    color:#aebbd0;
-    font-size:19px;
-    line-height:1.6;
-}
+        .hero {
+            text-align: center;
+            padding: 80px 20px;
+        }
 
-.btn{
-    display:inline-block;
-    border:0;
-    border-radius:12px;
-    padding:14px 25px;
-    color:white;
-    text-decoration:none;
-    font-weight:800;
-    cursor:pointer;
-    background:linear-gradient(90deg,#168bd1,#765cff);
-    box-shadow:0 10px 35px #168bd144;
-    transition:.2s;
-}
+        .hero h1 {
+            font-size: clamp(48px, 9vw, 100px);
+            font-weight: 1000;
+            background: linear-gradient(90deg,#8b5cf6,#ec4899,#f43f5e);
+            -webkit-background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 50px rgba(168,85,247,.2);
+        }
 
-.btn:hover{
-    transform:translateY(-3px);
-}
+        .hero p {
+            margin-top: 15px;
+            color: #aaa;
+            font-size: 18px;
+        }
 
-.cards{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:18px;
-}
+        .hero-buttons {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
 
-.card{
-    background:#0b111d;
-    border:1px solid #1c3048;
-    border-radius:18px;
-    padding:25px;
-}
+        .section {
+            margin-top: 45px;
+            background: rgba(14,14,27,.85);
+            border: 1px solid rgba(255,255,255,.08);
+            border-radius: 22px;
+            padding: 28px;
+            box-shadow: 0 20px 60px rgba(0,0,0,.25);
+        }
 
-.card h3{
-    color:#7bddff;
-    margin-top:0;
-}
+        .section h2 {
+            margin-bottom: 20px;
+        }
 
-.card p{
-    color:#9aa9bd;
-    line-height:1.5;
-}
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit,minmax(230px,1fr));
+            gap: 18px;
+        }
 
-.download{
-    text-align:center;
-    margin:55px 0;
-    padding:45px 20px;
-    border-radius:24px;
-    background:linear-gradient(135deg,#0e2035,#11142a);
-    border:1px solid #28547b;
-}
+        .card {
+            background: #10101d;
+            border: 1px solid rgba(255,255,255,.07);
+            padding: 25px;
+            border-radius: 18px;
+        }
 
-.download h2{
-    font-size:31px;
-}
+        .card h3 {
+            margin-bottom: 10px;
+        }
 
-.small{
-    margin-top:18px;
-    color:#718096;
-}
+        .card p {
+            color: #999;
+            line-height: 1.5;
+        }
 
-.section{
-    display:none;
-    margin:40px 0;
-}
+        input,
+        select {
+            width: 100%;
+            padding: 13px;
+            border-radius: 11px;
+            border: 1px solid #29293b;
+            background: #0b0b15;
+            color: white;
+            outline: none;
+            margin-top: 8px;
+        }
 
-.box{
-    background:#0b111d;
-    border:1px solid #263d57;
-    border-radius:22px;
-    padding:30px;
-    box-shadow:0 10px 40px #0006;
-}
+        input:focus,
+        select:focus {
+            border-color: #8b5cf6;
+        }
 
-.profile-name{
-    font-size:24px;
-    font-weight:bold;
-}
+        label {
+            display: block;
+            margin-top: 13px;
+            color: #bbb;
+        }
 
-.roles{
-    display:flex;
-    gap:10px;
-    flex-wrap:wrap;
-    margin:20px 0;
-}
+        .form-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 17px;
+            flex-wrap: wrap;
+        }
 
-.role{
-    padding:9px 15px;
-    border-radius:12px;
-    font-weight:bold;
-}
+        .account {
+            display: none;
+        }
 
-.user{
-    background:#172333;
-    border:1px solid #33465d;
-}
+        .profile-name {
+            font-size: 26px;
+            font-weight: 900;
+        }
 
-.premium{
-    background:#3b3106;
-    border:1px solid #e5c51b;
-    color:#ffe96a;
-}
+        .roles {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 9px;
+            margin-top: 15px;
+        }
 
-.developer{
-    background:#3b0b0b;
-    border:1px solid #ff3030;
-    color:#ff5c5c;
-}
+        .role-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 7px 12px;
+            border-radius: 999px;
+            font-size: 13px;
+            font-weight: 800;
+            border: 1px solid rgba(255,255,255,.12);
+        }
 
-.admin{
-    display:none;
-    margin:40px 0;
-}
+        .developer-panel {
+            display: none;
+        }
 
-.admin-box{
-    background:linear-gradient(145deg,#120d18,#0b111d);
-    border:1px solid #702d82;
-    border-radius:22px;
-    padding:30px;
-    box-shadow:0 15px 50px #0008;
-}
+        .role-create {
+            display: grid;
+            grid-template-columns: 1fr 80px auto;
+            gap: 10px;
+            align-items: end;
+        }
 
-.admin-title{
-    margin-top:0;
-    font-size:30px;
-    background:linear-gradient(90deg,#ff4d4d,#d36aff);
-    -webkit-background-clip:text;
-    color:transparent;
-}
+        .color-input {
+            height: 45px;
+            padding: 3px;
+            cursor: pointer;
+        }
 
-.description{
-    color:#9faabd;
-    margin-bottom:20px;
-}
+        .role-list {
+            margin-top: 20px;
+            display: grid;
+            gap: 10px;
+        }
 
-.search{
-    width:100%;
-    padding:14px;
-    border-radius:12px;
-    border:1px solid #2a4058;
-    background:#070c14;
-    color:white;
-    outline:none;
-    margin-bottom:20px;
-}
+        .role-item {
+            background: #10101c;
+            border: 1px solid rgba(255,255,255,.07);
+            padding: 13px;
+            border-radius: 13px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
 
-.users{
-    display:flex;
-    flex-direction:column;
-    gap:12px;
-}
+        .role-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
 
-.user-row{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:15px;
-    padding:18px;
-    background:#080e18;
-    border:1px solid #20344a;
-    border-radius:15px;
-    flex-wrap:wrap;
-}
+        .role-dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+        }
 
-.user-name{
-    font-size:18px;
-    font-weight:bold;
-}
+        .users-list {
+            margin-top: 20px;
+            display: grid;
+            gap: 12px;
+        }
 
-.user-id{
-    color:#65748a;
-    font-size:10px;
-    word-break:break-all;
-    margin-top:6px;
-}
+        .user-item {
+            background: #10101c;
+            border: 1px solid rgba(255,255,255,.07);
+            padding: 16px;
+            border-radius: 15px;
+        }
 
-.user-roles{
-    display:flex;
-    gap:5px;
-    flex-wrap:wrap;
-    margin-top:8px;
-}
+        .user-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
 
-.mini{
-    padding:4px 8px;
-    border-radius:6px;
-    font-size:11px;
-}
+        .username {
+            font-weight: 900;
+            font-size: 17px;
+        }
 
-.mini-premium{
-    background:#5d5000;
-    color:#ffe95b;
-}
+        .user-roles {
+            display: flex;
+            gap: 7px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
 
-.mini-developer{
-    background:#681515;
-    color:#ff7070;
-}
+        .user-actions {
+            display: grid;
+            grid-template-columns: 1fr auto auto;
+            gap: 8px;
+            margin-top: 12px;
+        }
 
-.actions{
-    display:flex;
-    gap:8px;
-    flex-wrap:wrap;
-}
+        .system-role {
+            color: #aaa;
+            font-size: 12px;
+        }
 
-.action{
-    border:0;
-    border-radius:9px;
-    padding:10px 13px;
-    color:white;
-    cursor:pointer;
-    font-weight:bold;
-}
+        .message {
+            margin-top: 12px;
+            padding: 12px;
+            border-radius: 10px;
+            display: none;
+            background: #10101d;
+        }
 
-.action:hover{
-    opacity:.8;
-}
+        .success {
+            border: 1px solid #166534;
+            color: #86efac;
+        }
 
-.p-on{background:#9b8300}
-.p-off{background:#313131}
-.d-on{background:#b21e1e}
-.d-off{background:#313131}
+        .error {
+            border: 1px solid #7f1d1d;
+            color: #fca5a5;
+        }
 
-.modal{
-    display:none;
-    position:fixed;
-    inset:0;
-    z-index:1000;
-    background:#000c;
-    align-items:center;
-    justify-content:center;
-    padding:20px;
-}
+        .empty {
+            color: #777;
+            padding: 10px 0;
+        }
 
-.modal-box{
-    width:100%;
-    max-width:430px;
-    padding:30px;
-    border-radius:20px;
-    background:#0b111d;
-    border:1px solid #294661;
-    box-shadow:0 20px 80px #000;
-}
+        footer {
+            text-align: center;
+            padding: 50px 20px;
+            color: #666;
+        }
 
-.input{
-    width:100%;
-    padding:13px;
-    margin:7px 0;
-    border-radius:10px;
-    border:1px solid #2b4259;
-    background:#060b12;
-    color:white;
-    outline:none;
-}
+        @media(max-width:700px) {
+            .role-create {
+                grid-template-columns: 1fr;
+            }
 
-.modal-buttons{
-    display:flex;
-    gap:10px;
-    margin-top:15px;
-}
+            .user-actions {
+                grid-template-columns: 1fr;
+            }
 
-.modal-buttons button{
-    flex:1;
-}
-
-.close{
-    background:#252d38;
-}
-
-.switch{
-    text-align:center;
-    margin-top:18px;
-    color:#75cfff;
-    cursor:pointer;
-}
-
-.error{
-    color:#ff6565;
-    margin-top:12px;
-}
-
-.success{
-    color:#61e391;
-    margin-top:12px;
-}
-
-.message{
-    margin:15px 0;
-    display:none;
-    padding:12px;
-    border-radius:10px;
-}
-
-footer{
-    text-align:center;
-    padding:40px 0;
-    color:#65748a;
-}
-
-@media(max-width:750px){
-    .cards{
-        grid-template-columns:1fr;
-    }
-
-    .hero h1{
-        font-size:45px;
-    }
-
-    .hero{
-        padding-top:55px;
-    }
-
-    .user-row{
-        align-items:flex-start;
-    }
-}
-</style>
+            nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-<div class="container">
+<header>
+    <nav>
+        <div class="logo">⚡ XPanel</div>
 
-<nav>
+        <div class="nav-buttons">
+            <button onclick="showSection('home')">Главная</button>
+            <button onclick="showSection('login')">Войти</button>
+            <button onclick="showSection('register')">Регистрация</button>
+            <button onclick="showSection('account')">Личный кабинет</button>
+        </div>
+    </nav>
+</header>
 
-    <div class="logo">
-        XPanel
-    </div>
+<main>
 
-    <div class="nav-buttons">
+    <!-- ГЛАВНАЯ -->
+    <section id="home" class="hero">
+        <h1>XPanel</h1>
+        <p>Arizona RP • Server 20</p>
 
-        <button class="nav-btn" onclick="openLogin()">
-            Войти
-        </button>
+        <div class="hero-buttons">
+            <a class="button purple"
+               href="./XPanel_ArizonaRP.lua"
+               download="XPanel_ArizonaRP.lua">
+                📥 Скачать XPanel
+            </a>
 
-        <button class="nav-btn" onclick="openRegister()">
-            Регистрация
-        </button>
+            <button onclick="showSection('account')">
+                👤 Личный кабинет
+            </button>
+        </div>
+    </section>
 
-        <button
-            class="nav-btn"
-            id="accountButton"
-            style="display:none"
-            onclick="showAccount()">
+    <section class="section">
+        <h2>🚀 Возможности</h2>
 
-            👤 Личный кабинет
+        <div class="cards">
 
-        </button>
+            <div class="card">
+                <h3>🎭 Автомаска</h3>
+                <p>
+                    Автоматическое управление маской в игре
+                    после окончания действия предыдущей.
+                </p>
+            </div>
 
-    </div>
+            <div class="card">
+                <h3>⚡ XPanel</h3>
+                <p>
+                    Удобная игровая панель с красивым
+                    интерфейсом.
+                </p>
+            </div>
 
-    <div class="server">
-        Arizona RP • Server 20
-    </div>
+            <div class="card">
+                <h3>👤 Аккаунты</h3>
+                <p>
+                    Регистрация, авторизация, личный кабинет
+                    и система ролей.
+                </p>
+            </div>
 
-</nav>
+            <div class="card">
+                <h3>🛠️ Developer</h3>
+                <p>
+                    Управление Premium, Developer и
+                    пользовательскими ролями.
+                </p>
+            </div>
 
+        </div>
+    </section>
 
-<section class="hero">
+    <!-- LOGIN -->
+    <section id="login" class="section" style="display:none;">
+        <h2>🔐 Вход</h2>
 
-    <h1>XPanel</h1>
+        <label>Email</label>
+        <input id="loginEmail" type="email" placeholder="Введите email">
 
-    <p>
-        Игровой MoonLoader-скрипт от
-        <b>Diazz_Kaneki</b>
-        для Arizona RP.
-    </p>
+        <label>Пароль</label>
+        <input id="loginPassword" type="password" placeholder="Введите пароль">
 
-    <a
-        class="btn"
-        href="./XPanel_ArizonaRP.lua"
-        download="XPanel_ArizonaRP.lua">
+        <div class="form-buttons">
+            <button class="purple" onclick="login()">
+                Войти
+            </button>
+        </div>
 
-        ⬇ Скачать XPanel
+        <div id="loginMessage" class="message"></div>
+    </section>
 
-    </a>
+    <!-- REGISTER -->
+    <section id="register" class="section" style="display:none;">
+        <h2>📝 Регистрация</h2>
 
-</section>
+        <label>Игровой ник</label>
+        <input id="registerUsername" placeholder="Например: Diazz_Kaneki">
 
+        <label>Email</label>
+        <input id="registerEmail" type="email" placeholder="Введите email">
 
-<section class="cards">
+        <label>Пароль</label>
+        <input id="registerPassword" type="password" placeholder="Минимум 6 символов">
 
-    <div class="card">
-        <h3>⏱ Автомаска</h3>
-        <p>
-            Автоматическая работа маски
-            с заданным интервалом.
-        </p>
-    </div>
+        <div class="form-buttons">
+            <button class="purple" onclick="register()">
+                Зарегистрироваться
+            </button>
+        </div>
 
-    <div class="card">
-        <h3>🎨 XPanel</h3>
-        <p>
-            Удобная игровая панель,
-            открываемая командой /xpanel.
-        </p>
-    </div>
+        <div id="registerMessage" class="message"></div>
+    </section>
 
-    <div class="card">
-        <h3>🔐 Система аккаунтов</h3>
-        <p>
-            Регистрация, вход,
-            Premium и Developer.
-        </p>
-    </div>
+    <!-- ACCOUNT -->
+    <section id="account" class="section account">
+        <h2>👤 Личный кабинет</h2>
 
-</section>
-
-
-<section class="download">
-
-    <h2>
-        Скачать последнюю версию
-    </h2>
-
-    <p>
-        XPanel • MoonLoader • Diazz_Kaneki
-    </p>
-
-    <a
-        class="btn"
-        href="./XPanel_ArizonaRP.lua"
-        download="XPanel_ArizonaRP.lua">
-
-        Скачать .LUA
-
-    </a>
-
-    <div class="small">
-        Файл предназначен для папки moonloader.
-    </div>
-
-</section>
-
-
-<!-- ЛИЧНЫЙ КАБИНЕТ -->
-
-<section
-    class="section"
-    id="account">
-
-    <div class="box">
-
-        <h2>
-            👤 Личный кабинет
-        </h2>
-
-        <div
-            class="profile-name"
-            id="profileName">
-
+        <div class="profile-name" id="profileName">
             Загрузка...
-
         </div>
 
-        <div
-            class="roles"
-            id="roles">
+        <div id="profileRoles" class="roles"></div>
 
+        <div class="form-buttons">
+            <button class="red" onclick="logout()">
+                🚪 Выйти
+            </button>
         </div>
 
-        <button
-            class="btn"
-            onclick="logout()">
+        <div id="accountMessage" class="message"></div>
+    </section>
 
-            🚪 Выйти
+    <!-- DEVELOPER -->
+    <section id="developerPanel" class="section developer-panel">
 
-        </button>
+        <h2>🛠️ Панель разработчика</h2>
 
-    </div>
+        <p style="color:#888;margin-bottom:20px;">
+            Здесь Developer может создавать роли и управлять ролями пользователей.
+        </p>
 
-</section>
+        <!-- CREATE ROLE -->
+        <div class="card">
+            <h3>➕ Создать роль</h3>
 
+            <div class="role-create">
 
-<!-- DEVELOPER PANEL -->
+                <div>
+                    <label>Название роли</label>
+                    <input id="newRoleName"
+                           maxlength="40"
+                           placeholder="Например: Moderator">
+                </div>
 
-<section
-    class="admin"
-    id="adminPanel">
+                <div>
+                    <label>Цвет</label>
+                    <input id="newRoleColor"
+                           class="color-input"
+                           type="color"
+                           value="#8b5cf6">
+                </div>
 
-    <div class="admin-box">
+                <button class="purple" onclick="createRole()">
+                    Создать
+                </button>
 
-        <h2 class="admin-title">
-            🔴 Developer Panel
-        </h2>
+            </div>
 
-        <div class="description">
-
-            Developer может управлять ролями
-            пользователей XPanel.
-
+            <div id="roleMessage" class="message"></div>
         </div>
 
-        <input
-            id="userSearch"
-            class="search"
-            placeholder="🔎 Поиск пользователя..."
-            oninput="filterUsers()"
-        >
+        <!-- ROLES -->
+        <div class="card" style="margin-top:18px;">
+            <h3>🎨 Роли</h3>
 
-        <div
-            id="adminMessage"
-            class="message">
+            <div id="roleList" class="role-list">
+                <div class="empty">Загрузка ролей...</div>
+            </div>
         </div>
 
-        <div
-            id="usersList"
-            class="users">
+        <!-- USERS -->
+        <div class="card" style="margin-top:18px;">
+            <h3>👥 Пользователи</h3>
 
-            Загрузка...
+            <input id="userSearch"
+                   placeholder="🔎 Поиск пользователя..."
+                   oninput="renderUsers()">
 
+            <div id="usersList" class="users-list">
+                <div class="empty">Загрузка пользователей...</div>
+            </div>
         </div>
 
-    </div>
+    </section>
 
-</section>
-
+</main>
 
 <footer>
-    © 2026 Diazz_Kaneki • XPanel • Arizona RP Server 20
+    XPanel © 2026 • Arizona RP Server 20
 </footer>
 
-</div>
-
-
-<!-- ОКНО АВТОРИЗАЦИИ -->
-
-<div
-    class="modal"
-    id="authModal">
-
-    <div class="modal-box">
-
-        <h2 id="authTitle">
-            Вход
-        </h2>
-
-        <input
-            id="usernameInput"
-            class="input"
-            placeholder="Username"
-            style="display:none"
-        >
-
-        <input
-            id="emailInput"
-            class="input"
-            type="email"
-            placeholder="Email"
-        >
-
-        <input
-            id="passwordInput"
-            class="input"
-            type="password"
-            placeholder="Пароль"
-        >
-
-        <div class="modal-buttons">
-
-            <button
-                class="btn"
-                id="authSubmit"
-                onclick="submitAuth()">
-
-                Войти
-
-            </button>
-
-            <button
-                class="btn close"
-                onclick="closeAuth()">
-
-                Закрыть
-
-            </button>
-
-        </div>
-
-        <div
-            class="switch"
-            id="authSwitch"
-            onclick="switchAuth()">
-
-            Нет аккаунта? Регистрация
-
-        </div>
-
-        <div id="authMessage"></div>
-
-    </div>
-
-</div>
-
-
 <script>
+    const SUPABASE_URL = "https://geimapwjvykzihwytjsu.supabase.co";
 
-/* =========================================
-   SUPABASE
-========================================= */
+    const SUPABASE_KEY =
+        "sb_publishable_bw3marsbGsI_XFzwCV6W_g_t7tkGS3G";
 
-const SUPABASE_URL =
-"https://geimapwjvykzihwytjsu.supabase.co";
-
-const SUPABASE_KEY =
-"sb_publishable_bw3marsbGsI_XFzwCV6W_g_t7tkGS3G";
-
-const supabaseClient =
-window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_KEY
-);
-
-
-/* =========================================
-   VARIABLES
-========================================= */
-
-let authMode = "login";
-let currentUser = null;
-let allUsers = [];
-
-
-/* =========================================
-   AUTH WINDOWS
-========================================= */
-
-function openLogin(){
-
-    authMode = "login";
-
-    document.getElementById("authModal").style.display="flex";
-
-    document.getElementById("authTitle").textContent="Вход";
-
-    document.getElementById("usernameInput").style.display="none";
-
-    document.getElementById("authSubmit").textContent="Войти";
-
-    document.getElementById("authSwitch").textContent=
-        "Нет аккаунта? Регистрация";
-
-    clearAuthMessage();
-}
-
-
-function openRegister(){
-
-    authMode = "register";
-
-    document.getElementById("authModal").style.display="flex";
-
-    document.getElementById("authTitle").textContent="Регистрация";
-
-    document.getElementById("usernameInput").style.display="block";
-
-    document.getElementById("authSubmit").textContent=
-        "Зарегистрироваться";
-
-    document.getElementById("authSwitch").textContent=
-        "Уже есть аккаунт? Войти";
-
-    clearAuthMessage();
-}
-
-
-function closeAuth(){
-
-    document.getElementById("authModal").style.display="none";
-
-}
-
-
-function switchAuth(){
-
-    if(authMode==="login"){
-        openRegister();
-    }else{
-        openLogin();
-    }
-
-}
-
-
-function clearAuthMessage(){
-
-    document.getElementById("authMessage").innerHTML="";
-
-}
-
-
-/* =========================================
-   REGISTRATION / LOGIN
-========================================= */
-
-async function submitAuth(){
-
-    const email =
-        document.getElementById("emailInput").value.trim();
-
-    const password =
-        document.getElementById("passwordInput").value;
-
-    const username =
-        document.getElementById("usernameInput").value.trim();
-
-
-    if(!email || !password){
-
-        showAuthMessage(
-            "Заполни email и пароль.",
-            false
+    const supabaseClient =
+        window.supabase.createClient(
+            SUPABASE_URL,
+            SUPABASE_KEY
         );
 
-        return;
-    }
+    let currentUser = null;
+    let currentRoles = [];
+    let allRoles = [];
+    let allUsers = [];
 
+    function showSection(id) {
+        const sections = [
+            "home",
+            "login",
+            "register",
+            "account"
+        ];
 
-    if(authMode==="register"){
+        sections.forEach(section => {
+            const el = document.getElementById(section);
 
-        if(!username){
+            if (!el) return;
 
-            showAuthMessage(
-                "Введите username.",
-                false
-            );
-
-            return;
-        }
-
-
-        if(!/^[a-zA-Z0-9_]+$/.test(username)){
-
-            showAuthMessage(
-                "Username: только английские буквы, цифры и _.",
-                false
-            );
-
-            return;
-        }
-
-
-        const {data,error} =
-        await supabaseClient.auth.signUp({
-
-            email:email,
-
-            password:password,
-
-            options:{
-                data:{
-                    username:username
-                }
+            if (section === id) {
+                el.style.display =
+                    section === "home" ? "block" : "block";
+            } else {
+                el.style.display = "none";
             }
-
         });
 
+        if (id === "account") {
+            loadAccount();
+        }
+    }
 
-        if(error){
+    function message(id, text, success = true) {
+        const el = document.getElementById(id);
 
-            showAuthMessage(
+        if (!el) return;
+
+        el.textContent = text;
+        el.className =
+            "message " + (success ? "success" : "error");
+
+        el.style.display = "block";
+    }
+
+    async function register() {
+        const username =
+            document.getElementById("registerUsername").value.trim();
+
+        const email =
+            document.getElementById("registerEmail").value.trim();
+
+        const password =
+            document.getElementById("registerPassword").value;
+
+        if (!username || !email || !password) {
+            message(
+                "registerMessage",
+                "Заполни все поля.",
+                false
+            );
+            return;
+        }
+
+        if (password.length < 6) {
+            message(
+                "registerMessage",
+                "Пароль должен содержать минимум 6 символов.",
+                false
+            );
+            return;
+        }
+
+        const { data, error } =
+            await supabaseClient.auth.signUp({
+                email,
+                password,
+                options: {
+                    data: {
+                        username: username
+                    }
+                }
+            });
+
+        if (error) {
+            message(
+                "registerMessage",
                 error.message,
                 false
             );
-
             return;
         }
 
+        message(
+            "registerMessage",
+            "Регистрация выполнена. Теперь можешь войти.",
+            true
+        );
+    }
 
-        if(data.session){
+    async function login() {
+        const email =
+            document.getElementById("loginEmail").value.trim();
 
-            currentUser=data.user;
+        const password =
+            document.getElementById("loginPassword").value;
 
-            closeAuth();
+        const { data, error } =
+            await supabaseClient.auth.signInWithPassword({
+                email,
+                password
+            });
 
-            await updateInterface();
-
-        }else{
-
-            showAuthMessage(
-                "Аккаунт создан. Проверь почту для подтверждения.",
-                true
-            );
-
-        }
-
-    }else{
-
-        const {data,error} =
-        await supabaseClient.auth.signInWithPassword({
-
-            email:email,
-
-            password:password
-
-        });
-
-
-        if(error){
-
-            showAuthMessage(
-                "Ошибка входа: "+error.message,
+        if (error) {
+            message(
+                "loginMessage",
+                error.message,
                 false
             );
+            return;
+        }
+
+        currentUser = data.user;
+
+        message(
+            "loginMessage",
+            "Успешный вход!",
+            true
+        );
+
+        await loadAccount();
+
+        setTimeout(() => {
+            showSection("account");
+        }, 400);
+    }
+
+    async function logout() {
+        await supabaseClient.auth.signOut();
+
+        currentUser = null;
+        currentRoles = [];
+
+        document.getElementById("developerPanel").style.display = "none";
+
+        showSection("home");
+    }
+
+    async function loadAccount() {
+        const { data: sessionData } =
+            await supabaseClient.auth.getSession();
+
+        currentUser =
+            sessionData?.session?.user || null;
+
+        const account =
+            document.getElementById("account");
+
+        if (!currentUser) {
+            account.style.display = "block";
+
+            document.getElementById("profileName").textContent =
+                "Ты не авторизован.";
+
+            document.getElementById("profileRoles").innerHTML =
+                "<span style='color:#888'>Войди в аккаунт, чтобы увидеть профиль.</span>";
+
+            document.getElementById("developerPanel").style.display =
+                "none";
 
             return;
         }
 
+        const { data: profile, error } =
+            await supabaseClient
+                .from("profiles")
+                .select("*")
+                .eq("id", currentUser.id)
+                .single();
 
-        currentUser=data.user;
+        if (error) {
+            document.getElementById("profileName").textContent =
+                "Ошибка загрузки профиля";
 
-        closeAuth();
+            return;
+        }
 
-        await updateInterface();
+        document.getElementById("profileName").textContent =
+            "@" + profile.username;
 
+        const { data: roles, error: rolesError } =
+            await supabaseClient.rpc("get_my_roles");
+
+        if (rolesError) {
+            console.error(rolesError);
+
+            currentRoles = [];
+
+            document.getElementById("profileRoles").innerHTML =
+                "<span style='color:#888'>Роли не загружены.</span>";
+        } else {
+            currentRoles = roles || [];
+
+            renderMyRoles();
+        }
+
+        const isDeveloper =
+            currentRoles.some(
+                role => role.special_key === "developer"
+            ) || profile.is_developer === true;
+
+        if (isDeveloper) {
+            document.getElementById("developerPanel").style.display =
+                "block";
+
+            await loadDeveloperPanel();
+        } else {
+            document.getElementById("developerPanel").style.display =
+                "none";
+        }
+
+        account.style.display = "block";
     }
 
-}
+    function renderMyRoles() {
+        const container =
+            document.getElementById("profileRoles");
 
+        container.innerHTML = "";
 
-function showAuthMessage(text,success){
+        if (!currentRoles.length) {
+            container.innerHTML =
+                "<span style='color:#777'>Нет ролей</span>";
+            return;
+        }
 
-    const element =
-        document.getElementById("authMessage");
+        currentRoles.forEach(role => {
+            const badge =
+                document.createElement("span");
 
-    element.className =
-        success ? "success" : "error";
+            badge.className = "role-badge";
 
-    element.textContent=text;
+            badge.style.color = role.color;
+            badge.style.borderColor = role.color;
 
-}
+            badge.textContent = role.name;
 
-
-/* =========================================
-   PROFILE
-========================================= */
-
-async function loadProfile(){
-
-    if(!currentUser)
-        return null;
-
-
-    const {data,error} =
-    await supabaseClient
-    .from("profiles")
-    .select("*")
-    .eq("id",currentUser.id)
-    .single();
-
-
-    if(error){
-
-        console.error(error);
-
-        return null;
+            container.appendChild(badge);
+        });
     }
 
-
-    return data;
-
-}
-
-
-/* =========================================
-   INTERFACE
-========================================= */
-
-async function updateInterface(){
-
-    const accountButton =
-        document.getElementById("accountButton");
-
-
-    if(!currentUser){
-
-        accountButton.style.display="none";
-
-        document.getElementById("account")
-        .style.display="none";
-
-        document.getElementById("adminPanel")
-        .style.display="none";
-
-        return;
+    async function loadDeveloperPanel() {
+        await loadRoles();
+        await loadUsers();
     }
 
+    async function loadRoles() {
+        const { data, error } =
+            await supabaseClient.rpc("developer_get_roles");
 
-    accountButton.style.display="block";
+        if (error) {
+            message(
+                "roleMessage",
+                error.message,
+                false
+            );
+            return;
+        }
 
-    await showAccount();
+        allRoles = data || [];
 
-}
-
-
-/* =========================================
-   ACCOUNT
-========================================= */
-
-async function showAccount(){
-
-    if(!currentUser)
-        return;
-
-
-    document.getElementById("account")
-    .style.display="block";
-
-
-    const profile =
-        await loadProfile();
-
-
-    if(!profile)
-        return;
-
-
-    document.getElementById("profileName")
-    .textContent="@"+profile.username;
-
-
-    const roles =
-        document.getElementById("roles");
-
-
-    roles.innerHTML="";
-
-
-    if(profile.is_developer){
-
-        roles.innerHTML +=
-        '<div class="role developer">🔴 Developer</div>';
-
+        renderRoles();
     }
 
+    function renderRoles() {
+        const container =
+            document.getElementById("roleList");
 
-    if(profile.is_premium){
+        container.innerHTML = "";
 
-        roles.innerHTML +=
-        '<div class="role premium">🟡 Premium</div>';
+        if (!allRoles.length) {
+            container.innerHTML =
+                "<div class='empty'>Ролей пока нет.</div>";
+            return;
+        }
 
+        allRoles.forEach(role => {
+
+            const item =
+                document.createElement("div");
+
+            item.className = "role-item";
+
+            const left =
+                document.createElement("div");
+
+            left.className = "role-left";
+
+            const dot =
+                document.createElement("span");
+
+            dot.className = "role-dot";
+            dot.style.background = role.color;
+            dot.style.boxShadow =
+                "0 0 12px " + role.color;
+
+            const name =
+                document.createElement("span");
+
+            name.textContent = role.name;
+
+            left.appendChild(dot);
+            left.appendChild(name);
+
+            const right =
+                document.createElement("div");
+
+            if (role.special_key) {
+                const system =
+                    document.createElement("span");
+
+                system.className = "system-role";
+
+                system.textContent =
+                    "Системная роль";
+
+                right.appendChild(system);
+            } else {
+                const deleteButton =
+                    document.createElement("button");
+
+                deleteButton.className = "red";
+
+                deleteButton.textContent =
+                    "🗑️ Удалить";
+
+                deleteButton.onclick = () =>
+                    deleteRole(role.id);
+
+                right.appendChild(deleteButton);
+            }
+
+            item.appendChild(left);
+            item.appendChild(right);
+
+            container.appendChild(item);
+        });
     }
 
+    async function createRole() {
+        const name =
+            document.getElementById("newRoleName").value.trim();
 
-    if(!profile.is_developer &&
-       !profile.is_premium){
+        const color =
+            document.getElementById("newRoleColor").value;
 
-        roles.innerHTML +=
-        '<div class="role user">👤 Пользователь</div>';
+        if (!name) {
+            message(
+                "roleMessage",
+                "Введите название роли.",
+                false
+            );
+            return;
+        }
 
+        const { error } =
+            await supabaseClient.rpc(
+                "developer_create_role",
+                {
+                    role_name: name,
+                    role_color: color
+                }
+            );
+
+        if (error) {
+            message(
+                "roleMessage",
+                error.message,
+                false
+            );
+            return;
+        }
+
+        document.getElementById("newRoleName").value = "";
+
+        message(
+            "roleMessage",
+            "Роль успешно создана!",
+            true
+        );
+
+        await loadRoles();
+        await loadUsers();
     }
 
+    async function deleteRole(roleId) {
+        const role =
+            allRoles.find(r => r.id === roleId);
 
-    await checkDeveloper();
+        if (!role) return;
 
+        if (role.special_key) {
+            message(
+                "roleMessage",
+                "Системную роль удалить нельзя.",
+                false
+            );
+            return;
+        }
 
-    document.getElementById("account")
-    .scrollIntoView({
-        behavior:"smooth"
-    });
+        if (!confirm(
+            "Удалить роль «" + role.name + "»?"
+        )) {
+            return;
+        }
 
-}
+        const { error } =
+            await supabaseClient.rpc(
+                "developer_delete_role",
+                {
+                    role_id: roleId
+                }
+            );
 
+        if (error) {
+            message(
+                "roleMessage",
+                error.message,
+                false
+            );
+            return;
+        }
 
-/* =========================================
-   LOGOUT
-========================================= */
+        message(
+            "roleMessage",
+            "Роль удалена.",
+            true
+        );
 
-async function logout(){
-
-    await supabaseClient.auth.signOut();
-
-    currentUser=null;
-
-    document.getElementById("account")
-    .style.display="none";
-
-    document.getElementById("adminPanel")
-    .style.display="none";
-
-    document.getElementById("accountButton")
-    .style.display="none";
-
-}
-
-
-/* =========================================
-   DEVELOPER CHECK
-========================================= */
-
-async function checkDeveloper(){
-
-    if(!currentUser)
-        return;
-
-
-    const {data,error} =
-    await supabaseClient.rpc(
-        "is_developer"
-    );
-
-
-    if(error){
-
-        console.error(error);
-
-        return;
+        await loadRoles();
+        await loadUsers();
     }
 
+    async function loadUsers() {
+        const { data, error } =
+            await supabaseClient.rpc(
+                "developer_get_users_with_roles"
+            );
 
-    if(data===true){
+        if (error) {
+            console.error(error);
 
-        document.getElementById("adminPanel")
-        .style.display="block";
+            document.getElementById("usersList").innerHTML =
+                "<div class='empty'>Ошибка: " +
+                escapeHtml(error.message) +
+                "</div>";
+
+            return;
+        }
+
+        allUsers = Array.isArray(data)
+            ? data
+            : [];
+
+        renderUsers();
+    }
+
+    function renderUsers() {
+        const container =
+            document.getElementById("usersList");
+
+        const search =
+            document.getElementById("userSearch")
+                .value
+                .trim()
+                .toLowerCase();
+
+        container.innerHTML = "";
+
+        const users =
+            allUsers.filter(user =>
+                String(user.username || "")
+                    .toLowerCase()
+                    .includes(search)
+            );
+
+        if (!users.length) {
+            container.innerHTML =
+                "<div class='empty'>Пользователи не найдены.</div>";
+            return;
+        }
+
+        users.forEach(user => {
+
+            const item =
+                document.createElement("div");
+
+            item.className = "user-item";
+
+            const top =
+                document.createElement("div");
+
+            top.className = "user-top";
+
+            const username =
+                document.createElement("div");
+
+            username.className = "username";
+
+            username.textContent =
+                "👤 @" + user.username;
+
+            top.appendChild(username);
+
+            item.appendChild(top);
+
+            const rolesBox =
+                document.createElement("div");
+
+            rolesBox.className = "user-roles";
+
+            const userRoles =
+                Array.isArray(user.roles)
+                    ? user.roles
+                    : [];
+
+            if (!userRoles.length) {
+                rolesBox.innerHTML =
+                    "<span style='color:#666'>Нет ролей</span>";
+            } else {
+                userRoles.forEach(role => {
+
+                    const badge =
+                        document.createElement("span");
+
+                    badge.className =
+                        "role-badge";
+
+                    badge.style.color =
+                        role.color;
+
+                    badge.style.borderColor =
+                        role.color;
+
+                    badge.textContent =
+                        role.name;
+
+                    rolesBox.appendChild(badge);
+                });
+            }
+
+            item.appendChild(rolesBox);
+
+            const actions =
+                document.createElement("div");
+
+            actions.className =
+                "user-actions";
+
+            const select =
+                document.createElement("select");
+
+            allRoles.forEach(role => {
+                const option =
+                    document.createElement("option");
+
+                option.value = role.id;
+                option.textContent = role.name;
+
+                select.appendChild(option);
+            });
+
+            const give =
+                document.createElement("button");
+
+            give.className = "green";
+            give.textContent = "➕ Выдать";
+
+            give.onclick = () =>
+                assignRole(user.id, select.value);
+
+            const remove =
+                document.createElement("button");
+
+            remove.className = "red";
+            remove.textContent = "➖ Снять";
+
+            remove.onclick = () =>
+                removeRole(user.id, select.value);
+
+            actions.appendChild(select);
+            actions.appendChild(give);
+            actions.appendChild(remove);
+
+            item.appendChild(actions);
+
+            container.appendChild(item);
+        });
+    }
+
+    async function assignRole(userId, roleId) {
+        if (!roleId) return;
+
+        const { error } =
+            await supabaseClient.rpc(
+                "developer_assign_role",
+                {
+                    target_user_id: userId,
+                    role_id: roleId
+                }
+            );
+
+        if (error) {
+            alert(error.message);
+            return;
+        }
 
         await loadUsers();
-
-    }else{
-
-        document.getElementById("adminPanel")
-        .style.display="none";
-
     }
 
-}
+    async function removeRole(userId, roleId) {
+        if (!roleId) return;
 
+        const { error } =
+            await supabaseClient.rpc(
+                "developer_remove_role",
+                {
+                    target_user_id: userId,
+                    role_id: roleId
+                }
+            );
 
-/* =========================================
-   USERS
-========================================= */
+        if (error) {
+            alert(error.message);
+            return;
+        }
 
-async function loadUsers(){
-
-    const list =
-        document.getElementById("usersList");
-
-
-    list.innerHTML="Загрузка пользователей...";
-
-
-    const {data,error} =
-    await supabaseClient.rpc(
-        "developer_get_users"
-    );
-
-
-    if(error){
-
-        list.innerHTML=
-        "<div class='error'>"+
-        "Не удалось загрузить пользователей."+
-        "</div>";
-
-        console.error(error);
-
-        return;
+        await loadUsers();
     }
 
-
-    allUsers=data || [];
-
-    renderUsers(allUsers);
-
-}
-
-
-/* =========================================
-   RENDER USERS
-========================================= */
-
-function renderUsers(users){
-
-    const list =
-        document.getElementById("usersList");
-
-
-    if(!users.length){
-
-        list.innerHTML=
-        "<div>Пользователи не найдены.</div>";
-
-        return;
-    }
-
-
-    list.innerHTML="";
-
-
-    users.forEach(user=>{
-
-        const row =
+    function escapeHtml(text) {
+        const div =
             document.createElement("div");
 
+        div.textContent = text;
 
-        row.className="user-row";
-
-
-        let roles="";
-
-
-        if(user.is_developer){
-
-            roles +=
-            '<span class="mini mini-developer">🔴 Developer</span>';
-
-        }
-
-
-        if(user.is_premium){
-
-            roles +=
-            '<span class="mini mini-premium">🟡 Premium</span>';
-
-        }
-
-
-        if(!roles){
-
-            roles=
-            '<span class="mini">👤 User</span>';
-
-        }
-
-
-        row.innerHTML=`
-
-        <div>
-
-            <div class="user-name">
-                👤 @${escapeHtml(user.username)}
-            </div>
-
-            <div class="user-roles">
-                ${roles}
-            </div>
-
-            <div class="user-id">
-                ID: ${escapeHtml(user.id)}
-            </div>
-
-        </div>
-
-
-        <div class="actions">
-
-            <button
-                class="action ${
-                    user.is_premium
-                    ? "p-on"
-                    : "p-off"
-                }"
-                onclick="
-                    togglePremium(
-                        '${user.id}',
-                        ${!user.is_premium}
-                    )
-                ">
-
-                ${
-                    user.is_premium
-                    ? "🟡 Снять Premium"
-                    : "🟡 Выдать Premium"
-                }
-
-            </button>
-
-
-            <button
-                class="action ${
-                    user.is_developer
-                    ? "d-on"
-                    : "d-off"
-                }"
-                onclick="
-                    toggleDeveloper(
-                        '${user.id}',
-                        ${!user.is_developer}
-                    )
-                ">
-
-                ${
-                    user.is_developer
-                    ? "🔴 Снять Developer"
-                    : "🔴 Выдать Developer"
-                }
-
-            </button>
-
-        </div>
-
-        `;
-
-
-        list.appendChild(row);
-
-    });
-
-}
-
-
-/* =========================================
-   PREMIUM
-========================================= */
-
-async function togglePremium(userId,value){
-
-    const {error} =
-    await supabaseClient.rpc(
-        "developer_set_premium",
-        {
-            target_user_id:userId,
-            new_value:value
-        }
-    );
-
-
-    if(error){
-
-        showAdminMessage(
-            "Ошибка: "+error.message,
-            false
-        );
-
-        return;
+        return div.innerHTML;
     }
 
-
-    showAdminMessage(
-        value
-        ? "🟡 Premium выдан!"
-        : "🟡 Premium снят!",
-        true
-    );
-
-
-    await loadUsers();
-
-}
-
-
-/* =========================================
-   DEVELOPER
-========================================= */
-
-async function toggleDeveloper(userId,value){
-
-    const {error} =
-    await supabaseClient.rpc(
-        "developer_set_developer",
-        {
-            target_user_id:userId,
-            new_value:value
-        }
-    );
-
-
-    if(error){
-
-        showAdminMessage(
-            "Ошибка: "+error.message,
-            false
-        );
-
-        return;
-    }
-
-
-    showAdminMessage(
-        value
-        ? "🔴 Developer выдан!"
-        : "🔴 Developer снят!",
-        true
-    );
-
-
-    await loadUsers();
-
-}
-
-
-/* =========================================
-   SEARCH
-========================================= */
-
-function filterUsers(){
-
-    const search =
-        document.getElementById("userSearch")
-        .value
-        .toLowerCase()
-        .trim();
-
-
-    const filtered =
-        allUsers.filter(
-            user =>
-            user.username
-            .toLowerCase()
-            .includes(search)
-        );
-
-
-    renderUsers(filtered);
-
-}
-
-
-/* =========================================
-   MESSAGE
-========================================= */
-
-function showAdminMessage(
-    text,
-    success
-){
-
-    const element =
-        document.getElementById("adminMessage");
-
-
-    element.style.display="block";
-
-
-    element.className=
-        "message "+
-        (success ? "success" : "error");
-
-
-    element.textContent=text;
-
-
-    setTimeout(()=>{
-
-        element.style.display="none";
-
-    },3000);
-
-}
-
-
-/* =========================================
-   SECURITY
-========================================= */
-
-function escapeHtml(text){
-
-    return String(text)
-    .replaceAll("&","&amp;")
-    .replaceAll("<","&lt;")
-    .replaceAll(">","&gt;")
-    .replaceAll('"',"&quot;")
-    .replaceAll("'","&#039;");
-
-}
-
-
-/* =========================================
-   SESSION
-========================================= */
-
-async function checkSession(){
-
-    const {data} =
-        await supabaseClient
-        .auth
-        .getSession();
-
-
-    currentUser =
-        data.session
-        ? data.session.user
-        : null;
-
-
-    await updateInterface();
-
-}
-
-
-supabaseClient.auth.onAuthStateChange(
-    async(event,session)=>{
+    async function checkSession() {
+        const { data } =
+            await supabaseClient.auth.getSession();
 
         currentUser =
-            session
-            ? session.user
-            : null;
+            data?.session?.user || null;
 
-        await updateInterface();
-
+        if (currentUser) {
+            await loadAccount();
+        }
     }
-);
 
+    supabaseClient.auth.onAuthStateChange(
+        async (event, session) => {
 
-checkSession();
+            currentUser =
+                session?.user || null;
 
+            if (currentUser) {
+                await loadAccount();
+            } else {
+                document.getElementById(
+                    "developerPanel"
+                ).style.display = "none";
+            }
+        }
+    );
+
+    checkSession();
 </script>
 
 </body>
 </html>
-```
