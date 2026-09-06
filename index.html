@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
@@ -339,6 +340,7 @@ padding:21px
 }
 
 </style>
+
 </head>
 
 <body>
@@ -372,7 +374,9 @@ padding:21px
 class="btn"
 id="loginBtn"
 onclick="openAuth()"
->
+
+
+
 Войти
 </button>
 
@@ -380,14 +384,15 @@ onclick="openAuth()"
 class="btn primary hidden"
 id="cabBtn"
 onclick="openCabinet()"
->
+
+
+
 Личный кабинет
 </button>
 
 </div>
 </div>
 </header>
-
 
 <main class="wrap">
 
@@ -414,16 +419,20 @@ Arizona RP • Server 20
 
 <a
 class="btn primary"
-href="./XPanel_Arizona_RP_2.0.1.lua"
-download="XPanel_Arizona_RP_2.0.1.lua"
->
-📥 Скачать XPanel 2.0.1
+href="./XPanel_Arizona_RP_2.1.lua"
+download="XPanel_Arizona_RP_2.1.lua"
+
+
+
+📥 Скачать XPanel 2.1
 </a>
 
 <button
 class="btn"
 onclick="go('features')"
->
+
+
+
 🚀 Возможности
 </button>
 
@@ -434,7 +443,6 @@ onclick="go('features')"
 </div>
 
 </section>
-
 
 <section class="download">
 
@@ -449,21 +457,22 @@ onclick="go('features')"
 </p>
 
 <div class="file">
-XPanel_Arizona_RP_2.0.1.lua
+XPanel_Arizona_RP_2.1.lua
 </div>
 
 <br>
 
 <a
 class="btn primary"
-href="./XPanel_Arizona_RP_2.0.1.lua"
-download="XPanel_Arizona_RP_2.0.1.lua"
->
+href="./XPanel_Arizona_RP_2.1.lua"
+download="XPanel_Arizona_RP_2.1.lua"
+
+
+
 ⬇ Скачать файл
 </a>
 
 </section>
-
 
 <section id="features" class="panel">
 
@@ -509,7 +518,6 @@ download="XPanel_Arizona_RP_2.0.1.lua"
 
 </section>
 
-
 <section id="install" class="panel">
 
 <h2>
@@ -520,12 +528,12 @@ download="XPanel_Arizona_RP_2.0.1.lua"
 
 <div class="step">
 <span class="num">1</span>
-Нажми «Скачать XPanel 2.0.1».
+Нажми «Скачать XPanel 2.1».
 </div>
 
 <div class="step">
 <span class="num">2</span>
-Найди XPanel_Arizona_RP_2.0.1.lua.
+Найди XPanel_Arizona_RP_2.1.lua.
 </div>
 
 <div class="step">
@@ -541,7 +549,6 @@ download="XPanel_Arizona_RP_2.0.1.lua"
 </div>
 
 </section>
-
 
 <section class="panel" id="script-code">
 
@@ -1355,7 +1362,6 @@ end
 
 </section>
 
-
 <section class="panel" style="text-align:center">
 
 <h2>
@@ -1370,14 +1376,15 @@ end
 class="btn primary"
 href="https://t.me/skypkaazinona"
 target="_blank"
->
+
+
+
 📱 Открыть Telegram
 </a>
 
 </section>
 
 </main>
-
 
 <footer>
 
@@ -1386,7 +1393,6 @@ XPanel © 2026 • Arizona RP Server 20
 Автор: <b>Diazz_Kaneki</b>
 
 </footer>
-
 
 <!-- LOGIN -->
 
@@ -1412,10 +1418,10 @@ id="email"
 type="email"
 autocomplete="email"
 placeholder="example@mail.com"
->
+
+
 
 </div>
-
 
 <div class="field">
 
@@ -1428,31 +1434,37 @@ id="password"
 type="password"
 autocomplete="current-password"
 placeholder="Пароль"
->
+
+
 
 </div>
-
 
 <div class="modal-actions">
 
 <button
 class="btn primary"
 onclick="login()"
->
+
+
+
 Войти
 </button>
 
 <button
 class="btn"
 onclick="register()"
->
+
+
+
 Регистрация
 </button>
 
 <button
 class="btn"
 onclick="closeModal('authModal')"
->
+
+
+
 Закрыть
 </button>
 
@@ -1465,7 +1477,6 @@ id="authMsg"
 
 </div>
 </div>
-
 
 <!-- CABINET -->
 
@@ -1491,7 +1502,9 @@ class="account"
 <button
 class="btn"
 onclick="logout()"
->
+
+
+
 Выйти
 </button>
 
@@ -1500,13 +1513,14 @@ onclick="logout()"
 <button
 class="btn"
 onclick="closeModal('cabModal')"
->
+
+
+
 Закрыть
 </button>
 
 </div>
 </div>
-
 
 <script>
 
@@ -1593,467 +1607,4 @@ return false;
 
 function showConnectionError(text){
 
-console.error(text);
-
-}
-
-
-// =====================================================
-// UI
-// =====================================================
-
-function go(id){
-
-document
-.getElementById(id)
-?.scrollIntoView({
-behavior:'smooth'
-});
-
-}
-
-
-function closeModal(id){
-
-document
-.getElementById(id)
-?.classList
-.add('hidden');
-
-}
-
-
-function openAuth(){
-
-document
-.getElementById('authModal')
-.classList
-.remove('hidden');
-
-document
-.getElementById('authMsg')
-.textContent='';
-
-}
-
-
-function msg(text,success=false){
-
-const el =
-document.getElementById('authMsg');
-
-el.textContent=text;
-
-el.className =
-success
-? 'message success'
-: 'message';
-
-}
-
-
-// =====================================================
-// REGISTER
-// =====================================================
-
-async function register(){
-
-if(!supabaseClient){
-
-msg(
-'Сайт не подключён к Supabase. Проверь Publishable key.'
-);
-
-return;
-
-}
-
-
-const email =
-document
-.getElementById('email')
-.value
-.trim()
-.toLowerCase();
-
-
-const password =
-document
-.getElementById('password')
-.value;
-
-
-if(!email || !password){
-
-msg(
-'Введите email и пароль.'
-);
-
-return;
-
-}
-
-
-if(password.length < 6){
-
-msg(
-'Пароль должен содержать минимум 6 символов.'
-);
-
-return;
-
-}
-
-
-msg(
-'Создаём аккаунт...'
-);
-
-
-const {
-data,
-error
-} =
-await supabaseClient.auth.signUp({
-
-email,
-password
-
-});
-
-
-if(error){
-
-msg(error.message);
-
-return;
-
-}
-
-
-if(data.session){
-
-msg(
-'Аккаунт создан!',
-true
-);
-
-await loadSession();
-
-setTimeout(
-()=>{
-closeModal('authModal');
-},
-700
-);
-
-}else{
-
-msg(
-'Аккаунт создан. Проверь почту, если требуется подтверждение email.',
-true
-);
-
-}
-
-}
-
-
-// =====================================================
-// LOGIN
-// =====================================================
-
-async function login(){
-
-if(!supabaseClient){
-
-msg(
-'Сайт не подключён к Supabase. Проверь Publishable key.'
-);
-
-return;
-
-}
-
-
-const email =
-document
-.getElementById('email')
-.value
-.trim()
-.toLowerCase();
-
-
-const password =
-document
-.getElementById('password')
-.value;
-
-
-if(!email || !password){
-
-msg(
-'Введите email и пароль.'
-);
-
-return;
-
-}
-
-
-msg(
-'Выполняется вход...'
-);
-
-
-const {
-data,
-error
-} =
-await supabaseClient.auth
-.signInWithPassword({
-
-email,
-password
-
-});
-
-
-if(error){
-
-msg(error.message);
-
-return;
-
-}
-
-
-session=data.session;
-
-updateNav();
-
-renderCabinet();
-
-msg(
-'Вход выполнен!',
-true
-);
-
-
-setTimeout(
-()=>{
-closeModal('authModal');
-},
-500
-);
-
-}
-
-
-// =====================================================
-// SESSION
-// =====================================================
-
-async function loadSession(){
-
-if(!supabaseClient){
-
-updateNav();
-
-return;
-
-}
-
-
-const {
-data,
-error
-} =
-await supabaseClient.auth
-.getSession();
-
-
-if(error){
-
-console.error(error);
-
-return;
-
-}
-
-
-session=data.session;
-
-updateNav();
-
-}
-
-
-function updateNav(){
-
-const logged =
-!!session;
-
-
-document
-.getElementById('loginBtn')
-.classList
-.toggle(
-'hidden',
-logged
-);
-
-
-document
-.getElementById('cabBtn')
-.classList
-.toggle(
-'hidden',
-!logged
-);
-
-}
-
-
-// =====================================================
-// CABINET
-// =====================================================
-
-function openCabinet(){
-
-if(!session){
-
-openAuth();
-
-return;
-
-}
-
-
-renderCabinet();
-
-document
-.getElementById('cabModal')
-.classList
-.remove('hidden');
-
-}
-
-
-function renderCabinet(){
-
-const email =
-session?.user?.email || '';
-
-
-document
-.getElementById('userInfo')
-.innerHTML = `
-
-<div style="color:#aaa">
-Email
-</div>
-
-<b>
-${escapeHtml(email)}
-</b>
-
-<div style="color:#aaa;margin-top:10px">
-ID пользователя
-</div>
-
-<small style="color:#777;word-break:break-all">
-${escapeHtml(session.user.id)}
-</small>
-
-<div style="color:#aaa;margin-top:10px">
-Статус
-</div>
-
-<span class="status">
-🟢 Авторизован
-</span>
-
-`;
-
-}
-
-
-// =====================================================
-// LOGOUT
-// =====================================================
-
-async function logout(){
-
-if(supabaseClient){
-
-await supabaseClient.auth.signOut();
-
-}
-
-session=null;
-
-updateNav();
-
-closeModal('cabModal');
-
-}
-
-
-// =====================================================
-// HTML SECURITY
-// =====================================================
-
-function escapeHtml(value){
-
-return String(value ?? '')
-.replace(
-/[&<>'"]/g,
-function(c){
-
-return {
-
-'&':'&amp;',
-'<':'&lt;',
-'>':'&gt;',
-"'":'&#39;',
-'"':'&quot;'
-
-}[c];
-
-}
-);
-
-}
-
-
-// =====================================================
-// START
-// =====================================================
-
-if(
-initSupabase()
-){
-
-supabaseClient.auth.onAuthStateChange(
-function(_event,newSession){
-
-session=newSession;
-
-updateNav();
-
-}
-);
-
-loadSession();
-
-}else{
-
-updateNav();
-
-}
-
-</script>
-
-</body>
-</html>
+console.e
