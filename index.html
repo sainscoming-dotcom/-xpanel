@@ -1,1223 +1,255 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>XPanel Arizona RP 2.0</title>
-
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-
-body{
-font-family:Arial,sans-serif;
-color:#fff;
-background:
-radial-gradient(circle at 15% 20%,#7c3aed44,transparent 30%),
-radial-gradient(circle at 85% 10%,#ec489933,transparent 28%),
-#070711;
-min-height:100vh
-}
-
-button,a,input{font:inherit}
-button,a{cursor:pointer}
-
-.wrap{
-max-width:1150px;
-margin:auto;
-padding:0 20px
-}
-
-header{
-position:sticky;
-top:0;
-z-index:20;
-background:#070711dd;
-backdrop-filter:blur(18px);
-border-bottom:1px solid #ffffff12
-}
-
-.nav{
-min-height:70px;
-display:flex;
-align-items:center;
-justify-content:space-between;
-gap:15px
-}
-
-.logo{
-font-size:25px;
-font-weight:900;
-color:#b56cff
-}
-
-.navlinks{
-display:flex;
-gap:8px;
-flex-wrap:wrap
-}
-
-.btn{
-display:inline-flex;
-align-items:center;
-justify-content:center;
-border:0;
-border-radius:12px;
-padding:11px 16px;
-background:#171725;
-color:#fff;
-text-decoration:none;
-font-weight:800
-}
-
-.btn:hover{
-background:#29293d
-}
-
-.primary{
-background:linear-gradient(135deg,#6d28d9,#a855f7,#db2777)
-}
-
-.hidden{
-display:none!important
-}
-
-.hero{
-text-align:center;
-padding:95px 0 55px
-}
-
-.badge{
-display:inline-block;
-padding:8px 14px;
-border-radius:99px;
-border:1px solid #a855f755;
-background:#8b5cf61c;
-color:#d8b4fe;
-font-weight:800
-}
-
-.hero h1{
-font-size:clamp(65px,12vw,125px);
-line-height:.9;
-margin:22px 0;
-background:linear-gradient(
-90deg,
-#8b5cf6,
-#c026d3,
-#ec4899,
-#f43f5e
-);
--webkit-background-clip:text;
-color:transparent
-}
-
-.hero h2{
-font-size:28px;
-color:#ddd
-}
-
-.hero p{
-max-width:700px;
-margin:17px auto;
-color:#999;
-line-height:1.6
-}
-
-.actions{
-display:flex;
-gap:12px;
-justify-content:center;
-flex-wrap:wrap;
-margin:28px 0
-}
-
-.author{
-color:#777
-}
-
-.author b{
-color:#bd8cff
-}
-
-.panel,
-.download{
-background:#0e0e1bd9;
-border:1px solid #ffffff10;
-border-radius:24px;
-padding:28px;
-margin:25px 0
-}
-
-.download{
-border-color:#a855f744
-}
-
-.panel h2,
-.download h2{
-margin-bottom:20px
-}
-
-.grid{
-display:grid;
-grid-template-columns:
-repeat(auto-fit,minmax(220px,1fr));
-gap:16px
-}
-
-.card{
-padding:23px;
-background:#10101d;
-border:1px solid #ffffff0d;
-border-radius:18px
-}
-
-.card:hover{
-border-color:#a855f755;
-transform:translateY(-3px)
-}
-
-.icon{
-font-size:30px;
-margin-bottom:12px
-}
-
-.card p{
-color:#999;
-line-height:1.5;
-margin-top:8px
-}
-
-.file{
-display:inline-block;
-margin:15px 0;
-padding:9px 13px;
-border-radius:9px;
-background:#090911;
-border:1px solid #ffffff12;
-color:#c4b5fd;
-font-family:monospace
-}
-
-.steps{
-display:grid;
-gap:12px
-}
-
-.step{
-display:flex;
-gap:14px;
-align-items:center;
-padding:15px;
-background:#10101c;
-border-radius:13px;
-color:#bbb
-}
-
-.num{
-min-width:36px;
-height:36px;
-border-radius:50%;
-display:grid;
-place-items:center;
-background:linear-gradient(135deg,#7c3aed,#a855f7);
-font-weight:900
-}
-
-.modal{
-position:fixed;
-inset:0;
-z-index:50;
-background:#000b;
-display:grid;
-place-items:center;
-padding:20px
-}
-
-.modalbox{
-width:min(650px,100%);
-max-height:90vh;
-overflow:auto;
-background:#11111f;
-border:1px solid #a855f744;
-border-radius:22px;
-padding:25px
-}
-
-.field{
-margin:10px 0
-}
-
-.field label{
-display:block;
-color:#aaa;
-margin-bottom:6px
-}
-
-.field input{
-width:100%;
-padding:12px;
-border-radius:11px;
-border:1px solid #ffffff15;
-background:#090912;
-color:#fff;
-outline:none
-}
-
-.modal-actions{
-display:flex;
-gap:10px;
-margin-top:18px;
-flex-wrap:wrap
-}
-
-.message{
-margin-top:12px;
-color:#fca5a5;
-min-height:20px
-}
-
-.success{
-color:#86efac
-}
-
-.account{
-display:grid;
-gap:15px
-}
-
-.status{
-color:#86efac
-}
-
-footer{
-text-align:center;
-color:#666;
-padding:45px 20px;
-border-top:1px solid #ffffff0a
-}
-
-footer b{
-color:#a855f7
-}
-
-@media(max-width:700px){
-
-.nav{
-flex-direction:column;
-padding:15px
-}
-
-.hero{
-padding-top:60px
-}
-
-.panel,
-.download{
-padding:21px
-}
-
-}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{font-family:Arial,sans-serif;color:#fff;background:radial-gradient(circle at 15% 20%,#7c3aed44,transparent 30%),radial-gradient(circle at 85% 10%,#ec489933,transparent 28%),#070711;min-height:100vh}button,a,input,select{font:inherit}button,a{cursor:pointer}.wrap{max-width:1150px;margin:auto;padding:0 20px}header{position:sticky;top:0;z-index:20;background:#070711cc;backdrop-filter:blur(18px);border-bottom:1px solid #ffffff12}.nav{min-height:70px;display:flex;align-items:center;justify-content:space-between;gap:15px}.logo{font-size:25px;font-weight:900;color:#b56cff;text-shadow:0 0 25px #8b5cf688}.navlinks{display:flex;gap:8px;flex-wrap:wrap}.btn{display:inline-flex;align-items:center;justify-content:center;border:0;border-radius:12px;padding:11px 16px;background:#171725;color:#fff;text-decoration:none;font-weight:800}.btn:hover{transform:translateY(-2px);background:#29293d}.primary{background:linear-gradient(135deg,#6d28d9,#a855f7,#db2777);box-shadow:0 0 25px #8b5cf655}.hero{text-align:center;padding:95px 0 55px}.badge{display:inline-block;padding:8px 14px;border-radius:99px;border:1px solid #a855f755;background:#8b5cf61c;color:#d8b4fe;font-weight:800}.hero h1{font-size:clamp(65px,12vw,125px);line-height:.9;margin:22px 0;background:linear-gradient(90deg,#8b5cf6,#c026d3,#ec4899,#f43f5e);-webkit-background-clip:text;color:transparent}.hero h2{font-size:28px;color:#ddd}.hero p{max-width:700px;margin:17px auto;color:#999;line-height:1.6}.actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:28px 0}.author{color:#777}.author b{color:#bd8cff}.panel{background:#0e0e1bd9;border:1px solid #ffffff10;border-radius:24px;padding:28px;margin:25px 0;box-shadow:0 20px 70px #0005}.panel h2{margin-bottom:20px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}.card{padding:23px;background:#10101d;border:1px solid #ffffff0d;border-radius:18px}.card:hover{border-color:#a855f755;transform:translateY(-3px)}.icon{font-size:30px;margin-bottom:12px}.card p{color:#999;line-height:1.5;margin-top:8px}.download{padding:25px;border-radius:22px;border:1px solid #a855f744;background:linear-gradient(135deg,#7c3aed1f,#ec489911),#0e0e1bd9}.file{display:inline-block;margin:15px 0;padding:9px 13px;border-radius:9px;background:#090911;border:1px solid #ffffff12;color:#c4b5fd;font-family:monospace}.steps{display:grid;gap:12px}.step{display:flex;gap:14px;align-items:center;padding:15px;background:#10101c;border-radius:13px;color:#bbb}.num{min-width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#7c3aed,#a855f7);font-weight:900}.hidden{display:none!important}.modal{position:fixed;inset:0;z-index:50;background:#000a;display:grid;place-items:center;padding:20px}.modalbox{width:min(650px,100%);max-height:90vh;overflow:auto;background:#11111f;border:1px solid #a855f744;border-radius:22px;padding:25px;box-shadow:0 30px 100px #000}.modalbox h2{margin-bottom:18px}.field{margin:10px 0}.field label{display:block;color:#aaa;margin-bottom:6px}.field input,.field select{width:100%;padding:12px;border-radius:11px;border:1px solid #ffffff15;background:#090912;color:#fff;outline:none}.modal-actions{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}.message{margin-top:12px;color:#fca5a5;min-height:20px}.success{color:#86efac}.userbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.role{padding:6px 10px;border-radius:999px;font-size:13px;font-weight:900;border:1px solid currentColor;background:#ffffff0a;display:inline-flex;align-items:center;margin:3px}.account{display:grid;gap:15px}.role-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px;background:#0b0b14;border-radius:12px}.swatch{width:24px;height:24px;border-radius:50%;display:inline-block;vertical-align:middle;margin-right:8px;border:2px solid #fff5}.danger{background:#7f1d1d}.small{padding:8px 11px;font-size:13px}.dev-section{padding:18px;background:#0b0b14;border-radius:16px;border:1px solid #a855f733;margin-top:10px}.dev-title{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}.user-card{padding:13px;background:#10101d;border:1px solid #ffffff0d;border-radius:13px;margin-top:10px}.user-card small{color:#888}.user-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.pill{display:inline-block;padding:5px 8px;border-radius:999px;font-size:12px;font-weight:800;margin:3px 3px 0 0;background:#ffffff0a}.closex{padding:8px 11px}.status{color:#86efac;font-size:13px}footer{text-align:center;color:#666;padding:45px 20px;border-top:1px solid #ffffff0a}footer b{color:#a855f7}@media(max-width:700px){.nav{flex-direction:column;padding:15px}.hero{padding-top:60px}.panel{padding:21px}.step{align-items:flex-start}.modalbox{padding:20px}}
 </style>
 </head>
-
 <body>
-
-<header>
-<div class="wrap nav">
-
-<div class="logo">
-⚡ XPanel
-</div>
-
-<div class="navlinks">
-
-<button class="btn" onclick="go('home')">
-Главная
-</button>
-
-<button class="btn" onclick="go('features')">
-Возможности
-</button>
-
-<button class="btn" onclick="go('install')">
-Установка
-</button>
-
-<button
-class="btn"
-id="loginBtn"
-onclick="openAuth()"
->
-Войти
-</button>
-
-<button
-class="btn primary hidden"
-id="cabBtn"
-onclick="openCabinet()"
->
-Личный кабинет
-</button>
-
-</div>
-</div>
-</header>
-
-
+<header><div class="wrap nav"><div class="logo">⚡ XPanel</div><div class="navlinks"><button class="btn" onclick="go('home')">Главная</button><button class="btn" onclick="go('features')">Возможности</button><button class="btn" onclick="go('install')">Установка</button><button class="btn" id="loginBtn" onclick="openAuth('login')">Войти</button><button class="btn primary hidden" id="cabBtn" onclick="openCabinet()">Личный кабинет</button></div></div></header>
 <main class="wrap">
-
-<section id="home" class="hero">
-
-<span class="badge">
-⚡ XPanel Arizona RP • VERSION 2.0
-</span>
-
-<h1>
-XPanel
-</h1>
-
-<h2>
-Arizona RP • Server 20
-</h2>
-
-<p>
-Удобная игровая панель с автоматическим обновлением маски,
-таймером и быстрыми действиями.
-</p>
-
-<div class="actions">
-
-<a
-class="btn primary"
-href="XPanel_ArizonaRP_2.0.lua"
-download
->
-📥 Скачать XPanel 2.0
-</a>
-
-<button
-class="btn"
-onclick="go('features')"
->
-🚀 Возможности
-</button>
-
-</div>
-
-<div class="author">
-Автор: <b>Diazz_Kaneki</b> • Server 20
-</div>
-
-</section>
-
-
-<section class="download">
-
-<h2>
-🔥 XPanel Arizona RP 2.0
-</h2>
-
-<p style="color:#999">
-Последняя версия панели.
-Скачай файл и перемести его в папку
-<b>moonloader</b>.
-</p>
-
-<div class="file">
-XPanel_ArizonaRP_2.0.lua
-</div>
-
-<br>
-
-<a
-class="btn primary"
-href="XPanel_ArizonaRP_2.0.lua"
-download
->
-⬇ Скачать файл
-</a>
-
-</section>
-
-
-<section id="features" class="panel">
-
-<h2>
-🚀 Возможности XPanel 2.0
-</h2>
-
-<div class="grid">
-
-<div class="card">
-<div class="icon">🎭</div>
-<h3>Автомаска</h3>
-<p>
-Автоматическое обновление маски после окончания таймера.
-</p>
-</div>
-
-<div class="card">
-<div class="icon">⏱️</div>
-<h3>Таймер</h3>
-<p>
-По умолчанию 10 минут с возможностью настройки.
-</p>
-</div>
-
-<div class="card">
-<div class="icon">⚡</div>
-<h3>Игровая панель</h3>
-<p>
-Панель открывается командой <b>/xpanel</b>.
-</p>
-</div>
-
-<div class="card">
-<div class="icon">🎮</div>
-<h3>Быстрые действия</h3>
-<p>
-Управление функциями прямо из игры.
-</p>
-</div>
-
-</div>
-
-</section>
-
-
-<section id="install" class="panel">
-
-<h2>
-📦 Как установить
-</h2>
-
-<div class="steps">
-
-<div class="step">
-<span class="num">1</span>
-Нажми «Скачать XPanel 2.0».
-</div>
-
-<div class="step">
-<span class="num">2</span>
-Найди XPanel_ArizonaRP_2.0.lua.
-</div>
-
-<div class="step">
-<span class="num">3</span>
-Перемести файл в GTA San Andreas → moonloader.
-</div>
-
-<div class="step">
-<span class="num">4</span>
-Запусти Arizona RP и введи /xpanel.
-</div>
-
-</div>
-
-</section>
-
-
-<section class="panel" style="text-align:center">
-
-<h2>
-📢 Telegram автора
-</h2>
-
-<p style="color:#999;margin:10px 0 20px">
-Новости, обновления XPanel и другие проекты.
-</p>
-
-<a
-class="btn primary"
-href="https://t.me/skypkaazinona"
-target="_blank"
->
-📱 Открыть Telegram
-</a>
-
-</section>
-
-</main>
-
-
-<footer>
-
-XPanel © 2026 • Arizona RP Server 20
-<br>
-Автор: <b>Diazz_Kaneki</b>
-
-</footer>
-
-
-<!-- LOGIN -->
-
-<div
-class="modal hidden"
-id="authModal"
->
-
-<div class="modalbox">
-
-<h2>
-🔐 Вход
-</h2>
-
-<div class="field">
-
-<label>
-Email
-</label>
-
-<input
-id="email"
-type="email"
-autocomplete="email"
-placeholder="example@mail.com"
->
-
-</div>
-
-
-<div class="field">
-
-<label>
-Пароль
-</label>
-
-<input
-id="password"
-type="password"
-autocomplete="current-password"
-placeholder="Пароль"
->
-
-</div>
-
-
-<div class="modal-actions">
-
-<button
-class="btn primary"
-onclick="login()"
->
-Войти
-</button>
-
-<button
-class="btn"
-onclick="register()"
->
-Регистрация
-</button>
-
-<button
-class="btn"
-onclick="closeModal('authModal')"
->
-Закрыть
-</button>
-
-</div>
-
-<div
-class="message"
-id="authMsg"
-></div>
-
-</div>
-</div>
-
-
-<!-- CABINET -->
-
-<div
-class="modal hidden"
-id="cabModal"
->
-
-<div class="modalbox">
-
-<h2>
-👤 Личный кабинет
-</h2>
-
-<div
-id="userInfo"
-class="account"
->
-</div>
-
-<br>
-
-<button
-class="btn"
-onclick="logout()"
->
-Выйти
-</button>
-
-<br><br>
-
-<button
-class="btn"
-onclick="closeModal('cabModal')"
->
-Закрыть
-</button>
-
-</div>
-</div>
-
+<section id="home" class="hero"><span class="badge">⚡ XPanel Arizona RP • VERSION 2.0</span><h1>XPanel</h1><h2>Arizona RP • Server 20</h2><p>Удобная игровая панель с автоматическим обновлением маски, таймером и быстрыми действиями.</p><div class="actions"><a class="btn primary" href="XPanel_ArizonaRP_2.0.lua" download="XPanel_ArizonaRP_2.0.lua">📥 Скачать XPanel 2.0</a><button class="btn" onclick="go('features')">🚀 Возможности</button></div><div class="author">Автор: <b>Diazz_Kaneki</b> • Server 20</div></section>
+<section class="download"><h2>🔥 XPanel Arizona RP 2.0</h2><p style="color:#999;margin-top:8px">Последняя версия панели. Скачай файл и перемести его в папку <b>moonloader</b>.</p><div class="file">XPanel_ArizonaRP_2.0.lua</div><br><a class="btn primary" href="XPanel_ArizonaRP_2.0.lua" download="XPanel_ArizonaRP_2.0.lua">⬇ Скачать файл</a></section>
+<section id="features" class="panel"><h2>🚀 Возможности XPanel 2.0</h2><div class="grid"><div class="card"><div class="icon">🎭</div><h3>Автомаска</h3><p>Автоматическое обновление маски после окончания таймера.</p></div><div class="card"><div class="icon">⏱️</div><h3>Таймер</h3><p>По умолчанию 10 минут с возможностью настройки.</p></div><div class="card"><div class="icon">⚡</div><h3>Игровая панель</h3><p>Панель открывается командой <b>/xpanel</b>.</p></div><div class="card"><div class="icon">🎮</div><h3>Быстрые действия</h3><p>Управление функциями прямо из игры.</p></div></div></section>
+<section id="install" class="panel"><h2>📦 Как установить</h2><div class="steps"><div class="step"><span class="num">1</span>Нажми «Скачать XPanel 2.0».</div><div class="step"><span class="num">2</span>Найди <b>XPanel_ArizonaRP_2.0.lua</b>.</div><div class="step"><span class="num">3</span>Перемести файл в <b>GTA San Andreas → moonloader</b>.</div><div class="step"><span class="num">4</span>Запусти Arizona RP и введи <b>/xpanel</b>.</div></div></section>
+<section class="panel" style="text-align:center"><h2>📢 Telegram автора</h2><p style="color:#999;margin:10px 0 20px">Новости, обновления XPanel и другие проекты.</p><a class="btn primary" href="https://t.me/skypkaazinona" target="_blank" rel="noopener">📱 Открыть Telegram</a></section>
+</main><footer>XPanel © 2026 • Arizona RP Server 20<br>Автор: <b>Diazz_Kaneki</b></footer>
+
+<div class="modal hidden" id="authModal"><div class="modalbox"><h2 id="authTitle">Вход</h2><div id="authForm"><div class="field"><label>Email</label><input id="email" type="email" autocomplete="email"></div><div class="field"><label>Пароль</label><input id="password" type="password" autocomplete="current-password"></div><div id="usernameField" class="field hidden"><label>Имя пользователя</label><input id="username" type="text" placeholder="Например: Sains"></div><div class="modal-actions"><button class="btn primary" onclick="authSubmit()">Продолжить</button><button class="btn" onclick="closeModal('authModal')">Закрыть</button></div><p id="authSwitch" style="margin-top:15px;color:#aaa"></p><div class="message" id="authMsg"></div></div></div></div>
+
+<div class="modal hidden" id="cabModal"><div class="modalbox"><div style="display:flex;justify-content:space-between;gap:10px;align-items:center"><h2>👤 Личный кабинет</h2><button class="btn small closex" onclick="closeModal('cabModal')">✕</button></div><div class="account"><div id="userInfo"></div><div id="developerBox" class="hidden"></div><button class="btn" onclick="logout()">Выйти из аккаунта</button></div></div></div>
 
 <script>
-
-// =====================================================
-// SUPABASE
-// =====================================================
-
-const SUPABASE_URL =
-'https://geimapwjvykzihwytjsu.supabase.co';
-
-
-// =====================================================
-// ВСТАВЬ СЮДА СВОЙ PUBLISHABLE KEY
-// =====================================================
-
-const SUPABASE_ANON_KEY =
-'sb_publishable_bw3marsbGsI_XFzwCV6W_g_t7tkGS3G';
-
-
-// =====================================================
-// СОЗДАНИЕ SUPABASE CLIENT
-// =====================================================
+// =========================================================
+// SUPABASE CONFIG
+// =========================================================
+const SUPABASE_URL = 'https://geimapwjvykzihwytjsu.supabase.co';
+// ВСТАВЬ СЮДА ТОЛЬКО ANON / PUBLISHABLE KEY ИЗ SUPABASE.
+const SUPABASE_ANON_KEY = 'ВСТАВЬ_СЮДА_ANON_KEY';
 
 let supabaseClient = null;
-
 let session = null;
+let profile = null;
+let myRoles = [];
 
-
-function initSupabase(){
-
-if(
-typeof window.supabase === 'undefined'
-){
-
-showConnectionError(
-'Supabase JS не загрузился. Проверь интернет или подключение CDN.'
-);
-
-return false;
-
+if (window.supabase && SUPABASE_ANON_KEY !== 'ВСТАВЬ_СЮДА_ANON_KEY') {
+  supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 }
 
+function go(id){document.getElementById(id)?.scrollIntoView({behavior:'smooth'})}
+function closeModal(id){document.getElementById(id).classList.add('hidden')}
+function msg(id,t,ok=false){const el=document.getElementById(id);el.textContent=t;el.classList.toggle('success',ok)}
+function escapeHtml(s){return String(s??'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]))}
+function safeColor(c){return /^#[0-9a-fA-F]{6}$/.test(c||'')?c:'#a855f7'}
 
-if(
-!SUPABASE_ANON_KEY ||
-SUPABASE_ANON_KEY.includes(
-'ВСТАВЬ_СЮДА'
-)
-){
-
-showConnectionError(
-'Вставь Publishable key в коде.'
-);
-
-return false;
-
+function openAuth(mode){
+  window.authMode=mode;
+  document.getElementById('authTitle').textContent=mode==='login'?'Вход':'Регистрация';
+  document.getElementById('usernameField').classList.toggle('hidden',mode==='login');
+  document.getElementById('authSwitch').innerHTML=mode==='login'?`Нет аккаунта? <button class="btn small" onclick="openAuth('register')">Регистрация</button>`:`Уже есть аккаунт? <button class="btn small" onclick="openAuth('login')">Войти</button>`;
+  msg('authMsg','');
+  document.getElementById('authModal').classList.remove('hidden');
 }
 
-
-try{
-
-supabaseClient =
-window.supabase.createClient(
-SUPABASE_URL,
-SUPABASE_ANON_KEY
-);
-
-return true;
-
-}catch(error){
-
-console.error(error);
-
-showConnectionError(
-'Ошибка создания подключения Supabase.'
-);
-
-return false;
-
+async function authSubmit(){
+  if(!supabaseClient){
+    msg('authMsg','Сайт ещё не подключён: вставь Supabase ANON / PUBLISHABLE KEY в код.');
+    return;
+  }
+  const email=document.getElementById('email').value.trim().toLowerCase();
+  const password=document.getElementById('password').value;
+  const username=document.getElementById('username').value.trim() || 'User';
+  if(!email||!password)return msg('authMsg','Заполни все поля.');
+  msg('authMsg','Подождите...');
+  let result;
+  if(window.authMode==='register'){
+    result=await supabaseClient.auth.signUp({email,password,options:{data:{username}}});
+    if(result.error)return msg('authMsg',result.error.message);
+    if(result.data.session){
+      closeModal('authModal');
+      await loadSession();
+    }else{
+      msg('authMsg','Аккаунт создан. Если включено подтверждение email — подтверди почту, затем войди.',true);
+    }
+  }else{
+    result=await supabaseClient.auth.signInWithPassword({email,password});
+    if(result.error)return msg('authMsg',result.error.message);
+    closeModal('authModal');
+    await loadSession();
+  }
 }
-
-}
-
-
-function showConnectionError(text){
-
-console.error(text);
-
-}
-
-
-// =====================================================
-// UI
-// =====================================================
-
-function go(id){
-
-document
-.getElementById(id)
-?.scrollIntoView({
-behavior:'smooth'
-});
-
-}
-
-
-function closeModal(id){
-
-document
-.getElementById(id)
-?.classList
-.add('hidden');
-
-}
-
-
-function openAuth(){
-
-document
-.getElementById('authModal')
-.classList
-.remove('hidden');
-
-document
-.getElementById('authMsg')
-.textContent='';
-
-}
-
-
-function msg(text,success=false){
-
-const el =
-document.getElementById('authMsg');
-
-el.textContent=text;
-
-el.className =
-success
-? 'message success'
-: 'message';
-
-}
-
-
-// =====================================================
-// REGISTER
-// =====================================================
-
-async function register(){
-
-if(!supabaseClient){
-
-msg(
-'Сайт не подключён к Supabase. Проверь Publishable key.'
-);
-
-return;
-
-}
-
-
-const email =
-document
-.getElementById('email')
-.value
-.trim()
-.toLowerCase();
-
-
-const password =
-document
-.getElementById('password')
-.value;
-
-
-if(!email || !password){
-
-msg(
-'Введите email и пароль.'
-);
-
-return;
-
-}
-
-
-if(password.length < 6){
-
-msg(
-'Пароль должен содержать минимум 6 символов.'
-);
-
-return;
-
-}
-
-
-msg(
-'Создаём аккаунт...'
-);
-
-
-const {
-data,
-error
-} =
-await supabaseClient.auth.signUp({
-
-email,
-password
-
-});
-
-
-if(error){
-
-msg(error.message);
-
-return;
-
-}
-
-
-if(data.session){
-
-msg(
-'Аккаунт создан!',
-true
-);
-
-await loadSession();
-
-setTimeout(
-()=>{
-closeModal('authModal');
-},
-700
-);
-
-}else{
-
-msg(
-'Аккаунт создан. Проверь почту, если требуется подтверждение email.',
-true
-);
-
-}
-
-}
-
-
-// =====================================================
-// LOGIN
-// =====================================================
-
-async function login(){
-
-if(!supabaseClient){
-
-msg(
-'Сайт не подключён к Supabase. Проверь Publishable key.'
-);
-
-return;
-
-}
-
-
-const email =
-document
-.getElementById('email')
-.value
-.trim()
-.toLowerCase();
-
-
-const password =
-document
-.getElementById('password')
-.value;
-
-
-if(!email || !password){
-
-msg(
-'Введите email и пароль.'
-);
-
-return;
-
-}
-
-
-msg(
-'Выполняется вход...'
-);
-
-
-const {
-data,
-error
-} =
-await supabaseClient.auth
-.signInWithPassword({
-
-email,
-password
-
-});
-
-
-if(error){
-
-msg(error.message);
-
-return;
-
-}
-
-
-session=data.session;
-
-updateNav();
-
-renderCabinet();
-
-msg(
-'Вход выполнен!',
-true
-);
-
-
-setTimeout(
-()=>{
-closeModal('authModal');
-},
-500
-);
-
-}
-
-
-// =====================================================
-// SESSION
-// =====================================================
 
 async function loadSession(){
-
-if(!supabaseClient){
-
-updateNav();
-
-return;
-
+  if(!supabaseClient){updateNav();return}
+  const {data}=await supabaseClient.auth.getSession();
+  session=data.session;
+  if(!session){profile=null;myRoles=[];updateNav();return}
+  await loadProfile();
+  await loadMyRoles();
+  updateNav();
 }
 
-
-const {
-data,
-error
-} =
-await supabaseClient.auth
-.getSession();
-
-
-if(error){
-
-console.error(error);
-
-return;
-
+async function loadProfile(){
+  if(!session)return;
+  const {data,error}=await supabaseClient.from('profiles').select('id,username,is_premium,is_developer').eq('id',session.user.id).maybeSingle();
+  if(error){console.error(error);profile=null;return}
+  profile=data;
 }
 
-
-session=data.session;
-
-updateNav();
-
+async function loadMyRoles(){
+  if(!session)return;
+  const {data,error}=await supabaseClient.rpc('get_my_roles');
+  if(error){console.error(error);myRoles=[];return}
+  myRoles=data||[];
+  // Если Developer-флаг есть, но роль по какой-то причине не пришла из user_roles,
+  // всё равно показываем Developer в кабинете.
+  if(profile?.is_developer && !myRoles.some(r=>r.name==='Developer')){
+    myRoles.unshift({id:null,name:'Developer',color:'#a855f7'});
+  }
 }
-
 
 function updateNav(){
-
-const logged =
-!!session;
-
-
-document
-.getElementById('loginBtn')
-.classList
-.toggle(
-'hidden',
-logged
-);
-
-
-document
-.getElementById('cabBtn')
-.classList
-.toggle(
-'hidden',
-!logged
-);
-
+  const logged=!!session;
+  document.getElementById('loginBtn').classList.toggle('hidden',logged);
+  document.getElementById('cabBtn').classList.toggle('hidden',!logged);
 }
 
-
-// =====================================================
-// CABINET
-// =====================================================
-
-function openCabinet(){
-
-if(!session){
-
-openAuth();
-
-return;
-
+async function openCabinet(){
+  if(!session)return openAuth('login');
+  await loadProfile();
+  await loadMyRoles();
+  renderCabinet();
+  document.getElementById('cabModal').classList.remove('hidden');
 }
-
-
-renderCabinet();
-
-document
-.getElementById('cabModal')
-.classList
-.remove('hidden');
-
-}
-
 
 function renderCabinet(){
-
-const email =
-session?.user?.email || '';
-
-
-document
-.getElementById('userInfo')
-.innerHTML = `
-
-<div style="color:#aaa">
-Email
-</div>
-
-<b>
-${escapeHtml(email)}
-</b>
-
-<div style="color:#aaa;margin-top:10px">
-ID пользователя
-</div>
-
-<small style="color:#777;word-break:break-all">
-${escapeHtml(session.user.id)}
-</small>
-
-<div style="color:#aaa;margin-top:10px">
-Статус
-</div>
-
-<span class="status">
-🟢 Авторизован
-</span>
-
-`;
-
+  const email=session.user.email||'';
+  const roleHtml=myRoles.length?myRoles.map(r=>`<span class="role" style="color:${safeColor(r.color)}"><span class="swatch" style="background:${safeColor(r.color)}"></span>${escapeHtml(r.name)}</span>`).join(' '):'<span style="color:#777">Ролей пока нет</span>';
+  const premium=!!profile?.is_premium;
+  const developer=!!profile?.is_developer;
+  document.getElementById('userInfo').innerHTML=`<div style="color:#aaa">Аккаунт</div><b>${escapeHtml(email)}</b><div style="margin-top:12px;color:#aaa">Имя</div><b>${escapeHtml(profile?.username||'User')}</b><div style="margin-top:12px;color:#aaa">Статус</div><div>${developer?'<span class="status">👑 Developer</span>':premium?'<span style="color:#facc15">💎 Premium</span>':'<span style="color:#aaa">👤 User</span>'}</div><div style="margin-top:12px;color:#aaa">Роли</div><div>${roleHtml}</div>`;
+  const box=document.getElementById('developerBox');
+  box.classList.toggle('hidden',!developer);
+  if(developer) renderDeveloperBox();
 }
 
+function renderDeveloperBox(){
+  document.getElementById('developerBox').innerHTML=`
+    <div class="dev-section">
+      <div class="dev-title"><h3>👑 Developer-панель</h3><span style="color:#a855f7;font-size:13px">Полный доступ</span></div>
+      <h4 style="margin:16px 0 8px">➕ Создать роль</h4>
+      <div class="field"><label>Название роли</label><input id="newRoleName" placeholder="Например: Moderator"></div>
+      <div class="field"><label>Цвет роли</label><input id="newRoleColor" type="color" value="#a855f7" style="height:45px"></div>
+      <button class="btn primary" onclick="createRole()">Создать роль</button>
+      <div class="message" id="createRoleMsg"></div>
 
-// =====================================================
-// LOGOUT
-// =====================================================
+      <h4 style="margin:20px 0 8px">👤 Управление пользователями</h4>
+      <div class="field"><label>Поиск по email или имени</label><input id="userSearch" placeholder="sains.com.ing@gmail.com" oninput="debouncedUsers()"></div>
+      <div id="usersList"><span style="color:#777">Загрузка...</span></div>
+
+      <h4 style="margin:20px 0 8px">🎨 Все роли</h4>
+      <div id="rolesList"><span style="color:#777">Загрузка...</span></div>
+    </div>`;
+  loadDeveloperData();
+}
+
+let userTimer;
+function debouncedUsers(){clearTimeout(userTimer);userTimer=setTimeout(loadDeveloperUsers,250)}
+
+async function loadDeveloperData(){
+  await loadDeveloperRoles();
+  await loadDeveloperUsers();
+}
+
+async function loadDeveloperRoles(){
+  const el=document.getElementById('rolesList');
+  if(!el)return;
+  const {data,error}=await supabaseClient.from('roles').select('id,name,color').order('name');
+  if(error){el.innerHTML=`<div class="message">${escapeHtml(error.message)}</div>`;return}
+  if(!data?.length){el.innerHTML='<span style="color:#777">Ролей пока нет.</span>';return}
+  el.innerHTML=data.map(r=>`<div class="role-row"><span><span class="swatch" style="background:${safeColor(r.color)}"></span><b>${escapeHtml(r.name)}</b></span><span style="color:${safeColor(r.color)}">${escapeHtml(r.color)}</span></div>`).join('');
+}
+
+async function loadDeveloperUsers(){
+  const el=document.getElementById('usersList');
+  if(!el)return;
+  const q=(document.getElementById('userSearch')?.value||'').trim();
+  const {data,error}=await supabaseClient.rpc('get_users_for_developer',{search_text:q});
+  if(error){el.innerHTML=`<div class="message">Ошибка: ${escapeHtml(error.message)}</div>`;return}
+  if(!data?.length){el.innerHTML='<span style="color:#777">Пользователи не найдены.</span>';return}
+  el.innerHTML=data.map(u=>`<div class="user-card"><b>${escapeHtml(u.email||'')}</b><br><small>${escapeHtml(u.username||'User')} • ${u.is_developer?'👑 Developer':u.is_premium?'💎 Premium':'👤 User'}</small><div class="user-actions"><button class="btn small primary" onclick="manageUser('${u.id}','${escapeHtml(u.email||'')}')">Управлять ролями</button></div></div>`).join('');
+}
+
+async function manageUser(userId,email){
+  const roles=await getAllRoles();
+  const choices=roles.map(r=>`<option value="${r.id}">${escapeHtml(r.name)}</option>`).join('');
+  const modal=document.createElement('div');
+  modal.className='modal';
+  modal.id='manageModal';
+  modal.innerHTML=`<div class="modalbox"><div style="display:flex;justify-content:space-between;align-items:center"><h2>🛠️ Роли пользователя</h2><button class="btn small" onclick="document.getElementById('manageModal')?.remove()">✕</button></div><p style="color:#aaa;margin-bottom:15px">${escapeHtml(email)}</p><div class="field"><label>Роль</label><select id="manageRole">${choices}</select></div><div class="modal-actions"><button class="btn primary" onclick="giveRole('${userId}')">➕ Выдать</button><button class="btn danger" onclick="removeRole('${userId}')">➖ Снять</button></div><div class="message" id="manageMsg"></div><div id="targetRoles" style="margin-top:15px"></div></div>`;
+  document.body.appendChild(modal);
+  await showTargetRoles(userId);
+}
+
+async function getAllRoles(){
+  const {data,error}=await supabaseClient.from('roles').select('id,name,color').order('name');
+  if(error)throw error;
+  return data||[];
+}
+
+async function showTargetRoles(userId){
+  const el=document.getElementById('targetRoles');if(!el)return;
+  const {data,error}=await supabaseClient.from('user_roles').select('role_id,roles(id,name,color)').eq('user_id',userId);
+  if(error){el.innerHTML=`<div class="message">${escapeHtml(error.message)}</div>`;return}
+  el.innerHTML='<div style="color:#aaa;margin-bottom:6px">Текущие роли</div>'+(data?.length?data.map(x=>`<span class="pill" style="color:${safeColor(x.roles?.color)}">${escapeHtml(x.roles?.name||'')}</span>`).join(''):'<span style="color:#777">Нет ролей</span>');
+}
+
+async function giveRole(userId){
+  const roleId=document.getElementById('manageRole')?.value;
+  if(!roleId)return;
+  const {error}=await supabaseClient.rpc('give_role',{target_user:userId,target_role:roleId});
+  if(error){msg('manageMsg',error.message);return}
+  msg('manageMsg','Роль выдана.',true);
+  await showTargetRoles(userId);await loadDeveloperUsers();await loadDeveloperRoles();
+}
+
+async function removeRole(userId){
+  const roleId=document.getElementById('manageRole')?.value;
+  if(!roleId)return;
+  const {error}=await supabaseClient.rpc('remove_role',{target_user:userId,target_role:roleId});
+  if(error){msg('manageMsg',error.message);return}
+  msg('manageMsg','Роль снята.',true);
+  await showTargetRoles(userId);await loadDeveloperUsers();
+}
+
+async function createRole(){
+  const name=document.getElementById('newRoleName')?.value.trim();
+  const color=document.getElementById('newRoleColor')?.value||'#a855f7';
+  if(!name)return msg('createRoleMsg','Укажи название роли.');
+  const {error}=await supabaseClient.rpc('create_role',{role_name:name,role_color:color});
+  if(error){msg('createRoleMsg',error.message);return}
+  msg('createRoleMsg','Роль создана.',true);
+  document.getElementById('newRoleName').value='';
+  await loadDeveloperRoles();
+}
 
 async function logout(){
+  if(supabaseClient)await supabaseClient.auth.signOut();
+  session=null;profile=null;myRoles=[];
+  closeModal('cabModal');
+  updateNav();
+}
 
 if(supabaseClient){
-
-await supabaseClient.auth.signOut();
-
+  supabaseClient.auth.onAuthStateChange((_event,newSession)=>{
+    session=newSession;
+    setTimeout(loadSession,0);
+  });
 }
-
-session=null;
-
-updateNav();
-
-closeModal('cabModal');
-
-}
-
-
-// =====================================================
-// HTML SECURITY
-// =====================================================
-
-function escapeHtml(value){
-
-return String(value ?? '')
-.replace(
-/[&<>'"]/g,
-function(c){
-
-return {
-
-'&':'&amp;',
-'<':'&lt;',
-'>':'&gt;',
-"'":'&#39;',
-'"':'&quot;'
-
-}[c];
-
-}
-);
-
-}
-
-
-// =====================================================
-// START
-// =====================================================
-
-if(
-initSupabase()
-){
-
-supabaseClient.auth.onAuthStateChange(
-function(_event,newSession){
-
-session=newSession;
-
-updateNav();
-
-}
-);
-
 loadSession();
-
-}else{
-
-updateNav();
-
-}
-
 </script>
-
 </body>
 </html>
