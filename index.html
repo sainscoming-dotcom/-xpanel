@@ -7,492 +7,403 @@
 
 <title>XPanel — Diazz_Kaneki</title>
 
-<!-- Supabase -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-* {
-    box-sizing: border-box;
-}
+*{box-sizing:border-box}
 
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    color: #fff;
-    min-height: 100vh;
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    color:white;
+    min-height:100vh;
     background:
-        radial-gradient(circle at 15% 10%, #163b65 0, transparent 35%),
-        radial-gradient(circle at 85% 15%, #3b164c 0, transparent 30%),
-        linear-gradient(135deg, #03050a, #080d17 50%, #05030a);
+    radial-gradient(circle at 20% 0%,#182b52 0,#080d18 42%,#03050a 100%);
 }
 
-button,
-input {
-    font-family: inherit;
+.container{
+    max-width:1100px;
+    margin:auto;
+    padding:20px;
 }
 
-.container {
-    max-width: 1100px;
-    margin: auto;
-    padding: 25px 20px;
+nav{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+    flex-wrap:wrap;
+    padding:15px 0;
 }
 
-/* NAV */
-
-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 0;
-    gap: 15px;
+.logo{
+    font-size:29px;
+    font-weight:900;
+    color:#55cfff;
 }
 
-.logo {
-    font-size: 26px;
-    font-weight: 900;
-    color: #55cfff;
-    text-shadow: 0 0 20px #55cfff66;
+.nav-buttons{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
 }
 
-.nav-right {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+.nav-btn{
+    background:#0b1421;
+    color:white;
+    border:1px solid #29445f;
+    padding:11px 16px;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:bold;
 }
 
-.nav-btn {
-    border: 1px solid #263d58;
-    background: #0b1320;
-    color: #d9e8f7;
-    padding: 10px 15px;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: .2s;
+.nav-btn:hover{
+    background:#17283b;
 }
 
-.nav-btn:hover {
-    transform: translateY(-2px);
-    border-color: #55cfff;
+.server{
+    padding:8px 14px;
+    border-radius:20px;
+    background:#0b1c2b;
+    border:1px solid #28658a;
+    color:#9edfff;
 }
 
-.user-mini {
-    display: none;
-    padding: 9px 13px;
-    background: #101a29;
-    border: 1px solid #263d58;
-    border-radius: 10px;
-    color: #9edfff;
+.hero{
+    text-align:center;
+    padding:80px 0 55px;
 }
 
-/* HERO */
-
-.hero {
-    text-align: center;
-    padding: 75px 0 45px;
+.hero h1{
+    margin:0;
+    font-size:68px;
+    background:linear-gradient(90deg,#43d9ff,#8b7cff,#ff5fcf);
+    -webkit-background-clip:text;
+    color:transparent;
 }
 
-.hero h1 {
-    font-size: 70px;
-    margin: 0 0 15px;
-
-    background: linear-gradient(
-        90deg,
-        #43d9ff,
-        #8b7cff,
-        #ff5fcf
-    );
-
-    -webkit-background-clip: text;
-    color: transparent;
-
-    text-shadow: 0 0 30px #168bd144;
+.hero p{
+    max-width:720px;
+    margin:20px auto 30px;
+    color:#aebbd0;
+    font-size:19px;
+    line-height:1.6;
 }
 
-.hero p {
-    max-width: 700px;
-    margin: auto auto 30px;
-    color: #aebbd0;
-    font-size: 19px;
-    line-height: 1.6;
+.btn{
+    display:inline-block;
+    border:0;
+    border-radius:12px;
+    padding:14px 25px;
+    color:white;
+    text-decoration:none;
+    font-weight:800;
+    cursor:pointer;
+    background:linear-gradient(90deg,#168bd1,#765cff);
+    box-shadow:0 10px 35px #168bd144;
+    transition:.2s;
 }
 
-.btn {
-    display: inline-block;
-    border: none;
-    padding: 15px 28px;
-    border-radius: 12px;
-    text-decoration: none;
-    font-weight: 800;
-    color: #fff;
-    cursor: pointer;
-
-    background: linear-gradient(
-        90deg,
-        #168bd1,
-        #765cff
-    );
-
-    box-shadow: 0 10px 35px #168bd144;
-    transition: .2s;
+.btn:hover{
+    transform:translateY(-3px);
 }
 
-.btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 15px 45px #168bd166;
+.cards{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
 }
 
-/* CARDS */
-
-.cardgrid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 18px;
-    margin: 30px 0;
+.card{
+    background:#0b111d;
+    border:1px solid #1c3048;
+    border-radius:18px;
+    padding:25px;
 }
 
-.card {
-    background: #0b111d;
-    border: 1px solid #1b3048;
-    border-radius: 18px;
-    padding: 25px;
-    box-shadow: 0 10px 35px #0005;
+.card h3{
+    color:#7bddff;
+    margin-top:0;
 }
 
-.card h3 {
-    margin-top: 0;
-    color: #7bddff;
+.card p{
+    color:#9aa9bd;
+    line-height:1.5;
 }
 
-.card p {
-    color: #9aa9bd;
-    line-height: 1.5;
+.download{
+    text-align:center;
+    margin:55px 0;
+    padding:45px 20px;
+    border-radius:24px;
+    background:linear-gradient(135deg,#0e2035,#11142a);
+    border:1px solid #28547b;
 }
 
-/* DOWNLOAD */
-
-.download {
-    margin: 55px 0;
-    background: linear-gradient(
-        135deg,
-        #0e2035,
-        #11142a
-    );
-    border: 1px solid #28547b;
-    border-radius: 24px;
-    padding: 45px;
-    text-align: center;
+.download h2{
+    font-size:31px;
 }
 
-.download h2 {
-    font-size: 32px;
-    margin-top: 0;
+.small{
+    margin-top:18px;
+    color:#718096;
 }
 
-.small {
-    color: #718096;
-    margin-top: 18px;
+.section{
+    display:none;
+    margin:40px 0;
 }
 
-/* ACCOUNT */
-
-.account {
-    display: none;
-    margin: 50px 0;
+.box{
+    background:#0b111d;
+    border:1px solid #263d57;
+    border-radius:22px;
+    padding:30px;
+    box-shadow:0 10px 40px #0006;
 }
 
-.account-box {
-    max-width: 700px;
-    margin: auto;
-    background: rgba(10, 17, 29, .95);
-    border: 1px solid #253b56;
-    border-radius: 25px;
-    padding: 35px;
-    box-shadow: 0 20px 60px #0007;
+.profile-name{
+    font-size:24px;
+    font-weight:bold;
 }
 
-.account-title {
-    text-align: center;
-    margin-bottom: 30px;
+.roles{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin:20px 0;
 }
 
-.account-title h2 {
-    margin: 0 0 10px;
-    font-size: 32px;
+.role{
+    padding:9px 15px;
+    border-radius:12px;
+    font-weight:bold;
 }
 
-.account-title p {
-    color: #8191a7;
+.user{
+    background:#172333;
+    border:1px solid #33465d;
 }
 
-/* PROFILE */
-
-.profile {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    padding: 22px;
-    border-radius: 18px;
-    background: #0d1624;
-    border: 1px solid #213650;
-    margin-bottom: 20px;
+.premium{
+    background:#3b3106;
+    border:1px solid #e5c51b;
+    color:#ffe96a;
 }
 
-.avatar {
-    width: 65px;
-    height: 65px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    background: linear-gradient(
-        135deg,
-        #168bd1,
-        #765cff
-    );
-
-    font-size: 25px;
-    font-weight: 900;
+.developer{
+    background:#3b0b0b;
+    border:1px solid #ff3030;
+    color:#ff5c5c;
 }
 
-.profile-name {
-    font-size: 22px;
-    font-weight: 800;
+.admin{
+    display:none;
+    margin:40px 0;
 }
 
-.profile-date {
-    color: #718096;
-    font-size: 14px;
-    margin-top: 5px;
+.admin-box{
+    background:linear-gradient(145deg,#120d18,#0b111d);
+    border:1px solid #702d82;
+    border-radius:22px;
+    padding:30px;
+    box-shadow:0 15px 50px #0008;
 }
 
-/* BADGES */
-
-.badges {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 15px;
+.admin-title{
+    margin-top:0;
+    font-size:30px;
+    background:linear-gradient(90deg,#ff4d4d,#d36aff);
+    -webkit-background-clip:text;
+    color:transparent;
 }
 
-.badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-
-    padding: 7px 12px;
-    border-radius: 20px;
-
-    font-size: 13px;
-    font-weight: 800;
+.description{
+    color:#9faabd;
+    margin-bottom:20px;
 }
 
-.badge-developer {
-    color: #ff8585;
-    background: #3a1116;
-    border: 1px solid #8e2935;
-    box-shadow: 0 0 18px #ff334422;
+.search{
+    width:100%;
+    padding:14px;
+    border-radius:12px;
+    border:1px solid #2a4058;
+    background:#070c14;
+    color:white;
+    outline:none;
+    margin-bottom:20px;
 }
 
-.badge-premium {
-    color: #ffd95c;
-    background: #392d08;
-    border: 1px solid #927515;
-    box-shadow: 0 0 18px #ffd21f22;
+.users{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
 }
 
-.badge-user {
-    color: #aebbd0;
-    background: #182230;
-    border: 1px solid #30445b;
+.user-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    padding:18px;
+    background:#080e18;
+    border:1px solid #20344a;
+    border-radius:15px;
+    flex-wrap:wrap;
 }
 
-/* STATUS */
-
-.status-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
-    margin-top: 20px;
+.user-name{
+    font-size:18px;
+    font-weight:bold;
 }
 
-.status {
-    padding: 18px;
-    border-radius: 15px;
-    background: #0a111c;
-    border: 1px solid #1c3048;
+.user-id{
+    color:#65748a;
+    font-size:10px;
+    word-break:break-all;
+    margin-top:6px;
 }
 
-.status-title {
-    color: #718096;
-    font-size: 13px;
-    margin-bottom: 7px;
+.user-roles{
+    display:flex;
+    gap:5px;
+    flex-wrap:wrap;
+    margin-top:8px;
 }
 
-.status-value {
-    font-weight: 800;
+.mini{
+    padding:4px 8px;
+    border-radius:6px;
+    font-size:11px;
 }
 
-/* AUTH */
-
-.auth {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: #0009;
-    backdrop-filter: blur(10px);
-
-    justify-content: center;
-    align-items: center;
-
-    padding: 20px;
-    z-index: 1000;
+.mini-premium{
+    background:#5d5000;
+    color:#ffe95b;
 }
 
-.auth-box {
-    width: 100%;
-    max-width: 430px;
-
-    background: #0b111d;
-    border: 1px solid #28425f;
-    border-radius: 22px;
-
-    padding: 30px;
-
-    box-shadow: 0 30px 90px #0009;
+.mini-developer{
+    background:#681515;
+    color:#ff7070;
 }
 
-.auth-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.actions{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
 }
 
-.auth-header h2 {
-    margin: 0;
+.action{
+    border:0;
+    border-radius:9px;
+    padding:10px 13px;
+    color:white;
+    cursor:pointer;
+    font-weight:bold;
 }
 
-.close {
-    border: none;
-    background: transparent;
-    color: #8090a5;
-    font-size: 25px;
-    cursor: pointer;
+.action:hover{
+    opacity:.8;
 }
 
-.input-group {
-    margin-top: 18px;
+.p-on{background:#9b8300}
+.p-off{background:#313131}
+.d-on{background:#b21e1e}
+.d-off{background:#313131}
+
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    z-index:1000;
+    background:#000c;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
 }
 
-.input-group label {
-    display: block;
-    color: #9aa9bd;
-    margin-bottom: 7px;
-    font-size: 14px;
+.modal-box{
+    width:100%;
+    max-width:430px;
+    padding:30px;
+    border-radius:20px;
+    background:#0b111d;
+    border:1px solid #294661;
+    box-shadow:0 20px 80px #000;
 }
 
-.input-group input {
-    width: 100%;
-    padding: 13px 14px;
-
-    border-radius: 10px;
-    border: 1px solid #263d58;
-
-    outline: none;
-
-    background: #070d16;
-    color: #fff;
-
-    transition: .2s;
+.input{
+    width:100%;
+    padding:13px;
+    margin:7px 0;
+    border-radius:10px;
+    border:1px solid #2b4259;
+    background:#060b12;
+    color:white;
+    outline:none;
 }
 
-.input-group input:focus {
-    border-color: #55cfff;
-    box-shadow: 0 0 0 3px #55cfff15;
+.modal-buttons{
+    display:flex;
+    gap:10px;
+    margin-top:15px;
 }
 
-.auth-submit {
-    width: 100%;
-    margin-top: 22px;
+.modal-buttons button{
+    flex:1;
 }
 
-.switch-auth {
-    text-align: center;
-    margin-top: 18px;
-    color: #718096;
-    font-size: 14px;
+.close{
+    background:#252d38;
 }
 
-.switch-auth span {
-    color: #55cfff;
-    cursor: pointer;
-    font-weight: 700;
+.switch{
+    text-align:center;
+    margin-top:18px;
+    color:#75cfff;
+    cursor:pointer;
 }
 
-.message {
-    display: none;
-    margin-top: 15px;
-    padding: 12px;
-    border-radius: 10px;
-    background: #24151a;
-    border: 1px solid #65313b;
-    color: #ff9da7;
-    font-size: 14px;
+.error{
+    color:#ff6565;
+    margin-top:12px;
 }
 
-/* ACCOUNT BUTTONS */
-
-.account-actions {
-    display: flex;
-    gap: 10px;
-    margin-top: 20px;
+.success{
+    color:#61e391;
+    margin-top:12px;
 }
 
-.logout-btn {
-    background: #26131a;
-    border: 1px solid #63303b;
-    color: #ff9da7;
-    padding: 12px 18px;
-    border-radius: 10px;
-    cursor: pointer;
+.message{
+    margin:15px 0;
+    display:none;
+    padding:12px;
+    border-radius:10px;
 }
 
-/* FOOTER */
-
-footer {
-    text-align: center;
-    padding: 40px;
-    color: #65748a;
+footer{
+    text-align:center;
+    padding:40px 0;
+    color:#65748a;
 }
 
-/* MOBILE */
-
-@media(max-width: 750px) {
-
-    .cardgrid {
-        grid-template-columns: 1fr;
+@media(max-width:750px){
+    .cards{
+        grid-template-columns:1fr;
     }
 
-    .hero h1 {
-        font-size: 48px;
+    .hero h1{
+        font-size:45px;
     }
 
-    .hero {
-        padding-top: 50px;
+    .hero{
+        padding-top:55px;
     }
 
-    nav {
-        flex-direction: column;
+    .user-row{
+        align-items:flex-start;
     }
-
-    .status-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .profile {
-        align-items: flex-start;
-    }
-
 }
 </style>
 </head>
@@ -501,110 +412,91 @@ footer {
 
 <div class="container">
 
-<!-- NAV -->
-
 <nav>
 
     <div class="logo">
         XPanel
     </div>
 
-    <div class="nav-right">
+    <div class="nav-buttons">
 
-        <div
-            class="user-mini"
-            id="userMini"
-        ></div>
-
-        <button
-            class="nav-btn"
-            id="loginButton"
-            onclick="openAuth('login')"
-        >
+        <button class="nav-btn" onclick="openLogin()">
             Войти
         </button>
 
-        <button
-            class="nav-btn"
-            id="registerButton"
-            onclick="openAuth('register')"
-        >
+        <button class="nav-btn" onclick="openRegister()">
             Регистрация
         </button>
 
         <button
             class="nav-btn"
             id="accountButton"
-            onclick="showAccount()"
-            style="display:none;"
-        >
-            Личный кабинет
+            style="display:none"
+            onclick="showAccount()">
+
+            👤 Личный кабинет
+
         </button>
 
     </div>
 
+    <div class="server">
+        Arizona RP • Server 20
+    </div>
+
 </nav>
 
-
-<!-- HERO -->
 
 <section class="hero">
 
     <h1>XPanel</h1>
 
     <p>
-        Красивый игровой MoonLoader-скрипт от
+        Игровой MoonLoader-скрипт от
         <b>Diazz_Kaneki</b>
-        для удобного автонадевания маски
-        и управления настройками прямо в игре.
+        для Arizona RP.
     </p>
 
     <a
         class="btn"
         href="./XPanel_ArizonaRP.lua"
-        download="XPanel_ArizonaRP.lua"
-    >
+        download="XPanel_ArizonaRP.lua">
+
         ⬇ Скачать XPanel
+
     </a>
 
 </section>
 
 
-<!-- FEATURES -->
-
-<section class="cardgrid">
+<section class="cards">
 
     <div class="card">
         <h3>⏱ Автомаска</h3>
-
         <p>
-            Автоматическая отправка команды
-            /mask каждые 10 минут.
+            Автоматическая работа маски
+            с заданным интервалом.
         </p>
     </div>
 
     <div class="card">
         <h3>🎨 XPanel</h3>
-
         <p>
-            Современная панель для удобного
-            управления функциями скрипта.
+            Удобная игровая панель,
+            открываемая командой /xpanel.
         </p>
     </div>
 
     <div class="card">
-        <h3>👤 Аккаунты</h3>
-
+        <h3>🔐 Система аккаунтов</h3>
         <p>
-            Личный кабинет, Premium и
-            специальные Developer-статусы.
+            Регистрация, вход,
+            Premium и Developer.
         </p>
     </div>
 
 </section>
 
-
-<!-- DOWNLOAD -->
 
 <section class="download">
 
@@ -613,125 +505,100 @@ footer {
     </h2>
 
     <p>
-        Версия 1.0 • MoonLoader • Diazz_Kaneki
+        XPanel • MoonLoader • Diazz_Kaneki
     </p>
 
     <a
         class="btn"
         href="./XPanel_ArizonaRP.lua"
-        download="XPanel_ArizonaRP.lua"
-    >
+        download="XPanel_ArizonaRP.lua">
+
         Скачать .LUA
+
     </a>
 
     <div class="small">
-        Файл: XPanel_ArizonaRP.lua
+        Файл предназначен для папки moonloader.
     </div>
 
 </section>
 
 
-<!-- ACCOUNT -->
+<!-- ЛИЧНЫЙ КАБИНЕТ -->
 
 <section
-    class="account"
-    id="accountSection"
->
+    class="section"
+    id="account">
 
-    <div class="account-box">
+    <div class="box">
 
-        <div class="account-title">
+        <h2>
+            👤 Личный кабинет
+        </h2>
 
-            <h2>
-                👤 Личный кабинет
-            </h2>
+        <div
+            class="profile-name"
+            id="profileName">
 
-            <p>
-                Твой профиль XPanel
-            </p>
-
-        </div>
-
-
-        <div class="profile">
-
-            <div
-                class="avatar"
-                id="avatar"
-            >
-                X
-            </div>
-
-            <div>
-
-                <div
-                    class="profile-name"
-                    id="profileName"
-                >
-                    Пользователь
-                </div>
-
-                <div
-                    class="profile-date"
-                    id="profileDate"
-                >
-                    Аккаунт
-                </div>
-
-                <div
-                    class="badges"
-                    id="badges"
-                ></div>
-
-            </div>
+            Загрузка...
 
         </div>
 
-
-        <div class="status-grid">
-
-            <div class="status">
-
-                <div class="status-title">
-                    Premium
-                </div>
-
-                <div
-                    class="status-value"
-                    id="premiumStatus"
-                >
-                    Нет
-                </div>
-
-            </div>
-
-
-            <div class="status">
-
-                <div class="status-title">
-                    Developer
-                </div>
-
-                <div
-                    class="status-value"
-                    id="developerStatus"
-                >
-                    Нет
-                </div>
-
-            </div>
+        <div
+            class="roles"
+            id="roles">
 
         </div>
 
+        <button
+            class="btn"
+            onclick="logout()">
 
-        <div class="account-actions">
+            🚪 Выйти
 
-            <button
-                class="logout-btn"
-                onclick="logout()"
-            >
-                Выйти из аккаунта
-            </button>
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- DEVELOPER PANEL -->
+
+<section
+    class="admin"
+    id="adminPanel">
+
+    <div class="admin-box">
+
+        <h2 class="admin-title">
+            🔴 Developer Panel
+        </h2>
+
+        <div class="description">
+
+            Developer может управлять ролями
+            пользователей XPanel.
+
+        </div>
+
+        <input
+            id="userSearch"
+            class="search"
+            placeholder="🔎 Поиск пользователя..."
+            oninput="filterUsers()"
+        >
+
+        <div
+            id="adminMessage"
+            class="message">
+        </div>
+
+        <div
+            id="usersList"
+            class="users">
+
+            Загрузка...
 
         </div>
 
@@ -747,164 +614,70 @@ footer {
 </div>
 
 
-<!-- AUTH WINDOW -->
+<!-- ОКНО АВТОРИЗАЦИИ -->
 
 <div
-    class="auth"
-    id="authModal"
->
+    class="modal"
+    id="authModal">
 
-    <div class="auth-box">
+    <div class="modal-box">
 
-        <div class="auth-header">
+        <h2 id="authTitle">
+            Вход
+        </h2>
 
-            <h2 id="authTitle">
-                Вход
-            </h2>
+        <input
+            id="usernameInput"
+            class="input"
+            placeholder="Username"
+            style="display:none"
+        >
+
+        <input
+            id="emailInput"
+            class="input"
+            type="email"
+            placeholder="Email"
+        >
+
+        <input
+            id="passwordInput"
+            class="input"
+            type="password"
+            placeholder="Пароль"
+        >
+
+        <div class="modal-buttons">
 
             <button
-                class="close"
-                onclick="closeAuth()"
-            >
-                ×
+                class="btn"
+                id="authSubmit"
+                onclick="submitAuth()">
+
+                Войти
+
+            </button>
+
+            <button
+                class="btn close"
+                onclick="closeAuth()">
+
+                Закрыть
+
             </button>
 
         </div>
-
-
-        <!-- REGISTER -->
-
-        <form
-            id="registerForm"
-            style="display:none;"
-            onsubmit="registerUser(event)"
-        >
-
-            <div class="input-group">
-
-                <label>
-                    Никнейм
-                </label>
-
-                <input
-                    id="registerUsername"
-                    type="text"
-                    minlength="3"
-                    maxlength="24"
-                    required
-                    placeholder="Например: Diazz_Kaneki"
-                >
-
-            </div>
-
-
-            <div class="input-group">
-
-                <label>
-                    Email
-                </label>
-
-                <input
-                    id="registerEmail"
-                    type="email"
-                    required
-                    placeholder="example@mail.com"
-                >
-
-            </div>
-
-
-            <div class="input-group">
-
-                <label>
-                    Пароль
-                </label>
-
-                <input
-                    id="registerPassword"
-                    type="password"
-                    minlength="6"
-                    required
-                    placeholder="Минимум 6 символов"
-                >
-
-            </div>
-
-
-            <button
-                class="btn auth-submit"
-                type="submit"
-            >
-                Создать аккаунт
-            </button>
-
-        </form>
-
-
-        <!-- LOGIN -->
-
-        <form
-            id="loginForm"
-            onsubmit="loginUser(event)"
-        >
-
-            <div class="input-group">
-
-                <label>
-                    Email
-                </label>
-
-                <input
-                    id="loginEmail"
-                    type="email"
-                    required
-                    placeholder="example@mail.com"
-                >
-
-            </div>
-
-
-            <div class="input-group">
-
-                <label>
-                    Пароль
-                </label>
-
-                <input
-                    id="loginPassword"
-                    type="password"
-                    required
-                    placeholder="Твой пароль"
-                >
-
-            </div>
-
-
-            <button
-                class="btn auth-submit"
-                type="submit"
-            >
-                Войти
-            </button>
-
-        </form>
-
 
         <div
-            class="message"
-            id="authMessage"
-        ></div>
+            class="switch"
+            id="authSwitch"
+            onclick="switchAuth()">
 
-
-        <div class="switch-auth">
-
-            <span
-                id="switchText"
-            >
-                Нет аккаунта? Зарегистрироваться
-            </span>
+            Нет аккаунта? Регистрация
 
         </div>
+
+        <div id="authMessage"></div>
 
     </div>
 
@@ -918,452 +691,295 @@ footer {
 ========================================= */
 
 const SUPABASE_URL =
-    "https://geimapwjvykzihwytjsu.supabase.co";
+"https://geimapwjvykzihwytjsu.supabase.co";
 
 const SUPABASE_KEY =
-    "sb_publishable_bw3marsbGsI_XFzwCV6W_g_t7tkGS3G";
+"sb_publishable_bw3marsbGsI_XFzwCV6W_g_t7tkGS3G";
 
 const supabaseClient =
-    window.supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_KEY
-    );
+window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
 
 
 /* =========================================
-   AUTH WINDOW
+   VARIABLES
 ========================================= */
 
-function openAuth(type) {
+let authMode = "login";
+let currentUser = null;
+let allUsers = [];
 
-    document.getElementById("authModal").style.display = "flex";
 
-    clearMessage();
+/* =========================================
+   AUTH WINDOWS
+========================================= */
 
-    if (type === "register") {
+function openLogin(){
 
-        document.getElementById("authTitle").textContent =
-            "Создание аккаунта";
+    authMode = "login";
 
-        document.getElementById("registerForm").style.display =
-            "block";
+    document.getElementById("authModal").style.display="flex";
 
-        document.getElementById("loginForm").style.display =
-            "none";
+    document.getElementById("authTitle").textContent="Вход";
 
-        document.getElementById("switchText").textContent =
-            "Уже есть аккаунт? Войти";
+    document.getElementById("usernameInput").style.display="none";
 
-        document.getElementById("switchText").onclick =
-            () => openAuth("login");
+    document.getElementById("authSubmit").textContent="Войти";
 
-    } else {
+    document.getElementById("authSwitch").textContent=
+        "Нет аккаунта? Регистрация";
 
-        document.getElementById("authTitle").textContent =
-            "Вход";
+    clearAuthMessage();
+}
 
-        document.getElementById("registerForm").style.display =
-            "none";
 
-        document.getElementById("loginForm").style.display =
-            "block";
+function openRegister(){
 
-        document.getElementById("switchText").textContent =
-            "Нет аккаунта? Зарегистрироваться";
+    authMode = "register";
 
-        document.getElementById("switchText").onclick =
-            () => openAuth("register");
+    document.getElementById("authModal").style.display="flex";
 
+    document.getElementById("authTitle").textContent="Регистрация";
+
+    document.getElementById("usernameInput").style.display="block";
+
+    document.getElementById("authSubmit").textContent=
+        "Зарегистрироваться";
+
+    document.getElementById("authSwitch").textContent=
+        "Уже есть аккаунт? Войти";
+
+    clearAuthMessage();
+}
+
+
+function closeAuth(){
+
+    document.getElementById("authModal").style.display="none";
+
+}
+
+
+function switchAuth(){
+
+    if(authMode==="login"){
+        openRegister();
+    }else{
+        openLogin();
     }
+
 }
 
 
-function closeAuth() {
+function clearAuthMessage(){
 
-    document.getElementById("authModal").style.display =
-        "none";
+    document.getElementById("authMessage").innerHTML="";
 
-    clearMessage();
-}
-
-
-function showMessage(text) {
-
-    const message =
-        document.getElementById("authMessage");
-
-    message.textContent = text;
-    message.style.display = "block";
-}
-
-
-function clearMessage() {
-
-    const message =
-        document.getElementById("authMessage");
-
-    message.textContent = "";
-    message.style.display = "none";
 }
 
 
 /* =========================================
-   REGISTER
+   REGISTRATION / LOGIN
 ========================================= */
 
-async function registerUser(event) {
-
-    event.preventDefault();
-
-    clearMessage();
-
-    const username =
-        document.getElementById("registerUsername")
-        .value
-        .trim();
+async function submitAuth(){
 
     const email =
-        document.getElementById("registerEmail")
-        .value
-        .trim();
+        document.getElementById("emailInput").value.trim();
 
     const password =
-        document.getElementById("registerPassword")
-        .value;
+        document.getElementById("passwordInput").value;
+
+    const username =
+        document.getElementById("usernameInput").value.trim();
 
 
-    if (!/^[a-zA-Z0-9_]+$/.test(username)) {
+    if(!email || !password){
 
-        showMessage(
-            "Никнейм может содержать только латинские буквы, цифры и _."
+        showAuthMessage(
+            "Заполни email и пароль.",
+            false
         );
 
         return;
     }
 
 
-    const { data, error } =
+    if(authMode==="register"){
+
+        if(!username){
+
+            showAuthMessage(
+                "Введите username.",
+                false
+            );
+
+            return;
+        }
+
+
+        if(!/^[a-zA-Z0-9_]+$/.test(username)){
+
+            showAuthMessage(
+                "Username: только английские буквы, цифры и _.",
+                false
+            );
+
+            return;
+        }
+
+
+        const {data,error} =
         await supabaseClient.auth.signUp({
 
-            email: email,
+            email:email,
 
-            password: password,
+            password:password,
 
-            options: {
-
-                data: {
-                    username: username
+            options:{
+                data:{
+                    username:username
                 }
-
             }
 
         });
 
 
-    if (error) {
+        if(error){
 
-        showMessage(
-            error.message
-        );
+            showAuthMessage(
+                error.message,
+                false
+            );
 
-        return;
-    }
-
-
-    if (data.session) {
-
-        closeAuth();
-
-        await loadProfile();
-
-        alert(
-            "Аккаунт успешно создан!"
-        );
-
-    } else {
-
-        showMessage(
-            "Аккаунт создан. Проверь почту, чтобы подтвердить email."
-        );
-
-    }
-
-}
+            return;
+        }
 
 
-/* =========================================
-   LOGIN
-========================================= */
+        if(data.session){
 
-async function loginUser(event) {
+            currentUser=data.user;
 
-    event.preventDefault();
+            closeAuth();
 
-    clearMessage();
+            await updateInterface();
 
-    const email =
-        document.getElementById("loginEmail")
-        .value
-        .trim();
+        }else{
 
-    const password =
-        document.getElementById("loginPassword")
-        .value;
+            showAuthMessage(
+                "Аккаунт создан. Проверь почту для подтверждения.",
+                true
+            );
 
+        }
 
-    const { data, error } =
+    }else{
+
+        const {data,error} =
         await supabaseClient.auth.signInWithPassword({
 
-            email: email,
+            email:email,
 
-            password: password
+            password:password
 
         });
 
 
-    if (error) {
+        if(error){
 
-        showMessage(
-            "Ошибка входа: " + error.message
-        );
+            showAuthMessage(
+                "Ошибка входа: "+error.message,
+                false
+            );
 
-        return;
+            return;
+        }
+
+
+        currentUser=data.user;
+
+        closeAuth();
+
+        await updateInterface();
+
     }
 
+}
 
-    closeAuth();
 
-    await loadProfile();
+function showAuthMessage(text,success){
 
-    showAccount();
+    const element =
+        document.getElementById("authMessage");
+
+    element.className =
+        success ? "success" : "error";
+
+    element.textContent=text;
 
 }
 
 
 /* =========================================
-   LOGOUT
+   PROFILE
 ========================================= */
 
-async function logout() {
+async function loadProfile(){
 
-    await supabaseClient.auth.signOut();
+    if(!currentUser)
+        return null;
 
-    document.getElementById("accountSection").style.display =
-        "none";
 
-    document.getElementById("accountButton").style.display =
-        "none";
+    const {data,error} =
+    await supabaseClient
+    .from("profiles")
+    .select("*")
+    .eq("id",currentUser.id)
+    .single();
 
-    document.getElementById("userMini").style.display =
-        "none";
 
-    document.getElementById("loginButton").style.display =
-        "inline-block";
+    if(error){
 
-    document.getElementById("registerButton").style.display =
-        "inline-block";
+        console.error(error);
 
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
+        return null;
+    }
+
+
+    return data;
 
 }
 
 
 /* =========================================
-   LOAD PROFILE
+   INTERFACE
 ========================================= */
 
-async function loadProfile() {
+async function updateInterface(){
 
-    const {
-        data: { user }
-    } =
-        await supabaseClient.auth.getUser();
+    const accountButton =
+        document.getElementById("accountButton");
 
 
-    if (!user) {
+    if(!currentUser){
 
-        return;
+        accountButton.style.display="none";
 
-    }
+        document.getElementById("account")
+        .style.display="none";
 
-
-    const { data: profile, error } =
-        await supabaseClient
-
-            .from("profiles")
-
-            .select(
-                "username, is_premium, is_developer, created_at"
-            )
-
-            .eq("id", user.id)
-
-            .single();
-
-
-    if (error) {
-
-        console.error(
-            "Profile error:",
-            error
-        );
+        document.getElementById("adminPanel")
+        .style.display="none";
 
         return;
-
     }
 
 
-    updateInterface(
-        profile
-    );
+    accountButton.style.display="block";
 
-}
-
-
-/* =========================================
-   UPDATE INTERFACE
-========================================= */
-
-function updateInterface(profile) {
-
-    const username =
-        profile.username || "User";
-
-
-    document.getElementById("profileName")
-        .textContent =
-        username;
-
-
-    document.getElementById("avatar")
-        .textContent =
-        username
-            .charAt(0)
-            .toUpperCase();
-
-
-    document.getElementById("userMini")
-        .textContent =
-        username;
-
-
-    const date =
-        new Date(
-            profile.created_at
-        );
-
-
-    document.getElementById("profileDate")
-        .textContent =
-        "Зарегистрирован: " +
-        date.toLocaleDateString(
-            "ru-RU"
-        );
-
-
-    document.getElementById("premiumStatus")
-        .textContent =
-        profile.is_premium
-            ? "🟡 Активен"
-            : "Нет";
-
-
-    document.getElementById("developerStatus")
-        .textContent =
-        profile.is_developer
-            ? "🔴 Активен"
-            : "Нет";
-
-
-    const badges =
-        document.getElementById("badges");
-
-
-    badges.innerHTML = "";
-
-
-    let hasBadge = false;
-
-
-    if (profile.is_developer) {
-
-        const badge =
-            document.createElement("div");
-
-        badge.className =
-            "badge badge-developer";
-
-        badge.innerHTML =
-            "🔴 Developer";
-
-        badges.appendChild(
-            badge
-        );
-
-        hasBadge = true;
-
-    }
-
-
-    if (profile.is_premium) {
-
-        const badge =
-            document.createElement("div");
-
-        badge.className =
-            "badge badge-premium";
-
-        badge.innerHTML =
-            "🟡 Premium";
-
-        badges.appendChild(
-            badge
-        );
-
-        hasBadge = true;
-
-    }
-
-
-    if (!hasBadge) {
-
-        const badge =
-            document.createElement("div");
-
-        badge.className =
-            "badge badge-user";
-
-        badge.innerHTML =
-            "Обычный пользователь";
-
-        badges.appendChild(
-            badge
-        );
-
-    }
-
-
-    document.getElementById("userMini")
-        .style.display =
-        "block";
-
-
-    document.getElementById("loginButton")
-        .style.display =
-        "none";
-
-
-    document.getElementById("registerButton")
-        .style.display =
-        "none";
-
-
-    document.getElementById("accountButton")
-        .style.display =
-        "inline-block";
+    await showAccount();
 
 }
 
@@ -1372,38 +988,128 @@ function updateInterface(profile) {
    ACCOUNT
 ========================================= */
 
-function showAccount() {
+async function showAccount(){
 
-    const account =
-        document.getElementById(
-            "accountSection"
-        );
+    if(!currentUser)
+        return;
 
-    account.style.display =
-        "block";
 
-    account.scrollIntoView({
-        behavior: "smooth"
+    document.getElementById("account")
+    .style.display="block";
+
+
+    const profile =
+        await loadProfile();
+
+
+    if(!profile)
+        return;
+
+
+    document.getElementById("profileName")
+    .textContent="@"+profile.username;
+
+
+    const roles =
+        document.getElementById("roles");
+
+
+    roles.innerHTML="";
+
+
+    if(profile.is_developer){
+
+        roles.innerHTML +=
+        '<div class="role developer">🔴 Developer</div>';
+
+    }
+
+
+    if(profile.is_premium){
+
+        roles.innerHTML +=
+        '<div class="role premium">🟡 Premium</div>';
+
+    }
+
+
+    if(!profile.is_developer &&
+       !profile.is_premium){
+
+        roles.innerHTML +=
+        '<div class="role user">👤 Пользователь</div>';
+
+    }
+
+
+    await checkDeveloper();
+
+
+    document.getElementById("account")
+    .scrollIntoView({
+        behavior:"smooth"
     });
 
 }
 
 
 /* =========================================
-   CHECK SESSION
+   LOGOUT
 ========================================= */
 
-async function checkSession() {
+async function logout(){
 
-    const {
-        data: { session }
-    } =
-        await supabaseClient.auth.getSession();
+    await supabaseClient.auth.signOut();
+
+    currentUser=null;
+
+    document.getElementById("account")
+    .style.display="none";
+
+    document.getElementById("adminPanel")
+    .style.display="none";
+
+    document.getElementById("accountButton")
+    .style.display="none";
+
+}
 
 
-    if (session) {
+/* =========================================
+   DEVELOPER CHECK
+========================================= */
 
-        await loadProfile();
+async function checkDeveloper(){
+
+    if(!currentUser)
+        return;
+
+
+    const {data,error} =
+    await supabaseClient.rpc(
+        "is_developer"
+    );
+
+
+    if(error){
+
+        console.error(error);
+
+        return;
+    }
+
+
+    if(data===true){
+
+        document.getElementById("adminPanel")
+        .style.display="block";
+
+        await loadUsers();
+
+    }else{
+
+        document.getElementById("adminPanel")
+        .style.display="none";
 
     }
 
@@ -1411,25 +1117,370 @@ async function checkSession() {
 
 
 /* =========================================
-   AUTH STATE
+   USERS
 ========================================= */
 
-supabaseClient.auth.onAuthStateChange(
-    async (event, session) => {
+async function loadUsers(){
 
-        if (session) {
+    const list =
+        document.getElementById("usersList");
 
-            await loadProfile();
+
+    list.innerHTML="Загрузка пользователей...";
+
+
+    const {data,error} =
+    await supabaseClient.rpc(
+        "developer_get_users"
+    );
+
+
+    if(error){
+
+        list.innerHTML=
+        "<div class='error'>"+
+        "Не удалось загрузить пользователей."+
+        "</div>";
+
+        console.error(error);
+
+        return;
+    }
+
+
+    allUsers=data || [];
+
+    renderUsers(allUsers);
+
+}
+
+
+/* =========================================
+   RENDER USERS
+========================================= */
+
+function renderUsers(users){
+
+    const list =
+        document.getElementById("usersList");
+
+
+    if(!users.length){
+
+        list.innerHTML=
+        "<div>Пользователи не найдены.</div>";
+
+        return;
+    }
+
+
+    list.innerHTML="";
+
+
+    users.forEach(user=>{
+
+        const row =
+            document.createElement("div");
+
+
+        row.className="user-row";
+
+
+        let roles="";
+
+
+        if(user.is_developer){
+
+            roles +=
+            '<span class="mini mini-developer">🔴 Developer</span>';
 
         }
+
+
+        if(user.is_premium){
+
+            roles +=
+            '<span class="mini mini-premium">🟡 Premium</span>';
+
+        }
+
+
+        if(!roles){
+
+            roles=
+            '<span class="mini">👤 User</span>';
+
+        }
+
+
+        row.innerHTML=`
+
+        <div>
+
+            <div class="user-name">
+                👤 @${escapeHtml(user.username)}
+            </div>
+
+            <div class="user-roles">
+                ${roles}
+            </div>
+
+            <div class="user-id">
+                ID: ${escapeHtml(user.id)}
+            </div>
+
+        </div>
+
+
+        <div class="actions">
+
+            <button
+                class="action ${
+                    user.is_premium
+                    ? "p-on"
+                    : "p-off"
+                }"
+                onclick="
+                    togglePremium(
+                        '${user.id}',
+                        ${!user.is_premium}
+                    )
+                ">
+
+                ${
+                    user.is_premium
+                    ? "🟡 Снять Premium"
+                    : "🟡 Выдать Premium"
+                }
+
+            </button>
+
+
+            <button
+                class="action ${
+                    user.is_developer
+                    ? "d-on"
+                    : "d-off"
+                }"
+                onclick="
+                    toggleDeveloper(
+                        '${user.id}',
+                        ${!user.is_developer}
+                    )
+                ">
+
+                ${
+                    user.is_developer
+                    ? "🔴 Снять Developer"
+                    : "🔴 Выдать Developer"
+                }
+
+            </button>
+
+        </div>
+
+        `;
+
+
+        list.appendChild(row);
+
+    });
+
+}
+
+
+/* =========================================
+   PREMIUM
+========================================= */
+
+async function togglePremium(userId,value){
+
+    const {error} =
+    await supabaseClient.rpc(
+        "developer_set_premium",
+        {
+            target_user_id:userId,
+            new_value:value
+        }
+    );
+
+
+    if(error){
+
+        showAdminMessage(
+            "Ошибка: "+error.message,
+            false
+        );
+
+        return;
+    }
+
+
+    showAdminMessage(
+        value
+        ? "🟡 Premium выдан!"
+        : "🟡 Premium снят!",
+        true
+    );
+
+
+    await loadUsers();
+
+}
+
+
+/* =========================================
+   DEVELOPER
+========================================= */
+
+async function toggleDeveloper(userId,value){
+
+    const {error} =
+    await supabaseClient.rpc(
+        "developer_set_developer",
+        {
+            target_user_id:userId,
+            new_value:value
+        }
+    );
+
+
+    if(error){
+
+        showAdminMessage(
+            "Ошибка: "+error.message,
+            false
+        );
+
+        return;
+    }
+
+
+    showAdminMessage(
+        value
+        ? "🔴 Developer выдан!"
+        : "🔴 Developer снят!",
+        true
+    );
+
+
+    await loadUsers();
+
+}
+
+
+/* =========================================
+   SEARCH
+========================================= */
+
+function filterUsers(){
+
+    const search =
+        document.getElementById("userSearch")
+        .value
+        .toLowerCase()
+        .trim();
+
+
+    const filtered =
+        allUsers.filter(
+            user =>
+            user.username
+            .toLowerCase()
+            .includes(search)
+        );
+
+
+    renderUsers(filtered);
+
+}
+
+
+/* =========================================
+   MESSAGE
+========================================= */
+
+function showAdminMessage(
+    text,
+    success
+){
+
+    const element =
+        document.getElementById("adminMessage");
+
+
+    element.style.display="block";
+
+
+    element.className=
+        "message "+
+        (success ? "success" : "error");
+
+
+    element.textContent=text;
+
+
+    setTimeout(()=>{
+
+        element.style.display="none";
+
+    },3000);
+
+}
+
+
+/* =========================================
+   SECURITY
+========================================= */
+
+function escapeHtml(text){
+
+    return String(text)
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+
+}
+
+
+/* =========================================
+   SESSION
+========================================= */
+
+async function checkSession(){
+
+    const {data} =
+        await supabaseClient
+        .auth
+        .getSession();
+
+
+    currentUser =
+        data.session
+        ? data.session.user
+        : null;
+
+
+    await updateInterface();
+
+}
+
+
+supabaseClient.auth.onAuthStateChange(
+    async(event,session)=>{
+
+        currentUser =
+            session
+            ? session.user
+            : null;
+
+        await updateInterface();
 
     }
 );
 
-
-/* =========================================
-   START
-========================================= */
 
 checkSession();
 
