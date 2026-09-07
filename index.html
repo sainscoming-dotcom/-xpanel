@@ -4,359 +4,68 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>XPanel — Arizona RP</title>
-
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: Arial, sans-serif;
-            background:
-                radial-gradient(circle at 20% 20%, #29105c 0, transparent 30%),
-                radial-gradient(circle at 80% 10%, #401020 0, transparent 25%),
-                #070711;
-            color: #fff;
-            min-height: 100vh;
-        }
-
-        header {
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            background: rgba(7, 7, 17, .85);
-            backdrop-filter: blur(15px);
-            border-bottom: 1px solid rgba(255,255,255,.08);
-        }
-
-        nav {
-            max-width: 1150px;
-            margin: auto;
-            padding: 18px 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .logo {
-            font-size: 24px;
-            font-weight: 900;
-            color: #a855f7;
-            text-shadow: 0 0 20px #8b5cf6;
-        }
-
-        .nav-buttons {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
-        button,
-        .button {
-            border: none;
-            border-radius: 12px;
-            padding: 11px 17px;
-            background: #171725;
-            color: white;
-            cursor: pointer;
-            font-weight: 700;
-            transition: .2s;
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        button:hover,
-        .button:hover {
-            transform: translateY(-2px);
-            background: #242438;
-        }
-
-        .purple {
-            background: linear-gradient(135deg, #7c3aed, #a855f7);
-            box-shadow: 0 0 25px rgba(168,85,247,.35);
-        }
-
-        .red {
-            background: #7f1d1d;
-        }
-
-        .green {
-            background: #166534;
-        }
-
-        main {
-            max-width: 1150px;
-            margin: auto;
-            padding: 70px 20px;
-        }
-
-        .hero {
-            text-align: center;
-            padding: 80px 20px;
-        }
-
-        .hero h1 {
-            font-size: clamp(48px, 9vw, 100px);
-            font-weight: 1000;
-            background: linear-gradient(90deg,#8b5cf6,#ec4899,#f43f5e);
-            -webkit-background-clip: text;
-            color: transparent;
-            text-shadow: 0 0 50px rgba(168,85,247,.2);
-        }
-
-        .hero p {
-            margin-top: 15px;
-            color: #aaa;
-            font-size: 18px;
-        }
-
-        .hero-buttons {
-            margin-top: 30px;
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-
-        .section {
-            margin-top: 45px;
-            background: rgba(14,14,27,.85);
-            border: 1px solid rgba(255,255,255,.08);
-            border-radius: 22px;
-            padding: 28px;
-            box-shadow: 0 20px 60px rgba(0,0,0,.25);
-        }
-
-        .section h2 {
-            margin-bottom: 20px;
-        }
-
-        .cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit,minmax(230px,1fr));
-            gap: 18px;
-        }
-
-        .card {
-            background: #10101d;
-            border: 1px solid rgba(255,255,255,.07);
-            padding: 25px;
-            border-radius: 18px;
-        }
-
-        .card h3 {
-            margin-bottom: 10px;
-        }
-
-        .card p {
-            color: #999;
-            line-height: 1.5;
-        }
-
-        input,
-        select {
-            width: 100%;
-            padding: 13px;
-            border-radius: 11px;
-            border: 1px solid #29293b;
-            background: #0b0b15;
-            color: white;
-            outline: none;
-            margin-top: 8px;
-        }
-
-        input:focus,
-        select:focus {
-            border-color: #8b5cf6;
-        }
-
-        label {
-            display: block;
-            margin-top: 13px;
-            color: #bbb;
-        }
-
-        .form-buttons {
-            display: flex;
-            gap: 10px;
-            margin-top: 17px;
-            flex-wrap: wrap;
-        }
-
-        .account {
-            display: none;
-        }
-
-        .profile-name {
-            font-size: 26px;
-            font-weight: 900;
-        }
-
-        .roles {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 9px;
-            margin-top: 15px;
-        }
-
-        .role-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 7px 12px;
-            border-radius: 999px;
-            font-size: 13px;
-            font-weight: 800;
-            border: 1px solid rgba(255,255,255,.12);
-        }
-
-        .developer-panel {
-            display: none;
-        }
-
-        .role-create {
-            display: grid;
-            grid-template-columns: 1fr 80px auto;
-            gap: 10px;
-            align-items: end;
-        }
-
-        .color-input {
-            height: 45px;
-            padding: 3px;
-            cursor: pointer;
-        }
-
-        .role-list {
-            margin-top: 20px;
-            display: grid;
-            gap: 10px;
-        }
-
-        .role-item {
-            background: #10101c;
-            border: 1px solid rgba(255,255,255,.07);
-            padding: 13px;
-            border-radius: 13px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 10px;
-        }
-
-        .role-left {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .role-dot {
-            width: 14px;
-            height: 14px;
-            border-radius: 50%;
-        }
-
-        .users-list {
-            margin-top: 20px;
-            display: grid;
-            gap: 12px;
-        }
-
-        .user-item {
-            background: #10101c;
-            border: 1px solid rgba(255,255,255,.07);
-            padding: 16px;
-            border-radius: 15px;
-        }
-
-        .user-top {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
-        .username {
-            font-weight: 900;
-            font-size: 17px;
-        }
-
-        .user-roles {
-            display: flex;
-            gap: 7px;
-            flex-wrap: wrap;
-            margin-top: 10px;
-        }
-
-        .user-actions {
-            display: grid;
-            grid-template-columns: 1fr auto auto;
-            gap: 8px;
-            margin-top: 12px;
-        }
-
-        .system-role {
-            color: #aaa;
-            font-size: 12px;
-        }
-
-        .message {
-            margin-top: 12px;
-            padding: 12px;
-            border-radius: 10px;
-            display: none;
-            background: #10101d;
-        }
-
-        .success {
-            border: 1px solid #166534;
-            color: #86efac;
-        }
-
-        .error {
-            border: 1px solid #7f1d1d;
-            color: #fca5a5;
-        }
-
-        .empty {
-            color: #777;
-            padding: 10px 0;
-        }
-
-        footer {
-            text-align: center;
-            padding: 50px 20px;
-            color: #666;
-        }
-
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: Arial, sans-serif; background: radial-gradient(circle at 20% 20%, #29105c 0, transparent 30%), radial-gradient(circle at 80% 10%, #401020 0, transparent 25%), #070711; color: #fff; min-height: 100vh; }
+        header { position: sticky; top: 0; z-index: 100; background: rgba(7, 7, 17, .85); backdrop-filter: blur(15px); border-bottom: 1px solid rgba(255,255,255,.08); }
+        nav { max-width: 1150px; margin: auto; padding: 18px 20px; display: flex; align-items: center; justify-content: space-between; }
+        .logo { font-size: 24px; font-weight: 900; color: #a855f7; text-shadow: 0 0 20px #8b5cf6; }
+        .nav-buttons { display: flex; gap: 10px; flex-wrap: wrap; }
+        button, .button { border: none; border-radius: 12px; padding: 11px 17px; background: #171725; color: white; cursor: pointer; font-weight: 700; transition: .2s; text-decoration: none; display: inline-block; }
+        button:hover, .button:hover { transform: translateY(-2px); background: #242438; }
+        .purple { background: linear-gradient(135deg, #7c3aed, #a855f7); box-shadow: 0 0 25px rgba(168,85,247,.35); }
+        .red { background: #7f1d1d; }
+        .green { background: #166534; }
+        main { max-width: 1150px; margin: auto; padding: 70px 20px; }
+        .hero { text-align: center; padding: 80px 20px; }
+        .hero h1 { font-size: clamp(48px, 9vw, 100px); font-weight: 1000; background: linear-gradient(90deg,#8b5cf6,#ec4899,#f43f5e); -webkit-background-clip: text; color: transparent; text-shadow: 0 0 50px rgba(168,85,247,.2); }
+        .hero p { margin-top: 15px; color: #aaa; font-size: 18px; }
+        .hero-buttons { margin-top: 30px; display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+        .section { margin-top: 45px; background: rgba(14,14,27,.85); border: 1px solid rgba(255,255,255,.08); border-radius: 22px; padding: 28px; box-shadow: 0 20px 60px rgba(0,0,0,.25); }
+        .section h2 { margin-bottom: 20px; }
+        .cards { display: grid; grid-template-columns: repeat(auto-fit,minmax(230px,1fr)); gap: 18px; }
+        .card { background: #10101d; border: 1px solid rgba(255,255,255,.07); padding: 25px; border-radius: 18px; }
+        .card h3 { margin-bottom: 10px; }
+        .card p { color: #999; line-height: 1.5; }
+        input, select { width: 100%; padding: 13px; border-radius: 11px; border: 1px solid #29293b; background: #0b0b15; color: white; outline: none; margin-top: 8px; }
+        input:focus, select:focus { border-color: #8b5cf6; }
+        label { display: block; margin-top: 13px; color: #bbb; }
+        .form-buttons { display: flex; gap: 10px; margin-top: 17px; flex-wrap: wrap; }
+        .account { display: none; }
+        .profile-name { font-size: 26px; font-weight: 900; }
+        .roles { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 15px; }
+        .role-badge { display: inline-flex; align-items: center; gap: 6px; padding: 7px 12px; border-radius: 999px; font-size: 13px; font-weight: 800; border: 1px solid rgba(255,255,255,.12); }
+        .developer-panel { display: none; }
+        .role-create { display: grid; grid-template-columns: 1fr 80px auto; gap: 10px; align-items: end; }
+        .color-input { height: 45px; padding: 3px; cursor: pointer; }
+        .role-list { margin-top: 20px; display: grid; gap: 10px; }
+        .role-item { background: #10101c; border: 1px solid rgba(255,255,255,.07); padding: 13px; border-radius: 13px; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+        .role-left { display: flex; align-items: center; gap: 10px; }
+        .role-dot { width: 14px; height: 14px; border-radius: 50%; }
+        .users-list { margin-top: 20px; display: grid; gap: 12px; }
+        .user-item { background: #10101c; border: 1px solid rgba(255,255,255,.07); padding: 16px; border-radius: 15px; }
+        .user-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+        .username { font-weight: 900; font-size: 17px; }
+        .user-roles { display: flex; gap: 7px; flex-wrap: wrap; margin-top: 10px; }
+        .user-actions { display: grid; grid-template-columns: 1fr auto auto; gap: 8px; margin-top: 12px; }
+        .system-role { color: #aaa; font-size: 12px; }
+        .message { margin-top: 12px; padding: 12px; border-radius: 10px; display: none; background: #10101d; }
+        .success { border: 1px solid #166534; color: #86efac; }
+        .error { border: 1px solid #7f1d1d; color: #fca5a5; }
+        .empty { color: #777; padding: 10px 0; }
+        footer { text-align: center; padding: 50px 20px; color: #666; }
         @media(max-width:700px) {
-            .role-create {
-                grid-template-columns: 1fr;
-            }
-
-            .user-actions {
-                grid-template-columns: 1fr;
-            }
-
-            nav {
-                flex-direction: column;
-                gap: 15px;
-            }
+            .role-create, .user-actions { grid-template-columns: 1fr; }
+            nav { flex-direction: column; gap: 15px; }
         }
     </style>
 </head>
-
 <body>
 
 <header>
     <nav>
         <div class="logo">⚡ XPanel</div>
-
         <div class="nav-buttons">
             <button onclick="showSection('home')">Главная</button>
             <button onclick="showSection('login')">Войти</button>
@@ -367,188 +76,113 @@
 </header>
 
 <main>
-
     <!-- ГЛАВНАЯ -->
     <section id="home" class="hero">
         <h1>XPanel</h1>
         <p>Arizona RP • Server 20</p>
-
         <div class="hero-buttons">
-            <a class="button purple"
-               href="./XPanel_ArizonaRP.lua"
-               download="XPanel_ArizonaRP.lua">
-                📥 Скачать XPanel
-            </a>
-
-            <button onclick="showSection('account')">
-                👤 Личный кабинет
-            </button>
+            <a class="button purple" href="./XPanel_ArizonaRP.lua" download="XPanel_ArizonaRP.lua">📥 Скачать XPanel</a>
+            <button onclick="showSection('account')">👤 Личный кабинет</button>
         </div>
     </section>
 
-    <section class="section">
+    <section id="features" class="section">
         <h2>🚀 Возможности</h2>
-
         <div class="cards">
-
             <div class="card">
                 <h3>🎭 Автомаска</h3>
-                <p>
-                    Автоматическое управление маской в игре
-                    после окончания действия предыдущей.
-                </p>
+                <p>Автоматическое управление маской в игре после окончания действия предыдущей.</p>
             </div>
-
             <div class="card">
                 <h3>⚡ XPanel</h3>
-                <p>
-                    Удобная игровая панель с красивым
-                    интерфейсом.
-                </p>
+                <p>Удобная игровая панель с красивым интерфейсом.</p>
             </div>
-
             <div class="card">
                 <h3>👤 Аккаунты</h3>
-                <p>
-                    Регистрация, авторизация, личный кабинет
-                    и система ролей.
-                </p>
+                <p>Регистрация, авторизация, личный кабинет и система ролей.</p>
             </div>
-
             <div class="card">
                 <h3>🛠️ Developer</h3>
-                <p>
-                    Управление Premium, Developer и
-                    пользовательскими ролями.
-                </p>
+                <p>Управление Premium, Developer и пользовательскими ролями.</p>
             </div>
-
         </div>
     </section>
 
     <!-- LOGIN -->
     <section id="login" class="section" style="display:none;">
         <h2>🔐 Вход</h2>
-
         <label>Email</label>
         <input id="loginEmail" type="email" placeholder="Введите email">
-
         <label>Пароль</label>
         <input id="loginPassword" type="password" placeholder="Введите пароль">
-
         <div class="form-buttons">
-            <button class="purple" onclick="login()">
-                Войти
-            </button>
+            <button class="purple" onclick="login()">Войти</button>
         </div>
-
         <div id="loginMessage" class="message"></div>
     </section>
 
     <!-- REGISTER -->
     <section id="register" class="section" style="display:none;">
         <h2>📝 Регистрация</h2>
-
         <label>Игровой ник</label>
         <input id="registerUsername" placeholder="Например: Diazz_Kaneki">
-
         <label>Email</label>
         <input id="registerEmail" type="email" placeholder="Введите email">
-
         <label>Пароль</label>
         <input id="registerPassword" type="password" placeholder="Минимум 6 символов">
-
         <div class="form-buttons">
-            <button class="purple" onclick="register()">
-                Зарегистрироваться
-            </button>
+            <button class="purple" onclick="register()">Зарегистрироваться</button>
         </div>
-
         <div id="registerMessage" class="message"></div>
     </section>
 
     <!-- ACCOUNT -->
     <section id="account" class="section account">
         <h2>👤 Личный кабинет</h2>
-
-        <div class="profile-name" id="profileName">
-            Загрузка...
-        </div>
-
+        <div class="profile-name" id="profileName">Загрузка...</div>
         <div id="profileRoles" class="roles"></div>
-
         <div class="form-buttons">
-            <button class="red" onclick="logout()">
-                🚪 Выйти
-            </button>
+            <button class="red" onclick="logout()">🚪 Выйти</button>
         </div>
-
         <div id="accountMessage" class="message"></div>
     </section>
 
     <!-- DEVELOPER -->
     <section id="developerPanel" class="section developer-panel">
-
         <h2>🛠️ Панель разработчика</h2>
+        <p style="color:#888;margin-bottom:20px;">Здесь Developer может создавать роли и управлять ролями пользователей.</p>
 
-        <p style="color:#888;margin-bottom:20px;">
-            Здесь Developer может создавать роли и управлять ролями пользователей.
-        </p>
-
-        <!-- CREATE ROLE -->
         <div class="card">
             <h3>➕ Создать роль</h3>
-
             <div class="role-create">
-
                 <div>
                     <label>Название роли</label>
-                    <input id="newRoleName"
-                           maxlength="40"
-                           placeholder="Например: Moderator">
+                    <input id="newRoleName" maxlength="40" placeholder="Например: Moderator">
                 </div>
-
                 <div>
                     <label>Цвет</label>
-                    <input id="newRoleColor"
-                           class="color-input"
-                           type="color"
-                           value="#8b5cf6">
+                    <input id="newRoleColor" class="color-input" type="color" value="#8b5cf6">
                 </div>
-
-                <button class="purple" onclick="createRole()">
-                    Создать
-                </button>
-
+                <button class="purple" onclick="createRole()">Создать</button>
             </div>
-
             <div id="roleMessage" class="message"></div>
         </div>
 
-        <!-- ROLES -->
         <div class="card" style="margin-top:18px;">
             <h3>🎨 Роли</h3>
-
             <div id="roleList" class="role-list">
                 <div class="empty">Загрузка ролей...</div>
             </div>
         </div>
 
-        <!-- USERS -->
         <div class="card" style="margin-top:18px;">
             <h3>👥 Пользователи</h3>
-
-            <input id="userSearch"
-                   placeholder="🔎 Поиск пользователя..."
-                   oninput="renderUsers()">
-
+            <input id="userSearch" placeholder="🔎 Поиск пользователя..." oninput="renderUsers()">
             <div id="usersList" class="users-list">
                 <div class="empty">Загрузка пользователей...</div>
             </div>
         </div>
-
     </section>
-
 </main>
 
 <footer>
@@ -557,15 +191,9 @@
 
 <script>
     const SUPABASE_URL = "https://geimapwjvykzihwytjsu.supabase.co";
+    const SUPABASE_KEY = "sb_publishable_bw3marsbGsI_XFzwCV6W_g_t7tkGS3G";
 
-    const SUPABASE_KEY =
-        "sb_publishable_bw3marsbGsI_XFzwCV6W_g_t7tkGS3G";
-
-    const supabaseClient =
-        window.supabase.createClient(
-            SUPABASE_URL,
-            SUPABASE_KEY
-        );
+    const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
     let currentUser = null;
     let currentRoles = [];
@@ -573,25 +201,17 @@
     let allUsers = [];
 
     function showSection(id) {
-        const sections = [
-            "home",
-            "login",
-            "register",
-            "account"
-        ];
-
+        const sections = ["home", "login", "register", "account"];
         sections.forEach(section => {
             const el = document.getElementById(section);
-
             if (!el) return;
-
-            if (section === id) {
-                el.style.display =
-                    section === "home" ? "block" : "block";
-            } else {
-                el.style.display = "none";
-            }
+            el.style.display = (section === id) ? "block" : "none";
         });
+
+        const featuresEl = document.getElementById("features");
+        if (featuresEl) {
+            featuresEl.style.display = (id === "home") ? "block" : "none";
+        }
 
         if (id === "account") {
             loadAccount();
@@ -600,218 +220,131 @@
 
     function message(id, text, success = true) {
         const el = document.getElementById(id);
-
         if (!el) return;
-
         el.textContent = text;
-        el.className =
-            "message " + (success ? "success" : "error");
-
+        el.className = "message " + (success ? "success" : "error");
         el.style.display = "block";
     }
 
     async function register() {
-        const username =
-            document.getElementById("registerUsername").value.trim();
-
-        const email =
-            document.getElementById("registerEmail").value.trim();
-
-        const password =
-            document.getElementById("registerPassword").value;
+        const username = document.getElementById("registerUsername").value.trim();
+        const email = document.getElementById("registerEmail").value.trim();
+        const password = document.getElementById("registerPassword").value;
 
         if (!username || !email || !password) {
-            message(
-                "registerMessage",
-                "Заполни все поля.",
-                false
-            );
+            message("registerMessage", "Заполни все поля.", false);
             return;
         }
 
         if (password.length < 6) {
-            message(
-                "registerMessage",
-                "Пароль должен содержать минимум 6 символов.",
-                false
-            );
+            message("registerMessage", "Пароль должен содержать минимум 6 символов.", false);
             return;
         }
 
-        const { data, error } =
-            await supabaseClient.auth.signUp({
-                email,
-                password,
-                options: {
-                    data: {
-                        username: username
-                    }
-                }
-            });
+        const { data, error } = await supabaseClient.auth.signUp({
+            email,
+            password,
+            options: { data: { username } }
+        });
 
         if (error) {
-            message(
-                "registerMessage",
-                error.message,
-                false
-            );
+            message("registerMessage", error.message, false);
             return;
         }
 
-        message(
-            "registerMessage",
-            "Регистрация выполнена. Теперь можешь войти.",
-            true
-        );
+        message("registerMessage", "Регистрация выполнена. Теперь можешь войти.", true);
     }
 
     async function login() {
-        const email =
-            document.getElementById("loginEmail").value.trim();
+        const email = document.getElementById("loginEmail").value.trim();
+        const password = document.getElementById("loginPassword").value;
 
-        const password =
-            document.getElementById("loginPassword").value;
-
-        const { data, error } =
-            await supabaseClient.auth.signInWithPassword({
-                email,
-                password
-            });
+        const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
 
         if (error) {
-            message(
-                "loginMessage",
-                error.message,
-                false
-            );
+            message("loginMessage", error.message, false);
             return;
         }
 
         currentUser = data.user;
-
-        message(
-            "loginMessage",
-            "Успешный вход!",
-            true
-        );
+        message("loginMessage", "Успешный вход!", true);
 
         await loadAccount();
-
-        setTimeout(() => {
-            showSection("account");
-        }, 400);
+        setTimeout(() => { showSection("account"); }, 400);
     }
 
     async function logout() {
         await supabaseClient.auth.signOut();
-
         currentUser = null;
         currentRoles = [];
-
         document.getElementById("developerPanel").style.display = "none";
-
         showSection("home");
     }
 
     async function loadAccount() {
-        const { data: sessionData } =
-            await supabaseClient.auth.getSession();
-
-        currentUser =
-            sessionData?.session?.user || null;
-
-        const account =
-            document.getElementById("account");
+        const { data: sessionData } = await supabaseClient.auth.getSession();
+        currentUser = sessionData?.session?.user || null;
+        const account = document.getElementById("account");
 
         if (!currentUser) {
             account.style.display = "block";
-
-            document.getElementById("profileName").textContent =
-                "Ты не авторизован.";
-
-            document.getElementById("profileRoles").innerHTML =
-                "<span style='color:#888'>Войди в аккаунт, чтобы увидеть профиль.</span>";
-
-            document.getElementById("developerPanel").style.display =
-                "none";
-
+            document.getElementById("profileName").textContent = "Ты не авторизован.";
+            document.getElementById("profileRoles").innerHTML = "<span style='color:#888'>Войди в аккаунт, чтобы увидеть профиль.</span>";
+            document.getElementById("developerPanel").style.display = "none";
             return;
         }
 
-        const { data: profile, error } =
-            await supabaseClient
-                .from("profiles")
-                .select("*")
-                .eq("id", currentUser.id)
-                .single();
+        const { data: profile, error } = await supabaseClient
+            .from("profiles")
+            .select("*")
+            .eq("id", currentUser.id)
+            .single();
 
         if (error) {
-            document.getElementById("profileName").textContent =
-                "Ошибка загрузки профиля";
-
+            document.getElementById("profileName").textContent = "Ошибка загрузки профиля";
             return;
         }
 
-        document.getElementById("profileName").textContent =
-            "@" + profile.username;
+        document.getElementById("profileName").textContent = "@" + profile.username;
 
-        const { data: roles, error: rolesError } =
-            await supabaseClient.rpc("get_my_roles");
+        const { data: roles, error: rolesError } = await supabaseClient.rpc("get_my_roles");
 
         if (rolesError) {
             console.error(rolesError);
-
             currentRoles = [];
-
-            document.getElementById("profileRoles").innerHTML =
-                "<span style='color:#888'>Роли не загружены.</span>";
+            document.getElementById("profileRoles").innerHTML = "<span style='color:#888'>Роли не загружены.</span>";
         } else {
             currentRoles = roles || [];
-
             renderMyRoles();
         }
 
-        const isDeveloper =
-            currentRoles.some(
-                role => role.special_key === "developer"
-            ) || profile.is_developer === true;
+        const isDeveloper = currentRoles.some(role => role.special_key === "developer") || profile.is_developer === true;
 
         if (isDeveloper) {
-            document.getElementById("developerPanel").style.display =
-                "block";
-
+            document.getElementById("developerPanel").style.display = "block";
             await loadDeveloperPanel();
         } else {
-            document.getElementById("developerPanel").style.display =
-                "none";
+            document.getElementById("developerPanel").style.display = "none";
         }
 
         account.style.display = "block";
     }
 
     function renderMyRoles() {
-        const container =
-            document.getElementById("profileRoles");
-
+        const container = document.getElementById("profileRoles");
         container.innerHTML = "";
 
         if (!currentRoles.length) {
-            container.innerHTML =
-                "<span style='color:#777'>Нет ролей</span>";
+            container.innerHTML = "<span style='color:#777'>Нет ролей</span>";
             return;
         }
 
         currentRoles.forEach(role => {
-            const badge =
-                document.createElement("span");
-
+            const badge = document.createElement("span");
             badge.className = "role-badge";
-
             badge.style.color = role.color;
             badge.style.borderColor = role.color;
-
             badge.textContent = role.name;
-
             container.appendChild(badge);
         });
     }
@@ -822,428 +355,238 @@
     }
 
     async function loadRoles() {
-        const { data, error } =
-            await supabaseClient.rpc("developer_get_roles");
-
+        const { data, error } = await supabaseClient.rpc("developer_get_roles");
         if (error) {
-            message(
-                "roleMessage",
-                error.message,
-                false
-            );
+            message("roleMessage", error.message, false);
             return;
         }
-
         allRoles = data || [];
-
         renderRoles();
     }
 
     function renderRoles() {
-        const container =
-            document.getElementById("roleList");
-
+        const container = document.getElementById("roleList");
         container.innerHTML = "";
 
         if (!allRoles.length) {
-            container.innerHTML =
-                "<div class='empty'>Ролей пока нет.</div>";
+            container.innerHTML = "<div class='empty'>Ролей пока нет.</div>";
             return;
         }
 
         allRoles.forEach(role => {
-
-            const item =
-                document.createElement("div");
-
+            const item = document.createElement("div");
             item.className = "role-item";
 
-            const left =
-                document.createElement("div");
-
+            const left = document.createElement("div");
             left.className = "role-left";
 
-            const dot =
-                document.createElement("span");
-
+            const dot = document.createElement("span");
             dot.className = "role-dot";
             dot.style.background = role.color;
-            dot.style.boxShadow =
-                "0 0 12px " + role.color;
+            dot.style.boxShadow = "0 0 12px " + role.color;
 
-            const name =
-                document.createElement("span");
-
+            const name = document.createElement("span");
             name.textContent = role.name;
 
             left.appendChild(dot);
             left.appendChild(name);
 
-            const right =
-                document.createElement("div");
+            const right = document.createElement("div");
 
             if (role.special_key) {
-                const system =
-                    document.createElement("span");
-
+                const system = document.createElement("span");
                 system.className = "system-role";
-
-                system.textContent =
-                    "Системная роль";
-
+                system.textContent = "Системная роль";
                 right.appendChild(system);
             } else {
-                const deleteButton =
-                    document.createElement("button");
-
+                const deleteButton = document.createElement("button");
                 deleteButton.className = "red";
-
-                deleteButton.textContent =
-                    "🗑️ Удалить";
-
-                deleteButton.onclick = () =>
-                    deleteRole(role.id);
-
+                deleteButton.textContent = "🗑️ Удалить";
+                deleteButton.onclick = () => deleteRole(role.id);
                 right.appendChild(deleteButton);
             }
 
             item.appendChild(left);
             item.appendChild(right);
-
             container.appendChild(item);
         });
     }
 
     async function createRole() {
-        const name =
-            document.getElementById("newRoleName").value.trim();
-
-        const color =
-            document.getElementById("newRoleColor").value;
+        const name = document.getElementById("newRoleName").value.trim();
+        const color = document.getElementById("newRoleColor").value;
 
         if (!name) {
-            message(
-                "roleMessage",
-                "Введите название роли.",
-                false
-            );
+            message("roleMessage", "Введите название роли.", false);
             return;
         }
 
-        const { error } =
-            await supabaseClient.rpc(
-                "developer_create_role",
-                {
-                    role_name: name,
-                    role_color: color
-                }
-            );
+        const { error } = await supabaseClient.rpc("developer_create_role", {
+            role_name: name,
+            role_color: color
+        });
 
         if (error) {
-            message(
-                "roleMessage",
-                error.message,
-                false
-            );
+            message("roleMessage", error.message, false);
             return;
         }
 
         document.getElementById("newRoleName").value = "";
-
-        message(
-            "roleMessage",
-            "Роль успешно создана!",
-            true
-        );
-
+        message("roleMessage", "Роль успешно создана!", true);
         await loadRoles();
         await loadUsers();
     }
 
     async function deleteRole(roleId) {
-        const role =
-            allRoles.find(r => r.id === roleId);
-
+        const role = allRoles.find(r => r.id === roleId);
         if (!role) return;
 
         if (role.special_key) {
-            message(
-                "roleMessage",
-                "Системную роль удалить нельзя.",
-                false
-            );
+            message("roleMessage", "Системную роль удалить нельзя.", false);
             return;
         }
 
-        if (!confirm(
-            "Удалить роль «" + role.name + "»?"
-        )) {
-            return;
-        }
+        if (!confirm("Удалить роль «" + role.name + "»?")) return;
 
-        const { error } =
-            await supabaseClient.rpc(
-                "developer_delete_role",
-                {
-                    role_id: roleId
-                }
-            );
+        const { error } = await supabaseClient.rpc("developer_delete_role", { role_id: roleId });
 
         if (error) {
-            message(
-                "roleMessage",
-                error.message,
-                false
-            );
+            message("roleMessage", error.message, false);
             return;
         }
 
-        message(
-            "roleMessage",
-            "Роль удалена.",
-            true
-        );
-
+        message("roleMessage", "Роль удалена.", true);
         await loadRoles();
         await loadUsers();
     }
 
     async function loadUsers() {
-        const { data, error } =
-            await supabaseClient.rpc(
-                "developer_get_users_with_roles"
-            );
+        const { data, error } = await supabaseClient.rpc("developer_get_users_with_roles");
 
         if (error) {
             console.error(error);
-
-            document.getElementById("usersList").innerHTML =
-                "<div class='empty'>Ошибка: " +
-                escapeHtml(error.message) +
-                "</div>";
-
+            document.getElementById("usersList").innerHTML = "<div class='empty'>Ошибка: " + escapeHtml(error.message) + "</div>";
             return;
         }
 
-        allUsers = Array.isArray(data)
-            ? data
-            : [];
-
+        allUsers = Array.isArray(data) ? data : [];
         renderUsers();
     }
 
     function renderUsers() {
-        const container =
-            document.getElementById("usersList");
-
-        const search =
-            document.getElementById("userSearch")
-                .value
-                .trim()
-                .toLowerCase();
-
+        const container = document.getElementById("usersList");
+        const search = document.getElementById("userSearch").value.trim().toLowerCase();
         container.innerHTML = "";
 
-        const users =
-            allUsers.filter(user =>
-                String(user.username || "")
-                    .toLowerCase()
-                    .includes(search)
-            );
+        const users = allUsers.filter(user => String(user.username || "").toLowerCase().includes(search));
 
         if (!users.length) {
-            container.innerHTML =
-                "<div class='empty'>Пользователи не найдены.</div>";
+            container.innerHTML = "<div class='empty'>Пользователи не найдены.</div>";
             return;
         }
 
         users.forEach(user => {
-
-            const item =
-                document.createElement("div");
-
+            const item = document.createElement("div");
             item.className = "user-item";
 
-            const top =
-                document.createElement("div");
-
+            const top = document.createElement("div");
             top.className = "user-top";
 
-            const username =
-                document.createElement("div");
-
+            const username = document.createElement("div");
             username.className = "username";
-
-            username.textContent =
-                "👤 @" + user.username;
+            username.textContent = "👤 @" + user.username;
 
             top.appendChild(username);
-
             item.appendChild(top);
 
-            const rolesBox =
-                document.createElement("div");
-
+            const rolesBox = document.createElement("div");
             rolesBox.className = "user-roles";
 
-            const userRoles =
-                Array.isArray(user.roles)
-                    ? user.roles
-                    : [];
+            const userRoles = Array.isArray(user.roles) ? user.roles : [];
 
             if (!userRoles.length) {
-                rolesBox.innerHTML =
-                    "<span style='color:#666'>Нет ролей</span>";
+                rolesBox.innerHTML = "<span style='color:#666'>Нет ролей</span>";
             } else {
                 userRoles.forEach(role => {
-
-                    const badge =
-                        document.createElement("span");
-
-                    badge.className =
-                        "role-badge";
-
-                    badge.style.color =
-                        role.color;
-
-                    badge.style.borderColor =
-                        role.color;
-
-                    badge.textContent =
-                        role.name;
-
+                    const badge = document.createElement("span");
+                    badge.className = "role-badge";
+                    badge.style.color = role.color;
+                    badge.style.borderColor = role.color;
+                    badge.textContent = role.name;
                     rolesBox.appendChild(badge);
                 });
             }
 
             item.appendChild(rolesBox);
 
-            const actions =
-                document.createElement("div");
+            const actions = document.createElement("div");
+            actions.className = "user-actions";
 
-            actions.className =
-                "user-actions";
-
-            const select =
-                document.createElement("select");
-
+            const select = document.createElement("select");
             allRoles.forEach(role => {
-                const option =
-                    document.createElement("option");
-
+                const option = document.createElement("option");
                 option.value = role.id;
                 option.textContent = role.name;
-
                 select.appendChild(option);
             });
 
-            const give =
-                document.createElement("button");
-
+            const give = document.createElement("button");
             give.className = "green";
             give.textContent = "➕ Выдать";
+            give.onclick = () => assignRole(user.id, select.value);
 
-            give.onclick = () =>
-                assignRole(user.id, select.value);
-
-            const remove =
-                document.createElement("button");
-
+            const remove = document.createElement("button");
             remove.className = "red";
             remove.textContent = "➖ Снять";
-
-            remove.onclick = () =>
-                removeRole(user.id, select.value);
+            remove.onclick = () => removeRole(user.id, select.value);
 
             actions.appendChild(select);
             actions.appendChild(give);
             actions.appendChild(remove);
 
             item.appendChild(actions);
-
             container.appendChild(item);
         });
     }
 
     async function assignRole(userId, roleId) {
         if (!roleId) return;
-
-        const { error } =
-            await supabaseClient.rpc(
-                "developer_assign_role",
-                {
-                    target_user_id: userId,
-                    role_id: roleId
-                }
-            );
-
-        if (error) {
-            alert(error.message);
-            return;
-        }
-
+        const { error } = await supabaseClient.rpc("developer_assign_role", { target_user_id: userId, role_id: roleId });
+        if (error) { alert(error.message); return; }
         await loadUsers();
     }
 
     async function removeRole(userId, roleId) {
         if (!roleId) return;
-
-        const { error } =
-            await supabaseClient.rpc(
-                "developer_remove_role",
-                {
-                    target_user_id: userId,
-                    role_id: roleId
-                }
-            );
-
-        if (error) {
-            alert(error.message);
-            return;
-        }
-
+        const { error } = await supabaseClient.rpc("developer_remove_role", { target_user_id: userId, role_id: roleId });
+        if (error) { alert(error.message); return; }
         await loadUsers();
     }
 
     function escapeHtml(text) {
-        const div =
-            document.createElement("div");
-
+        const div = document.createElement("div");
         div.textContent = text;
-
         return div.innerHTML;
     }
 
     async function checkSession() {
-        const { data } =
-            await supabaseClient.auth.getSession();
-
-        currentUser =
-            data?.session?.user || null;
-
+        const { data } = await supabaseClient.auth.getSession();
+        currentUser = data?.session?.user || null;
         if (currentUser) {
             await loadAccount();
         }
     }
 
-    supabaseClient.auth.onAuthStateChange(
-        async (event, session) => {
-
-            currentUser =
-                session?.user || null;
-
-            if (currentUser) {
-                await loadAccount();
-            } else {
-                document.getElementById(
-                    "developerPanel"
-                ).style.display = "none";
-            }
+    supabaseClient.auth.onAuthStateChange(async (event, session) => {
+        currentUser = session?.user || null;
+        if (currentUser) {
+            await loadAccount();
+        } else {
+            document.getElementById("developerPanel").style.display = "none";
         }
-    );
+    });
 
     checkSession();
 </script>
-
 </body>
 </html>
