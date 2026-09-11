@@ -1,329 +1,131 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Учёт прибыли</title>
-  <style>
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: Inter, Arial, sans-serif;
-      background: linear-gradient(135deg, #0a1020, #151a35 55%, #27134a);
-      color: #fff;
-      min-height: 100vh;
-      padding: 30px 16px;
-    }
-    .wrap {
-      max-width: 1100px;
-      margin: auto;
-    }
-    .panel {
-      background: rgba(18, 24, 48, .88);
-      border: 1px solid rgba(138, 100, 255, .35);
-      box-shadow: 0 20px 60px rgba(0,0,0,.35);
-      border-radius: 22px;
-      padding: 22px;
-      backdrop-filter: blur(12px);
-    }
-    h1 {
-      margin: 0 0 8px;
-      font-size: clamp(26px, 4vw, 42px);
-    }
-    .sub {
-      color: #adb6d7;
-      margin-bottom: 22px;
-    }
-    .summary {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-      margin-bottom: 20px;
-    }
-    .card {
-      background: #121a35;
-      border: 1px solid #253158;
-      border-radius: 16px;
-      padding: 16px;
-    }
-    .card span {
-      display: block;
-      color: #9aa6cc;
-      font-size: 13px;
-      margin-bottom: 7px;
-    }
-    .card strong {
-      font-size: 25px;
-    }
-    .income strong { color: #43e59b; }
-    .expense strong { color: #ff6f86; }
-    .profit strong { color: #b99cff; }
-
-    .table-box { overflow-x: auto; border-radius: 14px; }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      min-width: 850px;
-      background: #0f1730;
-    }
-    th, td {
-      padding: 10px;
-      border-bottom: 1px solid #263151;
-      text-align: left;
-    }
-    th {
-      background: #171f3e;
-      color: #b8c3e6;
-      font-size: 13px;
-    }
-    input, select {
-      width: 100%;
-      padding: 10px 11px;
-      border-radius: 10px;
-      border: 1px solid #33406c;
-      background: #111936;
-      color: #fff;
-      outline: none;
-    }
-    input:focus, select:focus {
-      border-color: #8c6cff;
-      box-shadow: 0 0 0 3px rgba(140,108,255,.14);
-    }
-    .amount { min-width: 110px; }
-    .actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 18px;
-    }
-    button {
-      border: 0;
-      padding: 12px 17px;
-      border-radius: 12px;
-      font-weight: 700;
-      cursor: pointer;
-      color: #fff;
-      background: #26345f;
-      transition: .2s;
-    }
-    button:hover { transform: translateY(-1px); filter: brightness(1.08); }
-    .primary { background: linear-gradient(90deg, #6b5cff, #a15cff); }
-    .save { background: linear-gradient(90deg, #167b5d, #18a776); }
-    .danger { background: linear-gradient(90deg, #b8324f, #e14b65); }
-    .add { background: linear-gradient(90deg, #2457b7, #3179e8); }
-    .remove {
-      background: #7a2940;
-      padding: 9px 12px;
-    }
-    .notice {
-      min-height: 22px;
-      margin-top: 14px;
-      color: #9fb0df;
-      font-size: 14px;
-    }
-    .footer-note {
-      margin-top: 16px;
-      color: #7783aa;
-      font-size: 12px;
-    }
-
-    @media (max-width: 700px) {
-      .summary { grid-template-columns: 1fr; }
-      .panel { padding: 15px; border-radius: 16px; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Журнал прибыли</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:linear-gradient(135deg,#090f22,#17163b,#29134d);color:#fff;padding:25px 15px}
+.container{max-width:1150px;margin:auto}
+.panel{background:rgba(15,21,48,.94);border:1px solid #39457a;border-radius:20px;padding:22px;box-shadow:0 20px 60px #0008}
+h1{margin:0 0 6px;font-size:34px}.desc{color:#aeb8d8;margin-bottom:22px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px}
+.card{background:#111a38;border:1px solid #2e3a67;border-radius:14px;padding:15px}
+.card small{display:block;color:#929fc6;margin-bottom:7px}.card b{font-size:25px}
+.green b{color:#43e59b}.red b{color:#ff6f86}.purple b{color:#b99cff}
+.form{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px;margin-bottom:15px}
+input,select{width:100%;padding:12px;border-radius:10px;border:1px solid #3a4775;background:#0e1630;color:#fff;outline:none}
+button{border:0;border-radius:10px;padding:12px 16px;color:#fff;font-weight:bold;cursor:pointer}
+.add{background:linear-gradient(90deg,#386ee8,#7655ff)}.save{background:#16805e}.clear{background:#b53750}
+.table{overflow:auto;border-radius:12px}
+table{width:100%;border-collapse:collapse;min-width:850px;background:#0d1530}
+th,td{padding:11px;border-bottom:1px solid #273355;text-align:left}
+th{background:#171f40;color:#b7c2e3;font-size:13px}
+.income{color:#43e59b}.expense{color:#ff7187}
+.delete{background:#70283d;padding:7px 10px}
+.status{height:22px;color:#9eacd3;margin-top:13px;font-size:14px}
+@media(max-width:700px){.cards{grid-template-columns:1fr}.form{grid-template-columns:1fr 1fr}}
+</style>
 </head>
 <body>
-  <div class="wrap">
-    <div class="panel">
-      <h1>💰 Учёт прибыли</h1>
-      <div class="sub">Добавляй доходы и расходы — прибыль посчитается автоматически.</div>
+<div class="container">
+<div class="panel">
+<h1>💰 Журнал прибыли</h1>
+<div class="desc">Каждая операция автоматически записывается с датой и временем.</div>
 
-      <div class="summary">
-        <div class="card income">
-          <span>Общий доход</span>
-          <strong id="incomeTotal">0 ₴</strong>
-        </div>
-        <div class="card expense">
-          <span>Общие расходы</span>
-          <strong id="expenseTotal">0 ₴</strong>
-        </div>
-        <div class="card profit">
-          <span>Чистая прибыль</span>
-          <strong id="profitTotal">0 ₴</strong>
-        </div>
-      </div>
+<div class="cards">
+<div class="card green"><small>Всего доходов</small><b id="income">0 ₴</b></div>
+<div class="card red"><small>Всего расходов</small><b id="expense">0 ₴</b></div>
+<div class="card purple"><small>Чистая прибыль</small><b id="profit">0 ₴</b></div>
+</div>
 
-      <div class="table-box">
-        <table>
-          <thead>
-            <tr>
-              <th>Дата</th>
-              <th>Тип</th>
-              <th>Категория</th>
-              <th>Сумма</th>
-              <th>Комментарий</th>
-              <th>Действие</th>
-            </tr>
-          </thead>
-          <tbody id="rows"></tbody>
-        </table>
-      </div>
+<div class="form">
+<input id="category" placeholder="Категория">
+<select id="type"><option value="income">Доход</option><option value="expense">Расход</option></select>
+<input id="amount" type="number" min="0" step="0.01" placeholder="Сумма ₴">
+<input id="comment" placeholder="Комментарий">
+</div>
 
-      <div class="actions">
-        <button class="add" onclick="addRow()">+ Добавить строку</button>
-        <button class="primary" onclick="calculate()">Подсчитать</button>
-        <button class="save" onclick="saveData()">Сохранить</button>
-        <button onclick="exportCSV()">Скачать CSV</button>
-        <button class="danger" onclick="clearAll()">Очистить</button>
-      </div>
+<button class="add" onclick="addOperation()">+ Добавить и записать</button>
+<button class="save" onclick="save()">💾 Сохранить</button>
+<button class="clear" onclick="clearHistory()">🗑 Очистить историю</button>
 
-      <div class="notice" id="notice"></div>
-      <div class="footer-note">Данные сохраняются прямо в браузере через localStorage.</div>
-    </div>
-  </div>
+<div class="table" style="margin-top:18px">
+<table>
+<thead><tr><th>#</th><th>Дата и время</th><th>Тип</th><th>Категория</th><th>Сумма</th><th>Комментарий</th><th></th></tr></thead>
+<tbody id="log"></tbody>
+</table>
+</div>
+<div class="status" id="status"></div>
+</div>
+</div>
 
 <script>
-const STORAGE_KEY = 'profit_tracker_v1';
-const rowsEl = document.getElementById('rows');
-const noticeEl = document.getElementById('notice');
+const KEY='xpanel_profit_log_v2';
+let operations=JSON.parse(localStorage.getItem(KEY)||'[]');
 
-function money(n) {
-  return new Intl.NumberFormat('uk-UA', {
-    maximumFractionDigits: 2
-  }).format(n) + ' ₴';
+function formatMoney(n){
+ return new Intl.NumberFormat('uk-UA',{maximumFractionDigits:2}).format(n)+' ₴';
 }
-
-function today() {
-  return new Date().toISOString().slice(0,10);
+function now(){
+ return new Date().toLocaleString('uk-UA',{dateStyle:'short',timeStyle:'medium'});
 }
-
-function addRow(data = {}) {
-  const tr = document.createElement('tr');
-  tr.innerHTML = `
-    <td><input type="date" class="date" value="${data.date || today()}"></td>
-    <td>
-      <select class="type">
-        <option value="income" ${data.type === 'income' ? 'selected' : ''}>Доход</option>
-        <option value="expense" ${data.type === 'expense' ? 'selected' : ''}>Расход</option>
-      </select>
-    </td>
-    <td><input class="category" placeholder="Например: Продажа" value="${escapeHtml(data.category || '')}"></td>
-    <td><input class="amount" type="number" min="0" step="0.01" placeholder="0.00" value="${data.amount ?? ''}"></td>
-    <td><input class="comment" placeholder="Комментарий" value="${escapeHtml(data.comment || '')}"></td>
-    <td><button class="remove" onclick="this.closest('tr').remove(); calculate();">Удалить</button></td>
-  `;
-  rowsEl.appendChild(tr);
-
-  tr.querySelectorAll('input, select').forEach(el => {
-    el.addEventListener('input', calculate);
-    el.addEventListener('change', calculate);
-  });
-  calculate();
+function addOperation(){
+ const category=document.getElementById('category').value.trim()||'Без категории';
+ const type=document.getElementById('type').value;
+ const amount=parseFloat(document.getElementById('amount').value);
+ const comment=document.getElementById('comment').value.trim()||'—';
+ if(!amount || amount<=0){notice('⚠️ Введи сумму.');return}
+ operations.push({time:now(),type,category,amount,comment});
+ localStorage.setItem(KEY,JSON.stringify(operations));
+ document.getElementById('amount').value='';
+ document.getElementById('comment').value='';
+ render();
+ notice('✅ Операция добавлена в журнал.');
 }
-
-function escapeHtml(text) {
-  return String(text)
-    .replaceAll('&', '&amp;')
-    .replaceAll('"', '&quot;')
-    .replaceAll('<', '&lt;')
-    .replaceAll('>', '&gt;');
+function removeOperation(i){
+ operations.splice(i,1);
+ localStorage.setItem(KEY,JSON.stringify(operations));
+ render();
+ notice('🗑 Запись удалена.');
 }
-
-function getData() {
-  return [...rowsEl.querySelectorAll('tr')].map(tr => ({
-    date: tr.querySelector('.date').value,
-    type: tr.querySelector('.type').value,
-    category: tr.querySelector('.category').value.trim(),
-    amount: parseFloat(tr.querySelector('.amount').value) || 0,
-    comment: tr.querySelector('.comment').value.trim()
-  }));
+function render(){
+ const log=document.getElementById('log');
+ log.innerHTML='';
+ let income=0,expense=0;
+ operations.forEach((x,i)=>{
+   if(x.type==='income') income+=x.amount; else expense+=x.amount;
+   const tr=document.createElement('tr');
+   tr.innerHTML=`<td>${i+1}</td><td>${escapeHtml(x.time)}</td>
+   <td class="${x.type==='income'?'income':'expense'}">${x.type==='income'?'Доход':'Расход'}</td>
+   <td>${escapeHtml(x.category)}</td><td>${formatMoney(x.amount)}</td>
+   <td>${escapeHtml(x.comment)}</td><td><button class="delete" onclick="removeOperation(${i})">Удалить</button></td>`;
+   log.appendChild(tr);
+ });
+ document.getElementById('income').textContent=formatMoney(income);
+ document.getElementById('expense').textContent=formatMoney(expense);
+ document.getElementById('profit').textContent=formatMoney(income-expense);
 }
-
-function calculate() {
-  const data = getData();
-  let income = 0;
-  let expense = 0;
-
-  data.forEach(item => {
-    if (item.type === 'income') income += item.amount;
-    else expense += item.amount;
-  });
-
-  const profit = income - expense;
-  document.getElementById('incomeTotal').textContent = money(income);
-  document.getElementById('expenseTotal').textContent = money(expense);
-  document.getElementById('profitTotal').textContent = money(profit);
-
-  return { income, expense, profit };
+function save(){
+ localStorage.setItem(KEY,JSON.stringify(operations));
+ notice('💾 Журнал сохранён.');
 }
-
-function saveData() {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(getData()));
-  calculate();
-  showNotice('✅ Данные сохранены.');
+function clearHistory(){
+ if(!confirm('Удалить всю историю операций?')) return;
+ operations=[];
+ localStorage.removeItem(KEY);
+ render();
+ notice('🗑 История очищена.');
 }
-
-function loadData() {
-  const saved = localStorage.getItem(STORAGE_KEY);
-  if (!saved) {
-    addRow();
-    return;
-  }
-
-  try {
-    const data = JSON.parse(saved);
-    rowsEl.innerHTML = '';
-    if (Array.isArray(data) && data.length) data.forEach(addRow);
-    else addRow();
-    calculate();
-    showNotice('📂 Сохранённые данные загружены.');
-  } catch {
-    addRow();
-  }
+function notice(t){
+ document.getElementById('status').textContent=t;
+ setTimeout(()=>document.getElementById('status').textContent='',2500);
 }
-
-function clearAll() {
-  if (!confirm('Точно очистить всю таблицу?')) return;
-  localStorage.removeItem(STORAGE_KEY);
-  rowsEl.innerHTML = '';
-  addRow();
-  calculate();
-  showNotice('🗑 Таблица очищена.');
+function escapeHtml(s){
+ return String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');
 }
-
-function showNotice(text) {
-  noticeEl.textContent = text;
-  setTimeout(() => {
-    if (noticeEl.textContent === text) noticeEl.textContent = '';
-  }, 2500);
-}
-
-function exportCSV() {
-  const data = getData();
-  const headers = ['Дата','Тип','Категория','Сумма','Комментарий'];
-  const lines = [
-    headers.join(';'),
-    ...data.map(x => [
-      x.date,
-      x.type === 'income' ? 'Доход' : 'Расход',
-      x.category,
-      x.amount,
-      x.comment
-    ].map(v => `"${String(v).replaceAll('"','""')}"`).join(';'))
-  ];
-
-  const blob = new Blob(["\uFEFF" + lines.join('\n')], {type: 'text/csv;charset=utf-8;'});
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = 'profit-data.csv';
-  a.click();
-  URL.revokeObjectURL(url);
-  showNotice('⬇️ CSV-файл создан.');
-}
-
-loadData();
+render();
 </script>
 </body>
 </html>
