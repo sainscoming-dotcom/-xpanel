@@ -1,592 +1,329 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>XPanel — Arizona RP</title>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: Arial, sans-serif; background: radial-gradient(circle at 20% 20%, #29105c 0, transparent 30%), radial-gradient(circle at 80% 10%, #401020 0, transparent 25%), #070711; color: #fff; min-height: 100vh; }
-        header { position: sticky; top: 0; z-index: 100; background: rgba(7, 7, 17, .85); backdrop-filter: blur(15px); border-bottom: 1px solid rgba(255,255,255,.08); }
-        nav { max-width: 1150px; margin: auto; padding: 18px 20px; display: flex; align-items: center; justify-content: space-between; }
-        .logo { font-size: 24px; font-weight: 900; color: #a855f7; text-shadow: 0 0 20px #8b5cf6; }
-        .nav-buttons { display: flex; gap: 10px; flex-wrap: wrap; }
-        button, .button { border: none; border-radius: 12px; padding: 11px 17px; background: #171725; color: white; cursor: pointer; font-weight: 700; transition: .2s; text-decoration: none; display: inline-block; }
-        button:hover, .button:hover { transform: translateY(-2px); background: #242438; }
-        .purple { background: linear-gradient(135deg, #7c3aed, #a855f7); box-shadow: 0 0 25px rgba(168,85,247,.35); }
-        .red { background: #7f1d1d; }
-        .green { background: #166534; }
-        main { max-width: 1150px; margin: auto; padding: 70px 20px; }
-        .hero { text-align: center; padding: 80px 20px; }
-        .hero h1 { font-size: clamp(48px, 9vw, 100px); font-weight: 1000; background: linear-gradient(90deg,#8b5cf6,#ec4899,#f43f5e); -webkit-background-clip: text; color: transparent; text-shadow: 0 0 50px rgba(168,85,247,.2); }
-        .hero p { margin-top: 15px; color: #aaa; font-size: 18px; }
-        .hero-buttons { margin-top: 30px; display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
-        .section { margin-top: 45px; background: rgba(14,14,27,.85); border: 1px solid rgba(255,255,255,.08); border-radius: 22px; padding: 28px; box-shadow: 0 20px 60px rgba(0,0,0,.25); }
-        .section h2 { margin-bottom: 20px; }
-        .cards { display: grid; grid-template-columns: repeat(auto-fit,minmax(230px,1fr)); gap: 18px; }
-        .card { background: #10101d; border: 1px solid rgba(255,255,255,.07); padding: 25px; border-radius: 18px; }
-        .card h3 { margin-bottom: 10px; }
-        .card p { color: #999; line-height: 1.5; }
-        input, select { width: 100%; padding: 13px; border-radius: 11px; border: 1px solid #29293b; background: #0b0b15; color: white; outline: none; margin-top: 8px; }
-        input:focus, select:focus { border-color: #8b5cf6; }
-        label { display: block; margin-top: 13px; color: #bbb; }
-        .form-buttons { display: flex; gap: 10px; margin-top: 17px; flex-wrap: wrap; }
-        .account { display: none; }
-        .profile-name { font-size: 26px; font-weight: 900; }
-        .roles { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 15px; }
-        .role-badge { display: inline-flex; align-items: center; gap: 6px; padding: 7px 12px; border-radius: 999px; font-size: 13px; font-weight: 800; border: 1px solid rgba(255,255,255,.12); }
-        .developer-panel { display: none; }
-        .role-create { display: grid; grid-template-columns: 1fr 80px auto; gap: 10px; align-items: end; }
-        .color-input { height: 45px; padding: 3px; cursor: pointer; }
-        .role-list { margin-top: 20px; display: grid; gap: 10px; }
-        .role-item { background: #10101c; border: 1px solid rgba(255,255,255,.07); padding: 13px; border-radius: 13px; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
-        .role-left { display: flex; align-items: center; gap: 10px; }
-        .role-dot { width: 14px; height: 14px; border-radius: 50%; }
-        .users-list { margin-top: 20px; display: grid; gap: 12px; }
-        .user-item { background: #10101c; border: 1px solid rgba(255,255,255,.07); padding: 16px; border-radius: 15px; }
-        .user-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
-        .username { font-weight: 900; font-size: 17px; }
-        .user-roles { display: flex; gap: 7px; flex-wrap: wrap; margin-top: 10px; }
-        .user-actions { display: grid; grid-template-columns: 1fr auto auto; gap: 8px; margin-top: 12px; }
-        .system-role { color: #aaa; font-size: 12px; }
-        .message { margin-top: 12px; padding: 12px; border-radius: 10px; display: none; background: #10101d; }
-        .success { border: 1px solid #166534; color: #86efac; }
-        .error { border: 1px solid #7f1d1d; color: #fca5a5; }
-        .empty { color: #777; padding: 10px 0; }
-        footer { text-align: center; padding: 50px 20px; color: #666; }
-        @media(max-width:700px) {
-            .role-create, .user-actions { grid-template-columns: 1fr; }
-            nav { flex-direction: column; gap: 15px; }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Учёт прибыли</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, Arial, sans-serif;
+      background: linear-gradient(135deg, #0a1020, #151a35 55%, #27134a);
+      color: #fff;
+      min-height: 100vh;
+      padding: 30px 16px;
+    }
+    .wrap {
+      max-width: 1100px;
+      margin: auto;
+    }
+    .panel {
+      background: rgba(18, 24, 48, .88);
+      border: 1px solid rgba(138, 100, 255, .35);
+      box-shadow: 0 20px 60px rgba(0,0,0,.35);
+      border-radius: 22px;
+      padding: 22px;
+      backdrop-filter: blur(12px);
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: clamp(26px, 4vw, 42px);
+    }
+    .sub {
+      color: #adb6d7;
+      margin-bottom: 22px;
+    }
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+    .card {
+      background: #121a35;
+      border: 1px solid #253158;
+      border-radius: 16px;
+      padding: 16px;
+    }
+    .card span {
+      display: block;
+      color: #9aa6cc;
+      font-size: 13px;
+      margin-bottom: 7px;
+    }
+    .card strong {
+      font-size: 25px;
+    }
+    .income strong { color: #43e59b; }
+    .expense strong { color: #ff6f86; }
+    .profit strong { color: #b99cff; }
+
+    .table-box { overflow-x: auto; border-radius: 14px; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 850px;
+      background: #0f1730;
+    }
+    th, td {
+      padding: 10px;
+      border-bottom: 1px solid #263151;
+      text-align: left;
+    }
+    th {
+      background: #171f3e;
+      color: #b8c3e6;
+      font-size: 13px;
+    }
+    input, select {
+      width: 100%;
+      padding: 10px 11px;
+      border-radius: 10px;
+      border: 1px solid #33406c;
+      background: #111936;
+      color: #fff;
+      outline: none;
+    }
+    input:focus, select:focus {
+      border-color: #8c6cff;
+      box-shadow: 0 0 0 3px rgba(140,108,255,.14);
+    }
+    .amount { min-width: 110px; }
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+    button {
+      border: 0;
+      padding: 12px 17px;
+      border-radius: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      color: #fff;
+      background: #26345f;
+      transition: .2s;
+    }
+    button:hover { transform: translateY(-1px); filter: brightness(1.08); }
+    .primary { background: linear-gradient(90deg, #6b5cff, #a15cff); }
+    .save { background: linear-gradient(90deg, #167b5d, #18a776); }
+    .danger { background: linear-gradient(90deg, #b8324f, #e14b65); }
+    .add { background: linear-gradient(90deg, #2457b7, #3179e8); }
+    .remove {
+      background: #7a2940;
+      padding: 9px 12px;
+    }
+    .notice {
+      min-height: 22px;
+      margin-top: 14px;
+      color: #9fb0df;
+      font-size: 14px;
+    }
+    .footer-note {
+      margin-top: 16px;
+      color: #7783aa;
+      font-size: 12px;
+    }
+
+    @media (max-width: 700px) {
+      .summary { grid-template-columns: 1fr; }
+      .panel { padding: 15px; border-radius: 16px; }
+    }
+  </style>
 </head>
 <body>
+  <div class="wrap">
+    <div class="panel">
+      <h1>💰 Учёт прибыли</h1>
+      <div class="sub">Добавляй доходы и расходы — прибыль посчитается автоматически.</div>
 
-<header>
-    <nav>
-        <div class="logo">⚡ XPanel</div>
-        <div class="nav-buttons">
-            <button onclick="showSection('home')">Главная</button>
-            <button onclick="showSection('login')">Войти</button>
-            <button onclick="showSection('register')">Регистрация</button>
-            <button onclick="showSection('account')">Личный кабинет</button>
+      <div class="summary">
+        <div class="card income">
+          <span>Общий доход</span>
+          <strong id="incomeTotal">0 ₴</strong>
         </div>
-    </nav>
-</header>
-
-<main>
-    <!-- ГЛАВНАЯ -->
-    <section id="home" class="hero">
-        <h1>XPanel</h1>
-        <p>Arizona RP • Server 20</p>
-        <div class="hero-buttons">
-            <a class="button purple" href="./XPanel_ArizonaRP.lua" download="XPanel_ArizonaRP.lua">📥 Скачать XPanel</a>
-            <button onclick="showSection('account')">👤 Личный кабинет</button>
+        <div class="card expense">
+          <span>Общие расходы</span>
+          <strong id="expenseTotal">0 ₴</strong>
         </div>
-    </section>
-
-    <section id="features" class="section">
-        <h2>🚀 Возможности</h2>
-        <div class="cards">
-            <div class="card">
-                <h3>🎭 Автомаска</h3>
-                <p>Автоматическое управление маской в игре после окончания действия предыдущей.</p>
-            </div>
-            <div class="card">
-                <h3>⚡ XPanel</h3>
-                <p>Удобная игровая панель с красивым интерфейсом.</p>
-            </div>
-            <div class="card">
-                <h3>👤 Аккаунты</h3>
-                <p>Регистрация, авторизация, личный кабинет и система ролей.</p>
-            </div>
-            <div class="card">
-                <h3>🛠️ Developer</h3>
-                <p>Управление Premium, Developer и пользовательскими ролями.</p>
-            </div>
+        <div class="card profit">
+          <span>Чистая прибыль</span>
+          <strong id="profitTotal">0 ₴</strong>
         </div>
-    </section>
+      </div>
 
-    <!-- LOGIN -->
-    <section id="login" class="section" style="display:none;">
-        <h2>🔐 Вход</h2>
-        <label>Email</label>
-        <input id="loginEmail" type="email" placeholder="Введите email">
-        <label>Пароль</label>
-        <input id="loginPassword" type="password" placeholder="Введите пароль">
-        <div class="form-buttons">
-            <button class="purple" onclick="login()">Войти</button>
-        </div>
-        <div id="loginMessage" class="message"></div>
-    </section>
+      <div class="table-box">
+        <table>
+          <thead>
+            <tr>
+              <th>Дата</th>
+              <th>Тип</th>
+              <th>Категория</th>
+              <th>Сумма</th>
+              <th>Комментарий</th>
+              <th>Действие</th>
+            </tr>
+          </thead>
+          <tbody id="rows"></tbody>
+        </table>
+      </div>
 
-    <!-- REGISTER -->
-    <section id="register" class="section" style="display:none;">
-        <h2>📝 Регистрация</h2>
-        <label>Игровой ник</label>
-        <input id="registerUsername" placeholder="Например: Diazz_Kaneki">
-        <label>Email</label>
-        <input id="registerEmail" type="email" placeholder="Введите email">
-        <label>Пароль</label>
-        <input id="registerPassword" type="password" placeholder="Минимум 6 символов">
-        <div class="form-buttons">
-            <button class="purple" onclick="register()">Зарегистрироваться</button>
-        </div>
-        <div id="registerMessage" class="message"></div>
-    </section>
+      <div class="actions">
+        <button class="add" onclick="addRow()">+ Добавить строку</button>
+        <button class="primary" onclick="calculate()">Подсчитать</button>
+        <button class="save" onclick="saveData()">Сохранить</button>
+        <button onclick="exportCSV()">Скачать CSV</button>
+        <button class="danger" onclick="clearAll()">Очистить</button>
+      </div>
 
-    <!-- ACCOUNT -->
-    <section id="account" class="section account">
-        <h2>👤 Личный кабинет</h2>
-        <div class="profile-name" id="profileName">Загрузка...</div>
-        <div id="profileRoles" class="roles"></div>
-        <div class="form-buttons">
-            <button class="red" onclick="logout()">🚪 Выйти</button>
-        </div>
-        <div id="accountMessage" class="message"></div>
-    </section>
-
-    <!-- DEVELOPER -->
-    <section id="developerPanel" class="section developer-panel">
-        <h2>🛠️ Панель разработчика</h2>
-        <p style="color:#888;margin-bottom:20px;">Здесь Developer может создавать роли и управлять ролями пользователей.</p>
-
-        <div class="card">
-            <h3>➕ Создать роль</h3>
-            <div class="role-create">
-                <div>
-                    <label>Название роли</label>
-                    <input id="newRoleName" maxlength="40" placeholder="Например: Moderator">
-                </div>
-                <div>
-                    <label>Цвет</label>
-                    <input id="newRoleColor" class="color-input" type="color" value="#8b5cf6">
-                </div>
-                <button class="purple" onclick="createRole()">Создать</button>
-            </div>
-            <div id="roleMessage" class="message"></div>
-        </div>
-
-        <div class="card" style="margin-top:18px;">
-            <h3>🎨 Роли</h3>
-            <div id="roleList" class="role-list">
-                <div class="empty">Загрузка ролей...</div>
-            </div>
-        </div>
-
-        <div class="card" style="margin-top:18px;">
-            <h3>👥 Пользователи</h3>
-            <input id="userSearch" placeholder="🔎 Поиск пользователя..." oninput="renderUsers()">
-            <div id="usersList" class="users-list">
-                <div class="empty">Загрузка пользователей...</div>
-            </div>
-        </div>
-    </section>
-</main>
-
-<footer>
-    XPanel © 2026 • Arizona RP Server 20
-</footer>
+      <div class="notice" id="notice"></div>
+      <div class="footer-note">Данные сохраняются прямо в браузере через localStorage.</div>
+    </div>
+  </div>
 
 <script>
-    const SUPABASE_URL = "https://geimapwjvykzihwytjsu.supabase.co";
-    const SUPABASE_KEY = "sb_publishable_bw3marsbGsI_XFzwCV6W_g_t7tkGS3G";
-
-    const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-
-    let currentUser = null;
-    let currentRoles = [];
-    let allRoles = [];
-    let allUsers = [];
-
-    function showSection(id) {
-        const sections = ["home", "login", "register", "account"];
-        sections.forEach(section => {
-            const el = document.getElementById(section);
-            if (!el) return;
-            el.style.display = (section === id) ? "block" : "none";
-        });
-
-        const featuresEl = document.getElementById("features");
-        if (featuresEl) {
-            featuresEl.style.display = (id === "home") ? "block" : "none";
-        }
-
-        if (id === "account") {
-            loadAccount();
-        }
-    }
-
-    function message(id, text, success = true) {
-        const el = document.getElementById(id);
-        if (!el) return;
-        el.textContent = text;
-        el.className = "message " + (success ? "success" : "error");
-        el.style.display = "block";
-    }
-
-    async function register() {
-        const username = document.getElementById("registerUsername").value.trim();
-        const email = document.getElementById("registerEmail").value.trim();
-        const password = document.getElementById("registerPassword").value;
-
-        if (!username || !email || !password) {
-            message("registerMessage", "Заполни все поля.", false);
-            return;
-        }
-
-        if (password.length < 6) {
-            message("registerMessage", "Пароль должен содержать минимум 6 символов.", false);
-            return;
-        }
-
-        const { data, error } = await supabaseClient.auth.signUp({
-            email,
-            password,
-            options: { data: { username } }
-        });
-
-        if (error) {
-            message("registerMessage", error.message, false);
-            return;
-        }
-
-        message("registerMessage", "Регистрация выполнена. Теперь можешь войти.", true);
-    }
-
-    async function login() {
-        const email = document.getElementById("loginEmail").value.trim();
-        const password = document.getElementById("loginPassword").value;
-
-        const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
-
-        if (error) {
-            message("loginMessage", error.message, false);
-            return;
-        }
-
-        currentUser = data.user;
-        message("loginMessage", "Успешный вход!", true);
-
-        await loadAccount();
-        setTimeout(() => { showSection("account"); }, 400);
-    }
-
-    async function logout() {
-        await supabaseClient.auth.signOut();
-        currentUser = null;
-        currentRoles = [];
-        document.getElementById("developerPanel").style.display = "none";
-        showSection("home");
-    }
-
-    async function loadAccount() {
-        const { data: sessionData } = await supabaseClient.auth.getSession();
-        currentUser = sessionData?.session?.user || null;
-        const account = document.getElementById("account");
-
-        if (!currentUser) {
-            account.style.display = "block";
-            document.getElementById("profileName").textContent = "Ты не авторизован.";
-            document.getElementById("profileRoles").innerHTML = "<span style='color:#888'>Войди в аккаунт, чтобы увидеть профиль.</span>";
-            document.getElementById("developerPanel").style.display = "none";
-            return;
-        }
-
-        const { data: profile, error } = await supabaseClient
-            .from("profiles")
-            .select("*")
-            .eq("id", currentUser.id)
-            .single();
-
-        if (error) {
-            document.getElementById("profileName").textContent = "Ошибка загрузки профиля";
-            return;
-        }
-
-        document.getElementById("profileName").textContent = "@" + profile.username;
-
-        const { data: roles, error: rolesError } = await supabaseClient.rpc("get_my_roles");
-
-        if (rolesError) {
-            console.error(rolesError);
-            currentRoles = [];
-            document.getElementById("profileRoles").innerHTML = "<span style='color:#888'>Роли не загружены.</span>";
-        } else {
-            currentRoles = roles || [];
-            renderMyRoles();
-        }
-
-        const isDeveloper = currentRoles.some(role => role.special_key === "developer") || profile.is_developer === true;
-
-        if (isDeveloper) {
-            document.getElementById("developerPanel").style.display = "block";
-            await loadDeveloperPanel();
-        } else {
-            document.getElementById("developerPanel").style.display = "none";
-        }
-
-        account.style.display = "block";
-    }
-
-    function renderMyRoles() {
-        const container = document.getElementById("profileRoles");
-        container.innerHTML = "";
-
-        if (!currentRoles.length) {
-            container.innerHTML = "<span style='color:#777'>Нет ролей</span>";
-            return;
-        }
-
-        currentRoles.forEach(role => {
-            const badge = document.createElement("span");
-            badge.className = "role-badge";
-            badge.style.color = role.color;
-            badge.style.borderColor = role.color;
-            badge.textContent = role.name;
-            container.appendChild(badge);
-        });
-    }
-
-    async function loadDeveloperPanel() {
-        await loadRoles();
-        await loadUsers();
-    }
-
-    async function loadRoles() {
-        const { data, error } = await supabaseClient.rpc("developer_get_roles");
-        if (error) {
-            message("roleMessage", error.message, false);
-            return;
-        }
-        allRoles = data || [];
-        renderRoles();
-    }
-
-    function renderRoles() {
-        const container = document.getElementById("roleList");
-        container.innerHTML = "";
-
-        if (!allRoles.length) {
-            container.innerHTML = "<div class='empty'>Ролей пока нет.</div>";
-            return;
-        }
-
-        allRoles.forEach(role => {
-            const item = document.createElement("div");
-            item.className = "role-item";
-
-            const left = document.createElement("div");
-            left.className = "role-left";
-
-            const dot = document.createElement("span");
-            dot.className = "role-dot";
-            dot.style.background = role.color;
-            dot.style.boxShadow = "0 0 12px " + role.color;
-
-            const name = document.createElement("span");
-            name.textContent = role.name;
-
-            left.appendChild(dot);
-            left.appendChild(name);
-
-            const right = document.createElement("div");
-
-            if (role.special_key) {
-                const system = document.createElement("span");
-                system.className = "system-role";
-                system.textContent = "Системная роль";
-                right.appendChild(system);
-            } else {
-                const deleteButton = document.createElement("button");
-                deleteButton.className = "red";
-                deleteButton.textContent = "🗑️ Удалить";
-                deleteButton.onclick = () => deleteRole(role.id);
-                right.appendChild(deleteButton);
-            }
-
-            item.appendChild(left);
-            item.appendChild(right);
-            container.appendChild(item);
-        });
-    }
-
-    async function createRole() {
-        const name = document.getElementById("newRoleName").value.trim();
-        const color = document.getElementById("newRoleColor").value;
-
-        if (!name) {
-            message("roleMessage", "Введите название роли.", false);
-            return;
-        }
-
-        const { error } = await supabaseClient.rpc("developer_create_role", {
-            role_name: name,
-            role_color: color
-        });
-
-        if (error) {
-            message("roleMessage", error.message, false);
-            return;
-        }
-
-        document.getElementById("newRoleName").value = "";
-        message("roleMessage", "Роль успешно создана!", true);
-        await loadRoles();
-        await loadUsers();
-    }
-
-    async function deleteRole(roleId) {
-        const role = allRoles.find(r => r.id === roleId);
-        if (!role) return;
-
-        if (role.special_key) {
-            message("roleMessage", "Системную роль удалить нельзя.", false);
-            return;
-        }
-
-        if (!confirm("Удалить роль «" + role.name + "»?")) return;
-
-        const { error } = await supabaseClient.rpc("developer_delete_role", { role_id: roleId });
-
-        if (error) {
-            message("roleMessage", error.message, false);
-            return;
-        }
-
-        message("roleMessage", "Роль удалена.", true);
-        await loadRoles();
-        await loadUsers();
-    }
-
-    async function loadUsers() {
-        const { data, error } = await supabaseClient.rpc("developer_get_users_with_roles");
-
-        if (error) {
-            console.error(error);
-            document.getElementById("usersList").innerHTML = "<div class='empty'>Ошибка: " + escapeHtml(error.message) + "</div>";
-            return;
-        }
-
-        allUsers = Array.isArray(data) ? data : [];
-        renderUsers();
-    }
-
-    function renderUsers() {
-        const container = document.getElementById("usersList");
-        const search = document.getElementById("userSearch").value.trim().toLowerCase();
-        container.innerHTML = "";
-
-        const users = allUsers.filter(user => String(user.username || "").toLowerCase().includes(search));
-
-        if (!users.length) {
-            container.innerHTML = "<div class='empty'>Пользователи не найдены.</div>";
-            return;
-        }
-
-        users.forEach(user => {
-            const item = document.createElement("div");
-            item.className = "user-item";
-
-            const top = document.createElement("div");
-            top.className = "user-top";
-
-            const username = document.createElement("div");
-            username.className = "username";
-            username.textContent = "👤 @" + user.username;
-
-            top.appendChild(username);
-            item.appendChild(top);
-
-            const rolesBox = document.createElement("div");
-            rolesBox.className = "user-roles";
-
-            const userRoles = Array.isArray(user.roles) ? user.roles : [];
-
-            if (!userRoles.length) {
-                rolesBox.innerHTML = "<span style='color:#666'>Нет ролей</span>";
-            } else {
-                userRoles.forEach(role => {
-                    const badge = document.createElement("span");
-                    badge.className = "role-badge";
-                    badge.style.color = role.color;
-                    badge.style.borderColor = role.color;
-                    badge.textContent = role.name;
-                    rolesBox.appendChild(badge);
-                });
-            }
-
-            item.appendChild(rolesBox);
-
-            const actions = document.createElement("div");
-            actions.className = "user-actions";
-
-            const select = document.createElement("select");
-            allRoles.forEach(role => {
-                const option = document.createElement("option");
-                option.value = role.id;
-                option.textContent = role.name;
-                select.appendChild(option);
-            });
-
-            const give = document.createElement("button");
-            give.className = "green";
-            give.textContent = "➕ Выдать";
-            give.onclick = () => assignRole(user.id, select.value);
-
-            const remove = document.createElement("button");
-            remove.className = "red";
-            remove.textContent = "➖ Снять";
-            remove.onclick = () => removeRole(user.id, select.value);
-
-            actions.appendChild(select);
-            actions.appendChild(give);
-            actions.appendChild(remove);
-
-            item.appendChild(actions);
-            container.appendChild(item);
-        });
-    }
-
-    async function assignRole(userId, roleId) {
-        if (!roleId) return;
-        const { error } = await supabaseClient.rpc("developer_assign_role", { target_user_id: userId, role_id: roleId });
-        if (error) { alert(error.message); return; }
-        await loadUsers();
-    }
-
-    async function removeRole(userId, roleId) {
-        if (!roleId) return;
-        const { error } = await supabaseClient.rpc("developer_remove_role", { target_user_id: userId, role_id: roleId });
-        if (error) { alert(error.message); return; }
-        await loadUsers();
-    }
-
-    function escapeHtml(text) {
-        const div = document.createElement("div");
-        div.textContent = text;
-        return div.innerHTML;
-    }
-
-    async function checkSession() {
-        const { data } = await supabaseClient.auth.getSession();
-        currentUser = data?.session?.user || null;
-        if (currentUser) {
-            await loadAccount();
-        }
-    }
-
-    supabaseClient.auth.onAuthStateChange(async (event, session) => {
-        currentUser = session?.user || null;
-        if (currentUser) {
-            await loadAccount();
-        } else {
-            document.getElementById("developerPanel").style.display = "none";
-        }
-    });
-
-    checkSession();
+const STORAGE_KEY = 'profit_tracker_v1';
+const rowsEl = document.getElementById('rows');
+const noticeEl = document.getElementById('notice');
+
+function money(n) {
+  return new Intl.NumberFormat('uk-UA', {
+    maximumFractionDigits: 2
+  }).format(n) + ' ₴';
+}
+
+function today() {
+  return new Date().toISOString().slice(0,10);
+}
+
+function addRow(data = {}) {
+  const tr = document.createElement('tr');
+  tr.innerHTML = `
+    <td><input type="date" class="date" value="${data.date || today()}"></td>
+    <td>
+      <select class="type">
+        <option value="income" ${data.type === 'income' ? 'selected' : ''}>Доход</option>
+        <option value="expense" ${data.type === 'expense' ? 'selected' : ''}>Расход</option>
+      </select>
+    </td>
+    <td><input class="category" placeholder="Например: Продажа" value="${escapeHtml(data.category || '')}"></td>
+    <td><input class="amount" type="number" min="0" step="0.01" placeholder="0.00" value="${data.amount ?? ''}"></td>
+    <td><input class="comment" placeholder="Комментарий" value="${escapeHtml(data.comment || '')}"></td>
+    <td><button class="remove" onclick="this.closest('tr').remove(); calculate();">Удалить</button></td>
+  `;
+  rowsEl.appendChild(tr);
+
+  tr.querySelectorAll('input, select').forEach(el => {
+    el.addEventListener('input', calculate);
+    el.addEventListener('change', calculate);
+  });
+  calculate();
+}
+
+function escapeHtml(text) {
+  return String(text)
+    .replaceAll('&', '&amp;')
+    .replaceAll('"', '&quot;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;');
+}
+
+function getData() {
+  return [...rowsEl.querySelectorAll('tr')].map(tr => ({
+    date: tr.querySelector('.date').value,
+    type: tr.querySelector('.type').value,
+    category: tr.querySelector('.category').value.trim(),
+    amount: parseFloat(tr.querySelector('.amount').value) || 0,
+    comment: tr.querySelector('.comment').value.trim()
+  }));
+}
+
+function calculate() {
+  const data = getData();
+  let income = 0;
+  let expense = 0;
+
+  data.forEach(item => {
+    if (item.type === 'income') income += item.amount;
+    else expense += item.amount;
+  });
+
+  const profit = income - expense;
+  document.getElementById('incomeTotal').textContent = money(income);
+  document.getElementById('expenseTotal').textContent = money(expense);
+  document.getElementById('profitTotal').textContent = money(profit);
+
+  return { income, expense, profit };
+}
+
+function saveData() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(getData()));
+  calculate();
+  showNotice('✅ Данные сохранены.');
+}
+
+function loadData() {
+  const saved = localStorage.getItem(STORAGE_KEY);
+  if (!saved) {
+    addRow();
+    return;
+  }
+
+  try {
+    const data = JSON.parse(saved);
+    rowsEl.innerHTML = '';
+    if (Array.isArray(data) && data.length) data.forEach(addRow);
+    else addRow();
+    calculate();
+    showNotice('📂 Сохранённые данные загружены.');
+  } catch {
+    addRow();
+  }
+}
+
+function clearAll() {
+  if (!confirm('Точно очистить всю таблицу?')) return;
+  localStorage.removeItem(STORAGE_KEY);
+  rowsEl.innerHTML = '';
+  addRow();
+  calculate();
+  showNotice('🗑 Таблица очищена.');
+}
+
+function showNotice(text) {
+  noticeEl.textContent = text;
+  setTimeout(() => {
+    if (noticeEl.textContent === text) noticeEl.textContent = '';
+  }, 2500);
+}
+
+function exportCSV() {
+  const data = getData();
+  const headers = ['Дата','Тип','Категория','Сумма','Комментарий'];
+  const lines = [
+    headers.join(';'),
+    ...data.map(x => [
+      x.date,
+      x.type === 'income' ? 'Доход' : 'Расход',
+      x.category,
+      x.amount,
+      x.comment
+    ].map(v => `"${String(v).replaceAll('"','""')}"`).join(';'))
+  ];
+
+  const blob = new Blob(["\uFEFF" + lines.join('\n')], {type: 'text/csv;charset=utf-8;'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'profit-data.csv';
+  a.click();
+  URL.revokeObjectURL(url);
+  showNotice('⬇️ CSV-файл создан.');
+}
+
+loadData();
 </script>
 </body>
 </html>
