@@ -1,591 +1,756 @@
+```html
 <!DOCTYPE html>
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Kannet — Форум</title>
+<title>Kannet — Forum</title>
 
 <style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-:root {
-    --bg: #080b14;
-    --bg2: #0d1220;
-    --card: #111827;
-    --card2: #151d2d;
-    --border: rgba(255,255,255,.07);
-    --text: #f4f7ff;
-    --muted: #8d98ad;
-    --blue: #4f8cff;
-    --purple: #8b5cf6;
-    --cyan: #22d3ee;
-    --green: #31d27c;
-    --red: #ff5577;
+:root{
+    --bg:#070b12;
+    --bg2:#0c111b;
+    --card:#101722;
+    --card2:#141d2b;
+    --border:rgba(255,255,255,.08);
+
+    --text:#f2f6ff;
+    --muted:#8995a8;
+
+    --blue:#397cff;
+    --blue-light:#5c96ff;
+    --purple:#7657ff;
+    --cyan:#38bdf8;
+
+    --green:#35d07f;
+    --red:#ff5577;
 }
 
-body {
-    font-family: Arial, Helvetica, sans-serif;
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    color:var(--text);
+    min-height:100vh;
+
     background:
-        radial-gradient(circle at 10% 0%, rgba(79,140,255,.15), transparent 30%),
-        radial-gradient(circle at 90% 10%, rgba(139,92,246,.13), transparent 30%),
+        radial-gradient(circle at 10% 0%,rgba(57,124,255,.16),transparent 30%),
+        radial-gradient(circle at 90% 10%,rgba(118,87,255,.14),transparent 30%),
         var(--bg);
-    color: var(--text);
-    min-height: 100vh;
 }
 
-/* HEADER */
+/* ================= HEADER ================= */
 
-header {
-    height: 72px;
-    background: rgba(8,11,20,.88);
-    border-bottom: 1px solid var(--border);
-    backdrop-filter: blur(16px);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
+header{
+    height:72px;
+    position:sticky;
+    top:0;
+    z-index:1000;
+
+    background:rgba(7,11,18,.88);
+    backdrop-filter:blur(18px);
+
+    border-bottom:1px solid var(--border);
 }
 
-.header-inner {
-    max-width: 1250px;
-    height: 100%;
-    margin: auto;
-    padding: 0 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+.header{
+    max-width:1250px;
+    height:100%;
+    margin:auto;
+    padding:0 20px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
 }
 
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    font-size: 23px;
-    font-weight: 800;
+.logo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+
+    font-size:23px;
+    font-weight:800;
 }
 
-.logo-icon {
-    width: 42px;
-    height: 42px;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(135deg,var(--blue),var(--purple));
-    box-shadow: 0 0 30px rgba(79,140,255,.3);
+.logo-icon{
+    width:42px;
+    height:42px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:12px;
+
+    background:linear-gradient(135deg,var(--blue),var(--purple));
+
+    box-shadow:
+        0 0 30px rgba(57,124,255,.28);
+
+    color:white;
 }
 
-.logo span {
-    background: linear-gradient(90deg,#fff,var(--blue));
-    -webkit-background-clip: text;
-    color: transparent;
+.logo span{
+    background:linear-gradient(90deg,#fff,var(--blue-light));
+    -webkit-background-clip:text;
+    color:transparent;
 }
 
-nav {
-    display: flex;
-    gap: 8px;
+nav{
+    display:flex;
+    gap:5px;
 }
 
-nav a {
-    color: #aab4c8;
-    text-decoration: none;
-    padding: 11px 15px;
-    border-radius: 10px;
-    transition: .2s;
-    font-size: 14px;
+nav a{
+    color:#9da8bb;
+    text-decoration:none;
+
+    padding:11px 15px;
+    border-radius:10px;
+
+    font-size:14px;
+
+    transition:.2s;
 }
 
 nav a:hover,
-nav a.active {
-    background: rgba(79,140,255,.12);
-    color: white;
+nav a.active{
+    color:white;
+    background:rgba(57,124,255,.12);
 }
 
-.header-buttons {
-    display: flex;
-    gap: 10px;
+.buttons{
+    display:flex;
+    gap:9px;
 }
 
-.btn {
-    border: 0;
-    cursor: pointer;
-    padding: 11px 17px;
-    border-radius: 10px;
-    color: white;
-    font-weight: 700;
-    transition: .2s;
+.btn{
+    border:0;
+    cursor:pointer;
+
+    padding:11px 17px;
+    border-radius:10px;
+
+    color:white;
+    font-weight:700;
+
+    transition:.2s;
 }
 
-.btn-login {
-    background: rgba(255,255,255,.06);
-    border: 1px solid var(--border);
+.btn:hover{
+    transform:translateY(-2px);
 }
 
-.btn-register {
-    background: linear-gradient(135deg,var(--blue),var(--purple));
-    box-shadow: 0 8px 25px rgba(79,140,255,.2);
+.login{
+    background:rgba(255,255,255,.05);
+    border:1px solid var(--border);
 }
 
-.btn:hover {
-    transform: translateY(-2px);
+.register{
+    background:linear-gradient(135deg,var(--blue),var(--purple));
+
+    box-shadow:
+        0 8px 25px rgba(57,124,255,.2);
 }
 
-/* HERO */
+/* ================= HERO ================= */
 
-.hero {
-    max-width: 1250px;
-    margin: 35px auto 25px;
-    padding: 0 20px;
+.hero{
+    max-width:1250px;
+    margin:32px auto 24px;
+    padding:0 20px;
 }
 
-.hero-box {
-    min-height: 230px;
-    padding: 45px;
-    border-radius: 22px;
-    border: 1px solid var(--border);
+.hero-box{
+    min-height:245px;
+
+    padding:45px;
+
+    border-radius:22px;
+
+    border:1px solid var(--border);
+
     background:
-        linear-gradient(120deg,rgba(79,140,255,.14),rgba(139,92,246,.10)),
-        rgba(17,24,39,.78);
-    position: relative;
-    overflow: hidden;
+        linear-gradient(
+            120deg,
+            rgba(57,124,255,.13),
+            rgba(118,87,255,.09)
+        ),
+        rgba(16,23,34,.82);
+
+    position:relative;
+    overflow:hidden;
 }
 
-.hero-box::before {
-    content: "";
-    position: absolute;
-    width: 300px;
-    height: 300px;
-    background: var(--blue);
-    filter: blur(130px);
-    opacity: .12;
-    right: -80px;
-    top: -100px;
+.hero-box:before{
+    content:"";
+
+    position:absolute;
+
+    width:360px;
+    height:360px;
+
+    right:-120px;
+    top:-160px;
+
+    background:var(--blue);
+
+    filter:blur(130px);
+
+    opacity:.12;
 }
 
-.hero h1 {
-    font-size: 42px;
-    margin-bottom: 12px;
-    position: relative;
+.hero h1{
+    position:relative;
+
+    font-size:43px;
+    margin-bottom:13px;
 }
 
-.hero h1 span {
-    color: var(--blue);
+.hero h1 span{
+    color:var(--blue-light);
 }
 
-.hero p {
-    color: var(--muted);
-    max-width: 650px;
-    line-height: 1.7;
-    position: relative;
+.hero p{
+    position:relative;
+
+    max-width:700px;
+
+    color:var(--muted);
+
+    line-height:1.7;
 }
 
-.hero-actions {
-    margin-top: 25px;
-    display: flex;
-    gap: 10px;
-    position: relative;
+.hero-buttons{
+    position:relative;
+
+    display:flex;
+    gap:10px;
+
+    margin-top:25px;
 }
 
-.hero-btn {
-    padding: 13px 20px;
+/* ================= CONTAINER ================= */
+
+.container{
+    max-width:1250px;
+    margin:auto;
+    padding:0 20px 50px;
 }
 
-/* MAIN */
-
-.container {
-    max-width: 1250px;
-    margin: auto;
-    padding: 0 20px 50px;
+.layout{
+    display:grid;
+    grid-template-columns:1fr 320px;
+    gap:22px;
 }
 
-.layout {
-    display: grid;
-    grid-template-columns: 1fr 320px;
-    gap: 22px;
+/* ================= SEARCH ================= */
+
+.search{
+    margin-bottom:18px;
 }
 
-.section-title {
-    font-size: 19px;
-    margin: 5px 0 13px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.search input{
+    width:100%;
+
+    padding:15px 18px;
+
+    border-radius:12px;
+
+    border:1px solid var(--border);
+
+    outline:none;
+
+    background:rgba(16,23,34,.85);
+
+    color:white;
+
+    transition:.2s;
 }
 
-.section-title small {
-    font-size: 12px;
-    color: var(--muted);
-    font-weight: normal;
+.search input:focus{
+    border-color:rgba(57,124,255,.5);
+
+    box-shadow:
+        0 0 20px rgba(57,124,255,.08);
 }
 
-/* CATEGORY */
-
-.category {
-    margin-bottom: 18px;
-    background: rgba(17,24,39,.76);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    overflow: hidden;
+.search input::placeholder{
+    color:#657187;
 }
 
-.category-header {
-    padding: 17px 20px;
-    background: rgba(255,255,255,.025);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+/* ================= SECTION ================= */
+
+.section-title{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    font-size:19px;
+
+    margin:5px 0 13px;
 }
 
-.category-header h2 {
-    font-size: 15px;
+.section-title small{
+    color:var(--muted);
+    font-size:12px;
+    font-weight:normal;
 }
 
-.category-header span {
-    color: var(--muted);
-    font-size: 12px;
+/* ================= CATEGORY ================= */
+
+.category{
+    overflow:hidden;
+
+    margin-bottom:18px;
+
+    border-radius:16px;
+
+    background:rgba(16,23,34,.78);
+
+    border:1px solid var(--border);
 }
 
-.forum {
-    display: grid;
-    grid-template-columns: 52px 1fr 90px 90px 220px;
-    gap: 15px;
-    align-items: center;
-    min-height: 78px;
-    padding: 12px 20px;
-    border-top: 1px solid var(--border);
-    transition: .2s;
+.category-header{
+    padding:17px 20px;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    background:rgba(255,255,255,.025);
 }
 
-.forum:hover {
-    background: rgba(79,140,255,.045);
+.category-header h2{
+    font-size:15px;
 }
 
-.forum-icon {
-    width: 44px;
-    height: 44px;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(135deg,rgba(79,140,255,.18),rgba(139,92,246,.18));
-    color: var(--blue);
-    font-size: 19px;
+.category-header span{
+    color:var(--muted);
+    font-size:12px;
 }
 
-.forum-info h3 {
-    font-size: 14px;
-    margin-bottom: 5px;
+/* ================= FORUM ================= */
+
+.forum{
+    min-height:78px;
+
+    padding:12px 20px;
+
+    display:grid;
+
+    grid-template-columns:
+        52px
+        1fr
+        90px
+        90px
+        220px;
+
+    gap:15px;
+
+    align-items:center;
+
+    border-top:1px solid var(--border);
+
+    cursor:pointer;
+
+    transition:.2s;
 }
 
-.forum-info p {
-    color: var(--muted);
-    font-size: 12px;
+.forum:hover{
+    background:rgba(57,124,255,.045);
 }
 
-.stat {
-    text-align: center;
-    color: var(--muted);
-    font-size: 12px;
+.forum-icon{
+    width:44px;
+    height:44px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    border-radius:12px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(57,124,255,.16),
+            rgba(118,87,255,.15)
+        );
+
+    color:var(--blue-light);
+
+    font-size:19px;
 }
 
-.stat strong {
-    display: block;
-    color: white;
-    font-size: 14px;
-    margin-bottom: 3px;
+.forum-info h3{
+    font-size:14px;
+    margin-bottom:5px;
 }
 
-.last {
-    font-size: 12px;
-    color: var(--muted);
+.forum-info p{
+    color:var(--muted);
+    font-size:12px;
 }
 
-.last strong {
-    display: block;
-    color: #dce3f0;
-    margin-bottom: 4px;
+.stat{
+    text-align:center;
+
+    color:var(--muted);
+
+    font-size:12px;
 }
 
-.last span {
-    color: #69758c;
+.stat strong{
+    display:block;
+
+    color:white;
+
+    font-size:14px;
+
+    margin-bottom:3px;
 }
 
-/* SIDEBAR */
-
-.sidebar-box {
-    background: rgba(17,24,39,.78);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    margin-bottom: 18px;
-    overflow: hidden;
+.last{
+    color:var(--muted);
+    font-size:12px;
 }
 
-.sidebar-title {
-    padding: 17px 18px;
-    border-bottom: 1px solid var(--border);
-    font-weight: 700;
-    font-size: 14px;
+.last strong{
+    display:block;
+
+    color:#dce3f0;
+
+    margin-bottom:4px;
 }
 
-.online {
-    padding: 18px;
+.last span{
+    color:#69758c;
 }
 
-.online-number {
-    font-size: 31px;
-    font-weight: 800;
-    margin-bottom: 4px;
+/* ================= SIDEBAR ================= */
+
+.sidebar-box{
+    overflow:hidden;
+
+    margin-bottom:18px;
+
+    border-radius:16px;
+
+    background:rgba(16,23,34,.78);
+
+    border:1px solid var(--border);
 }
 
-.online-number span {
-    color: var(--green);
+.sidebar-title{
+    padding:17px 18px;
+
+    border-bottom:1px solid var(--border);
+
+    font-size:14px;
+    font-weight:700;
 }
 
-.online p {
-    color: var(--muted);
-    font-size: 12px;
+.stats{
+    padding:18px;
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:9px;
 }
 
-.user-list {
-    padding: 0 18px 18px;
+.stat-card{
+    padding:15px 5px;
+
+    text-align:center;
+
+    border-radius:12px;
+
+    background:rgba(255,255,255,.035);
 }
 
-.user {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 8px 0;
-    color: #c7cfdd;
-    font-size: 13px;
+.stat-card strong{
+    display:block;
+
+    font-size:19px;
+
+    margin-bottom:5px;
 }
 
-.avatar {
-    width: 30px;
-    height: 30px;
-    border-radius: 9px;
-    background: linear-gradient(135deg,var(--blue),var(--purple));
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 12px;
-    font-weight: bold;
+.stat-card span{
+    color:var(--muted);
+
+    font-size:10px;
 }
 
-.dot {
-    width: 7px;
-    height: 7px;
-    background: var(--green);
-    border-radius: 50%;
-    margin-left: auto;
+.online{
+    padding:18px;
 }
 
-/* STATS */
-
-.stats {
-    display: grid;
-    grid-template-columns: repeat(3,1fr);
-    gap: 10px;
-    padding: 18px;
+.online-number{
+    font-size:28px;
+    font-weight:800;
 }
 
-.stat-card {
-    background: rgba(255,255,255,.035);
-    border-radius: 12px;
-    padding: 15px 5px;
-    text-align: center;
+.online-number span{
+    color:var(--green);
 }
 
-.stat-card strong {
-    display: block;
-    font-size: 19px;
-    margin-bottom: 5px;
+.online p{
+    color:var(--muted);
+    font-size:12px;
+    margin-top:4px;
 }
 
-.stat-card span {
-    font-size: 10px;
-    color: var(--muted);
+.users{
+    padding:0 18px 18px;
 }
 
-/* SEARCH */
+.user{
+    display:flex;
+    align-items:center;
 
-.search {
-    position: relative;
-    margin-bottom: 20px;
+    gap:10px;
+
+    padding:8px 0;
+
+    color:#c7cfdd;
+
+    font-size:13px;
 }
 
-.search input {
-    width: 100%;
-    padding: 15px 18px;
-    background: rgba(17,24,39,.8);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    color: white;
-    outline: none;
+.avatar{
+    width:30px;
+    height:30px;
+
+    border-radius:9px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--blue),
+            var(--purple)
+        );
+
+    font-size:12px;
+    font-weight:bold;
 }
 
-.search input:focus {
-    border-color: rgba(79,140,255,.5);
+.dot{
+    width:7px;
+    height:7px;
+
+    margin-left:auto;
+
+    border-radius:50%;
+
+    background:var(--green);
+
+    box-shadow:
+        0 0 8px rgba(53,208,127,.5);
 }
 
-.search input::placeholder {
-    color: #667186;
+/* ================= FOOTER ================= */
+
+footer{
+    padding:35px 20px;
+
+    border-top:1px solid var(--border);
+
+    background:rgba(5,8,13,.8);
 }
 
-/* FOOTER */
+.footer{
+    max-width:1250px;
+    margin:auto;
 
-footer {
-    border-top: 1px solid var(--border);
-    background: rgba(5,7,13,.8);
-    padding: 35px 20px;
+    display:flex;
+    justify-content:space-between;
+
+    color:#68748a;
+
+    font-size:12px;
 }
 
-.footer-inner {
-    max-width: 1250px;
-    margin: auto;
-    display: flex;
-    justify-content: space-between;
-    color: #68748a;
-    font-size: 12px;
+.footer strong{
+    color:white;
 }
 
-.footer-logo {
-    color: white;
-    font-weight: 700;
+/* ================= MODAL ================= */
+
+.modal{
+    position:fixed;
+
+    inset:0;
+
+    z-index:5000;
+
+    display:none;
+
+    align-items:center;
+    justify-content:center;
+
+    padding:20px;
+
+    background:rgba(0,0,0,.75);
+
+    backdrop-filter:blur(9px);
 }
 
-/* MODAL */
-
-.modal {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,.72);
-    backdrop-filter: blur(8px);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    z-index: 5000;
-    padding: 20px;
+.modal.show{
+    display:flex;
 }
 
-.modal.show {
-    display: flex;
+.modal-box{
+    width:420px;
+    max-width:100%;
+
+    padding:28px;
+
+    border-radius:18px;
+
+    background:#101722;
+
+    border:1px solid var(--border);
+
+    box-shadow:
+        0 30px 80px rgba(0,0,0,.5);
 }
 
-.modal-box {
-    width: 420px;
-    max-width: 100%;
-    background: #111827;
-    border: 1px solid var(--border);
-    border-radius: 18px;
-    padding: 28px;
-    box-shadow: 0 30px 80px rgba(0,0,0,.5);
+.close{
+    float:right;
+
+    color:var(--muted);
+
+    font-size:23px;
+
+    cursor:pointer;
 }
 
-.modal-box h2 {
-    margin-bottom: 8px;
+.modal-box h2{
+    margin-bottom:7px;
 }
 
-.modal-box p {
-    color: var(--muted);
-    font-size: 13px;
-    margin-bottom: 20px;
+.modal-box p{
+    color:var(--muted);
+
+    font-size:13px;
+
+    margin-bottom:20px;
 }
 
-.modal-box input {
-    width: 100%;
-    padding: 13px;
-    margin-bottom: 10px;
-    background: #0b101b;
-    border: 1px solid var(--border);
-    border-radius: 9px;
-    color: white;
-    outline: none;
+.modal-box input{
+    width:100%;
+
+    padding:13px;
+
+    margin-bottom:10px;
+
+    border-radius:9px;
+
+    outline:none;
+
+    color:white;
+
+    background:#090e17;
+
+    border:1px solid var(--border);
 }
 
-.modal-box button {
-    width: 100%;
-    margin-top: 8px;
+.modal-box input:focus{
+    border-color:rgba(57,124,255,.5);
 }
 
-.close {
-    float: right;
-    cursor: pointer;
-    color: var(--muted);
-    font-size: 20px;
+.modal-box button{
+    width:100%;
+    margin-top:8px;
 }
 
-/* MOBILE */
+/* ================= MOBILE ================= */
 
-@media(max-width: 900px) {
+@media(max-width:900px){
 
-    nav {
-        display: none;
+    nav{
+        display:none;
     }
 
-    .layout {
-        grid-template-columns: 1fr;
+    .layout{
+        grid-template-columns:1fr;
     }
 
-    .hero-box {
-        padding: 30px 25px;
-    }
-
-    .hero h1 {
-        font-size: 31px;
-    }
-
-    .forum {
-        grid-template-columns: 48px 1fr;
+    .forum{
+        grid-template-columns:48px 1fr;
     }
 
     .stat,
-    .last {
-        display: none;
+    .last{
+        display:none;
     }
 
-    .header-buttons .btn-login {
-        display: none;
+    .hero-box{
+        padding:32px 25px;
     }
 
-    .footer-inner {
-        flex-direction: column;
-        gap: 10px;
+    .hero h1{
+        font-size:32px;
+    }
+
+    .login{
+        display:none;
     }
 }
 
-@media(max-width: 500px) {
+@media(max-width:500px){
 
-    .header-inner {
-        padding: 0 12px;
+    .header{
+        padding:0 12px;
     }
 
-    .logo {
-        font-size: 19px;
+    .logo{
+        font-size:19px;
     }
 
-    .logo-icon {
-        width: 37px;
-        height: 37px;
+    .logo-icon{
+        width:37px;
+        height:37px;
     }
 
-    .hero {
-        margin-top: 20px;
+    .hero{
+        margin-top:20px;
     }
 
-    .hero-box {
-        padding: 25px 20px;
+    .hero-box{
+        padding:27px 20px;
     }
 
-    .hero h1 {
-        font-size: 27px;
+    .hero h1{
+        font-size:27px;
     }
 
-    .container {
-        padding: 0 12px 30px;
+    .container{
+        padding-left:12px;
+        padding-right:12px;
+    }
+
+    .footer{
+        flex-direction:column;
+        gap:10px;
     }
 }
 </style>
@@ -593,355 +758,597 @@ footer {
 
 <body>
 
+<!-- HEADER -->
+
 <header>
-    <div class="header-inner">
 
-        <div class="logo">
-            <div class="logo-icon">K</div>
-            <span>Kannet</span>
+<div class="header">
+
+    <div class="logo">
+
+        <div class="logo-icon">
+            K
         </div>
 
-        <nav>
-            <a href="#" class="active">Главная</a>
-            <a href="#forums">Форум</a>
-            <a href="#news">Новости</a>
-            <a href="#members">Участники</a>
-        </nav>
-
-        <div class="header-buttons">
-            <button class="btn btn-login" onclick="openModal('login')">
-                Войти
-            </button>
-
-            <button class="btn btn-register" onclick="openModal('register')">
-                Регистрация
-            </button>
-        </div>
+        <span>Kannet</span>
 
     </div>
+
+
+    <nav>
+
+        <a href="#" class="active">
+            Главная
+        </a>
+
+        <a href="#forum">
+            Форум
+        </a>
+
+        <a href="#news">
+            Новости
+        </a>
+
+        <a href="#members">
+            Участники
+        </a>
+
+    </nav>
+
+
+    <div class="buttons">
+
+        <button
+            class="btn login"
+            onclick="openModal('login')">
+
+            Войти
+
+        </button>
+
+        <button
+            class="btn register"
+            onclick="openModal('register')">
+
+            Регистрация
+
+        </button>
+
+    </div>
+
+</div>
+
 </header>
 
 
+<!-- HERO -->
+
 <section class="hero">
 
-    <div class="hero-box">
+<div class="hero-box">
 
-        <h1>
-            Добро пожаловать на <span>Kannet</span>
-        </h1>
+    <h1>
+        Добро пожаловать на
+        <span>Kannet</span>
+    </h1>
 
-        <p>
-            Официальное сообщество Kannet. Здесь вы можете общаться,
-            создавать темы, находить игроков, читать новости и следить
-            за развитием проекта.
-        </p>
+    <p>
+        Добро пожаловать на официальный форум Kannet.
+        Общайтесь с другими участниками, создавайте темы,
+        следите за новостями и принимайте участие в жизни проекта.
+    </p>
 
-        <div class="hero-actions">
-            <button class="btn btn-register hero-btn"
-                    onclick="document.getElementById('forums').scrollIntoView({behavior:'smooth'})">
-                Перейти на форум
-            </button>
 
-            <button class="btn btn-login hero-btn"
-                    onclick="openModal('login')">
-                Войти в аккаунт
-            </button>
-        </div>
+    <div class="hero-buttons">
+
+        <button
+            class="btn register"
+            onclick="scrollForum()">
+
+            Перейти на форум
+
+        </button>
+
+        <button
+            class="btn login"
+            onclick="openModal('login')">
+
+            Войти в аккаунт
+
+        </button>
 
     </div>
+
+</div>
 
 </section>
 
 
+<!-- CONTENT -->
+
 <div class="container">
 
+
+<!-- SEARCH -->
+
 <div class="search">
-    <input
-        id="search"
-        type="text"
-        placeholder="🔎 Поиск по форуму..."
-        onkeyup="searchForums()"
-    >
+
+<input
+    id="search"
+    type="text"
+    placeholder="🔎 Поиск по форуму..."
+    onkeyup="searchForum()">
+
 </div>
 
 
 <div class="layout">
 
-<main id="forums">
+
+<!-- MAIN -->
+
+<main id="forum">
 
 
 <div class="section-title">
-    Форумы
-    <small>Обсуждения сообщества</small>
+
+    <span>
+        Форумы
+    </span>
+
+    <small>
+        Разделы Kannet
+    </small>
+
 </div>
 
 
-<!-- КАТЕГОРИЯ 1 -->
+<!-- CATEGORY -->
 
 <div class="category">
 
 <div class="category-header">
-    <h2>📢 Kannet — Основное</h2>
-    <span>Официальная информация</span>
-</div>
 
+    <h2>
+        📢 Kannet — Основное
+    </h2>
 
-<div class="forum">
-
-<div class="forum-icon">📣</div>
-
-<div class="forum-info">
-    <h3>Новости проекта</h3>
-    <p>Последние новости и важные объявления Kannet</p>
-</div>
-
-<div class="stat">
-    <strong>24</strong>
-    Темы
-</div>
-
-<div class="stat">
-    <strong>186</strong>
-    Сообщения
-</div>
-
-<div class="last">
-    <strong>Обновление Kannet</strong>
-    сегодня в 18:42<br>
-    <span>Kirill</span>
-</div>
+    <span>
+        Официальная информация
+    </span>
 
 </div>
 
 
 <div class="forum">
 
-<div class="forum-icon">📌</div>
+    <div class="forum-icon">
+        📣
+    </div>
 
-<div class="forum-info">
-    <h3>Важная информация</h3>
-    <p>Правила, объявления и документация проекта</p>
+    <div class="forum-info">
+
+        <h3>
+            Новости проекта
+        </h3>
+
+        <p>
+            Новости, обновления и важные объявления Kannet
+        </p>
+
+    </div>
+
+    <div class="stat">
+        <strong>24</strong>
+        Темы
+    </div>
+
+    <div class="stat">
+        <strong>186</strong>
+        Сообщения
+    </div>
+
+    <div class="last">
+
+        <strong>
+            Обновление Kannet
+        </strong>
+
+        сегодня в 18:42
+
+        <br>
+
+        <span>
+            Kirill
+        </span>
+
+    </div>
+
 </div>
 
-<div class="stat">
-    <strong>12</strong>
-    Темы
+
+<div class="forum">
+
+    <div class="forum-icon">
+        📌
+    </div>
+
+    <div class="forum-info">
+
+        <h3>
+            Важная информация
+        </h3>
+
+        <p>
+            Правила, объявления и документация
+        </p>
+
+    </div>
+
+    <div class="stat">
+        <strong>12</strong>
+        Темы
+    </div>
+
+    <div class="stat">
+        <strong>94</strong>
+        Сообщения
+    </div>
+
+    <div class="last">
+
+        <strong>
+            Правила форума
+        </strong>
+
+        вчера в 21:10
+
+        <br>
+
+        <span>
+            Kannet Team
+        </span>
+
+    </div>
+
 </div>
 
-<div class="stat">
-    <strong>94</strong>
-    Сообщения
-</div>
-
-<div class="last">
-    <strong>Правила форума</strong>
-    вчера в 21:10<br>
-    <span>Kannet Team</span>
-</div>
-
-</div>
-
 </div>
 
 
-<!-- КАТЕГОРИЯ 2 -->
+<!-- GAME -->
 
 <div class="category">
 
 <div class="category-header">
-    <h2>🎮 Игровые разделы</h2>
-    <span>Общение игроков</span>
-</div>
 
+    <h2>
+        🎮 Игровые разделы
+    </h2>
 
-<div class="forum">
-
-<div class="forum-icon">🎮</div>
-
-<div class="forum-info">
-    <h3>Общий раздел</h3>
-    <p>Обсуждение игры, вопросы и общение</p>
-</div>
-
-<div class="stat">
-    <strong>138</strong>
-    Темы
-</div>
-
-<div class="stat">
-    <strong>1.4K</strong>
-    Сообщения
-</div>
-
-<div class="last">
-    <strong>Кто сегодня играет?</strong>
-    5 мин назад<br>
-    <span>Alex</span>
-</div>
+    <span>
+        Общение игроков
+    </span>
 
 </div>
 
 
 <div class="forum">
 
-<div class="forum-icon">🏆</div>
+    <div class="forum-icon">
+        🎮
+    </div>
 
-<div class="forum-info">
-    <h3>Конкурсы и мероприятия</h3>
-    <p>Конкурсы, события и награды</p>
-</div>
+    <div class="forum-info">
 
-<div class="stat">
-    <strong>47</strong>
-    Темы
-</div>
+        <h3>
+            Общий раздел
+        </h3>
 
-<div class="stat">
-    <strong>521</strong>
-    Сообщения
-</div>
+        <p>
+            Общение, вопросы и обсуждение проекта
+        </p>
 
-<div class="last">
-    <strong>Новый конкурс!</strong>
-    32 мин назад<br>
-    <span>Kannet Team</span>
-</div>
+    </div>
+
+    <div class="stat">
+        <strong>138</strong>
+        Темы
+    </div>
+
+    <div class="stat">
+        <strong>1.4K</strong>
+        Сообщения
+    </div>
+
+    <div class="last">
+
+        <strong>
+            Кто сегодня играет?
+        </strong>
+
+        5 минут назад
+
+        <br>
+
+        <span>
+            Alex
+        </span>
+
+    </div>
 
 </div>
 
 
 <div class="forum">
 
-<div class="forum-icon">💬</div>
+    <div class="forum-icon">
+        🏆
+    </div>
 
-<div class="forum-info">
-    <h3>Флудилка</h3>
-    <p>Свободное общение обо всём</p>
+    <div class="forum-info">
+
+        <h3>
+            Конкурсы и мероприятия
+        </h3>
+
+        <p>
+            Конкурсы, события и различные мероприятия
+        </p>
+
+    </div>
+
+    <div class="stat">
+        <strong>47</strong>
+        Темы
+    </div>
+
+    <div class="stat">
+        <strong>521</strong>
+        Сообщения
+    </div>
+
+    <div class="last">
+
+        <strong>
+            Новый конкурс!
+        </strong>
+
+        32 минуты назад
+
+        <br>
+
+        <span>
+            Kannet Team
+        </span>
+
+    </div>
+
 </div>
 
-<div class="stat">
-    <strong>326</strong>
-    Темы
+
+<div class="forum">
+
+    <div class="forum-icon">
+        💬
+    </div>
+
+    <div class="forum-info">
+
+        <h3>
+            Флудилка
+        </h3>
+
+        <p>
+            Свободное общение обо всём
+        </p>
+
+    </div>
+
+    <div class="stat">
+        <strong>326</strong>
+        Темы
+    </div>
+
+    <div class="stat">
+        <strong>5.7K</strong>
+        Сообщения
+    </div>
+
+    <div class="last">
+
+        <strong>
+            Всем привет 👋
+        </strong>
+
+        2 минуты назад
+
+        <br>
+
+        <span>
+            Max
+        </span>
+
+    </div>
+
 </div>
 
-<div class="stat">
-    <strong>5.7K</strong>
-    Сообщения
-</div>
-
-<div class="last">
-    <strong>Всем привет 👋</strong>
-    2 мин назад<br>
-    <span>Max</span>
-</div>
-
-</div>
-
 </div>
 
 
-<!-- КАТЕГОРИЯ 3 -->
+<!-- SUPPORT -->
 
 <div class="category">
 
 <div class="category-header">
-    <h2>🛠 Поддержка</h2>
-    <span>Помощь пользователям</span>
-</div>
 
+    <h2>
+        🛠 Поддержка
+    </h2>
 
-<div class="forum">
-
-<div class="forum-icon">❓</div>
-
-<div class="forum-info">
-    <h3>Вопросы и помощь</h3>
-    <p>Получите помощь от администрации и игроков</p>
-</div>
-
-<div class="stat">
-    <strong>71</strong>
-    Темы
-</div>
-
-<div class="stat">
-    <strong>338</strong>
-    Сообщения
-</div>
-
-<div class="last">
-    <strong>Нужна помощь</strong>
-    1 час назад<br>
-    <span>Player</span>
-</div>
+    <span>
+        Помощь пользователям
+    </span>
 
 </div>
 
 
 <div class="forum">
 
-<div class="forum-icon">⚠️</div>
+    <div class="forum-icon">
+        ❓
+    </div>
 
-<div class="forum-info">
-    <h3>Жалобы</h3>
-    <p>Жалобы и обращения к администрации</p>
+    <div class="forum-info">
+
+        <h3>
+            Вопросы и помощь
+        </h3>
+
+        <p>
+            Получите помощь от администрации и игроков
+        </p>
+
+    </div>
+
+    <div class="stat">
+        <strong>71</strong>
+        Темы
+    </div>
+
+    <div class="stat">
+        <strong>338</strong>
+        Сообщения
+    </div>
+
+    <div class="last">
+
+        <strong>
+            Нужна помощь
+        </strong>
+
+        1 час назад
+
+        <br>
+
+        <span>
+            Player
+        </span>
+
+    </div>
+
 </div>
 
-<div class="stat">
-    <strong>29</strong>
-    Темы
+
+<div class="forum">
+
+    <div class="forum-icon">
+        ⚠️
+    </div>
+
+    <div class="forum-info">
+
+        <h3>
+            Жалобы
+        </h3>
+
+        <p>
+            Жалобы и обращения к администрации
+        </p>
+
+    </div>
+
+    <div class="stat">
+        <strong>29</strong>
+        Темы
+    </div>
+
+    <div class="stat">
+        <strong>115</strong>
+        Сообщения
+    </div>
+
+    <div class="last">
+
+        <strong>
+            Жалоба #184
+        </strong>
+
+        3 часа назад
+
+        <br>
+
+        <span>
+            Moderator
+        </span>
+
+    </div>
+
 </div>
 
-<div class="stat">
-    <strong>115</strong>
-    Сообщения
-</div>
-
-<div class="last">
-    <strong>Жалоба #184</strong>
-    3 часа назад<br>
-    <span>Moderator</span>
-</div>
-
-</div>
-
 </div>
 
 
-<!-- КАТЕГОРИЯ 4 -->
+<!-- ADMIN -->
 
 <div class="category" id="news">
 
 <div class="category-header">
-    <h2>👑 Администрация</h2>
-    <span>Закрытый раздел</span>
+
+    <h2>
+        👑 Администрация
+    </h2>
+
+    <span>
+        Раздел команды
+    </span>
+
 </div>
 
 
 <div class="forum">
 
-<div class="forum-icon">🛡️</div>
+    <div class="forum-icon">
+        🛡️
+    </div>
 
-<div class="forum-info">
-    <h3>Администрация Kannet</h3>
-    <p>Работа команды проекта</p>
-</div>
+    <div class="forum-info">
 
-<div class="stat">
-    <strong>16</strong>
-    Темы
-</div>
+        <h3>
+            Администрация Kannet
+        </h3>
 
-<div class="stat">
-    <strong>83</strong>
-    Сообщения
-</div>
+        <p>
+            Работа команды проекта
+        </p>
 
-<div class="last">
-    <strong>Набор администрации</strong>
-    сегодня в 12:30<br>
-    <span>Administrator</span>
-</div>
+    </div>
+
+    <div class="stat">
+        <strong>16</strong>
+        Темы
+    </div>
+
+    <div class="stat">
+        <strong>83</strong>
+        Сообщения
+    </div>
+
+    <div class="last">
+
+        <strong>
+            Набор администрации
+        </strong>
+
+        сегодня в 12:30
+
+        <br>
+
+        <span>
+            Administrator
+        </span>
+
+    </div>
 
 </div>
 
@@ -954,6 +1361,7 @@ footer {
 
 <aside>
 
+
 <div class="sidebar-box">
 
 <div class="sidebar-title">
@@ -963,18 +1371,39 @@ footer {
 <div class="stats">
 
 <div class="stat-card">
-    <strong>653</strong>
-    <span>Тем</span>
+
+    <strong>
+        653
+    </strong>
+
+    <span>
+        Тем
+    </span>
+
 </div>
 
 <div class="stat-card">
-    <strong>8.4K</strong>
-    <span>Сообщений</span>
+
+    <strong>
+        8.4K
+    </strong>
+
+    <span>
+        Сообщений
+    </span>
+
 </div>
 
 <div class="stat-card">
-    <strong>1.2K</strong>
-    <span>Участников</span>
+
+    <strong>
+        1.2K
+    </strong>
+
+    <span>
+        Участников
+    </span>
+
 </div>
 
 </div>
@@ -991,37 +1420,73 @@ footer {
 <div class="online">
 
 <div class="online-number">
-    <span>47</span> пользователей
+
+    <span>
+        47
+    </span>
+
+    пользователей
+
 </div>
 
-<p>Сейчас находятся на форуме</p>
+<p>
+    Сейчас находятся на форуме
+</p>
 
 </div>
 
-<div class="user-list">
+
+<div class="users">
 
 <div class="user">
-    <div class="avatar">K</div>
+
+    <div class="avatar">
+        K
+    </div>
+
     Kirill
+
     <div class="dot"></div>
+
 </div>
 
+
 <div class="user">
-    <div class="avatar">A</div>
+
+    <div class="avatar">
+        A
+    </div>
+
     Alex
+
     <div class="dot"></div>
+
 </div>
 
+
 <div class="user">
-    <div class="avatar">M</div>
+
+    <div class="avatar">
+        M
+    </div>
+
     Max
+
     <div class="dot"></div>
+
 </div>
 
+
 <div class="user">
-    <div class="avatar">D</div>
+
+    <div class="avatar">
+        D
+    </div>
+
     Developer
+
     <div class="dot"></div>
+
 </div>
 
 </div>
@@ -1035,26 +1500,46 @@ footer {
     🔥 Последние темы
 </div>
 
-<div class="user-list">
+<div class="users">
 
 <div class="user">
-    <div class="avatar">1</div>
+
+    <div class="avatar">
+        1
+    </div>
+
     Обновление Kannet
+
 </div>
 
 <div class="user">
-    <div class="avatar">2</div>
+
+    <div class="avatar">
+        2
+    </div>
+
     Набор администрации
+
 </div>
 
 <div class="user">
-    <div class="avatar">3</div>
+
+    <div class="avatar">
+        3
+    </div>
+
     Кто сегодня играет?
+
 </div>
 
 <div class="user">
-    <div class="avatar">4</div>
+
+    <div class="avatar">
+        4
+    </div>
+
     Новый конкурс
+
 </div>
 
 </div>
@@ -1068,17 +1553,24 @@ footer {
 </div>
 
 
+<!-- FOOTER -->
+
 <footer>
 
-<div class="footer-inner">
+<div class="footer">
 
 <div>
-    <span class="footer-logo">Kannet</span>
+
+    <strong>
+        Kannet
+    </strong>
+
     © 2026 Все права защищены.
+
 </div>
 
 <div>
-    Сделано с ❤️ для сообщества
+    Сделано для сообщества Kannet
 </div>
 
 </div>
@@ -1086,24 +1578,39 @@ footer {
 </footer>
 
 
-<!-- LOGIN MODAL -->
+<!-- LOGIN -->
 
 <div class="modal" id="loginModal">
 
 <div class="modal-box">
 
-<span class="close" onclick="closeModal()">×</span>
+<span
+    class="close"
+    onclick="closeModal()">
+    ×
+</span>
 
-<h2>Вход</h2>
+<h2>
+    Вход
+</h2>
 
-<p>Войдите в свой аккаунт Kannet</p>
+<p>
+    Войдите в свой аккаунт Kannet
+</p>
 
-<input type="text" placeholder="Логин">
+<input
+    type="text"
+    placeholder="Логин">
 
-<input type="password" placeholder="Пароль">
+<input
+    type="password"
+    placeholder="Пароль">
 
-<button class="btn btn-register">
+<button
+    class="btn register">
+
     Войти
+
 </button>
 
 </div>
@@ -1111,26 +1618,43 @@ footer {
 </div>
 
 
-<!-- REGISTER MODAL -->
+<!-- REGISTER -->
 
 <div class="modal" id="registerModal">
 
 <div class="modal-box">
 
-<span class="close" onclick="closeModal()">×</span>
+<span
+    class="close"
+    onclick="closeModal()">
+    ×
+</span>
 
-<h2>Регистрация</h2>
+<h2>
+    Регистрация
+</h2>
 
-<p>Создайте новый аккаунт Kannet</p>
+<p>
+    Создайте аккаунт Kannet
+</p>
 
-<input type="text" placeholder="Имя пользователя">
+<input
+    type="text"
+    placeholder="Имя пользователя">
 
-<input type="email" placeholder="Email">
+<input
+    type="email"
+    placeholder="Email">
 
-<input type="password" placeholder="Пароль">
+<input
+    type="password"
+    placeholder="Пароль">
 
-<button class="btn btn-register">
+<button
+    class="btn register">
+
     Зарегистрироваться
+
 </button>
 
 </div>
@@ -1140,37 +1664,69 @@ footer {
 
 <script>
 
-/* МОДАЛЬНЫЕ ОКНА */
+/* ПЕРЕХОД К ФОРУМУ */
 
-function openModal(type) {
+function scrollForum(){
+
+    document
+        .getElementById("forum")
+        .scrollIntoView({
+            behavior:"smooth"
+        });
+
+}
+
+
+/* ОКНА */
+
+function openModal(type){
 
     closeModal();
 
-    if(type === "login") {
-        document.getElementById("loginModal").classList.add("show");
+    if(type === "login"){
+
+        document
+            .getElementById("loginModal")
+            .classList.add("show");
+
     }
 
-    if(type === "register") {
-        document.getElementById("registerModal").classList.add("show");
+    if(type === "register"){
+
+        document
+            .getElementById("registerModal")
+            .classList.add("show");
+
     }
+
 }
 
-function closeModal() {
 
-    document.getElementById("loginModal").classList.remove("show");
-    document.getElementById("registerModal").classList.remove("show");
+function closeModal(){
+
+    document
+        .getElementById("loginModal")
+        .classList.remove("show");
+
+    document
+        .getElementById("registerModal")
+        .classList.remove("show");
 
 }
 
 
 /* ЗАКРЫТИЕ ПО ФОНУ */
 
-document.querySelectorAll(".modal").forEach(function(modal) {
+document
+.querySelectorAll(".modal")
+.forEach(function(modal){
 
-    modal.addEventListener("click", function(e) {
+    modal.addEventListener("click",function(e){
 
-        if(e.target === modal) {
+        if(e.target === modal){
+
             closeModal();
+
         }
 
     });
@@ -1180,10 +1736,12 @@ document.querySelectorAll(".modal").forEach(function(modal) {
 
 /* ESC */
 
-document.addEventListener("keydown", function(e) {
+document.addEventListener("keydown",function(e){
 
-    if(e.key === "Escape") {
+    if(e.key === "Escape"){
+
         closeModal();
+
     }
 
 });
@@ -1191,23 +1749,33 @@ document.addEventListener("keydown", function(e) {
 
 /* ПОИСК */
 
-function searchForums() {
+function searchForum(){
 
-    let input = document
+    let input =
+        document
         .getElementById("search")
         .value
         .toLowerCase();
 
-    let forums = document.querySelectorAll(".forum");
+    let forums =
+        document
+        .querySelectorAll(".forum");
 
-    forums.forEach(function(forum) {
+    forums.forEach(function(forum){
 
-        let text = forum.innerText.toLowerCase();
+        let text =
+            forum
+            .innerText
+            .toLowerCase();
 
-        if(text.includes(input)) {
-            forum.style.display = "";
-        } else {
-            forum.style.display = "none";
+        if(text.includes(input)){
+
+            forum.style.display="grid";
+
+        }else{
+
+            forum.style.display="none";
+
         }
 
     });
@@ -1218,3 +1786,4 @@ function searchForums() {
 
 </body>
 </html>
+```
