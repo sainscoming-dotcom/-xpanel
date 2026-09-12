@@ -2,130 +2,1219 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Журнал прибыли</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Kannet — Форум</title>
+
 <style>
-*{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:linear-gradient(135deg,#090f22,#17163b,#29134d);color:#fff;padding:25px 15px}
-.container{max-width:1150px;margin:auto}
-.panel{background:rgba(15,21,48,.94);border:1px solid #39457a;border-radius:20px;padding:22px;box-shadow:0 20px 60px #0008}
-h1{margin:0 0 6px;font-size:34px}.desc{color:#aeb8d8;margin-bottom:22px}
-.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px}
-.card{background:#111a38;border:1px solid #2e3a67;border-radius:14px;padding:15px}
-.card small{display:block;color:#929fc6;margin-bottom:7px}.card b{font-size:25px}
-.green b{color:#43e59b}.red b{color:#ff6f86}.purple b{color:#b99cff}
-.form{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px;margin-bottom:15px}
-input,select{width:100%;padding:12px;border-radius:10px;border:1px solid #3a4775;background:#0e1630;color:#fff;outline:none}
-button{border:0;border-radius:10px;padding:12px 16px;color:#fff;font-weight:bold;cursor:pointer}
-.add{background:linear-gradient(90deg,#386ee8,#7655ff)}.save{background:#16805e}.clear{background:#b53750}
-.table{overflow:auto;border-radius:12px}
-table{width:100%;border-collapse:collapse;min-width:850px;background:#0d1530}
-th,td{padding:11px;border-bottom:1px solid #273355;text-align:left}
-th{background:#171f40;color:#b7c2e3;font-size:13px}
-.income{color:#43e59b}.expense{color:#ff7187}
-.delete{background:#70283d;padding:7px 10px}
-.status{height:22px;color:#9eacd3;margin-top:13px;font-size:14px}
-@media(max-width:700px){.cards{grid-template-columns:1fr}.form{grid-template-columns:1fr 1fr}}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg: #080b14;
+    --bg2: #0d1220;
+    --card: #111827;
+    --card2: #151d2d;
+    --border: rgba(255,255,255,.07);
+    --text: #f4f7ff;
+    --muted: #8d98ad;
+    --blue: #4f8cff;
+    --purple: #8b5cf6;
+    --cyan: #22d3ee;
+    --green: #31d27c;
+    --red: #ff5577;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background:
+        radial-gradient(circle at 10% 0%, rgba(79,140,255,.15), transparent 30%),
+        radial-gradient(circle at 90% 10%, rgba(139,92,246,.13), transparent 30%),
+        var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+}
+
+/* HEADER */
+
+header {
+    height: 72px;
+    background: rgba(8,11,20,.88);
+    border-bottom: 1px solid var(--border);
+    backdrop-filter: blur(16px);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.header-inner {
+    max-width: 1250px;
+    height: 100%;
+    margin: auto;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 23px;
+    font-weight: 800;
+}
+
+.logo-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg,var(--blue),var(--purple));
+    box-shadow: 0 0 30px rgba(79,140,255,.3);
+}
+
+.logo span {
+    background: linear-gradient(90deg,#fff,var(--blue));
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+nav {
+    display: flex;
+    gap: 8px;
+}
+
+nav a {
+    color: #aab4c8;
+    text-decoration: none;
+    padding: 11px 15px;
+    border-radius: 10px;
+    transition: .2s;
+    font-size: 14px;
+}
+
+nav a:hover,
+nav a.active {
+    background: rgba(79,140,255,.12);
+    color: white;
+}
+
+.header-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.btn {
+    border: 0;
+    cursor: pointer;
+    padding: 11px 17px;
+    border-radius: 10px;
+    color: white;
+    font-weight: 700;
+    transition: .2s;
+}
+
+.btn-login {
+    background: rgba(255,255,255,.06);
+    border: 1px solid var(--border);
+}
+
+.btn-register {
+    background: linear-gradient(135deg,var(--blue),var(--purple));
+    box-shadow: 0 8px 25px rgba(79,140,255,.2);
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+}
+
+/* HERO */
+
+.hero {
+    max-width: 1250px;
+    margin: 35px auto 25px;
+    padding: 0 20px;
+}
+
+.hero-box {
+    min-height: 230px;
+    padding: 45px;
+    border-radius: 22px;
+    border: 1px solid var(--border);
+    background:
+        linear-gradient(120deg,rgba(79,140,255,.14),rgba(139,92,246,.10)),
+        rgba(17,24,39,.78);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-box::before {
+    content: "";
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background: var(--blue);
+    filter: blur(130px);
+    opacity: .12;
+    right: -80px;
+    top: -100px;
+}
+
+.hero h1 {
+    font-size: 42px;
+    margin-bottom: 12px;
+    position: relative;
+}
+
+.hero h1 span {
+    color: var(--blue);
+}
+
+.hero p {
+    color: var(--muted);
+    max-width: 650px;
+    line-height: 1.7;
+    position: relative;
+}
+
+.hero-actions {
+    margin-top: 25px;
+    display: flex;
+    gap: 10px;
+    position: relative;
+}
+
+.hero-btn {
+    padding: 13px 20px;
+}
+
+/* MAIN */
+
+.container {
+    max-width: 1250px;
+    margin: auto;
+    padding: 0 20px 50px;
+}
+
+.layout {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 22px;
+}
+
+.section-title {
+    font-size: 19px;
+    margin: 5px 0 13px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.section-title small {
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: normal;
+}
+
+/* CATEGORY */
+
+.category {
+    margin-bottom: 18px;
+    background: rgba(17,24,39,.76);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.category-header {
+    padding: 17px 20px;
+    background: rgba(255,255,255,.025);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.category-header h2 {
+    font-size: 15px;
+}
+
+.category-header span {
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.forum {
+    display: grid;
+    grid-template-columns: 52px 1fr 90px 90px 220px;
+    gap: 15px;
+    align-items: center;
+    min-height: 78px;
+    padding: 12px 20px;
+    border-top: 1px solid var(--border);
+    transition: .2s;
+}
+
+.forum:hover {
+    background: rgba(79,140,255,.045);
+}
+
+.forum-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg,rgba(79,140,255,.18),rgba(139,92,246,.18));
+    color: var(--blue);
+    font-size: 19px;
+}
+
+.forum-info h3 {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.forum-info p {
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.stat {
+    text-align: center;
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.stat strong {
+    display: block;
+    color: white;
+    font-size: 14px;
+    margin-bottom: 3px;
+}
+
+.last {
+    font-size: 12px;
+    color: var(--muted);
+}
+
+.last strong {
+    display: block;
+    color: #dce3f0;
+    margin-bottom: 4px;
+}
+
+.last span {
+    color: #69758c;
+}
+
+/* SIDEBAR */
+
+.sidebar-box {
+    background: rgba(17,24,39,.78);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    margin-bottom: 18px;
+    overflow: hidden;
+}
+
+.sidebar-title {
+    padding: 17px 18px;
+    border-bottom: 1px solid var(--border);
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.online {
+    padding: 18px;
+}
+
+.online-number {
+    font-size: 31px;
+    font-weight: 800;
+    margin-bottom: 4px;
+}
+
+.online-number span {
+    color: var(--green);
+}
+
+.online p {
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.user-list {
+    padding: 0 18px 18px;
+}
+
+.user {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 0;
+    color: #c7cfdd;
+    font-size: 13px;
+}
+
+.avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 9px;
+    background: linear-gradient(135deg,var(--blue),var(--purple));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.dot {
+    width: 7px;
+    height: 7px;
+    background: var(--green);
+    border-radius: 50%;
+    margin-left: auto;
+}
+
+/* STATS */
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 10px;
+    padding: 18px;
+}
+
+.stat-card {
+    background: rgba(255,255,255,.035);
+    border-radius: 12px;
+    padding: 15px 5px;
+    text-align: center;
+}
+
+.stat-card strong {
+    display: block;
+    font-size: 19px;
+    margin-bottom: 5px;
+}
+
+.stat-card span {
+    font-size: 10px;
+    color: var(--muted);
+}
+
+/* SEARCH */
+
+.search {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.search input {
+    width: 100%;
+    padding: 15px 18px;
+    background: rgba(17,24,39,.8);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    color: white;
+    outline: none;
+}
+
+.search input:focus {
+    border-color: rgba(79,140,255,.5);
+}
+
+.search input::placeholder {
+    color: #667186;
+}
+
+/* FOOTER */
+
+footer {
+    border-top: 1px solid var(--border);
+    background: rgba(5,7,13,.8);
+    padding: 35px 20px;
+}
+
+.footer-inner {
+    max-width: 1250px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    color: #68748a;
+    font-size: 12px;
+}
+
+.footer-logo {
+    color: white;
+    font-weight: 700;
+}
+
+/* MODAL */
+
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.72);
+    backdrop-filter: blur(8px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 5000;
+    padding: 20px;
+}
+
+.modal.show {
+    display: flex;
+}
+
+.modal-box {
+    width: 420px;
+    max-width: 100%;
+    background: #111827;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 28px;
+    box-shadow: 0 30px 80px rgba(0,0,0,.5);
+}
+
+.modal-box h2 {
+    margin-bottom: 8px;
+}
+
+.modal-box p {
+    color: var(--muted);
+    font-size: 13px;
+    margin-bottom: 20px;
+}
+
+.modal-box input {
+    width: 100%;
+    padding: 13px;
+    margin-bottom: 10px;
+    background: #0b101b;
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    color: white;
+    outline: none;
+}
+
+.modal-box button {
+    width: 100%;
+    margin-top: 8px;
+}
+
+.close {
+    float: right;
+    cursor: pointer;
+    color: var(--muted);
+    font-size: 20px;
+}
+
+/* MOBILE */
+
+@media(max-width: 900px) {
+
+    nav {
+        display: none;
+    }
+
+    .layout {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-box {
+        padding: 30px 25px;
+    }
+
+    .hero h1 {
+        font-size: 31px;
+    }
+
+    .forum {
+        grid-template-columns: 48px 1fr;
+    }
+
+    .stat,
+    .last {
+        display: none;
+    }
+
+    .header-buttons .btn-login {
+        display: none;
+    }
+
+    .footer-inner {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+@media(max-width: 500px) {
+
+    .header-inner {
+        padding: 0 12px;
+    }
+
+    .logo {
+        font-size: 19px;
+    }
+
+    .logo-icon {
+        width: 37px;
+        height: 37px;
+    }
+
+    .hero {
+        margin-top: 20px;
+    }
+
+    .hero-box {
+        padding: 25px 20px;
+    }
+
+    .hero h1 {
+        font-size: 27px;
+    }
+
+    .container {
+        padding: 0 12px 30px;
+    }
+}
 </style>
 </head>
+
 <body>
+
+<header>
+    <div class="header-inner">
+
+        <div class="logo">
+            <div class="logo-icon">K</div>
+            <span>Kannet</span>
+        </div>
+
+        <nav>
+            <a href="#" class="active">Главная</a>
+            <a href="#forums">Форум</a>
+            <a href="#news">Новости</a>
+            <a href="#members">Участники</a>
+        </nav>
+
+        <div class="header-buttons">
+            <button class="btn btn-login" onclick="openModal('login')">
+                Войти
+            </button>
+
+            <button class="btn btn-register" onclick="openModal('register')">
+                Регистрация
+            </button>
+        </div>
+
+    </div>
+</header>
+
+
+<section class="hero">
+
+    <div class="hero-box">
+
+        <h1>
+            Добро пожаловать на <span>Kannet</span>
+        </h1>
+
+        <p>
+            Официальное сообщество Kannet. Здесь вы можете общаться,
+            создавать темы, находить игроков, читать новости и следить
+            за развитием проекта.
+        </p>
+
+        <div class="hero-actions">
+            <button class="btn btn-register hero-btn"
+                    onclick="document.getElementById('forums').scrollIntoView({behavior:'smooth'})">
+                Перейти на форум
+            </button>
+
+            <button class="btn btn-login hero-btn"
+                    onclick="openModal('login')">
+                Войти в аккаунт
+            </button>
+        </div>
+
+    </div>
+
+</section>
+
+
 <div class="container">
-<div class="panel">
-<h1>💰 Журнал прибыли</h1>
-<div class="desc">Каждая операция автоматически записывается с датой и временем.</div>
 
-<div class="cards">
-<div class="card green"><small>Всего доходов</small><b id="income">0 ₴</b></div>
-<div class="card red"><small>Всего расходов</small><b id="expense">0 ₴</b></div>
-<div class="card purple"><small>Чистая прибыль</small><b id="profit">0 ₴</b></div>
-</div>
-
-<div class="form">
-<input id="category" placeholder="Категория">
-<select id="type"><option value="income">Доход</option><option value="expense">Расход</option></select>
-<input id="amount" type="number" min="0" step="0.01" placeholder="Сумма ₴">
-<input id="comment" placeholder="Комментарий">
+<div class="search">
+    <input
+        id="search"
+        type="text"
+        placeholder="🔎 Поиск по форуму..."
+        onkeyup="searchForums()"
+    >
 </div>
 
-<button class="add" onclick="addOperation()">+ Добавить и записать</button>
-<button class="save" onclick="save()">💾 Сохранить</button>
-<button class="clear" onclick="clearHistory()">🗑 Очистить историю</button>
 
-<div class="table" style="margin-top:18px">
-<table>
-<thead><tr><th>#</th><th>Дата и время</th><th>Тип</th><th>Категория</th><th>Сумма</th><th>Комментарий</th><th></th></tr></thead>
-<tbody id="log"></tbody>
-</table>
+<div class="layout">
+
+<main id="forums">
+
+
+<div class="section-title">
+    Форумы
+    <small>Обсуждения сообщества</small>
 </div>
-<div class="status" id="status"></div>
+
+
+<!-- КАТЕГОРИЯ 1 -->
+
+<div class="category">
+
+<div class="category-header">
+    <h2>📢 Kannet — Основное</h2>
+    <span>Официальная информация</span>
 </div>
+
+
+<div class="forum">
+
+<div class="forum-icon">📣</div>
+
+<div class="forum-info">
+    <h3>Новости проекта</h3>
+    <p>Последние новости и важные объявления Kannet</p>
 </div>
+
+<div class="stat">
+    <strong>24</strong>
+    Темы
+</div>
+
+<div class="stat">
+    <strong>186</strong>
+    Сообщения
+</div>
+
+<div class="last">
+    <strong>Обновление Kannet</strong>
+    сегодня в 18:42<br>
+    <span>Kirill</span>
+</div>
+
+</div>
+
+
+<div class="forum">
+
+<div class="forum-icon">📌</div>
+
+<div class="forum-info">
+    <h3>Важная информация</h3>
+    <p>Правила, объявления и документация проекта</p>
+</div>
+
+<div class="stat">
+    <strong>12</strong>
+    Темы
+</div>
+
+<div class="stat">
+    <strong>94</strong>
+    Сообщения
+</div>
+
+<div class="last">
+    <strong>Правила форума</strong>
+    вчера в 21:10<br>
+    <span>Kannet Team</span>
+</div>
+
+</div>
+
+</div>
+
+
+<!-- КАТЕГОРИЯ 2 -->
+
+<div class="category">
+
+<div class="category-header">
+    <h2>🎮 Игровые разделы</h2>
+    <span>Общение игроков</span>
+</div>
+
+
+<div class="forum">
+
+<div class="forum-icon">🎮</div>
+
+<div class="forum-info">
+    <h3>Общий раздел</h3>
+    <p>Обсуждение игры, вопросы и общение</p>
+</div>
+
+<div class="stat">
+    <strong>138</strong>
+    Темы
+</div>
+
+<div class="stat">
+    <strong>1.4K</strong>
+    Сообщения
+</div>
+
+<div class="last">
+    <strong>Кто сегодня играет?</strong>
+    5 мин назад<br>
+    <span>Alex</span>
+</div>
+
+</div>
+
+
+<div class="forum">
+
+<div class="forum-icon">🏆</div>
+
+<div class="forum-info">
+    <h3>Конкурсы и мероприятия</h3>
+    <p>Конкурсы, события и награды</p>
+</div>
+
+<div class="stat">
+    <strong>47</strong>
+    Темы
+</div>
+
+<div class="stat">
+    <strong>521</strong>
+    Сообщения
+</div>
+
+<div class="last">
+    <strong>Новый конкурс!</strong>
+    32 мин назад<br>
+    <span>Kannet Team</span>
+</div>
+
+</div>
+
+
+<div class="forum">
+
+<div class="forum-icon">💬</div>
+
+<div class="forum-info">
+    <h3>Флудилка</h3>
+    <p>Свободное общение обо всём</p>
+</div>
+
+<div class="stat">
+    <strong>326</strong>
+    Темы
+</div>
+
+<div class="stat">
+    <strong>5.7K</strong>
+    Сообщения
+</div>
+
+<div class="last">
+    <strong>Всем привет 👋</strong>
+    2 мин назад<br>
+    <span>Max</span>
+</div>
+
+</div>
+
+</div>
+
+
+<!-- КАТЕГОРИЯ 3 -->
+
+<div class="category">
+
+<div class="category-header">
+    <h2>🛠 Поддержка</h2>
+    <span>Помощь пользователям</span>
+</div>
+
+
+<div class="forum">
+
+<div class="forum-icon">❓</div>
+
+<div class="forum-info">
+    <h3>Вопросы и помощь</h3>
+    <p>Получите помощь от администрации и игроков</p>
+</div>
+
+<div class="stat">
+    <strong>71</strong>
+    Темы
+</div>
+
+<div class="stat">
+    <strong>338</strong>
+    Сообщения
+</div>
+
+<div class="last">
+    <strong>Нужна помощь</strong>
+    1 час назад<br>
+    <span>Player</span>
+</div>
+
+</div>
+
+
+<div class="forum">
+
+<div class="forum-icon">⚠️</div>
+
+<div class="forum-info">
+    <h3>Жалобы</h3>
+    <p>Жалобы и обращения к администрации</p>
+</div>
+
+<div class="stat">
+    <strong>29</strong>
+    Темы
+</div>
+
+<div class="stat">
+    <strong>115</strong>
+    Сообщения
+</div>
+
+<div class="last">
+    <strong>Жалоба #184</strong>
+    3 часа назад<br>
+    <span>Moderator</span>
+</div>
+
+</div>
+
+</div>
+
+
+<!-- КАТЕГОРИЯ 4 -->
+
+<div class="category" id="news">
+
+<div class="category-header">
+    <h2>👑 Администрация</h2>
+    <span>Закрытый раздел</span>
+</div>
+
+
+<div class="forum">
+
+<div class="forum-icon">🛡️</div>
+
+<div class="forum-info">
+    <h3>Администрация Kannet</h3>
+    <p>Работа команды проекта</p>
+</div>
+
+<div class="stat">
+    <strong>16</strong>
+    Темы
+</div>
+
+<div class="stat">
+    <strong>83</strong>
+    Сообщения
+</div>
+
+<div class="last">
+    <strong>Набор администрации</strong>
+    сегодня в 12:30<br>
+    <span>Administrator</span>
+</div>
+
+</div>
+
+</div>
+
+</main>
+
+
+<!-- SIDEBAR -->
+
+<aside>
+
+<div class="sidebar-box">
+
+<div class="sidebar-title">
+    📊 Статистика форума
+</div>
+
+<div class="stats">
+
+<div class="stat-card">
+    <strong>653</strong>
+    <span>Тем</span>
+</div>
+
+<div class="stat-card">
+    <strong>8.4K</strong>
+    <span>Сообщений</span>
+</div>
+
+<div class="stat-card">
+    <strong>1.2K</strong>
+    <span>Участников</span>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="sidebar-box">
+
+<div class="sidebar-title">
+    🟢 Сейчас онлайн
+</div>
+
+<div class="online">
+
+<div class="online-number">
+    <span>47</span> пользователей
+</div>
+
+<p>Сейчас находятся на форуме</p>
+
+</div>
+
+<div class="user-list">
+
+<div class="user">
+    <div class="avatar">K</div>
+    Kirill
+    <div class="dot"></div>
+</div>
+
+<div class="user">
+    <div class="avatar">A</div>
+    Alex
+    <div class="dot"></div>
+</div>
+
+<div class="user">
+    <div class="avatar">M</div>
+    Max
+    <div class="dot"></div>
+</div>
+
+<div class="user">
+    <div class="avatar">D</div>
+    Developer
+    <div class="dot"></div>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="sidebar-box" id="members">
+
+<div class="sidebar-title">
+    🔥 Последние темы
+</div>
+
+<div class="user-list">
+
+<div class="user">
+    <div class="avatar">1</div>
+    Обновление Kannet
+</div>
+
+<div class="user">
+    <div class="avatar">2</div>
+    Набор администрации
+</div>
+
+<div class="user">
+    <div class="avatar">3</div>
+    Кто сегодня играет?
+</div>
+
+<div class="user">
+    <div class="avatar">4</div>
+    Новый конкурс
+</div>
+
+</div>
+
+</div>
+
+</aside>
+
+</div>
+
+</div>
+
+
+<footer>
+
+<div class="footer-inner">
+
+<div>
+    <span class="footer-logo">Kannet</span>
+    © 2026 Все права защищены.
+</div>
+
+<div>
+    Сделано с ❤️ для сообщества
+</div>
+
+</div>
+
+</footer>
+
+
+<!-- LOGIN MODAL -->
+
+<div class="modal" id="loginModal">
+
+<div class="modal-box">
+
+<span class="close" onclick="closeModal()">×</span>
+
+<h2>Вход</h2>
+
+<p>Войдите в свой аккаунт Kannet</p>
+
+<input type="text" placeholder="Логин">
+
+<input type="password" placeholder="Пароль">
+
+<button class="btn btn-register">
+    Войти
+</button>
+
+</div>
+
+</div>
+
+
+<!-- REGISTER MODAL -->
+
+<div class="modal" id="registerModal">
+
+<div class="modal-box">
+
+<span class="close" onclick="closeModal()">×</span>
+
+<h2>Регистрация</h2>
+
+<p>Создайте новый аккаунт Kannet</p>
+
+<input type="text" placeholder="Имя пользователя">
+
+<input type="email" placeholder="Email">
+
+<input type="password" placeholder="Пароль">
+
+<button class="btn btn-register">
+    Зарегистрироваться
+</button>
+
+</div>
+
+</div>
+
 
 <script>
-const KEY='xpanel_profit_log_v2';
-let operations=JSON.parse(localStorage.getItem(KEY)||'[]');
 
-function formatMoney(n){
- return new Intl.NumberFormat('uk-UA',{maximumFractionDigits:2}).format(n)+' ₴';
+/* МОДАЛЬНЫЕ ОКНА */
+
+function openModal(type) {
+
+    closeModal();
+
+    if(type === "login") {
+        document.getElementById("loginModal").classList.add("show");
+    }
+
+    if(type === "register") {
+        document.getElementById("registerModal").classList.add("show");
+    }
 }
-function now(){
- return new Date().toLocaleString('uk-UA',{dateStyle:'short',timeStyle:'medium'});
+
+function closeModal() {
+
+    document.getElementById("loginModal").classList.remove("show");
+    document.getElementById("registerModal").classList.remove("show");
+
 }
-function addOperation(){
- const category=document.getElementById('category').value.trim()||'Без категории';
- const type=document.getElementById('type').value;
- const amount=parseFloat(document.getElementById('amount').value);
- const comment=document.getElementById('comment').value.trim()||'—';
- if(!amount || amount<=0){notice('⚠️ Введи сумму.');return}
- operations.push({time:now(),type,category,amount,comment});
- localStorage.setItem(KEY,JSON.stringify(operations));
- document.getElementById('amount').value='';
- document.getElementById('comment').value='';
- render();
- notice('✅ Операция добавлена в журнал.');
+
+
+/* ЗАКРЫТИЕ ПО ФОНУ */
+
+document.querySelectorAll(".modal").forEach(function(modal) {
+
+    modal.addEventListener("click", function(e) {
+
+        if(e.target === modal) {
+            closeModal();
+        }
+
+    });
+
+});
+
+
+/* ESC */
+
+document.addEventListener("keydown", function(e) {
+
+    if(e.key === "Escape") {
+        closeModal();
+    }
+
+});
+
+
+/* ПОИСК */
+
+function searchForums() {
+
+    let input = document
+        .getElementById("search")
+        .value
+        .toLowerCase();
+
+    let forums = document.querySelectorAll(".forum");
+
+    forums.forEach(function(forum) {
+
+        let text = forum.innerText.toLowerCase();
+
+        if(text.includes(input)) {
+            forum.style.display = "";
+        } else {
+            forum.style.display = "none";
+        }
+
+    });
+
 }
-function removeOperation(i){
- operations.splice(i,1);
- localStorage.setItem(KEY,JSON.stringify(operations));
- render();
- notice('🗑 Запись удалена.');
-}
-function render(){
- const log=document.getElementById('log');
- log.innerHTML='';
- let income=0,expense=0;
- operations.forEach((x,i)=>{
-   if(x.type==='income') income+=x.amount; else expense+=x.amount;
-   const tr=document.createElement('tr');
-   tr.innerHTML=`<td>${i+1}</td><td>${escapeHtml(x.time)}</td>
-   <td class="${x.type==='income'?'income':'expense'}">${x.type==='income'?'Доход':'Расход'}</td>
-   <td>${escapeHtml(x.category)}</td><td>${formatMoney(x.amount)}</td>
-   <td>${escapeHtml(x.comment)}</td><td><button class="delete" onclick="removeOperation(${i})">Удалить</button></td>`;
-   log.appendChild(tr);
- });
- document.getElementById('income').textContent=formatMoney(income);
- document.getElementById('expense').textContent=formatMoney(expense);
- document.getElementById('profit').textContent=formatMoney(income-expense);
-}
-function save(){
- localStorage.setItem(KEY,JSON.stringify(operations));
- notice('💾 Журнал сохранён.');
-}
-function clearHistory(){
- if(!confirm('Удалить всю историю операций?')) return;
- operations=[];
- localStorage.removeItem(KEY);
- render();
- notice('🗑 История очищена.');
-}
-function notice(t){
- document.getElementById('status').textContent=t;
- setTimeout(()=>document.getElementById('status').textContent='',2500);
-}
-function escapeHtml(s){
- return String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');
-}
-render();
+
 </script>
+
 </body>
 </html>
