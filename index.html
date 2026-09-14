@@ -1,756 +1,291 @@
-```html
 <!DOCTYPE html>
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kannet — Forum</title>
+<title>Metro Royale — Учёт выноса</title>
 
 <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-:root{
-    --bg:#070b12;
-    --bg2:#0c111b;
-    --card:#101722;
-    --card2:#141d2b;
-    --border:rgba(255,255,255,.08);
-
-    --text:#f2f6ff;
-    --muted:#8995a8;
-
-    --blue:#397cff;
-    --blue-light:#5c96ff;
-    --purple:#7657ff;
-    --cyan:#38bdf8;
-
-    --green:#35d07f;
-    --red:#ff5577;
-}
-
-html{
-    scroll-behavior:smooth;
-}
-
-body{
-    font-family:Arial,Helvetica,sans-serif;
-    color:var(--text);
-    min-height:100vh;
-
+body {
+    font-family: Arial, Helvetica, sans-serif;
     background:
-        radial-gradient(circle at 10% 0%,rgba(57,124,255,.16),transparent 30%),
-        radial-gradient(circle at 90% 10%,rgba(118,87,255,.14),transparent 30%),
-        var(--bg);
+        radial-gradient(circle at top left, #1d3557 0%, transparent 35%),
+        radial-gradient(circle at bottom right, #54206f 0%, transparent 35%),
+        #090b12;
+    color: #fff;
+    min-height: 100vh;
+    padding: 25px;
 }
 
-/* ================= HEADER ================= */
-
-header{
-    height:72px;
-    position:sticky;
-    top:0;
-    z-index:1000;
-
-    background:rgba(7,11,18,.88);
-    backdrop-filter:blur(18px);
-
-    border-bottom:1px solid var(--border);
-}
-
-.header{
-    max-width:1250px;
-    height:100%;
-    margin:auto;
-    padding:0 20px;
-
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-}
-
-.logo{
-    display:flex;
-    align-items:center;
-    gap:12px;
-
-    font-size:23px;
-    font-weight:800;
-}
-
-.logo-icon{
-    width:42px;
-    height:42px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    border-radius:12px;
-
-    background:linear-gradient(135deg,var(--blue),var(--purple));
-
-    box-shadow:
-        0 0 30px rgba(57,124,255,.28);
-
-    color:white;
-}
-
-.logo span{
-    background:linear-gradient(90deg,#fff,var(--blue-light));
-    -webkit-background-clip:text;
-    color:transparent;
-}
-
-nav{
-    display:flex;
-    gap:5px;
-}
-
-nav a{
-    color:#9da8bb;
-    text-decoration:none;
-
-    padding:11px 15px;
-    border-radius:10px;
-
-    font-size:14px;
-
-    transition:.2s;
-}
-
-nav a:hover,
-nav a.active{
-    color:white;
-    background:rgba(57,124,255,.12);
-}
-
-.buttons{
-    display:flex;
-    gap:9px;
-}
-
-.btn{
-    border:0;
-    cursor:pointer;
-
-    padding:11px 17px;
-    border-radius:10px;
-
-    color:white;
-    font-weight:700;
-
-    transition:.2s;
-}
-
-.btn:hover{
-    transform:translateY(-2px);
-}
-
-.login{
-    background:rgba(255,255,255,.05);
-    border:1px solid var(--border);
-}
-
-.register{
-    background:linear-gradient(135deg,var(--blue),var(--purple));
-
-    box-shadow:
-        0 8px 25px rgba(57,124,255,.2);
-}
-
-/* ================= HERO ================= */
-
-.hero{
-    max-width:1250px;
-    margin:32px auto 24px;
-    padding:0 20px;
-}
-
-.hero-box{
-    min-height:245px;
-
-    padding:45px;
-
-    border-radius:22px;
-
-    border:1px solid var(--border);
-
-    background:
-        linear-gradient(
-            120deg,
-            rgba(57,124,255,.13),
-            rgba(118,87,255,.09)
-        ),
-        rgba(16,23,34,.82);
-
-    position:relative;
-    overflow:hidden;
-}
-
-.hero-box:before{
-    content:"";
-
-    position:absolute;
-
-    width:360px;
-    height:360px;
-
-    right:-120px;
-    top:-160px;
-
-    background:var(--blue);
-
-    filter:blur(130px);
-
-    opacity:.12;
-}
-
-.hero h1{
-    position:relative;
-
-    font-size:43px;
-    margin-bottom:13px;
-}
-
-.hero h1 span{
-    color:var(--blue-light);
-}
-
-.hero p{
-    position:relative;
-
-    max-width:700px;
-
-    color:var(--muted);
-
-    line-height:1.7;
-}
-
-.hero-buttons{
-    position:relative;
-
-    display:flex;
-    gap:10px;
-
-    margin-top:25px;
-}
-
-/* ================= CONTAINER ================= */
-
-.container{
-    max-width:1250px;
-    margin:auto;
-    padding:0 20px 50px;
-}
-
-.layout{
-    display:grid;
-    grid-template-columns:1fr 320px;
-    gap:22px;
-}
-
-/* ================= SEARCH ================= */
-
-.search{
-    margin-bottom:18px;
-}
-
-.search input{
-    width:100%;
-
-    padding:15px 18px;
-
-    border-radius:12px;
-
-    border:1px solid var(--border);
-
-    outline:none;
-
-    background:rgba(16,23,34,.85);
-
-    color:white;
-
-    transition:.2s;
-}
-
-.search input:focus{
-    border-color:rgba(57,124,255,.5);
-
-    box-shadow:
-        0 0 20px rgba(57,124,255,.08);
-}
-
-.search input::placeholder{
-    color:#657187;
-}
-
-/* ================= SECTION ================= */
-
-.section-title{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-
-    font-size:19px;
-
-    margin:5px 0 13px;
+.container {
+    width: 100%;
+    max-width: 1100px;
+    margin: auto;
 }
 
-.section-title small{
-    color:var(--muted);
-    font-size:12px;
-    font-weight:normal;
+.header {
+    text-align: center;
+    margin-bottom: 25px;
 }
-
-/* ================= CATEGORY ================= */
-
-.category{
-    overflow:hidden;
 
-    margin-bottom:18px;
-
-    border-radius:16px;
-
-    background:rgba(16,23,34,.78);
-
-    border:1px solid var(--border);
+.header h1 {
+    font-size: 34px;
+    margin-bottom: 8px;
 }
 
-.category-header{
-    padding:17px 20px;
-
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-
-    background:rgba(255,255,255,.025);
+.header p {
+    color: #9da5b5;
+    font-size: 15px;
 }
 
-.category-header h2{
-    font-size:15px;
-}
+/* Статистика */
 
-.category-header span{
-    color:var(--muted);
-    font-size:12px;
+.stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-bottom: 20px;
 }
 
-/* ================= FORUM ================= */
-
-.forum{
-    min-height:78px;
-
-    padding:12px 20px;
-
-    display:grid;
-
-    grid-template-columns:
-        52px
-        1fr
-        90px
-        90px
-        220px;
-
-    gap:15px;
-
-    align-items:center;
-
-    border-top:1px solid var(--border);
-
-    cursor:pointer;
-
-    transition:.2s;
+.stat {
+    background: rgba(20, 24, 36, 0.9);
+    border: 1px solid #252c3d;
+    border-radius: 16px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,.2);
 }
 
-.forum:hover{
-    background:rgba(57,124,255,.045);
+.stat-title {
+    color: #8f98aa;
+    font-size: 14px;
+    margin-bottom: 8px;
 }
-
-.forum-icon{
-    width:44px;
-    height:44px;
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    border-radius:12px;
 
-    background:
-        linear-gradient(
-            135deg,
-            rgba(57,124,255,.16),
-            rgba(118,87,255,.15)
-        );
-
-    color:var(--blue-light);
-
-    font-size:19px;
+.stat-value {
+    font-size: 27px;
+    font-weight: bold;
 }
 
-.forum-info h3{
-    font-size:14px;
-    margin-bottom:5px;
-}
+/* Карточка */
 
-.forum-info p{
-    color:var(--muted);
-    font-size:12px;
+.card {
+    background: rgba(16, 19, 29, 0.95);
+    border: 1px solid #252c3d;
+    border-radius: 18px;
+    padding: 22px;
+    margin-bottom: 20px;
+    box-shadow: 0 15px 40px rgba(0,0,0,.25);
 }
 
-.stat{
-    text-align:center;
-
-    color:var(--muted);
-
-    font-size:12px;
+.card h2 {
+    margin-bottom: 18px;
+    font-size: 21px;
 }
-
-.stat strong{
-    display:block;
 
-    color:white;
+/* Форма */
 
-    font-size:14px;
-
-    margin-bottom:3px;
-}
-
-.last{
-    color:var(--muted);
-    font-size:12px;
+.form {
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
+    gap: 12px;
 }
 
-.last strong{
-    display:block;
-
-    color:#dce3f0;
-
-    margin-bottom:4px;
+input {
+    width: 100%;
+    padding: 14px 15px;
+    background: #0d111a;
+    border: 1px solid #30384b;
+    border-radius: 11px;
+    color: white;
+    outline: none;
+    font-size: 15px;
 }
 
-.last span{
-    color:#69758c;
+input:focus {
+    border-color: #6c63ff;
+    box-shadow: 0 0 0 3px rgba(108,99,255,.12);
 }
-
-/* ================= SIDEBAR ================= */
 
-.sidebar-box{
-    overflow:hidden;
-
-    margin-bottom:18px;
-
-    border-radius:16px;
-
-    background:rgba(16,23,34,.78);
-
-    border:1px solid var(--border);
+button {
+    border: none;
+    cursor: pointer;
+    border-radius: 11px;
+    padding: 13px 18px;
+    font-size: 14px;
+    font-weight: bold;
+    transition: .2s;
 }
-
-.sidebar-title{
-    padding:17px 18px;
-
-    border-bottom:1px solid var(--border);
 
-    font-size:14px;
-    font-weight:700;
+button:hover {
+    transform: translateY(-1px);
 }
 
-.stats{
-    padding:18px;
-
-    display:grid;
-
-    grid-template-columns:
-        repeat(3,1fr);
-
-    gap:9px;
+.add-btn {
+    background: linear-gradient(135deg, #5965ff, #884cff);
+    color: white;
 }
 
-.stat-card{
-    padding:15px 5px;
+/* Панель */
 
-    text-align:center;
-
-    border-radius:12px;
-
-    background:rgba(255,255,255,.035);
+.toolbar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
 }
-
-.stat-card strong{
-    display:block;
 
-    font-size:19px;
-
-    margin-bottom:5px;
+.search {
+    flex: 1;
+    min-width: 200px;
 }
 
-.stat-card span{
-    color:var(--muted);
-
-    font-size:10px;
+.clear-btn {
+    background: #351b22;
+    color: #ff8f9c;
+    border: 1px solid #67303a;
 }
 
-.online{
-    padding:18px;
-}
+/* Таблица */
 
-.online-number{
-    font-size:28px;
-    font-weight:800;
+.table-wrap {
+    overflow-x: auto;
 }
 
-.online-number span{
-    color:var(--green);
+table {
+    width: 100%;
+    border-collapse: collapse;
 }
 
-.online p{
-    color:var(--muted);
-    font-size:12px;
-    margin-top:4px;
+th {
+    color: #8e98aa;
+    text-align: left;
+    font-size: 13px;
+    padding: 13px 10px;
+    border-bottom: 1px solid #292f3e;
 }
 
-.users{
-    padding:0 18px 18px;
+td {
+    padding: 15px 10px;
+    border-bottom: 1px solid #202634;
+    font-size: 14px;
 }
-
-.user{
-    display:flex;
-    align-items:center;
-
-    gap:10px;
-
-    padding:8px 0;
 
-    color:#c7cfdd;
-
-    font-size:13px;
+tr:last-child td {
+    border-bottom: none;
 }
-
-.avatar{
-    width:30px;
-    height:30px;
-
-    border-radius:9px;
 
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    background:
-        linear-gradient(
-            135deg,
-            var(--blue),
-            var(--purple)
-        );
-
-    font-size:12px;
-    font-weight:bold;
+.amount {
+    font-weight: bold;
+    color: #72e6a3;
 }
-
-.dot{
-    width:7px;
-    height:7px;
 
-    margin-left:auto;
-
-    border-radius:50%;
-
-    background:var(--green);
-
-    box-shadow:
-        0 0 8px rgba(53,208,127,.5);
+.actions {
+    display: flex;
+    gap: 7px;
 }
-
-/* ================= FOOTER ================= */
-
-footer{
-    padding:35px 20px;
-
-    border-top:1px solid var(--border);
 
-    background:rgba(5,8,13,.8);
+.edit-btn {
+    background: #252b40;
+    color: #aeb7ff;
+    padding: 8px 11px;
 }
 
-.footer{
-    max-width:1250px;
-    margin:auto;
-
-    display:flex;
-    justify-content:space-between;
-
-    color:#68748a;
-
-    font-size:12px;
+.delete-btn {
+    background: #351b22;
+    color: #ff8997;
+    padding: 8px 11px;
 }
 
-.footer strong{
-    color:white;
+.empty {
+    text-align: center;
+    padding: 35px 10px;
+    color: #747d90;
 }
-
-/* ================= MODAL ================= */
-
-.modal{
-    position:fixed;
-
-    inset:0;
 
-    z-index:5000;
+/* Модальное окно */
 
-    display:none;
-
-    align-items:center;
-    justify-content:center;
-
-    padding:20px;
-
-    background:rgba(0,0,0,.75);
-
-    backdrop-filter:blur(9px);
-}
-
-.modal.show{
-    display:flex;
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.72);
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 100;
 }
 
-.modal-box{
-    width:420px;
-    max-width:100%;
-
-    padding:28px;
-
-    border-radius:18px;
-
-    background:#101722;
-
-    border:1px solid var(--border);
-
-    box-shadow:
-        0 30px 80px rgba(0,0,0,.5);
+.modal.active {
+    display: flex;
 }
-
-.close{
-    float:right;
 
-    color:var(--muted);
-
-    font-size:23px;
-
-    cursor:pointer;
+.modal-box {
+    width: 100%;
+    max-width: 450px;
+    background: #121620;
+    border: 1px solid #30384b;
+    border-radius: 18px;
+    padding: 25px;
+    box-shadow: 0 25px 70px rgba(0,0,0,.5);
 }
 
-.modal-box h2{
-    margin-bottom:7px;
+.modal-box h2 {
+    margin-bottom: 18px;
 }
-
-.modal-box p{
-    color:var(--muted);
 
-    font-size:13px;
-
-    margin-bottom:20px;
+.modal-box input {
+    margin-bottom: 12px;
 }
-
-.modal-box input{
-    width:100%;
-
-    padding:13px;
 
-    margin-bottom:10px;
-
-    border-radius:9px;
-
-    outline:none;
-
-    color:white;
-
-    background:#090e17;
-
-    border:1px solid var(--border);
+.modal-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
 }
 
-.modal-box input:focus{
-    border-color:rgba(57,124,255,.5);
+.save-btn {
+    background: #5865f2;
+    color: white;
 }
 
-.modal-box button{
-    width:100%;
-    margin-top:8px;
+.cancel-btn {
+    background: #292f3d;
+    color: #ccd2df;
 }
-
-/* ================= MOBILE ================= */
 
-@media(max-width:900px){
+/* Адаптив */
 
-    nav{
-        display:none;
+@media (max-width: 700px) {
+    body {
+        padding: 12px;
     }
 
-    .layout{
-        grid-template-columns:1fr;
+    .stats {
+        grid-template-columns: 1fr;
     }
 
-    .forum{
-        grid-template-columns:48px 1fr;
+    .form {
+        grid-template-columns: 1fr;
     }
 
-    .stat,
-    .last{
-        display:none;
+    .header h1 {
+        font-size: 26px;
     }
 
-    .hero-box{
-        padding:32px 25px;
+    .card {
+        padding: 16px;
     }
 
-    .hero h1{
-        font-size:32px;
-    }
-
-    .login{
-        display:none;
-    }
-}
-
-@media(max-width:500px){
-
-    .header{
-        padding:0 12px;
-    }
-
-    .logo{
-        font-size:19px;
-    }
-
-    .logo-icon{
-        width:37px;
-        height:37px;
-    }
-
-    .hero{
-        margin-top:20px;
-    }
-
-    .hero-box{
-        padding:27px 20px;
-    }
-
-    .hero h1{
-        font-size:27px;
-    }
-
-    .container{
-        padding-left:12px;
-        padding-right:12px;
-    }
-
-    .footer{
-        flex-direction:column;
-        gap:10px;
+    th,
+    td {
+        white-space: nowrap;
     }
 }
 </style>
@@ -758,1032 +293,496 @@ footer{
 
 <body>
 
-<!-- HEADER -->
-
-<header>
-
-<div class="header">
-
-    <div class="logo">
-
-        <div class="logo-icon">
-            K
-        </div>
-
-        <span>Kannet</span>
-
-    </div>
-
-
-    <nav>
-
-        <a href="#" class="active">
-            Главная
-        </a>
-
-        <a href="#forum">
-            Форум
-        </a>
-
-        <a href="#news">
-            Новости
-        </a>
-
-        <a href="#members">
-            Участники
-        </a>
-
-    </nav>
-
-
-    <div class="buttons">
-
-        <button
-            class="btn login"
-            onclick="openModal('login')">
-
-            Войти
-
-        </button>
-
-        <button
-            class="btn register"
-            onclick="openModal('register')">
-
-            Регистрация
-
-        </button>
-
-    </div>
-
-</div>
-
-</header>
-
-
-<!-- HERO -->
-
-<section class="hero">
-
-<div class="hero-box">
-
-    <h1>
-        Добро пожаловать на
-        <span>Kannet</span>
-    </h1>
-
-    <p>
-        Добро пожаловать на официальный форум Kannet.
-        Общайтесь с другими участниками, создавайте темы,
-        следите за новостями и принимайте участие в жизни проекта.
-    </p>
-
-
-    <div class="hero-buttons">
-
-        <button
-            class="btn register"
-            onclick="scrollForum()">
-
-            Перейти на форум
-
-        </button>
-
-        <button
-            class="btn login"
-            onclick="openModal('login')">
-
-            Войти в аккаунт
-
-        </button>
-
-    </div>
-
-</div>
-
-</section>
-
-
-<!-- CONTENT -->
-
 <div class="container">
 
-
-<!-- SEARCH -->
-
-<div class="search">
-
-<input
-    id="search"
-    type="text"
-    placeholder="🔎 Поиск по форуму..."
-    onkeyup="searchForum()">
-
-</div>
-
-
-<div class="layout">
-
-
-<!-- MAIN -->
-
-<main id="forum">
-
-
-<div class="section-title">
-
-    <span>
-        Форумы
-    </span>
-
-    <small>
-        Разделы Kannet
-    </small>
-
-</div>
-
-
-<!-- CATEGORY -->
-
-<div class="category">
-
-<div class="category-header">
-
-    <h2>
-        📢 Kannet — Основное
-    </h2>
-
-    <span>
-        Официальная информация
-    </span>
-
-</div>
-
-
-<div class="forum">
-
-    <div class="forum-icon">
-        📣
+    <div class="header">
+        <h1>🎒 Metro Royale</h1>
+        <p>Учёт выноса с каждой катки PUBG</p>
     </div>
 
-    <div class="forum-info">
+    <!-- Статистика -->
 
-        <h3>
-            Новости проекта
-        </h3>
+    <div class="stats">
 
-        <p>
-            Новости, обновления и важные объявления Kannet
-        </p>
+        <div class="stat">
+            <div class="stat-title">💰 Общий вынос</div>
+            <div class="stat-value" id="totalAmount">0</div>
+        </div>
+
+        <div class="stat">
+            <div class="stat-title">🎮 Всего каток</div>
+            <div class="stat-value" id="gamesCount">0</div>
+        </div>
+
+        <div class="stat">
+            <div class="stat-title">📈 Средний вынос</div>
+            <div class="stat-value" id="averageAmount">0</div>
+        </div>
 
     </div>
 
-    <div class="stat">
-        <strong>24</strong>
-        Темы
-    </div>
+    <!-- Добавление -->
 
-    <div class="stat">
-        <strong>186</strong>
-        Сообщения
-    </div>
+    <div class="card">
 
-    <div class="last">
+        <h2>➕ Добавить катку</h2>
 
-        <strong>
-            Обновление Kannet
-        </strong>
+        <div class="form">
 
-        сегодня в 18:42
+            <input
+                type="number"
+                id="amountInput"
+                placeholder="Вынос за катку"
+                min="0"
+                step="1"
+            >
 
-        <br>
+            <input
+                type="text"
+                id="noteInput"
+                placeholder="Комментарий, например: Хорошая катка"
+            >
 
-        <span>
-            Kirill
-        </span>
+            <button class="add-btn" onclick="addGame()">
+                Добавить
+            </button>
 
-    </div>
-
-</div>
-
-
-<div class="forum">
-
-    <div class="forum-icon">
-        📌
-    </div>
-
-    <div class="forum-info">
-
-        <h3>
-            Важная информация
-        </h3>
-
-        <p>
-            Правила, объявления и документация
-        </p>
+        </div>
 
     </div>
 
-    <div class="stat">
-        <strong>12</strong>
-        Темы
-    </div>
+    <!-- История -->
 
-    <div class="stat">
-        <strong>94</strong>
-        Сообщения
-    </div>
+    <div class="card">
 
-    <div class="last">
+        <h2>📋 История каток</h2>
 
-        <strong>
-            Правила форума
-        </strong>
+        <div class="toolbar">
 
-        вчера в 21:10
+            <input
+                class="search"
+                id="searchInput"
+                type="text"
+                placeholder="🔎 Поиск по записям..."
+                oninput="renderGames()"
+            >
 
-        <br>
+            <button class="clear-btn" onclick="clearAll()">
+                🗑 Очистить всё
+            </button>
 
-        <span>
-            Kannet Team
-        </span>
+        </div>
 
-    </div>
+        <div class="table-wrap">
 
-</div>
+            <table>
 
-</div>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Дата</th>
+                        <th>Вынос</th>
+                        <th>Комментарий</th>
+                        <th>Действия</th>
+                    </tr>
+                </thead>
 
+                <tbody id="gamesTable"></tbody>
 
-<!-- GAME -->
+            </table>
 
-<div class="category">
-
-<div class="category-header">
-
-    <h2>
-        🎮 Игровые разделы
-    </h2>
-
-    <span>
-        Общение игроков
-    </span>
-
-</div>
-
-
-<div class="forum">
-
-    <div class="forum-icon">
-        🎮
-    </div>
-
-    <div class="forum-info">
-
-        <h3>
-            Общий раздел
-        </h3>
-
-        <p>
-            Общение, вопросы и обсуждение проекта
-        </p>
-
-    </div>
-
-    <div class="stat">
-        <strong>138</strong>
-        Темы
-    </div>
-
-    <div class="stat">
-        <strong>1.4K</strong>
-        Сообщения
-    </div>
-
-    <div class="last">
-
-        <strong>
-            Кто сегодня играет?
-        </strong>
-
-        5 минут назад
-
-        <br>
-
-        <span>
-            Alex
-        </span>
+        </div>
 
     </div>
 
 </div>
 
 
-<div class="forum">
+<!-- Окно редактирования -->
 
-    <div class="forum-icon">
-        🏆
-    </div>
+<div class="modal" id="editModal">
 
-    <div class="forum-info">
+    <div class="modal-box">
 
-        <h3>
-            Конкурсы и мероприятия
-        </h3>
+        <h2>✏️ Изменить катку</h2>
 
-        <p>
-            Конкурсы, события и различные мероприятия
-        </p>
+        <input
+            type="number"
+            id="editAmount"
+            placeholder="Вынос"
+            min="0"
+        >
 
-    </div>
+        <input
+            type="text"
+            id="editNote"
+            placeholder="Комментарий"
+        >
 
-    <div class="stat">
-        <strong>47</strong>
-        Темы
-    </div>
+        <div class="modal-buttons">
 
-    <div class="stat">
-        <strong>521</strong>
-        Сообщения
-    </div>
+            <button class="cancel-btn" onclick="closeModal()">
+                Отмена
+            </button>
 
-    <div class="last">
+            <button class="save-btn" onclick="saveEdit()">
+                Сохранить
+            </button>
 
-        <strong>
-            Новый конкурс!
-        </strong>
-
-        32 минуты назад
-
-        <br>
-
-        <span>
-            Kannet Team
-        </span>
+        </div>
 
     </div>
-
-</div>
-
-
-<div class="forum">
-
-    <div class="forum-icon">
-        💬
-    </div>
-
-    <div class="forum-info">
-
-        <h3>
-            Флудилка
-        </h3>
-
-        <p>
-            Свободное общение обо всём
-        </p>
-
-    </div>
-
-    <div class="stat">
-        <strong>326</strong>
-        Темы
-    </div>
-
-    <div class="stat">
-        <strong>5.7K</strong>
-        Сообщения
-    </div>
-
-    <div class="last">
-
-        <strong>
-            Всем привет 👋
-        </strong>
-
-        2 минуты назад
-
-        <br>
-
-        <span>
-            Max
-        </span>
-
-    </div>
-
-</div>
-
-</div>
-
-
-<!-- SUPPORT -->
-
-<div class="category">
-
-<div class="category-header">
-
-    <h2>
-        🛠 Поддержка
-    </h2>
-
-    <span>
-        Помощь пользователям
-    </span>
-
-</div>
-
-
-<div class="forum">
-
-    <div class="forum-icon">
-        ❓
-    </div>
-
-    <div class="forum-info">
-
-        <h3>
-            Вопросы и помощь
-        </h3>
-
-        <p>
-            Получите помощь от администрации и игроков
-        </p>
-
-    </div>
-
-    <div class="stat">
-        <strong>71</strong>
-        Темы
-    </div>
-
-    <div class="stat">
-        <strong>338</strong>
-        Сообщения
-    </div>
-
-    <div class="last">
-
-        <strong>
-            Нужна помощь
-        </strong>
-
-        1 час назад
-
-        <br>
-
-        <span>
-            Player
-        </span>
-
-    </div>
-
-</div>
-
-
-<div class="forum">
-
-    <div class="forum-icon">
-        ⚠️
-    </div>
-
-    <div class="forum-info">
-
-        <h3>
-            Жалобы
-        </h3>
-
-        <p>
-            Жалобы и обращения к администрации
-        </p>
-
-    </div>
-
-    <div class="stat">
-        <strong>29</strong>
-        Темы
-    </div>
-
-    <div class="stat">
-        <strong>115</strong>
-        Сообщения
-    </div>
-
-    <div class="last">
-
-        <strong>
-            Жалоба #184
-        </strong>
-
-        3 часа назад
-
-        <br>
-
-        <span>
-            Moderator
-        </span>
-
-    </div>
-
-</div>
-
-</div>
-
-
-<!-- ADMIN -->
-
-<div class="category" id="news">
-
-<div class="category-header">
-
-    <h2>
-        👑 Администрация
-    </h2>
-
-    <span>
-        Раздел команды
-    </span>
-
-</div>
-
-
-<div class="forum">
-
-    <div class="forum-icon">
-        🛡️
-    </div>
-
-    <div class="forum-info">
-
-        <h3>
-            Администрация Kannet
-        </h3>
-
-        <p>
-            Работа команды проекта
-        </p>
-
-    </div>
-
-    <div class="stat">
-        <strong>16</strong>
-        Темы
-    </div>
-
-    <div class="stat">
-        <strong>83</strong>
-        Сообщения
-    </div>
-
-    <div class="last">
-
-        <strong>
-            Набор администрации
-        </strong>
-
-        сегодня в 12:30
-
-        <br>
-
-        <span>
-            Administrator
-        </span>
-
-    </div>
-
-</div>
-
-</div>
-
-</main>
-
-
-<!-- SIDEBAR -->
-
-<aside>
-
-
-<div class="sidebar-box">
-
-<div class="sidebar-title">
-    📊 Статистика форума
-</div>
-
-<div class="stats">
-
-<div class="stat-card">
-
-    <strong>
-        653
-    </strong>
-
-    <span>
-        Тем
-    </span>
-
-</div>
-
-<div class="stat-card">
-
-    <strong>
-        8.4K
-    </strong>
-
-    <span>
-        Сообщений
-    </span>
-
-</div>
-
-<div class="stat-card">
-
-    <strong>
-        1.2K
-    </strong>
-
-    <span>
-        Участников
-    </span>
-
-</div>
-
-</div>
-
-</div>
-
-
-<div class="sidebar-box">
-
-<div class="sidebar-title">
-    🟢 Сейчас онлайн
-</div>
-
-<div class="online">
-
-<div class="online-number">
-
-    <span>
-        47
-    </span>
-
-    пользователей
-
-</div>
-
-<p>
-    Сейчас находятся на форуме
-</p>
-
-</div>
-
-
-<div class="users">
-
-<div class="user">
-
-    <div class="avatar">
-        K
-    </div>
-
-    Kirill
-
-    <div class="dot"></div>
-
-</div>
-
-
-<div class="user">
-
-    <div class="avatar">
-        A
-    </div>
-
-    Alex
-
-    <div class="dot"></div>
-
-</div>
-
-
-<div class="user">
-
-    <div class="avatar">
-        M
-    </div>
-
-    Max
-
-    <div class="dot"></div>
-
-</div>
-
-
-<div class="user">
-
-    <div class="avatar">
-        D
-    </div>
-
-    Developer
-
-    <div class="dot"></div>
-
-</div>
-
-</div>
-
-</div>
-
-
-<div class="sidebar-box" id="members">
-
-<div class="sidebar-title">
-    🔥 Последние темы
-</div>
-
-<div class="users">
-
-<div class="user">
-
-    <div class="avatar">
-        1
-    </div>
-
-    Обновление Kannet
-
-</div>
-
-<div class="user">
-
-    <div class="avatar">
-        2
-    </div>
-
-    Набор администрации
-
-</div>
-
-<div class="user">
-
-    <div class="avatar">
-        3
-    </div>
-
-    Кто сегодня играет?
-
-</div>
-
-<div class="user">
-
-    <div class="avatar">
-        4
-    </div>
-
-    Новый конкурс
-
-</div>
-
-</div>
-
-</div>
-
-</aside>
-
-</div>
-
-</div>
-
-
-<!-- FOOTER -->
-
-<footer>
-
-<div class="footer">
-
-<div>
-
-    <strong>
-        Kannet
-    </strong>
-
-    © 2026 Все права защищены.
-
-</div>
-
-<div>
-    Сделано для сообщества Kannet
-</div>
-
-</div>
-
-</footer>
-
-
-<!-- LOGIN -->
-
-<div class="modal" id="loginModal">
-
-<div class="modal-box">
-
-<span
-    class="close"
-    onclick="closeModal()">
-    ×
-</span>
-
-<h2>
-    Вход
-</h2>
-
-<p>
-    Войдите в свой аккаунт Kannet
-</p>
-
-<input
-    type="text"
-    placeholder="Логин">
-
-<input
-    type="password"
-    placeholder="Пароль">
-
-<button
-    class="btn register">
-
-    Войти
-
-</button>
-
-</div>
-
-</div>
-
-
-<!-- REGISTER -->
-
-<div class="modal" id="registerModal">
-
-<div class="modal-box">
-
-<span
-    class="close"
-    onclick="closeModal()">
-    ×
-</span>
-
-<h2>
-    Регистрация
-</h2>
-
-<p>
-    Создайте аккаунт Kannet
-</p>
-
-<input
-    type="text"
-    placeholder="Имя пользователя">
-
-<input
-    type="email"
-    placeholder="Email">
-
-<input
-    type="password"
-    placeholder="Пароль">
-
-<button
-    class="btn register">
-
-    Зарегистрироваться
-
-</button>
-
-</div>
 
 </div>
 
 
 <script>
 
-/* ПЕРЕХОД К ФОРУМУ */
+let games = JSON.parse(localStorage.getItem("metroRoyaleGames")) || [];
 
-function scrollForum(){
+let editingId = null;
 
-    document
-        .getElementById("forum")
-        .scrollIntoView({
-            behavior:"smooth"
-        });
 
+/* Сохранение */
+
+function saveData() {
+    localStorage.setItem(
+        "metroRoyaleGames",
+        JSON.stringify(games)
+    );
 }
 
 
-/* ОКНА */
+/* Добавление катки */
 
-function openModal(type){
+function addGame() {
 
-    closeModal();
+    const amountInput = document.getElementById("amountInput");
+    const noteInput = document.getElementById("noteInput");
 
-    if(type === "login"){
+    const amount = Number(amountInput.value);
+    const note = noteInput.value.trim();
 
-        document
-            .getElementById("loginModal")
-            .classList.add("show");
-
+    if (!amountInput.value || amount < 0) {
+        alert("Введите сумму выноса.");
+        return;
     }
 
-    if(type === "register"){
+    const game = {
+        id: Date.now(),
+        amount: amount,
+        note: note || "Без комментария",
+        date: new Date().toLocaleString("ru-RU")
+    };
 
-        document
-            .getElementById("registerModal")
-            .classList.add("show");
+    games.unshift(game);
 
-    }
+    saveData();
 
+    amountInput.value = "";
+    noteInput.value = "";
+
+    renderGames();
 }
 
 
-function closeModal(){
+/* Отображение */
 
-    document
-        .getElementById("loginModal")
-        .classList.remove("show");
+function renderGames() {
 
-    document
-        .getElementById("registerModal")
-        .classList.remove("show");
-
-}
-
-
-/* ЗАКРЫТИЕ ПО ФОНУ */
-
-document
-.querySelectorAll(".modal")
-.forEach(function(modal){
-
-    modal.addEventListener("click",function(e){
-
-        if(e.target === modal){
-
-            closeModal();
-
-        }
-
-    });
-
-});
-
-
-/* ESC */
-
-document.addEventListener("keydown",function(e){
-
-    if(e.key === "Escape"){
-
-        closeModal();
-
-    }
-
-});
-
-
-/* ПОИСК */
-
-function searchForum(){
-
-    let input =
-        document
-        .getElementById("search")
+    const table = document.getElementById("gamesTable");
+    const search = document
+        .getElementById("searchInput")
         .value
         .toLowerCase();
 
-    let forums =
-        document
-        .querySelectorAll(".forum");
+    table.innerHTML = "";
 
-    forums.forEach(function(forum){
+    let filteredGames = games.filter(game => {
 
-        let text =
-            forum
-            .innerText
-            .toLowerCase();
+        return (
+            game.note.toLowerCase().includes(search) ||
+            String(game.amount).includes(search) ||
+            game.date.toLowerCase().includes(search)
+        );
 
-        if(text.includes(input)){
+    });
 
-            forum.style.display="grid";
+    if (filteredGames.length === 0) {
 
-        }else{
+        table.innerHTML = `
+            <tr>
+                <td colspan="5" class="empty">
+                    Пока нет записей
+                </td>
+            </tr>
+        `;
 
-            forum.style.display="none";
+    } else {
 
+        filteredGames.forEach((game, index) => {
+
+            const row = document.createElement("tr");
+
+            row.innerHTML = `
+
+                <td>${index + 1}</td>
+
+                <td>${game.date}</td>
+
+                <td class="amount">
+                    ${formatNumber(game.amount)}
+                </td>
+
+                <td>
+                    ${escapeHTML(game.note)}
+                </td>
+
+                <td>
+
+                    <div class="actions">
+
+                        <button
+                            class="edit-btn"
+                            onclick="openEdit(${game.id})"
+                        >
+                            ✏️
+                        </button>
+
+                        <button
+                            class="delete-btn"
+                            onclick="deleteGame(${game.id})"
+                        >
+                            🗑
+                        </button>
+
+                    </div>
+
+                </td>
+            `;
+
+            table.appendChild(row);
+
+        });
+
+    }
+
+    updateStats();
+}
+
+
+/* Статистика */
+
+function updateStats() {
+
+    const total = games.reduce(
+        (sum, game) => sum + Number(game.amount),
+        0
+    );
+
+    const count = games.length;
+
+    const average = count > 0
+        ? total / count
+        : 0;
+
+    document.getElementById("totalAmount").textContent =
+        formatNumber(total);
+
+    document.getElementById("gamesCount").textContent =
+        count;
+
+    document.getElementById("averageAmount").textContent =
+        formatNumber(Math.round(average));
+}
+
+
+/* Форматирование числа */
+
+function formatNumber(number) {
+
+    return Number(number).toLocaleString("ru-RU");
+
+}
+
+
+/* Удаление */
+
+function deleteGame(id) {
+
+    const game = games.find(g => g.id === id);
+
+    if (!game) return;
+
+    if (
+        !confirm(
+            `Удалить катку с выносом ${formatNumber(game.amount)}?`
+        )
+    ) {
+        return;
+    }
+
+    games = games.filter(g => g.id !== id);
+
+    saveData();
+
+    renderGames();
+}
+
+
+/* Открытие редактирования */
+
+function openEdit(id) {
+
+    const game = games.find(g => g.id === id);
+
+    if (!game) return;
+
+    editingId = id;
+
+    document.getElementById("editAmount").value =
+        game.amount;
+
+    document.getElementById("editNote").value =
+        game.note;
+
+    document
+        .getElementById("editModal")
+        .classList.add("active");
+}
+
+
+/* Сохранение редактирования */
+
+function saveEdit() {
+
+    const amount =
+        Number(document.getElementById("editAmount").value);
+
+    const note =
+        document.getElementById("editNote").value.trim();
+
+    if (!amount || amount < 0) {
+
+        alert("Введите сумму выноса.");
+
+        return;
+    }
+
+    const game = games.find(
+        g => g.id === editingId
+    );
+
+    if (!game) return;
+
+    game.amount = amount;
+
+    game.note =
+        note || "Без комментария";
+
+    saveData();
+
+    closeModal();
+
+    renderGames();
+}
+
+
+/* Закрытие окна */
+
+function closeModal() {
+
+    editingId = null;
+
+    document
+        .getElementById("editModal")
+        .classList.remove("active");
+}
+
+
+/* Очистить всё */
+
+function clearAll() {
+
+    if (games.length === 0) {
+
+        alert("Записей пока нет.");
+
+        return;
+    }
+
+    if (
+        !confirm(
+            "Точно удалить ВСЕ записи?"
+        )
+    ) {
+        return;
+    }
+
+    games = [];
+
+    saveData();
+
+    renderGames();
+}
+
+
+/* Защита текста */
+
+function escapeHTML(text) {
+
+    return String(text)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+}
+
+
+/* Закрытие модального окна */
+
+document
+    .getElementById("editModal")
+    .addEventListener("click", function(e) {
+
+        if (e.target === this) {
+            closeModal();
         }
 
     });
 
-}
+
+/* Enter для добавления */
+
+document
+    .getElementById("amountInput")
+    .addEventListener("keydown", function(e) {
+
+        if (e.key === "Enter") {
+            addGame();
+        }
+
+    });
+
+
+document
+    .getElementById("noteInput")
+    .addEventListener("keydown", function(e) {
+
+        if (e.key === "Enter") {
+            addGame();
+        }
+
+    });
+
+
+/* Первый запуск */
+
+renderGames();
 
 </script>
 
 </body>
 </html>
-```
