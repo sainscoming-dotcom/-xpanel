@@ -1,196 +1,479 @@
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Drey Online — Logs</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PPS Help Amazing — Store</title>
 <style>
 :root {
-  color-scheme: light dark;
-  --site-primary: #2563eb;
-  --site-on-primary: #ffffff;
-  --site-secondary: #111c31;
-  --site-on-secondary: #edf3ff;
-  --site-background: #080d18;
-  --site-on-background: #e8eefb;
-  --site-font-body: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --site-font-heading: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --site-heading-scale: 1;
-  --site-spacing-scale: 1;
-  --site-radius-scale: 1;
-  --site-decoration-opacity: 1;
-  --surface: light-dark(#ffffff, #0d1525);
-  --surface-2: light-dark(#f5f7fc, #111d31);
-  --surface-3: light-dark(#edf2fb, #17243b);
-  --text: light-dark(#15223a, #e8eefb);
-  --muted: light-dark(#65738c, #8ea0bd);
-  --border: light-dark(#dce4f0, #22314a);
-  --green: #34d399;
-  --amber: #fbbf24;
-  --red: #fb7185;
+  --bg:#0b0b11;
+  --panel:#12121c;
+  --panel2:#191927;
+  --border:#29293b;
+  --text:#f3f3fa;
+  --muted:#9999b1;
+  --purple:#8957ff;
+  --blue:#386bff;
+  --green:#43d9a3;
 }
-* { box-sizing: border-box; }
-body { margin: 0; font-family: var(--site-font-body); background: var(--site-background); color: var(--site-on-background); }
-button, input, select { font: inherit; }
-button { cursor: pointer; }
-#app { min-height: 100vh; width: 100%; background-color: var(--site-background); color: var(--site-on-background); border-radius: 0; }
-.shell { display: grid; grid-template-columns: 248px minmax(0, 1fr); min-height: 100vh; }
-.sidebar { background: var(--site-secondary); color: var(--site-on-secondary); border-right: 1px solid rgba(143,169,212,.15); padding: calc(22px * var(--site-spacing-scale)) 15px; display: flex; flex-direction: column; gap: 25px; }
-.brand { display: flex; align-items: center; gap: 11px; padding: 0 9px; }
-.brand-mark { display: grid; place-items: center; width: 40px; height: 40px; border-radius: calc(12px * var(--site-radius-scale)); background: var(--site-primary); color: white; font-weight: 900; letter-spacing: -1px; box-shadow: 0 8px 25px rgba(37,99,235,.28); }
-.brand-name { font-weight: 800; letter-spacing: .2px; }
-.brand-sub { color: #8fa5c8; font-size: 11px; margin-top: 3px; letter-spacing: 1.5px; }
-.nav-label { color: #7185a7; font-size: 10px; font-weight: 800; letter-spacing: 1.5px; padding: 0 11px; margin-bottom: 7px; }
-.nav { display: grid; gap: 5px; }
-.nav button { border: 0; background: transparent; color: #a9b8d1; text-align: left; padding: 11px 12px; border-radius: calc(10px * var(--site-radius-scale)); display: flex; align-items: center; gap: 12px; transition: .15s ease; }
-.nav button:hover { background: rgba(255,255,255,.06); color: white; }
-.nav button.active { background: #1c3e7b; color: white; box-shadow: inset 3px 0 #60a5fa; }
-.nav-icon { width: 19px; text-align: center; font-size: 16px; }
-.side-bottom { margin-top: auto; }
-.server-card { border: 1px solid #293a57; background: #101c30; border-radius: 13px; padding: 13px; }
-.server-line { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; }
-.online-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); box-shadow: 0 0 10px rgba(52,211,153,.6); }
-.server-muted { color: #8498b8; font-size: 11px; margin-top: 7px; }
-.main { min-width: 0; }
-.topbar { min-height: 76px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px 30px; background: var(--surface); }
-.crumb { color: var(--muted); font-size: 12px; }
-.crumb strong { color: var(--text); font-weight: 700; }
-.top-right { display: flex; align-items: center; gap: 14px; }
-.demo-tag { font-size: 10px; font-weight: 800; letter-spacing: .8px; color: #fcd34d; background: rgba(245,158,11,.12); border: 1px solid rgba(245,158,11,.25); border-radius: 99px; padding: 6px 9px; }
-.avatar { display: grid; place-items: center; width: 35px; height: 35px; border-radius: 50%; background: linear-gradient(135deg,#2563eb,#7c3aed); color: white; font-size: 12px; font-weight: 800; }
-.content { padding: 30px; max-width: 1600px; margin: 0 auto; }
-.heading-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 20px; margin-bottom: 25px; }
-h1 { font-family: var(--site-font-heading); font-size: calc(28px * var(--site-heading-scale)); letter-spacing: -.9px; margin: 0; }
-.subtitle { color: var(--muted); font-size: 13px; margin-top: 8px; line-height: 1.6; }
-.primary-btn { background: var(--site-primary); color: var(--site-on-primary); border: 1px solid transparent; padding: 10px 14px; border-radius: calc(9px * var(--site-radius-scale)); font-weight: 700; font-size: 12px; box-shadow: 0 6px 18px rgba(37,99,235,.17); }
-.primary-btn:hover { filter: brightness(1.1); }
-.ghost-btn { background: var(--surface); color: var(--text); border: 1px solid var(--border); padding: 9px 12px; border-radius: calc(9px * var(--site-radius-scale)); font-size: 12px; font-weight: 650; }
-.stats { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 14px; margin-bottom: 22px; }
-.stat { border: 1px solid var(--border); background: var(--surface); border-radius: calc(15px * var(--site-radius-scale)); padding: 18px; min-width: 0; }
-.stat-top { display: flex; justify-content: space-between; gap: 8px; align-items: center; color: var(--muted); font-size: 12px; }
-.stat-icon { display: grid; place-items: center; width: 33px; height: 33px; background: rgba(37,99,235,.12); color: #60a5fa; border-radius: 10px; font-size: 16px; }
-.stat-number { font-size: 27px; font-weight: 800; letter-spacing: -.7px; margin-top: 15px; }
-.stat-foot { font-size: 11px; color: var(--muted); margin-top: 5px; }
-.stat-foot .up { color: var(--green); }
-.panel { background: var(--surface); border: 1px solid var(--border); border-radius: calc(15px * var(--site-radius-scale)); overflow: hidden; }
-.panel-head { display: flex; justify-content: space-between; align-items: center; gap: 14px; padding: 19px 20px; border-bottom: 1px solid var(--border); }
-.panel-title { font-size: 14px; font-weight: 800; }
-.panel-note { font-size: 11px; color: var(--muted); margin-top: 5px; }
-.filters { padding: 15px 20px; display: flex; gap: 10px; flex-wrap: wrap; border-bottom: 1px solid var(--border); }
-.search-wrap { flex: 1 1 230px; position: relative; }
-.search-wrap span { position: absolute; left: 12px; top: 10px; color: var(--muted); }
-.search-wrap input { width: 100%; padding-left: 34px; }
-input, select { color: var(--text); background: var(--surface-2); border: 1px solid var(--border); border-radius: 9px; outline: none; padding: 10px 11px; font-size: 12px; min-height: 37px; }
-input:focus, select:focus { border-color: #3b82f6; box-shadow: 0 0 0 3px rgba(59,130,246,.12); }
-select { min-width: 135px; }
-.table-wrap { overflow-x: auto; }
-table { width: 100%; border-collapse: collapse; min-width: 760px; }
-th { text-align: left; color: var(--muted); font-size: 10px; letter-spacing: .9px; text-transform: uppercase; font-weight: 800; padding: 13px 18px; background: var(--surface-2); white-space: nowrap; }
-td { padding: 15px 18px; border-top: 1px solid var(--border); font-size: 12px; vertical-align: middle; }
-tbody tr { transition: background .12s; cursor: pointer; }
-tbody tr:hover { background: var(--surface-2); }
-.log-title { font-weight: 750; color: var(--text); }
-.log-sub { color: var(--muted); font-size: 10px; margin-top: 4px; }
-.player { display: flex; align-items: center; gap: 8px; white-space: nowrap; }
-.player-dot { display: grid; place-items: center; width: 27px; height: 27px; border-radius: 8px; background: var(--surface-3); color: #93c5fd; font-size: 10px; font-weight: 800; }
-.pill { display: inline-flex; align-items: center; border-radius: 99px; padding: 5px 8px; font-size: 10px; font-weight: 800; white-space: nowrap; }
-.pill.blue { background: rgba(59,130,246,.13); color: #60a5fa; }
-.pill.green { background: rgba(52,211,153,.12); color: var(--green); }
-.pill.orange { background: rgba(251,191,36,.12); color: var(--amber); }
-.pill.red { background: rgba(251,113,133,.12); color: var(--red); }
-.time { color: var(--muted); white-space: nowrap; font-variant-numeric: tabular-nums; }
-.row-action { color: #60a5fa; font-weight: 800; font-size: 17px; }
-.table-footer { display: flex; justify-content: space-between; align-items: center; padding: 14px 20px; border-top: 1px solid var(--border); color: var(--muted); font-size: 11px; gap: 10px; }
-.pager { display: flex; gap: 6px; }
-.pager button { background: var(--surface-2); color: var(--text); border: 1px solid var(--border); border-radius: 7px; width: 29px; height: 29px; }
-.pager button.current { background: var(--site-primary); border-color: var(--site-primary); color: white; }
-.empty { padding: 35px; text-align: center; color: var(--muted); font-size: 13px; }
-.footer-note { color: var(--muted); font-size: 11px; margin-top: 16px; line-height: 1.6; }
-.toast { position: fixed; bottom: 22px; right: 22px; background: var(--surface); color: var(--text); border: 1px solid var(--border); border-radius: 12px; padding: 13px 16px; box-shadow: 0 15px 45px rgba(0,0,0,.25); font-size: 12px; max-width: 340px; display: none; z-index: 10; }
-.modal-backdrop { position: fixed; inset: 0; background: rgba(3,8,18,.72); display: none; align-items: center; justify-content: center; padding: 18px; z-index: 20; }
-.modal { width: min(540px,100%); background: var(--surface); color: var(--text); border: 1px solid var(--border); border-radius: 16px; box-shadow: 0 24px 90px rgba(0,0,0,.4); }
-.modal-head { display: flex; justify-content: space-between; align-items: center; padding: 18px 20px; border-bottom: 1px solid var(--border); }
-.modal-head strong { font-size: 15px; }
-.close { border: 0; background: transparent; color: var(--muted); font-size: 22px; }
-.modal-body { padding: 20px; }
-.detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 13px; }
-.detail { background: var(--surface-2); border: 1px solid var(--border); border-radius: 10px; padding: 12px; min-width: 0; }
-.detail small { color: var(--muted); display: block; font-size: 10px; margin-bottom: 7px; }
-.detail div { font-size: 12px; font-weight: 700; overflow-wrap: anywhere; }
-.modal-desc { color: var(--muted); font-size: 12px; line-height: 1.7; margin-top: 16px; }
-@media (max-width: 1000px) { .stats { grid-template-columns: repeat(2,minmax(0,1fr)); } .content { padding: 22px; } .topbar { padding: 15px 22px; } }
-@media (max-width: 720px) { .shell { grid-template-columns: 1fr; } .sidebar { padding: 12px; gap: 12px; border-right: 0; border-bottom: 1px solid var(--border); } .brand { padding: 2px 5px; } .nav-label, .side-bottom { display: none; } .nav { display: flex; overflow-x: auto; padding-bottom: 3px; } .nav button { white-space: nowrap; padding: 9px 11px; } .topbar { min-height: 58px; padding: 12px 16px; } .content { padding: 18px 13px; } .heading-row { flex-direction: column; } .stats { gap: 9px; } .stat { padding: 13px; } .stat-number { font-size: 23px; } .panel-head { padding: 15px; } .filters { padding: 12px; } .search-wrap { flex-basis: 100%; } .detail-grid { grid-template-columns: 1fr; } }
-@media (prefers-color-scheme: light) { .sidebar { background: #111c31; color: #edf3ff; } }
+* { box-sizing:border-box }
+body {
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font:15px Arial, sans-serif;
+}
+button,input,textarea,select { font:inherit }
+button { cursor:pointer }
+button:focus-visible,input:focus-visible { outline:2px solid var(--purple) }
+a { color:inherit;text-decoration:none }
+header {
+  position:sticky;top:0;z-index:5;
+  background:#0d0d15ed;
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--border);
+}
+.top {
+  max-width:1250px;margin:auto;padding:17px 22px;
+  display:flex;align-items:center;gap:24px;flex-wrap:wrap;
+}
+.logo { font-size:20px;font-weight:900;letter-spacing:1px }
+.logo span { color:var(--purple) }
+nav { display:flex;gap:8px;flex:1;flex-wrap:wrap }
+nav button,.outline {
+  background:transparent;border:1px solid transparent;
+  color:var(--muted);padding:10px 12px;border-radius:9px;
+}
+nav button:hover,nav button.active,.outline:hover {
+  color:white;background:var(--panel2);border-color:var(--border);
+}
+.actions { display:flex;gap:8px;flex-wrap:wrap }
+.btn {
+  border:0;border-radius:9px;padding:11px 15px;
+  color:white;background:linear-gradient(110deg,var(--purple),var(--blue));
+  font-weight:700;
+}
+.btn:hover { filter:brightness(1.12) }
+.outline { border-color:var(--border);color:var(--text) }
+main { max-width:1200px;margin:auto;padding:26px 20px 60px }
+.hero {
+  border:1px solid #393054;border-radius:18px;padding:45px;
+  background:
+    radial-gradient(ellipse at 85% 5%,#49317b80,transparent 42%),
+    linear-gradient(120deg,#171321,#11111b 65%);
+  overflow:hidden;
+}
+.eyebrow { color:#bba3ff;font-size:12px;font-weight:800;letter-spacing:2px }
+h1 { font-size:clamp(32px,5vw,54px);line-height:1.08;margin:18px 0 }
+h1 span { color:#a88aff }
+p { line-height:1.65 }
+.muted { color:var(--muted) }
+.hero p { max-width:600px;color:#c2c0d2 }
+.hero-actions { display:flex;gap:12px;flex-wrap:wrap;margin-top:25px }
+.stats {
+  display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:22px
+}
+.stat,.panel,.product,.feature {
+  background:var(--panel);border:1px solid var(--border);border-radius:13px;
+}
+.stat { padding:17px }
+.stat b { display:block;font-size:21px;margin-bottom:6px }
+.stat small { color:var(--muted) }
+.section-head {
+  display:flex;align-items:center;justify-content:space-between;
+  gap:12px;flex-wrap:wrap;margin:38px 0 17px;
+}
+h2 { font-size:25px;margin:0 }
+.tools { display:flex;gap:10px;flex-wrap:wrap }
+input,textarea,select {
+  background:#0c0c14;color:white;border:1px solid var(--border);
+  border-radius:9px;padding:12px;width:100%;
+}
+.tools input { width:min(340px,100%) }
+.grid {
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;
+}
+.product { overflow:hidden;transition:.18s }
+.product:hover { transform:translateY(-3px);border-color:#615087 }
+.art {
+  height:145px;display:grid;place-items:center;font-size:47px;
+  background:radial-gradient(ellipse at 50% 0%,#6543a54d,transparent 70%),#171522;
+  border-bottom:1px solid var(--border);
+}
+.product-body { padding:17px }
+.tag {
+  display:inline-block;font-size:11px;color:#c5b1ff;
+  background:#7650b524;border:1px solid #6143a8;
+  padding:5px 8px;border-radius:6px;margin-bottom:10px;
+}
+.product h3 { margin:4px 0 8px;font-size:18px }
+.product p { color:var(--muted);font-size:13px;min-height:42px }
+.product-bottom { display:flex;align-items:center;justify-content:space-between;gap:10px }
+.price { font-weight:900;font-size:19px }
+.smallbtn { padding:9px 11px;font-size:13px }
+.feature-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:13px }
+.feature { padding:20px }
+.feature .emoji { font-size:25px }
+.feature h3 { margin-bottom:6px }
+.feature p { color:var(--muted);font-size:13px }
+.page { display:none }
+.page.active { display:block }
+.panel { padding:22px;margin-bottom:17px }
+.field { margin:14px 0 }
+.field label { display:block;color:var(--muted);margin-bottom:8px }
+.row { display:flex;gap:12px;flex-wrap:wrap }
+.row > * { flex:1;min-width:180px }
+textarea { min-height:170px;resize:vertical;font-family:monospace;font-size:13px }
+hr { border:0;border-top:1px solid var(--border);margin:22px 0 }
+.list-item {
+  display:flex;align-items:center;justify-content:space-between;
+  gap:14px;padding:14px 0;border-bottom:1px solid var(--border);
+}
+.empty { text-align:center;padding:45px 12px;color:var(--muted) }
+footer { border-top:1px solid var(--border);padding:25px;text-align:center;color:var(--muted) }
+.modal {
+  display:none;position:fixed;inset:0;z-index:10;
+  background:#000b;align-items:center;justify-content:center;padding:18px;
+}
+.modal.open { display:flex }
+.modal-box {
+  width:min(420px,100%);background:var(--panel);
+  border:1px solid var(--border);border-radius:15px;padding:24px;
+}
+.modal-head { display:flex;justify-content:space-between;align-items:center }
+.close { border:0;background:transparent;color:white;font-size:25px }
+.notice { font-size:12px;color:var(--muted);line-height:1.5 }
+.hidden { display:none!important }
+@media(max-width:850px) {
+  .grid { grid-template-columns:repeat(2,minmax(0,1fr)) }
+  .top { gap:12px }
+  nav { order:3;flex-basis:100% }
+  .hero { padding:30px 23px }
+}
+@media(max-width:560px) {
+  .grid,.feature-grid,.stats { grid-template-columns:1fr }
+  .top { padding:13px }
+  main { padding:18px 13px 40px }
+  .actions { margin-left:auto }
+  nav button { padding:8px }
+  .hero { padding:25px 18px }
+}
 </style>
 </head>
 <body>
-<div id="app" data-sites-preview-theme="custom">
-  <div class="shell">
-    <aside class="sidebar">
-      <div class="brand"><div class="brand-mark">D</div><div><div class="brand-name">DREY ONLINE</div><div class="brand-sub">CONTROL CENTER</div></div></div>
-      <div><div class="nav-label">ОБЗОР</div><nav class="nav" id="nav">
-        <button class="active" data-filter="all"><span class="nav-icon">▦</span> Все логи</button>
-        <button data-filter="admin"><span class="nav-icon">♙</span> Администрация</button>
-        <button data-filter="items"><span class="nav-icon">▣</span> Предметы</button>
-        <button data-filter="punishments"><span class="nav-icon">⚑</span> Наказания</button>
-        <button data-filter="economy"><span class="nav-icon">◈</span> Экономика</button>
-        <button data-filter="login"><span class="nav-icon">↪</span> Входы в аккаунт</button>
-      </nav></div>
-      <div><div class="nav-label">СИСТЕМА</div><nav class="nav"><button id="exportBtn"><span class="nav-icon">⇩</span> Экспорт логов</button><button id="aboutBtn"><span class="nav-icon">ⓘ</span> О проекте</button></nav></div>
-      <div class="side-bottom"><div class="server-card"><div class="server-line"><span class="online-dot"></span> Drey Online</div><div class="server-muted">Сервер: 188.127.241.74:3794</div><div class="server-muted">Макет панели • тестовые данные</div></div></div>
-    </aside>
-    <main class="main">
-      <header class="topbar"><div class="crumb">Drey Online <span style="padding:0 7px;opacity:.45">/</span> <strong id="crumbTitle">Все логи</strong></div><div class="top-right"><span class="demo-tag">● DEMO MODE</span><div class="avatar">AD</div></div></header>
-      <section class="content">
-        <div class="heading-row"><div><h1 id="pageTitle">Журнал событий</h1><div class="subtitle">История действий на сервере Drey Online в одном месте.<br>Поиск по игрокам, администраторам, типам событий и времени.</div></div><button class="primary-btn" id="refreshBtn">↻ &nbsp; Обновить данные</button></div>
-        <div class="stats">
-          <div class="stat"><div class="stat-top"><span>Всего записей</span><span class="stat-icon">▤</span></div><div class="stat-number" id="statTotal">1 284</div><div class="stat-foot"><span class="up">+ 24</span> за последние 24 часа</div></div>
-          <div class="stat"><div class="stat-top"><span>Действия администрации</span><span class="stat-icon">♙</span></div><div class="stat-number">186</div><div class="stat-foot">Выдача прав и управление</div></div>
-          <div class="stat"><div class="stat-top"><span>Операции с предметами</span><span class="stat-icon">▣</span></div><div class="stat-number">542</div><div class="stat-foot">Выдача, удаление, передача</div></div>
-          <div class="stat"><div class="stat-top"><span>Наказания</span><span class="stat-icon">⚑</span></div><div class="stat-number">73</div><div class="stat-foot">Муты, баны и предупреждения</div></div>
+<header>
+  <div class="top">
+    <a class="logo" href="#" onclick="showPage('home');return false">
+      PPS <span>HELP</span> AMAZING
+    </a>
+    <nav>
+      <button class="active" data-page="home">Главная</button>
+      <button data-page="shop">Магазин</button>
+      <button data-page="market">Площадка</button>
+      <button data-page="build">AHK-конструктор</button>
+      <button data-page="faq">FAQ</button>
+    </nav>
+    <div class="actions">
+      <button class="outline" onclick="showPage('purchases')">Мои покупки</button>
+      <button class="outline" onclick="openLogin()">Войти</button>
+      <button class="btn" onclick="showPage('cart')">Корзина <span id="cartCount">0</span></button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="page active" id="home">
+    <div class="hero">
+      <div class="eyebrow">⚡ PPS HELP AMAZING · DIGITAL STORE</div>
+      <h1>Игровые решения<br><span>нового поколения</span></h1>
+      <p>Цифровые продукты, инструменты и конструктор настроек AHK для твоего игрового проекта.</p>
+      <div class="hero-actions">
+        <button class="btn" onclick="showPage('shop')">Перейти в магазин →</button>
+        <button class="outline" onclick="showPage('build')">Открыть AHK-конструктор</button>
+      </div>
+    </div>
+    <div class="stats">
+      <div class="stat"><b>24/7</b><small>Информация и помощь</small></div>
+      <div class="stat"><b>AHK</b><small>Настройка собственных скриптов</small></div>
+      <div class="stat"><b>Личный кабинет</b><small>Демо-интерфейс профиля</small></div>
+    </div>
+    <div class="section-head">
+      <h2>Лучшие предложения</h2>
+      <button class="outline" onclick="showPage('shop')">Весь каталог →</button>
+    </div>
+    <div class="grid" id="featured"></div>
+    <div class="section-head"><h2>Возможности сервиса</h2></div>
+    <div class="feature-grid">
+      <div class="feature"><div class="emoji">🛒</div><h3>Магазин</h3><p>Каталог, поиск и демонстрационная корзина.</p></div>
+      <div class="feature"><div class="emoji">🛠️</div><h3>AHK-конструктор</h3><p>Импорт текста скрипта, настройка и экспорт файла.</p></div>
+      <div class="feature"><div class="emoji">👤</div><h3>Личный кабинет</h3><p>Демо-страницы профиля и истории покупок.</p></div>
+    </div>
+  </section>
+
+  <section class="page" id="shop">
+    <div class="section-head"><h2>Магазин</h2><span class="muted">Цифровые товары</span></div>
+    <div class="tools">
+      <input id="search" placeholder="⌕ Поиск по товарам..." oninput="renderProducts()">
+      <select id="category" onchange="renderProducts()" style="max-width:220px">
+        <option value="all">Все категории</option>
+        <option value="AHK">AHK-скрипты</option>
+        <option value="Tools">Инструменты</option>
+        <option value="Guide">Инструкции</option>
+      </select>
+    </div>
+    <div class="grid" id="products" style="margin-top:18px"></div>
+  </section>
+
+  <section class="page" id="market">
+    <div class="hero">
+      <div class="eyebrow">PPS COMMUNITY MARKET</div>
+      <h1>Площадка<br><span>цифровых товаров</span></h1>
+      <p>Раздел для каталога пользовательских товаров. Размещение, проверка продавцов и безопасные сделки потребуют серверной реализации.</p>
+      <button class="btn" onclick="alert('Демонстрация: подключи сервер для размещения объявлений.')">Начать продавать</button>
+    </div>
+    <div class="panel" style="margin-top:20px">
+      <h2>Правила площадки</h2>
+      <p class="muted">Публикуй только материалы, на распространение которых у тебя есть права. Проверка файлов, сообщения между участниками и обработка споров должны выполняться на сервере.</p>
+    </div>
+  </section>
+
+  <section class="page" id="cart">
+    <div class="section-head"><h2>Корзина</h2></div>
+    <div class="panel" id="cartItems"></div>
+    <div class="panel">
+      <div class="list-item"><b>Итого</b><strong id="total">0 ₽</strong></div>
+      <p class="notice">Демонстрационный заказ. Настоящая оплата не подключена.</p>
+      <button class="btn" onclick="checkout()">Оформить заказ</button>
+    </div>
+  </section>
+
+  <section class="page" id="purchases">
+    <div class="section-head"><h2>Мои покупки</h2></div>
+    <div class="panel">
+      <div id="purchaseContent" class="empty">Войди в аккаунт, чтобы посмотреть демонстрационную библиотеку.</div>
+      <button class="btn" onclick="openLogin()">Войти</button>
+    </div>
+  </section>
+
+  <section class="page" id="profile">
+    <div class="section-head"><h2>Личный кабинет</h2></div>
+    <div class="panel">
+      <h3 id="welcome">Профиль пользователя</h3>
+      <p class="muted">Это локальный демонстрационный профиль. Он не является защищённым аккаунтом.</p>
+      <button class="outline" onclick="showPage('purchases')">Мои покупки</button>
+      <button class="outline" onclick="logout()">Выйти</button>
+    </div>
+  </section>
+
+  <section class="page" id="build">
+    <div class="section-head"><h2>AHK-конструктор</h2><span class="tag">Экспорт .ahk</span></div>
+    <div class="panel">
+      <h3>1. Импорт своего скрипта</h3>
+      <p class="muted">Выбери файл AHK. Его текст загрузится в редактор браузера.</p>
+      <input type="file" id="ahkFile" accept=".ahk,.txt">
+      <div class="field">
+        <label for="scriptName">Имя итогового файла</label>
+        <input id="scriptName" value="PPS_Help_Amazing.ahk">
+      </div>
+      <div class="field">
+        <label for="ahkText">Исходный код AHK</label>
+        <textarea id="ahkText" spellcheck="false">#Requires AutoHotkey v2.0
+#SingleInstance Force
+
+; PPS Help Amazing
+; Вставь сюда собственный скрипт и настрой его.
+F6:: {
+    Send "Пример команды"
+}
+</textarea>
+      </div>
+      <h3>2. Настройки экспорта</h3>
+      <div class="row">
+        <div class="field">
+          <label for="appTitle">Комментарий проекта</label>
+          <input id="appTitle" value="PPS Help Amazing">
         </div>
-        <section class="panel">
-          <div class="panel-head"><div><div class="panel-title" id="tableTitle">Последние события</div><div class="panel-note">Нажми на строку, чтобы посмотреть подробности</div></div><button class="ghost-btn" id="clearBtn">Сбросить фильтры</button></div>
-          <div class="filters"><div class="search-wrap"><span>⌕</span><input id="search" type="search" placeholder="Поиск: ник, ID, действие..." aria-label="Поиск по логам"></div><select id="typeFilter" aria-label="Тип события"><option value="all">Все типы событий</option><option value="admin">Администрация</option><option value="items">Предметы</option><option value="punishments">Наказания</option><option value="economy">Экономика</option><option value="login">Входы в аккаунт</option></select><select id="dateFilter" aria-label="Период"><option value="all">Любая дата</option><option value="today">Сегодня</option><option value="week">Последние 7 дней</option></select></div>
-          <div class="table-wrap"><table><thead><tr><th>Событие</th><th>Инициатор</th><th>Игрок</th><th>Категория</th><th>Дата и время</th><th></th></tr></thead><tbody id="logRows"></tbody></table><div class="empty" id="emptyState" hidden>По заданным фильтрам ничего не найдено.</div></div>
-          <div class="table-footer"><span id="resultCount">Показано 8 записей</span><div class="pager"><button aria-label="Предыдущая страница" id="prevPage">‹</button><button class="current" id="pageNum">1</button><button aria-label="Следующая страница" id="nextPage">›</button></div></div>
-        </section>
-        <div class="footer-note">Важно: сейчас показаны демонстрационные записи. Чтобы отображались настоящие логи, сервер должен отправлять события в защищённый API и базу данных. Не храните пароли и секретные токены в логах.</div>
-      </section>
-    </main>
+        <div class="field">
+          <label for="version">Версия</label>
+          <input id="version" value="1.0.0">
+        </div>
+      </div>
+      <button class="btn" onclick="downloadAHK()">⬇ Скачать готовый AHK</button>
+      <button class="outline" onclick="document.getElementById('ahkText').value=''">Очистить редактор</button>
+      <hr>
+      <p class="notice">Внимание: импортированный AHK-код может выполнять команды на компьютере. Проверяй код перед запуском. Этот редактор экспортирует текст, но не проверяет безопасность скрипта и не разбирает автоматически все его настройки.</p>
+    </div>
+  </section>
+
+  <section class="page" id="faq">
+    <div class="section-head"><h2>FAQ и инструкции</h2></div>
+    <div class="panel">
+      <h3>Как скачать товар?</h3>
+      <p class="muted">Добавь товар в корзину. В этой версии оформление заказа демонстрационное.</p>
+      <hr>
+      <h3>Как экспортировать AHK?</h3>
+      <p class="muted">Открой конструктор, импортируй свой файл или вставь код и нажми «Скачать готовый AHK».</p>
+      <hr>
+      <h3>Работает ли настоящая оплата?</h3>
+      <p class="muted">Нет. Для платежей, заказов и выдачи купленных файлов нужен backend и платёжный провайдер.</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <b>PPS HELP AMAZING</b><br>
+  <p>Независимый проект. Не является официальным ресурсом Amazing Online.</p>
+  <span>© 2026 · Все права защищены</span>
+</footer>
+
+<div class="modal" id="loginModal" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
+  <div class="modal-box">
+    <div class="modal-head">
+      <h2 id="loginTitle">Вход в аккаунт</h2>
+      <button class="close" onclick="closeLogin()" aria-label="Закрыть">×</button>
+    </div>
+    <p class="muted">Демонстрационный режим без настоящей авторизации.</p>
+    <form onsubmit="loginDemo(event)">
+      <div class="field"><label for="email">Электронная почта</label><input id="email" type="email" required placeholder="you@example.com"></div>
+      <div class="field"><label for="nickname">Никнейм</label><input id="nickname" required placeholder="Твой никнейм"></div>
+      <button class="btn" type="submit" style="width:100%">Продолжить</button>
+    </form>
+    <p class="notice">Не используй здесь настоящий пароль: эта демоверсия не выполняет безопасную регистрацию.</p>
   </div>
 </div>
-<div class="toast" id="toast" role="status"></div>
-<div class="modal-backdrop" id="modalBackdrop"><section class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modal-head"><strong id="modalTitle">Подробности события</strong><button class="close" id="closeModal" aria-label="Закрыть">×</button></div><div class="modal-body" id="modalBody"></div></section></div>
-<script>
-const logs = [
- {id:'LOG-001284',type:'admin',title:'Выдан уровень администратора 3',sub:'Изменение прав доступа',actor:'System_Admin',target:'Player_Kirill',status:'Выдача прав',tone:'blue',date:'22.10.2026 21:48:16',detail:'Игроку назначен третий уровень административных прав. В реальной системе здесь будут указаны причина, старый и новый уровни, а также подтверждённый источник события.'},
- {id:'LOG-001283',type:'items',title:'Выдан предмет «Аптечка»',sub:'ID предмета: 4012 • Количество: 5',actor:'Admin_Drey',target:'Alex_Miller',status:'Выдача предмета',tone:'green',date:'22.10.2026 21:42:03',detail:'Демонстрационная запись выдачи пяти аптечек. Для реального лога нужно фиксировать ID предмета, количество и результат операции.'},
- {id:'LOG-001282',type:'punishments',title:'Игрок получил мут на 30 минут',sub:'Причина: нарушение правил чата',actor:'Mod_Raven',target:'Dark_Smile',status:'Наказание',tone:'red',date:'22.10.2026 21:36:51',detail:'Демонстрационная запись наказания. В настоящем журнале желательно хранить причину, срок, администратора и ссылку на доказательства, если они есть.'},
- {id:'LOG-001281',type:'economy',title:'Изменён баланс игрока',sub:'Сумма операции: $25 000',actor:'Admin_Drey',target:'Nikita_RP',status:'Экономика',tone:'orange',date:'22.10.2026 21:20:14',detail:'Пример финансовой операции. В настоящей системе необходимо указывать баланс до и после операции, валюту, причину и уникальный ID транзакции.'},
- {id:'LOG-001280',type:'login',title:'Успешный вход в аккаунт',sub:'Сессия создана',actor:'Auth_Service',target:'Maks_Storm',status:'Вход',tone:'green',date:'22.10.2026 21:15:40',detail:'Пример события авторизации. Не записывайте пароли, токены сессий или другие секреты. IP-адреса стоит хранить только при наличии необходимости и соответствующих мер защиты.'},
- {id:'LOG-001279',type:'items',title:'Удалён предмет «Золотой слиток»',sub:'ID предмета: 780 • Количество: 1',actor:'Admin_Fox',target:'Vlad_One',status:'Удаление предмета',tone:'orange',date:'22.10.2026 20:59:22',detail:'Демонстрационная запись удаления предмета. Укажите основание действия и результат операции.'},
- {id:'LOG-001278',type:'admin',title:'Изменён уровень администратора',sub:'Уровень: 2 → 1',actor:'System_Admin',target:'Mod_Raven',status:'Изменение прав',tone:'blue',date:'22.10.2026 20:44:08',detail:'Пример изменения уровня доступа. Для аудита должны сохраняться предыдущие и новые права, автор изменения и основание.'},
- {id:'LOG-001277',type:'punishments',title:'Выдано предупреждение',sub:'Причина: помеха игровому процессу',actor:'Mod_Raven',target:'Roman_Lee',status:'Предупреждение',tone:'red',date:'22.10.2026 20:30:49',detail:'Демонстрационная запись предупреждения игроку.'},
- {id:'LOG-001276',type:'economy',title:'Выдана игровая валюта',sub:'Сумма операции: $5 000',actor:'Admin_Drey',target:'Anna_Blue',status:'Экономика',tone:'orange',date:'21.10.2026 19:12:11',detail:'Пример начисления валюты. В рабочей версии запись создаётся на сервере после подтверждённого результата операции.'},
- {id:'LOG-001275',type:'login',title:'Выход из аккаунта',sub:'Сессия завершена',actor:'Auth_Service',target:'Alex_Miller',status:'Выход',tone:'green',date:'21.10.2026 18:55:27',detail:'Пример завершения пользовательской сессии.'},
- {id:'LOG-001274',type:'items',title:'Игрок передал предмет',sub:'ID предмета: 120 • Количество: 2',actor:'Game_Server',target:'Maks_Storm',status:'Передача предмета',tone:'green',date:'21.10.2026 18:21:02',detail:'Пример передачи предметов. Можно добавить получателя, если сервер предоставляет это поле.'},
- {id:'LOG-001273',type:'admin',title:'Администратор вошёл в панель',sub:'Создана административная сессия',actor:'System_Admin',target:'System_Admin',status:'Вход в панель',tone:'blue',date:'21.10.2026 17:02:33',detail:'Пример входа в панель управления. В рабочей системе необходимы серверная авторизация, контроль ролей и защита от подделки логов.'}
-];
-const labels={all:'Все логи',admin:'Администрация',items:'Предметы',punishments:'Наказания',economy:'Экономика',login:'Входы в аккаунт'};
-let activeType='all', page=1, pageSize=8;
-const $=id=>document.getElementById(id);
-function showToast(message){const t=$('toast');t.textContent=message;t.style.display='block';clearTimeout(showToast.timer);showToast.timer=setTimeout(()=>t.style.display='none',3200)}
-function filteredLogs(){const q=$('search').value.trim().toLowerCase();const type=$('typeFilter').value;const period=$('dateFilter').value;return logs.filter(l=>{const typeOk=(activeType==='all'||l.type===activeType)&&(type==='all'||l.type===type);const hay=[l.id,l.title,l.sub,l.actor,l.target,l.status,l.date,l.detail].join(' ').toLowerCase();const searchOk=!q||hay.includes(q);const day=l.date.slice(0,10);const dateOk=period==='all'||(period==='today'&&day==='22.10.2026')||(period==='week'&&['22.10.2026','21.10.2026'].includes(day));return typeOk&&searchOk&&dateOk})}
-function render(){const all=filteredLogs();const pages=Math.max(1,Math.ceil(all.length/pageSize));page=Math.min(page,pages);const start=(page-1)*pageSize;const visible=all.slice(start,start+pageSize);$('logRows').innerHTML=visible.map(l=>`<tr data-id="${l.id}" tabindex="0"><td><div class="log-title">${esc(l.title)}</div><div class="log-sub">${esc(l.id)} · ${esc(l.sub)}</div></td><td><div class="player"><span class="player-dot">${esc(l.actor.slice(0,2).toUpperCase())}</span>${esc(l.actor)}</div></td><td>${esc(l.target)}</td><td><span class="pill ${l.tone}">${esc(l.status)}</span></td><td class="time">${esc(l.date)}</td><td><span class="row-action">›</span></td></tr>`).join('');$('emptyState').hidden=visible.length!==0;$('resultCount').textContent=all.length?`Показано ${start+1}–${start+visible.length} из ${all.length} записей`:'Показано 0 записей';$('pageNum').textContent=page;$('prevPage').disabled=page<=1;$('nextPage').disabled=page>=pages;$('crumbTitle').textContent=labels[activeType];$('tableTitle').textContent=activeType==='all'?'Последние события':`Логи: ${labels[activeType].toLowerCase()}`;document.querySelectorAll('#nav button[data-filter]').forEach(b=>b.classList.toggle('active',b.dataset.filter===activeType));$('statTotal').textContent=(1284+all.length-8).toLocaleString('ru-RU');document.querySelectorAll('#logRows tr').forEach(row=>{row.addEventListener('click',()=>openLog(row.dataset.id));row.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openLog(row.dataset.id)}})})}
-function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-function openLog(id){const l=logs.find(x=>x.id===id);if(!l)return;$('modalTitle').textContent=l.title;$('modalBody').innerHTML=`<div class="detail-grid"><div class="detail"><small>ID события</small><div>${esc(l.id)}</div></div><div class="detail"><small>Категория</small><div>${esc(labels[l.type])}</div></div><div class="detail"><small>Инициатор</small><div>${esc(l.actor)}</div></div><div class="detail"><small>Игрок</small><div>${esc(l.target)}</div></div><div class="detail"><small>Дата и время</small><div>${esc(l.date)}</div></div><div class="detail"><small>Действие</small><div>${esc(l.status)}</div></div></div><div class="modal-desc">${esc(l.detail)}<br><br><strong>Примечание:</strong> это пример интерфейса, запись не получена с игрового сервера.</div>`;$('modalBackdrop').style.display='flex'}
-document.querySelectorAll('#nav button[data-filter]').forEach(b=>b.addEventListener('click',()=>{activeType=b.dataset.filter;$('typeFilter').value='all';page=1;render()}));$('typeFilter').addEventListener('change',()=>{activeType='all';document.querySelectorAll('#nav button[data-filter]').forEach(b=>b.classList.toggle('active',b.dataset.filter==='all'));page=1;render()});$('search').addEventListener('input',()=>{page=1;render()});$('dateFilter').addEventListener('change',()=>{page=1;render()});$('clearBtn').addEventListener('click',()=>{$('search').value='';$('typeFilter').value='all';$('dateFilter').value='all';activeType='all';page=1;render();showToast('Фильтры сброшены')});$('refreshBtn').addEventListener('click',()=>{render();showToast('Демо-данные обновлены. Подключение к игровому серверу пока не настроено.')});$('prevPage').addEventListener('click',()=>{if(page>1){page--;render()}});$('nextPage').addEventListener('click',()=>{if(page<Math.ceil(filteredLogs().length/pageSize)){page++;render()}});$('closeModal').addEventListener('click',()=>$('modalBackdrop').style.display='none');$('modalBackdrop').addEventListener('click',e=>{if(e.target===$('modalBackdrop'))$('modalBackdrop').style.display='none'});document.addEventListener('keydown',e=>{if(e.key==='Escape')$('modalBackdrop').style.display='none'});$('exportBtn').addEventListener('click',()=>{const data=filteredLogs();const header=['id','type','title','actor','target','status','date','details'];const csv=[header,...data.map(l=>header.map(k=>l[k]??''))].map(row=>row.map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(';')).join('\r\n');const blob=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8;'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='drey-online-logs-demo.csv';a.click();URL.revokeObjectURL(url);showToast('Экспортировано записей: '+data.length)});$('aboutBtn').addEventListener('click',()=>{ $('modalTitle').textContent='О проекте Drey Online Logs';$('modalBody').innerHTML='<div class="modal-desc" style="margin-top:0">Панель аудита для GTA San Andreas / SA-MP проекта Drey Online.<br><br>Сейчас это интерактивный демонстрационный макет: поиск, фильтры, просмотр деталей и экспорт CSV работают на тестовых данных.<br><br>Для настоящих логов понадобится серверный API, база данных, авторизация и отправка событий из игрового сервера. Админские действия нельзя доверять только данным, присланным браузером.</div>';$('modalBackdrop').style.display='flex'});render();
-</script>
 
-<!--sites-preview-theme:start-->
-<style data-sites-preview-theme>:root{--site-primary:#462132 !important;--site-on-primary:#ffffff !important}</style>
-<script type="application/json" data-sites-preview-theme>{"appearance":"custom","primary":"#462132","secondary":"#111c31","background":"#080d18","typography":"original","spacing":1,"roundness":1,"headingScale":1,"decorationOpacity":null}</script>
-<!--sites-preview-theme:end-->
+<script>
+const products = [
+  {id:1,name:"PPS Help — AHK Template",cat:"AHK",price:199,icon:"⌨️",desc:"Шаблон для организации собственного AutoHotkey-проекта.",tag:"ПОПУЛЯРНО"},
+  {id:2,name:"AHK Starter Pack",cat:"AHK",price:299,icon:"⚡",desc:"Стартовая структура скрипта с примерами горячих клавиш.",tag:"НАБОР"},
+  {id:3,name:"PPS Tools",cat:"Tools",price:149,icon:"🛠️",desc:"Демонстрационный набор инструментов и настроек.",tag:"TOOLS"},
+  {id:4,name:"Гайд по AHK v2",cat:"Guide",price:99,icon:"📘",desc:"Справочник по синтаксису и организации скриптов.",tag:"ГАЙД"},
+  {id:5,name:"PPS UI Template",cat:"Tools",price:249,icon:"🎨",desc:"Шаблон интерфейса для собственного проекта.",tag:"НОВИНКА"},
+  {id:6,name:"AHK Config Pack",cat:"AHK",price:179,icon:"⚙️",desc:"Пример файла конфигурации для собственного скрипта.",tag:"CONFIG"}
+];
+let cart = [];
+let user = null;
+
+function money(n) {
+  return n.toLocaleString("ru-RU") + " ₽";
+}
+function productCard(p) {
+  return `<article class="product">
+    <div class="art">${p.icon}</div>
+    <div class="product-body">
+      <span class="tag">${p.tag}</span>
+      <h3>${p.name}</h3>
+      <p>${p.desc}</p>
+      <div class="product-bottom">
+        <span class="price">${money(p.price)}</span>
+        <button class="btn smallbtn" onclick="addCart(${p.id})">В корзину</button>
+      </div>
+    </div>
+  </article>`;
+}
+function renderProducts() {
+  const q = (document.getElementById("search")?.value || "").toLowerCase();
+  const cat = document.getElementById("category")?.value || "all";
+  const filtered = products.filter(p =>
+    (cat === "all" || p.cat === cat) &&
+    (p.name + " " + p.desc).toLowerCase().includes(q)
+  );
+  document.getElementById("products").innerHTML =
+    filtered.length ? filtered.map(productCard).join("") :
+    '<div class="empty">Ничего не найдено.</div>';
+}
+function addCart(id) {
+  const p = products.find(x => x.id === id);
+  if (p) cart.push(p);
+  renderCart();
+  alert("Товар добавлен в корзину.");
+}
+function renderCart() {
+  document.getElementById("cartCount").textContent = cart.length;
+  document.getElementById("total").textContent = money(cart.reduce((s,p)=>s+p.price,0));
+  document.getElementById("cartItems").innerHTML = cart.length
+    ? cart.map((p,i)=>`<div class="list-item">
+        <div><b>${p.name}</b><div class="muted">${money(p.price)}</div></div>
+        <button class="outline" onclick="removeCart(${i})">Удалить</button>
+      </div>`).join("")
+    : '<div class="empty">Корзина пуста. Выбери товары в магазине.</div>';
+}
+function removeCart(i) {
+  cart.splice(i,1);
+  renderCart();
+}
+function checkout() {
+  if (!cart.length) return alert("Сначала добавь товар в корзину.");
+  alert("Это демонстрационный магазин: настоящая оплата и заказ не подключены.");
+}
+function showPage(id) {
+  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+  document.getElementById(id)?.classList.add("active");
+  document.querySelectorAll("nav button").forEach(b=>b.classList.toggle("active",b.dataset.page===id));
+  if (id === "cart") renderCart();
+  if (id === "purchases") {
+    document.getElementById("purchaseContent").textContent = user
+      ? "Демонстрационных покупок пока нет."
+      : "Войди в аккаунт, чтобы посмотреть демонстрационную библиотеку.";
+  }
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+document.querySelectorAll("nav button").forEach(b=>b.addEventListener("click",()=>showPage(b.dataset.page)));
+function openLogin() {
+  if (user) return showPage("profile");
+  document.getElementById("loginModal").classList.add("open");
+}
+function closeLogin() {
+  document.getElementById("loginModal").classList.remove("open");
+}
+function loginDemo(e) {
+  e.preventDefault();
+  user = {
+    email:document.getElementById("email").value,
+    nickname:document.getElementById("nickname").value
+  };
+  document.getElementById("welcome").textContent = "Привет, " + user.nickname + "!";
+  document.querySelectorAll(".actions .outline")[1].textContent = "Профиль";
+  closeLogin();
+  showPage("profile");
+}
+function logout() {
+  user = null;
+  document.querySelectorAll(".actions .outline")[1].textContent = "Войти";
+  showPage("home");
+}
+document.getElementById("ahkFile").addEventListener("change", async e => {
+  const file = e.target.files[0];
+  if (!file) return;
+  document.getElementById("ahkText").value = await file.text();
+  if (!document.getElementById("scriptName").value.trim()) {
+    document.getElementById("scriptName").value = file.name;
+  }
+});
+function downloadAHK() {
+  let name = document.getElementById("scriptName").value.trim() || "PPS_Help_Amazing.ahk";
+  if (!name.toLowerCase().endsWith(".ahk")) name += ".ahk";
+  const title = document.getElementById("appTitle").value.trim() || "PPS Help Amazing";
+  const version = document.getElementById("version").value.trim() || "1.0.0";
+  const source = document.getElementById("ahkText").value;
+  const result = `; ${title}\n; Version: ${version}\n; Exported from PPS Help Amazing\n\n${source}`;
+  const blob = new Blob([result], {type:"text/plain;charset=utf-8"});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = name;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+}
+document.getElementById("loginModal").addEventListener("click",e=>{
+  if(e.target.id==="loginModal") closeLogin();
+});
+document.getElementById("featured").innerHTML = products.slice(0,3).map(productCard).join("");
+renderProducts();
+renderCart();
+</script>
 </body>
 </html>
