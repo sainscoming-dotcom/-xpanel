@@ -1,231 +1,895 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>PPS Help Amazing</title>
-<style>
-:root{--bg:#0b0d12;--card:#12151d;--line:#252a36;--text:#f2f4fa;--muted:#939baa;--accent:#9270ff;--green:#4be0ad}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--text);font:14px Arial,sans-serif}
-button,input,select{font:inherit}
-button{cursor:pointer}
-header{background:#0d0f15;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:4}
-.top{max-width:1240px;margin:auto;padding:15px 20px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
-.logo{font-size:18px;font-weight:900;white-space:nowrap}
-.logo span{color:var(--accent)}
-nav{display:flex;gap:5px;flex:1;flex-wrap:wrap}
-button{color:var(--text)}
-nav button,.plain{background:transparent;border:1px solid transparent;border-radius:8px;padding:10px;color:#b5bac8}
-nav button:hover,nav button.active,.plain:hover{background:#1b1e29;border-color:var(--line);color:white}
-.actions{display:flex;gap:7px;flex-wrap:wrap}
-.primary{background:var(--accent);color:white;border:0;border-radius:8px;padding:11px 15px;font-weight:bold}
-.outline{background:#171a24;border:1px solid var(--line);border-radius:8px;padding:10px 13px}
-main{max-width:1200px;margin:auto;padding:25px 20px 60px}
-.page{display:none}.page.active{display:block}
-.hero{border:1px solid #343047;border-radius:15px;padding:38px;background:radial-gradient(ellipse at 85% 10%,#5a3ca344,transparent 40%),linear-gradient(110deg,#191724,#10131a)}
-.eyebrow{font-size:11px;letter-spacing:2px;color:#b8a5ff;font-weight:bold}
-h1{font-size:clamp(32px,5vw,49px);line-height:1.1;margin:20px 0}
-h1 span{color:var(--accent)}
-p{line-height:1.65}.muted{color:var(--muted)}
-.hero p{max-width:620px;color:#b9bfcd}
-.actions-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
-.section-title{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin:34px 0 17px}
-h2{font-size:23px;margin:0}h3{margin:8px 0}
-.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}
-.card,.box{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden}
-.art{height:145px;background:radial-gradient(ellipse at 50% 0%,#6c52aa44,transparent 70%),#171a24;display:grid;place-items:center;font-size:43px;border-bottom:1px solid var(--line)}
-.body{padding:16px}.body p{font-size:13px;color:var(--muted);min-height:40px}
-.tag{display:inline-block;padding:5px 8px;border-radius:5px;background:#302448;color:#c7b4ff;font-size:10px;font-weight:bold}
-.product-foot{display:flex;justify-content:space-between;align-items:center;gap:8px}
-.price{font-size:19px;font-weight:bold}
-.box{padding:20px;margin-bottom:15px}
-.features{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}
-.feature{padding:17px;background:var(--card);border:1px solid var(--line);border-radius:10px}
-.feature p{font-size:13px;color:var(--muted)}
-input,select{width:100%;padding:12px;background:#0c0e14;border:1px solid var(--line);border-radius:8px;color:white}
-.searchrow{display:flex;gap:10px;margin-bottom:17px}
-.searchrow input{flex:1}
-.item{padding:14px 0;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:12px}
-.small{font-size:12px;color:var(--muted)}
-footer{border-top:1px solid var(--line);padding:28px 15px;text-align:center;color:var(--muted)}
-.modal{display:none;position:fixed;inset:0;background:#000b;z-index:9;align-items:center;justify-content:center;padding:15px}
-.modal.open{display:flex}
-.modal-box{width:min(420px,100%);padding:22px;background:var(--card);border:1px solid var(--line);border-radius:13px}
-.modal-head{display:flex;justify-content:space-between;align-items:center}
-.close{border:0;background:none;font-size:25px}
-.field{margin:14px 0}.field label{display:block;margin-bottom:7px;color:var(--muted)}
-.page-note{padding:15px;border:1px solid var(--line);border-radius:9px;color:var(--muted);line-height:1.6}
-@media(max-width:850px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.top{gap:10px}nav{order:3;flex-basis:100%}}
-@media(max-width:550px){.grid,.features{grid-template-columns:1fr}.hero{padding:24px 18px}main{padding:17px 12px 40px}.top{padding:12px}}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>CRUZ — магазин и торговая площадка Amazing Online</title>
+  <meta name="description" content="CRUZ — игровые материалы, AHK, сборки и защищённая торговая площадка Amazing Online с биржей заказов, честными отзывами и безопасными сделками.">
+  <meta property="og:title" content="CRUZ Market — покупай и продавай безопасно">
+  <meta property="og:description" content="Биржа товаров и заказов Amazing Online: модерация, защита сделки, честные отзывы, подписки и споры при участии администратора.">
+  <link id="siteFavicon" rel="icon" href="public/assets/branding/cruz-favicon-v165.ico" sizes="any">
+  <link id="siteFavicon32" rel="icon" type="image/png" sizes="32x32" href="public/assets/branding/cruz-favicon-v165-32.png">
+  <link id="siteFavicon64" rel="icon" type="image/png" sizes="64x64" href="public/assets/branding/cruz-favicon-v165-64.png">
+  <link id="siteFavicon180" rel="apple-touch-icon" sizes="180x180" href="public/assets/branding/cruz-favicon-v165-180.png">
+  <link rel="manifest" href="site.webmanifest?v=165">
+  <meta name="theme-color" content="#8b2cff">
+  <meta name="cruz-build" content="1.9.1">
+  <link rel="preconnect" href="https://telegram.org" crossorigin>
+  <link rel="dns-prefetch" href="//telegram.org">
+  <link rel="preload" href="public/styles-v171.css?v=191" as="style">
+  <link rel="stylesheet" href="public/styles-v171.css?v=191">
+  <link rel="stylesheet" href="public/readability.css?v=20260813-product-issue-v1">
+  <link rel="stylesheet" href="public/mobile.css?v=20260813-mobile-parity-v1">
+  <link rel="stylesheet" href="public/gallery.css?v=20260813-product-gallery-v1">
+
+<style id="ac-license-module-styles">
+.ac-admin-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-bottom:16px}
+.ac-admin-card{border:1px solid #283651;background:#0d1422;border-radius:14px;padding:16px}
+.ac-admin-card h3{margin:0 0 14px}
+.ac-admin-card label{display:block;margin-bottom:10px}
+.ac-admin-card label>span{display:block;color:#93a1b6;font-size:12px;margin-bottom:6px}
+.ac-admin-card small{display:block;color:#8492a8;margin-top:9px;line-height:1.45}
+.ac-release-current{margin:12px 0 16px;padding:13px 15px;border:1px solid #273750;border-radius:12px;background:#0b1220;color:#9eabc0}
+.ac-release-current b{color:#eef4ff}
+.ac-license-key{font-family:Consolas,monospace;word-break:break-all;color:#d6ccff}
+.ac-license-status-active{color:#42d9aa}.ac-license-status-expired{color:#f0b95b}.ac-license-status-blocked{color:#ff7183}
+.ac-profile-license-card{border-color:#3b4d78!important;background:linear-gradient(145deg,#101a2d,#0b1221)!important}
+.ac-profile-license-card .ac-key-mini{font-family:Consolas,monospace;color:#cfc4ff}
+.ac-license-modal-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:15px 0}
+.ac-license-modal-cell{border:1px solid #27364f;background:#0a111e;border-radius:12px;padding:12px}
+.ac-license-modal-cell small{display:block;color:#8f9db3;margin-bottom:5px}
+.ac-license-modal-cell b{display:block}
+.ac-license-modal-key{padding:12px;border-radius:12px;border:1px solid #394867;background:#0a101b;font:700 14px/1.5 Consolas,monospace;word-break:break-all;color:#dcd4ff;margin:12px 0}
+@media(max-width:800px){.ac-admin-grid,.ac-license-modal-grid{grid-template-columns:1fr}.ac-license-table{min-width:900px}}
 </style>
+
+<style id="ac-trial-styles">
+.trial-btn{background:linear-gradient(135deg,#12b886,#5f7dff);border:0;color:#fff;font-weight:850}
+.trial-btn:hover{filter:brightness(1.08)}
+.ac-trial-note{margin-top:10px;padding:10px 12px;border-radius:11px;border:1px solid #28524c;background:#0d211f;color:#a8c8c2}
+</style>
+
+<style id="ac-trial-card-fix">
+.product-trial-offer{
+  margin-top:12px;
+  padding:12px;
+  border:1px solid rgba(53,211,169,.30);
+  border-radius:13px;
+  background:linear-gradient(135deg,rgba(12,38,34,.82),rgba(28,25,72,.82));
+}
+.product-trial-offer .trial-btn{
+  width:100%;
+  min-height:46px;
+  font-size:15px;
+}
+.product-trial-offer small{
+  display:block;
+  margin-top:8px;
+  text-align:center;
+  color:#9eb4b1;
+}
+.cruz-pop-trial{
+  margin-top:10px;
+}
+.cruz-pop-trial .trial-btn{
+  width:100%;
+}
+</style>
+
+
+<style id="ac-trial-ux-fix">
+.ac-license-owned-btn{
+  background:linear-gradient(135deg,rgba(24,153,111,.22),rgba(55,105,214,.22));
+  border:1px solid rgba(69,214,168,.38);
+  color:#b9ffe6;
+  font-weight:850;
+}
+</style>
+
+
+<style id="cruz-random-box-css">
+.rb-shell{margin-top:28px}.rb-hero{display:grid;grid-template-columns:1.05fr 1fr .9fr;gap:18px;padding:22px;border:1px solid rgba(124,92,246,.35);border-radius:24px;background:radial-gradient(circle at 18% 40%,rgba(124,58,237,.24),transparent 35%),linear-gradient(135deg,rgba(8,12,25,.96),rgba(16,9,32,.96));box-shadow:0 20px 70px rgba(50,20,120,.18);overflow:hidden}.rb-box-art{min-height:280px;display:grid;place-items:center;position:relative}.rb-glow{position:absolute;width:210px;height:210px;border-radius:50%;background:rgba(124,58,237,.35);filter:blur(45px);animation:rbpulse 2.5s infinite}.rb-question{z-index:1;width:180px;height:180px;border-radius:32px;display:grid;place-items:center;font-size:100px;font-weight:950;color:#fff;background:linear-gradient(145deg,#32106b,#111a45);border:2px solid rgba(170,120,255,.7);box-shadow:0 0 40px rgba(124,58,237,.65),inset 0 0 30px rgba(255,255,255,.08);transform:rotate(-4deg)}.rb-copy{padding:20px 10px}.rb-copy h2{font-size:42px;margin:8px 0}.rb-copy p{color:#aab4c9}.rb-price{display:flex;align-items:baseline;gap:9px;margin:22px 0}.rb-price b{font-size:34px}.rb-price span,.rb-note{color:#8390a8}.rb-open-btn{font-size:16px;padding:14px 22px}.rb-note{display:block;margin-top:12px}.rb-prizes{padding:18px;background:rgba(5,8,18,.55);border:1px solid rgba(70,90,150,.3);border-radius:18px}.rb-panel-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}.rb-prize-list{display:grid;gap:8px;max-height:270px;overflow:auto}.rb-prize{display:grid;grid-template-columns:34px 1fr auto;gap:9px;align-items:center;padding:9px 10px;border-radius:12px;background:rgba(18,25,43,.8);border:1px solid rgba(60,80,130,.25)}.rb-prize .chance{font-size:11px;color:#9ca9c1}.rb-recent{margin-top:14px;padding:16px;border:1px solid rgba(70,90,150,.25);border-radius:18px;background:rgba(7,11,22,.75)}.rb-recent-list{display:flex;gap:10px;overflow:auto}.rb-win{min-width:180px;padding:11px;border-radius:12px;background:rgba(16,23,40,.9);border:1px solid rgba(70,90,150,.25)}.rb-stage{position:relative;margin-top:14px;padding:32px 16px 20px;border:1px solid rgba(170,100,255,.55);border-radius:20px;background:radial-gradient(circle at center,rgba(100,40,180,.22),rgba(4,7,16,.98));overflow:hidden}.rb-track{display:flex;gap:12px;transform:translateX(0);will-change:transform}.rb-card{flex:0 0 150px;height:130px;border-radius:16px;border:1px solid rgba(80,100,180,.5);display:grid;place-items:center;text-align:center;padding:10px;background:linear-gradient(145deg,#10172c,#0b0e1a);box-shadow:0 10px 30px rgba(0,0,0,.3)}.rb-card b{font-size:13px}.rb-card span{font-size:32px}.rb-pointer{position:absolute;z-index:3;left:50%;top:8px;transform:translateX(-50%);width:0;height:0;border-left:12px solid transparent;border-right:12px solid transparent;border-top:20px solid #fff;filter:drop-shadow(0 0 10px #8b5cf6)}.rb-stage-status{text-align:center;margin-top:16px;color:#aeb9cf}.rb-admin-settings{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.rb-admin-settings label span{display:block;color:#94a1b8;font-size:12px;margin-bottom:6px}.rb-admin-wide{grid-column:span 2}.rb-admin-toolbar{display:flex;justify-content:space-between;align-items:center;margin:20px 0 10px}.rb-admin-prize-input{min-width:120px}.rb-admin-actions{display:flex;gap:10px;margin-top:18px}.rb-admin-history{display:grid;gap:8px}.rb-admin-history .history-row{display:flex;justify-content:space-between;gap:12px;padding:10px;border-radius:10px;background:#0d1422}.rb-admin-history .history-row small{display:block;color:#8492a8}@keyframes rbpulse{50%{transform:scale(1.18);opacity:.7}}@media(max-width:1050px){.rb-hero{grid-template-columns:1fr}.rb-admin-settings{grid-template-columns:1fr 1fr}.rb-admin-wide{grid-column:span 2}}@media(max-width:650px){.rb-question{width:140px;height:140px;font-size:80px}.rb-copy h2{font-size:32px}.rb-admin-settings{grid-template-columns:1fr}.rb-admin-wide{grid-column:auto}.rb-card{flex-basis:120px}}
+.admin-section-hidden{display:none!important}
+</style>
+
+<style id="cruz-v3-visual-overhaul">
+:root{--cruz-bg:#060812;--cruz-panel:rgba(12,16,30,.78);--cruz-panel2:rgba(16,20,38,.9);--cruz-line:rgba(128,104,255,.22);--cruz-purple:#8b5cf6;--cruz-blue:#4f7cff;--cruz-text:#f5f7ff;--cruz-muted:#8995ad}
+html{background:var(--cruz-bg);scroll-behavior:smooth}body{background:radial-gradient(900px 500px at 12% -5%,rgba(104,55,255,.13),transparent 60%),radial-gradient(800px 500px at 100% 15%,rgba(32,104,255,.09),transparent 58%),#060812;color:var(--cruz-text)}body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;background-image:linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.014) 1px,transparent 1px);background-size:44px 44px;mask-image:linear-gradient(to bottom,#000,transparent 80%)}
+.topbar{background:rgba(5,7,15,.78)!important;border-bottom:1px solid rgba(126,105,255,.18)!important;backdrop-filter:blur(18px)!important;box-shadow:0 10px 40px rgba(0,0,0,.2)}.brand-copy strong{letter-spacing:-.03em}.nav button{transition:all .2s ease}.nav button:hover{transform:translateY(-1px)}
+.neo-hero-card,.neo-glow-card,.neo-offers-panel,.neo-tools-panel,.neo-stat-card,.neo-trust-strip,.panel,.rb-hero,.rb-recent,.rb-stage{background-color:var(--cruz-panel)!important;border-color:var(--cruz-line)!important;box-shadow:0 24px 80px rgba(0,0,0,.24),inset 0 1px 0 rgba(255,255,255,.025)!important;backdrop-filter:blur(18px)}.neo-hero-card{border-radius:28px!important}.neo-stat-card{border-radius:20px!important}.panel{border-radius:20px!important}.btn.primary,.neo-primary{box-shadow:0 10px 32px rgba(111,70,255,.28)!important}.btn.primary:hover,.neo-primary:hover{box-shadow:0 14px 42px rgba(111,70,255,.4)!important;transform:translateY(-1px)}
+.neo-home-bg i{filter:blur(70px);opacity:.6}.section-title h2,.neo-panel-head b{letter-spacing:-.025em}.product-card,.neo-product-card{border-radius:20px!important;background:linear-gradient(145deg,rgba(16,21,38,.95),rgba(9,12,23,.95))!important;border-color:rgba(113,102,188,.2)!important;transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease!important}.product-card:hover,.neo-product-card:hover{transform:translateY(-5px)!important;border-color:rgba(139,92,246,.5)!important;box-shadow:0 20px 50px rgba(0,0,0,.32),0 0 35px rgba(102,62,222,.1)!important}
+.rb-shell{margin-top:34px!important}.rb-hero{grid-template-columns:minmax(250px,.82fr) minmax(300px,1.15fr) minmax(260px,.9fr)!important;padding:24px!important;border-radius:28px!important;background:radial-gradient(circle at 8% 50%,rgba(124,58,237,.24),transparent 30%),radial-gradient(circle at 88% 20%,rgba(45,108,255,.16),transparent 35%),linear-gradient(145deg,rgba(9,12,25,.96),rgba(15,9,31,.96))!important}.rb-box-art{min-height:320px}.rb-box-art:after{content:"";position:absolute;width:230px;height:230px;border:1px solid rgba(158,117,255,.2);border-radius:50%;box-shadow:0 0 0 22px rgba(139,92,246,.025),0 0 0 44px rgba(139,92,246,.018);animation:rbOrbit 7s linear infinite}.rb-question{width:200px!important;height:200px!important;font-size:112px!important;border-radius:40px!important;background:linear-gradient(145deg,#351078,#111b4c)!important;box-shadow:0 0 65px rgba(124,58,237,.7),inset 0 0 35px rgba(255,255,255,.1)!important;animation:rbFloat 3s ease-in-out infinite}.rb-copy{padding:22px 10px}.rb-copy h2{font-size:clamp(38px,4vw,58px)!important;line-height:1;margin:12px 0!important;background:linear-gradient(90deg,#fff,#d8c7ff 55%,#8bb7ff);-webkit-background-clip:text;background-clip:text;color:transparent}.rb-copy p{font-size:16px;line-height:1.6}.rb-kickers{display:flex;gap:9px;align-items:center;flex-wrap:wrap}.rb-live-chip{font-size:10px;font-weight:900;letter-spacing:.12em;color:#9bf4cf;border:1px solid rgba(63,211,164,.25);background:rgba(36,130,101,.1);padding:7px 9px;border-radius:999px}.rb-price{padding:15px 17px;border-radius:16px;background:rgba(255,255,255,.035);border:1px solid rgba(139,92,246,.18);width:max-content;min-width:150px}.rb-price b{font-size:38px}.rb-open-btn{min-width:235px;border-radius:14px!important;font-weight:900!important}.rb-feature-pills{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px}.rb-feature-pills span{font-size:11px;color:#b8c2d7;padding:7px 9px;border-radius:999px;background:rgba(255,255,255,.035);border:1px solid rgba(100,115,160,.18)}.rb-prizes{background:rgba(3,6,15,.5)!important;border-color:rgba(100,115,170,.22)!important}.rb-prize{padding:11px!important;border-color:rgba(90,105,155,.2)!important;background:linear-gradient(90deg,rgba(21,28,49,.8),rgba(13,18,32,.8))!important;transition:.18s}.rb-prize:hover{border-color:rgba(139,92,246,.35)!important;transform:translateX(2px)}.rb-prize strong{font-variant-numeric:tabular-nums;color:#d9ccff}.rb-recent{background:rgba(7,10,20,.72)!important}.rb-win{border-color:rgba(96,110,160,.2)!important;transition:.18s}.rb-win:hover{transform:translateY(-2px);border-color:rgba(139,92,246,.35)!important}.rb-stage{padding:40px 16px 22px!important;background:radial-gradient(circle at center,rgba(100,40,180,.2),rgba(4,7,16,.98))!important;box-shadow:0 0 60px rgba(124,58,237,.12),inset 0 0 80px rgba(45,82,190,.08)!important}.rb-track{will-change:transform}.rb-card{border-color:rgba(103,112,190,.34)!important;background:linear-gradient(145deg,#111a33,#090d19)!important}.rb-card small{display:block;color:#7f8ba5;font-size:10px;margin-top:4px}.rb-target-card{border-color:rgba(255,201,87,.75)!important;box-shadow:0 0 35px rgba(255,186,70,.22),inset 0 0 30px rgba(255,191,80,.07)!important}.rb-win-modal{position:relative;text-align:center;overflow:hidden;padding:12px}.rb-win-icon{width:116px;height:116px;margin:0 auto 16px;display:grid;place-items:center;font-size:58px;border-radius:30px;background:linear-gradient(145deg,rgba(124,58,237,.28),rgba(41,101,220,.2));border:1px solid rgba(177,142,255,.55);box-shadow:0 0 55px rgba(124,58,237,.35)}.rb-win-burst{position:absolute;inset:0;pointer-events:none;font-size:22px;color:#d9c7ff;opacity:.7;animation:rbBurst 1.6s ease-out infinite}.rb-win-actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:20px}.rb-win-actions .btn{min-width:150px}
+.rb-admin-panel{overflow:hidden}.rb-admin-settings{padding:16px;border-radius:18px;background:rgba(4,7,15,.42);border:1px solid rgba(100,115,160,.18)}.rb-admin-toolbar{padding-top:4px}.rb-admin-weight-meta{display:block;color:#7f8ca5;font-size:12px;margin-top:4px}.rb-admin-tip{margin-top:14px;padding:12px 14px;border-radius:14px;background:rgba(79,124,255,.07);border:1px solid rgba(79,124,255,.18);color:#9caaca;font-size:12px;line-height:1.5}.rb-admin-panel .table-wrap{overflow:auto;border-radius:16px;border:1px solid rgba(80,95,140,.18)}.rb-admin-panel table{min-width:1180px}.rb-admin-panel th{position:sticky;top:0;background:#0b1020;z-index:2}.rb-admin-panel td,.rb-admin-panel th{border-color:rgba(80,95,140,.16)!important}.rb-admin-panel td{vertical-align:middle}.rb-admin-panel td .input{min-width:105px}.rb-admin-panel .rb-p-title{min-width:190px}.rb-admin-panel .rb-p-product{min-width:220px}.rb-admin-panel .rb-p-chance{font-weight:900;color:#cdbdff;white-space:nowrap}.rb-admin-panel .rb-is-ahk{background:rgba(75,116,255,.035)}
+@keyframes rbFloat{0%,100%{transform:rotate(-4deg) translateY(0)}50%{transform:rotate(3deg) translateY(-10px)}}@keyframes rbOrbit{to{transform:rotate(360deg)}}@keyframes rbBurst{0%{transform:scale(.8);opacity:0}30%{opacity:.8}100%{transform:scale(1.35);opacity:0}}
+@media(max-width:1050px){.rb-hero{grid-template-columns:1fr 1fr!important}.rb-box-art{grid-row:span 2}.rb-copy{padding-left:0}.rb-prizes{grid-column:2}}
+@media(max-width:720px){.topbar{backdrop-filter:blur(16px)!important}.rb-hero{grid-template-columns:1fr!important;padding:16px!important}.rb-box-art{grid-row:auto;min-height:250px}.rb-question{width:160px!important;height:160px!important;font-size:88px!important}.rb-copy h2{font-size:39px!important}.rb-open-btn{width:100%;min-width:0}.rb-price{width:100%}.rb-prizes{grid-column:auto}.rb-feature-pills span{font-size:10px}.rb-admin-settings{grid-template-columns:1fr!important}.rb-admin-wide{grid-column:auto!important}.rb-admin-panel .table-wrap{margin-left:-4px;margin-right:-4px}.rb-admin-panel table{min-width:1050px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.001ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition:none!important}}
+</style>
+
 </head>
 <body>
-<header>
-<div class="top">
-<div class="logo">⚡ PPS <span>HELP AMAZING</span></div>
-<nav>
-<button class="active" data-page="home">Главная</button>
-<button data-page="shop">Магазин</button>
-<button data-page="market">Площадка</button>
-<button data-page="builds">Сборки</button>
-<button data-page="faq">FAQ</button>
-</nav>
-<div class="actions">
-<button class="plain" onclick="go('purchases')">▣ Мои покупки <span id="purchaseCount">0</span></button>
-<button class="outline" onclick="login()">👤 Войти</button>
-<button class="primary" onclick="go('cart')">🛒 Корзина <span id="count">0</span></button>
-</div>
-</div>
+<header class="topbar">
+  <div class="container nav">
+    <button class="brand nav-go" data-view="home" aria-label="На главную">
+      <span class="logo" id="siteLogo"><span id="siteLogoLetter">A</span><img id="siteLogoImage" class="site-logo-image hidden" alt=""></span>
+      <span class="brand-copy neo-wordmark"><strong id="siteNameText">Cruz-amazing.online</strong><small id="siteTaglineText">AMAZING ONLINE STORE</small></span>
+    </button>
+    <button id="mobileMenuBtn" class="mobile-menu-btn" type="button" aria-label="Открыть меню" aria-controls="mainNav" aria-expanded="false">☰</button>
+    <nav id="mainNav">
+      <button class="nav-go" data-view="home">Главная</button>
+      <button id="catalogNavBtn" type="button">Магазин</button><button id="randomBoxNavBtn" type="button">🎁 Random Box</button>
+      <button class="nav-go marketplace-nav-btn" data-view="marketplace">Площадка</button>
+      <button class="nav-go" data-view="builds">Сборки</button>
+      <button id="faqNavBtn" class="faq-scroll-btn">FAQ</button>
+      <button id="adminNav" class="nav-go hidden" data-view="admin">Админ</button>
+    </nav>
+    <div class="nav-actions neo-nav-actions">
+      <button class="neo-status-chip nav-go" data-view="updates" type="button"><span>◉</span><div><b>Обновления</b><small>Регулярно</small></div></button>
+      <button class="neo-status-chip nav-go" data-view="support-info" type="button"><span>◌</span><div><b>Поддержка</b><small>24/7 онлайн</small></div></button>
+      <button id="notificationBtn" class="icon-btn notification-btn" type="button" title="Уведомления" aria-label="Уведомления">🔔<span id="notificationCount" class="notification-count hidden">0</span></button>
+      <button id="purchasesQuickBtn" class="purchases-chip nav-go" data-view="library" type="button"><span>▣</span><span>Мои покупки</span><b id="purchasesQuickCount">0</b></button>
+      <button id="mobileAccountBtn" class="icon-btn mobile-account-btn" type="button" title="Личный кабинет" aria-label="Личный кабинет"><span id="mobileAccountIcon">👤</span></button>
+      <button id="accountBtn" class="account-chip">Войти</button>
+      <button id="cartBtn" class="cart-chip"><span class="cart-glyph">🛒</span><span>Корзина</span><span id="cartCount" class="count">0</span></button>
+    </div>
+  </div>
 </header>
+<div id="siteAnnouncement" class="site-announcement hidden" role="status"><div class="container site-announcement-inner"><span id="announcementIcon">📣</span><b id="announcementText"></b></div></div>
+
 <main>
-<section class="page active" id="home">
-<div class="hero">
-<div class="eyebrow">⚡ PPS HELP AMAZING STORE</div>
-<h1>Игровые решения<br><span>нового поколения</span></h1>
-<p>AHK-инструменты, цифровые продукты и настройки для твоего игрового проекта.</p>
-<div class="actions-row">
-<button class="primary" onclick="go('shop')">Перейти в магазин →</button>
-<button class="outline" onclick="go('purchases')">Мои покупки</button>
-</div>
-</div>
-<div class="section-title"><h2>LIVE MARKET</h2></div>
-<div class="box">
-<h2>Игроки продают игрокам</h2>
-<p class="muted">Каталог пользовательских цифровых товаров. Публикации, проверка продавцов и защищённые сделки требуют серверной части.</p>
-<button class="primary" onclick="go('market')">Открыть торговую площадку</button>
-<button class="outline" onclick="go('market')">＋ Начать продавать</button>
-</div>
-<div class="features">
-<div class="feature">🛡️ <b>Проверка файлов</b><p>Публикуй только разрешённые материалы.</p></div>
-<div class="feature">⏳ <b>Защита сделки</b><p>Для настоящих сделок необходим сервер.</p></div>
-<div class="feature">⚖️ <b>Поддержка</b><p>Раздел для обращений и вопросов.</p></div>
-</div>
-<div class="section-title"><h2>Лучшие решения</h2><button class="plain" onclick="go('shop')">Перейти в магазин →</button></div>
-<div class="searchrow"><input id="homeSearch" placeholder="⌕ Поиск товаров: AHK, сборки, инструменты..." oninput="render()"></div>
-<div class="grid" id="featured"></div>
-<div class="section-title"><h2>AMZ HUB — инструменты</h2><button class="plain" onclick="go('shop')">Все инструменты →</button></div>
-<div class="box"><h3>Как работает магазин</h3><div class="features">
-<div class="feature"><b>01 · Выберите продукт</b><p>Найдите подходящий товар в каталоге.</p></div>
-<div class="feature"><b>02 · Оформите заказ</b><p>Проверьте состав заказа перед оплатой.</p></div>
-<div class="feature"><b>03 · Получите доступ</b><p>В полноценном магазине доступ открывается после подтверждения платежа.</p></div>
-</div></div>
-<div class="section-title"><h2>FAQ и инструкции</h2></div>
-<div class="box"><p class="muted">Ответы на вопросы о товарах, заказах и настройках.</p><button class="outline" onclick="go('faq')">Открыть FAQ</button></div>
-</section>
+  <section id="view-home" class="view active neo-home-view">
+    <div class="neo-home-bg" aria-hidden="true"><i></i><i></i><i></i></div>
 
-<section class="page" id="shop">
-<div class="section-title"><h2>Магазин</h2><span class="muted">Каталог цифровых продуктов</span></div>
-<div class="searchrow"><input id="shopSearch" placeholder="Поиск по товарам..." oninput="render()"><select id="category" onchange="render()" style="max-width:200px"><option value="all">Все категории</option><option value="AHK">AHK</option><option value="Tools">Инструменты</option><option value="Guide">Инструкции</option></select></div>
-<div class="grid" id="products"></div>
-</section>
+    <div class="container neo-hero-layout">
+      <section class="neo-hero-card neo-glow-card" id="neoHeroCard">
+        <div class="neo-hero-copy">
+          <span class="neo-mini-kicker" id="heroEyebrow">⚡ CRUZ AMAZING STORE</span>
+          <h1><span id="heroTitleBefore">Игровые решения</span><span id="heroTitleAccent">нового поколения</span><span id="heroTitleAfter" class="neo-title-tail"></span></h1>
+          <p id="heroDescription">Премиальные AHK-скрипты, приватные сборки и инструменты для тех, кто играет на шаг впереди.</p>
+          <div class="neo-hero-actions">
+            <a id="heroPrimaryButton" class="btn primary neo-primary" href="#catalog">Перейти в магазин</a>
+            <button id="openLibraryHero" class="btn ghost neo-ghost" type="button">Мои покупки</button>
+          </div>
+          <div class="neo-hero-mini-features">
+            <div><span id="heroCardItem1Icon">◇</span><p><b id="heroCardItem1Title">Качество</b><small id="heroCardItem1Status">Проверено тысячами</small></p><em id="heroCardItem1Action">✓</em></div>
+            <div><span>♢</span><p><b>Безопасность</b><small id="heroCardLockedText">Приватные решения</small></p></div>
+            <div><span id="heroCardItem2Icon">◌</span><p><b id="heroCardItem2Title">Поддержка</b><small id="heroCardItem2Status">Помощь 24/7</small></p><em id="heroCardItem2Action">24/7</em></div>
+          </div>
+          <button class="quest-hidden-mark hidden" data-quest-spot="hero" type="button" aria-label="Секрет">✦</button>
+          <span id="heroCardTitle" class="hidden">CRUZ AMAZING</span><span id="heroCardLockedTitle" class="hidden">Безопасность</span>
+        </div>
+        <div class="neo-hero-art" aria-hidden="true">
+          <div class="neo-art-triangle"></div>
+          <img src="public/assets/hero-figure.webp" alt="" decoding="async" fetchpriority="high">
+          <div id="heroShowcaseImageWrap" class="hero-showcase-image-wrap neo-admin-showcase hidden"><img id="heroShowcaseImage" alt=""></div>
+        </div>
+      </section>
 
-<section class="page" id="market">
-<div class="hero"><div class="eyebrow">CRUZ-STYLE MARKET · PPS</div><h1>Новый рынок<br><span>PPS Market</span></h1><p>Раздел цифровых объявлений. Для реальных продаж нужны серверная модерация, обработка заказов и безопасная платёжная система.</p><button class="primary" onclick="alert('Демонстрация. Подключи сервер для публикации объявлений.')">＋ Начать продавать</button></div>
-<div class="section-title"><h2>Площадка</h2></div>
-<div class="features"><div class="feature">✓ <b>Модерация</b><p>Проверка объявлений.</p></div><div class="feature">✓ <b>Защита сделки</b><p>Статусы заказа на сервере.</p></div><div class="feature">✓ <b>Отзывы</b><p>Отзывы после подтверждённых покупок.</p></div></div>
-<div class="section-title"><h2>Калькулятор продавца</h2></div>
-<div class="box"><label>Цена товара, ₽</label><input id="sellerPrice" type="number" min="0" value="1000" oninput="calcSeller()"><p>Условная комиссия 5%: <b id="fee">50 ₽</b></p><p>Остаток: <b id="sellerNet">950 ₽</b></p><p class="small">Пример расчёта, не связанный с реальными платежами.</p></div>
-</section>
+      <aside class="neo-hero-stats" aria-label="Преимущества магазина">
+        <div class="neo-stat-card"><strong id="heroProducts">0</strong><span id="heroStat1Label">товаров<br>в каталоге</span><i>◎</i></div>
+        <div class="neo-stat-card"><strong>2</strong><span>отдельные<br>AHK-линейки</span><i>◈</i></div>
+        <div class="neo-stat-card"><strong id="heroStat2Value">24/7</strong><span id="heroStat2Label">поддержка<br>и доступ</span><i>ϟ</i></div>
+        <div class="hidden"><span id="paymentModeLabel">Баланс</span><span id="heroStat3Label">Оплата</span></div>
+      </aside>
+    </div>
 
-<section class="page" id="builds">
-<div class="hero"><div class="eyebrow">PPS · GAME BUILDS</div><h1>Игровые<br><span>сборки</span></h1><p>Каталог сборок и комплектов. Добавь собственные товары и описания.</p></div>
-<div class="section-title"><h2>Каталог сборок</h2></div>
-<div class="box"><input id="buildSearch" placeholder="Поиск сборки..." oninput="renderBuilds()"></div>
-<div class="grid" id="buildGrid"></div>
-</section>
+    <section class="container marketplace-spotlight neo-glow-card" aria-labelledby="marketplaceSpotlightTitle">
+      <div class="marketplace-spotlight-copy"><span class="market-live-dot">LIVE MARKET</span><h2 id="marketplaceSpotlightTitle">Игроки продают игрокам — безопасно через CRUZ Market</h2><p>Выставляйте цифровые товары после модерации, получайте оплату на защищённый баланс и решайте спорные сделки вместе с администратором.</p><div class="marketplace-spotlight-actions"><button class="btn primary nav-go" data-view="marketplace" type="button">Открыть торговую площадку</button><button class="btn ghost" type="button" onclick="openMarketplaceListingForm()">＋ Начать продавать</button></div></div>
+      <div class="marketplace-spotlight-proof"><div><b>🛡️</b><span>Проверка файлов</span><small>Запрещены программы и скрипты</small></div><div><b>⏳</b><span>Защита сделки</span><small>Деньги удерживаются до подтверждения</small></div><div><b>⚖️</b><span>Споры с админом</span><small>Покупатель и продавец в одном чате</small></div></div>
+      <div id="marketplaceHomePicks" class="marketplace-home-picks" aria-live="polite"></div>
+    </section>
 
-<section class="page" id="cart">
-<div class="section-title"><h2>Корзина</h2></div>
-<div class="box" id="cartList"></div>
-<div class="box"><div class="item"><b>Итого</b><b id="total">0 ₽</b></div><p class="small">Демонстрационный заказ: оплата не подключена.</p><button class="primary" onclick="checkout()">Оформить заказ</button></div>
-</section>
+    <div id="catalog" class="container neo-catalog-shell">
+      <div class="neo-search-row">
+        <label class="neo-search-box"><span>⌕</span><input id="search" class="input" placeholder="Поиск по товарам: AHK, сборки, софт..."></label>
+        <select id="orgFilter" class="input neo-org-select"><option value="all">Все организации</option></select>
+      </div>
 
-<section class="page" id="purchases">
-<div class="section-title"><h2>Мои покупки</h2></div>
-<div class="box"><p class="muted" id="purchasesText">Войди в аккаунт, чтобы увидеть свою библиотеку.</p><button class="primary" onclick="login()">Войти</button></div>
-</section>
+      <div class="neo-category-tabs" id="neoCategoryTabs">
+        <button class="active" type="button" data-quick="popular">☆ <span>Популярные</span></button>
+        <button class="nav-go" data-view="builds" type="button">🎮 <span>Игровые сборки</span></button>
+        <button type="button" data-quick="ahk">‹/› <span>Приватные AHK</span></button>
+        <button type="button" data-quick="hub">△ <span>AMZ HUB</span></button>
+        <button type="button" data-quick="packs">▱ <span>Бандлы</span></button>
+        <button type="button" data-quick="other">••• <span>Другое</span></button>
+      </div>
 
-<section class="page" id="faq">
-<div class="section-title"><h2>FAQ и инструкции</h2></div>
-<div class="box"><h3>Как купить товар?</h3><p class="muted">Выбери товар, добавь его в корзину и проверь итоговую сумму. Для настоящей оплаты необходимо подключить сервер.</p><hr><h3>Где мои покупки?</h3><p class="muted">Раздел «Мои покупки» предназначен для библиотеки приобретённых материалов.</p><hr><h3>Как получить помощь?</h3><p class="muted">В рабочей версии здесь размещаются контакты поддержки и система тикетов.</p></div>
-</section>
+      <div class="section-title neo-catalog-title"><div><span id="catalogEyebrow" class="eyebrow">CRUZ / STORE</span><h2 id="catalogTitle">Лучшие решения</h2><p id="catalogDescription">Два флагманских AHK и остальные продукты магазина.</p></div><span id="catalogMeta"></span></div>
+      <div id="products" class="product-grid neo-product-grid"></div>
+      <div class="quest-mark-row"><button class="quest-hidden-mark hidden" data-quest-spot="catalog" type="button" aria-label="Секрет">✦</button></div>
+    </div>
 
-<section class="page" id="profile">
-<div class="section-title"><h2>Личный кабинет</h2></div>
-<div class="box"><h3 id="welcome">Профиль</h3><p class="muted">Демонстрационный профиль браузера, не защищённый серверной авторизацией.</p><button class="outline" onclick="go('purchases')">Мои покупки</button><button class="outline" onclick="logout()">Выйти</button></div>
-</section>
 
-<section class="page" id="support">
-<div class="section-title"><h2>Поддержка</h2></div>
-<div class="box"><p>Для вопросов об оплате в рабочей версии указывается номер заказа. Не отправляй пароли и данные банковских карт.</p><label>Тема обращения</label><input placeholder="Оплата, доступ, вопрос"><br><br><label>Сообщение</label><input placeholder="Опиши свой вопрос"><br><br><button class="primary" onclick="alert('Для отправки обращений нужен сервер.')">Отправить обращение</button></div>
-</section>
+    <section id="randomBox" class="container rb-shell">
+      <div class="rb-hero">
+        <div class="rb-box-art"><div class="rb-question">?</div><div class="rb-glow"></div></div>
+        <div class="rb-copy"><div class="rb-kickers"><span class="eyebrow">CRUZ / RANDOM</span><span class="rb-live-chip">● LIVE DROP</span></div><h2 id="rbTitle">RANDOM BOX</h2><p id="rbDescription">Открой коробку и получи случайный приз.</p><div class="rb-price"><b id="rbPrice">50 ₽</b><span>за открытие</span></div><button id="rbOpenBtn" class="btn primary rb-open-btn" type="button">🎁 Открыть за 50 ₽</button><div class="rb-feature-pills"><span>⚡ Мгновенная выдача</span><span>🛡️ Серверный RNG</span><span>🎯 Честные шансы</span></div><small class="rb-note">Результат определяется сервером. Шансы указаны открыто.</small></div>
+        <div class="rb-prizes"><div class="rb-panel-title"><b>Что можно выиграть?</b><span id="rbPrizeCount"></span></div><div id="rbPrizeList" class="rb-prize-list"></div></div>
+      </div>
+      <div class="rb-recent"><div class="rb-panel-title"><b>🔥 Последние выигрыши</b><button id="rbMyHistoryBtn" class="btn ghost small" type="button">Моя история</button></div><div id="rbRecentList" class="rb-recent-list"></div></div>
+      <div id="rbStage" class="rb-stage hidden"><div class="rb-pointer"></div><div id="rbTrack" class="rb-track"></div><div class="rb-stage-status">Открываем коробку…</div></div>
+    </section>
+    <section class="container neo-split-panels">
+      <div id="neoOffersPanel" class="neo-offers-panel neo-glow-card">
+        <div class="neo-panel-head"><div><span class="neo-panel-icon">♨</span><b id="offersPanelTitle">ЛУЧШИЕ ПРЕДЛОЖЕНИЯ</b><small id="offersPanelSubtitle">Популярные товары с лучшими условиями</small></div><button id="catalogFocusBtn" class="neo-outline-link" type="button">Перейти в магазин →</button></div>
+        <div id="popularProducts" class="neo-popular-mini-grid"></div>
+      </div>
+      <div id="neoToolsPanel" class="neo-tools-panel neo-glow-card">
+        <div class="neo-panel-head"><div><span class="neo-panel-icon">▱</span><b id="toolsPanelTitle">AMZ HUB — ИНСТРУМЕНТЫ</b><small id="toolsPanelSubtitle">Профессиональные инструменты для работы и развлечений</small></div><button id="toolsPanelButton" class="neo-outline-link" type="button">Все инструменты →</button></div>
+        <div id="neoToolGrid" class="neo-tool-grid"></div>
+        <div id="neoToolsFoot" class="neo-tools-foot"></div>
+      </div>
+    </section>
+
+    <div id="neoTrustStrip" class="container neo-trust-strip"></div>
+
+    <div class="container recent-purchases-section neo-lower-section">
+      <div class="section-title"><div><span class="eyebrow">Активность магазина</span><h2>Недавно купили</h2><p>Последние оплаченные покупки без публикации данных покупателей.</p></div><span id="recentPurchasesMeta"></span></div>
+      <div id="recentPurchases" class="recent-purchases-list"><div class="empty compact-empty">Загружаем покупки…</div></div>
+    </div>
+
+    <div class="container how neo-lower-section">
+      <div class="section-title"><div><h2>Как работает магазин</h2><p>Выбор → оплата → доступ в личном кабинете.</p></div></div>
+      <div class="steps"><article><strong>01</strong><h3>Выберите продукт</h3><p>Добавьте товар в корзину и выберите подходящий срок доступа.</p></article><article><strong>02</strong><h3>Оплатите</h3><p>Оплата с баланса или доступным платёжным способом.</p></article><article><strong>03</strong><h3>Получите доступ</h3><p>Покупка сразу появляется в личном кабинете и библиотеке.</p></article></div>
+    </div>
+
+    <div id="questTeaser" class="container quest-teaser hidden"><span>🕵️</span><div><b>Скрытый промокод-квест активен</b><p id="questHint">Ищите секретную метку на сайте.</p></div></div>
+
+    <div id="faq" class="container faq-section neo-lower-section">
+      <div class="section-title"><div><span class="eyebrow">Помощь</span><h2>FAQ и инструкции</h2><p>Ответы на основные вопросы о покупке, лицензиях и получении продуктов.</p></div></div>
+      <div id="faqList" class="faq-list"><div class="empty">Загружаем инструкции…</div></div><div class="quest-mark-row"><button class="quest-hidden-mark hidden" data-quest-spot="faq" type="button" aria-label="Секрет">✦</button></div>
+    </div>
+
+    <div class="container disclaimer neo-disclaimer"><span>⚠️</span><div><b>Неофициальный фан-проект.</b><p>Не является официальным ресурсом Amazing Online.</p></div></div>
+  </section>
+  <section id="view-marketplace" class="view container page marketplace-page">
+    <div class="marketplace-hero">
+      <div class="marketplace-hero-copy"><span class="eyebrow">⚡ CRUZ MARKET · PLAYER TO PLAYER</span><h1>Новый рынок Amazing Online</h1><p>Покупайте готовые товары или создавайте заказ на бирже. Публикации и файлы проверяются, деньги удерживаются до получения, а отзывы доступны только после настоящей сделки.</p><div class="marketplace-trust-chips"><span>✓ Модерация</span><span>✓ Защита сделки</span><span>✓ Проверка файлов</span><span>✓ Чат спора</span><span>✓ Честные отзывы</span><span>✓ Подписки на продавцов</span></div></div>
+      <div class="marketplace-hero-actions"><button class="btn primary market-cta" type="button" onclick="openMarketplaceListingForm()">＋ Выставить товар</button><button class="btn request" type="button" onclick="openMarketplaceRequestForm()">✦ Создать заказ</button><button class="btn ghost" type="button" onclick="openSellerCenter()">💼 Кабинет продавца</button><button class="btn ghost" type="button" onclick="openSellerCenter('purchases')">▣ Мои покупки</button></div>
+    </div>
+    <section class="marketplace-launch-program">
+      <div><span class="eyebrow">🚀 ПРОГРАММА ДЛЯ НОВЫХ ПРОДАВЦОВ</span><h2>Начать продавать проще</h2><p>Понятные условия старта, дополнительная видимость товара и бонус за приглашённого покупателя.</p></div>
+      <div class="marketplace-launch-benefits"><span><b>5</b> первых успешных продаж без комиссии</span><span><b>★</b> значок «Первый продавец CRUZ Market»</span><span><b>⚡</b> одно бесплатное продвижение на главной</span><span><b>🔥</b> еженедельная подборка лучших товаров</span><span><b>＋</b> бонус за приглашённого покупателя</span><span><b>3</b> рабочих дня — прозрачный срок вывода</span></div>
+    </section>
+    <div id="marketplaceStats" class="marketplace-stats"></div>
+    <section id="marketplaceWeeklySection" class="marketplace-curated-section hidden"><div class="marketplace-section-head"><div><span class="eyebrow">🔥 ВЫБОР НЕДЕЛИ</span><h2>Лучшее в CRUZ Market</h2></div><small>Подборка строится по успешным продажам, отзывам и качеству сделок.</small></div><div id="marketplaceWeeklyGrid" class="marketplace-mini-grid"></div></section>
+    <section id="marketplaceRecommendationsSection" class="marketplace-curated-section hidden"><div class="marketplace-section-head"><div><span class="eyebrow">✨ ДЛЯ ВАС</span><h2>Персональные рекомендации</h2></div><small>На основе ваших покупок и подписок на продавцов.</small></div><div id="marketplaceRecommendationsGrid" class="marketplace-mini-grid"></div></section>
+    <div class="marketplace-toolbar"><label class="marketplace-search"><span>⌕</span><input id="marketplaceSearch" class="input" placeholder="Поиск по площадке..."></label><select id="marketplaceCategory" class="input"><option value="all">Все категории</option></select><select id="marketplaceSort" class="input"><option value="new">Сначала новые</option><option value="cheap">Сначала дешевле</option><option value="expensive">Сначала дороже</option><option value="sales">По продажам</option></select></div>
+    <div id="marketplaceGrid" class="marketplace-grid"><div class="empty">Загружаем торговую площадку…</div></div>
+    <section class="marketplace-request-exchange">
+      <div class="marketplace-section-head"><div><span class="eyebrow">✦ БИРЖА ЗАКАЗОВ</span><h2>Не нашли готовый товар?</h2><p>Опишите задачу и бюджет. Продавцы предложат цену и срок, а оплата останется под защитой CRUZ Market.</p></div><button class="btn primary" type="button" onclick="openMarketplaceRequestForm()">Создать запрос</button></div>
+      <div id="marketplaceRequestsGrid" class="marketplace-requests-grid"><div class="empty">Загружаем запросы покупателей…</div></div>
+    </section>
+    <section class="marketplace-commission-calculator">
+      <div><span class="eyebrow">₽ ПРОЗРАЧНЫЕ УСЛОВИЯ</span><h2>Калькулятор продавца</h2><p>До публикации видно, сколько удержит площадка и какая сумма поступит после завершения защиты сделки.</p></div>
+      <label><span>Цена товара, ₽</span><input id="marketplaceCommissionPrice" class="input" type="number" min="1" max="1000000" step="1" value="1000"></label>
+      <div id="marketplaceCommissionResult" class="marketplace-calculator-result"></div>
+    </section>
+    <div class="marketplace-rules"><div><b>🛡️ Безопасная публикация</b><span>Каждое объявление проходит модерацию, а изображения пересобираются без скрытых данных.</span></div><div><b>🔎 Проверка файлов</b><span>Исполняемые файлы и скрипты запрещены; ZIP проверяется изнутри.</span></div><div><b>⏳ Защита сделки</b><span>Деньги продавца удерживаются до подтверждения покупателя или окончания срока защиты.</span></div><div><b>⚖️ Спор</b><span>Покупатель, продавец и администратор общаются в одном чате сделки.</span></div></div>
+  </section>
+  <section id="view-builds" class="view container page builds-page">
+    <div class="page-head"><div><span class="eyebrow">🎮 Отдельный раздел магазина</span><h1>Игровые сборки</h1><p>Готовые игровые сборки и комплекты для Amazing Online. В этом разделе отображаются только товары типа «Сборка».</p></div></div>
+    <div class="builds-hero-note"><span>🧩</span><div><b>Всё необходимое одним комплектом</b><p>Выберите подходящую сборку, добавьте её в корзину и оформите покупку обычным способом через баланс или Т-Банк.</p></div></div>
+    <div class="section-title"><div><h2>Каталог сборок</h2><p>Найдите сборку по названию, описанию или категории.</p></div><span id="buildCatalogMeta"></span></div>
+    <div class="filters"><input id="buildSearch" class="input" placeholder="Поиск сборки…"><select id="buildOrgFilter" class="input"><option value="all">Все категории</option></select></div>
+    <div id="buildProducts" class="product-grid"><div class="empty">Сборки загружаются…</div></div>
+  </section>
+
+  <section id="view-updates" class="view container page updates-page">
+    <div class="page-head"><div><span class="eyebrow">История проекта</span><h1>Обновления сайта</h1><p>Новые функции, исправления и изменения Cruz-amazing.</p></div></div>
+    <div id="siteUpdatesList" class="site-updates-list"><div class="empty">Загружаем обновления…</div></div>
+  </section>
+
+  <section id="view-pricing" class="view container page legal-page pricing-page">
+    <div class="page-head"><div><span class="eyebrow">Прозрачная стоимость</span><h1>Тарифы и цены</h1><p>До оплаты пользователь видит итоговую стоимость и понимает, какой цифровой материал получает.</p></div></div>
+    <div class="pricing-intro"><article><span>🛒</span><div><b>Разовая покупка</b><p>Оплачивается выбранный материал из каталога. После подтверждения оплаты доступ открывается в личной библиотеке аккаунта.</p></div></article><article><span>⭐</span><div><b>Premium-доступ</b><p id="premiumPricingText">Доступ ко всем активным материалам на срок подписки. Стоимость и срок задаются администрацией.</p><button class="btn primary small" type="button" onclick="openPremium()">Оформить Premium</button></div></article><article><span>🎟️</span><div><b>Подарочный сертификат</b><p>Номинал от 50 до 100 000 ₽. Сертификат создаётся с баланса и может быть активирован другим пользователем на его баланс.</p></div></article></div>
+    <div class="section-title"><div><h2>Актуальные цены материалов</h2><p>Цена каждого товара берётся непосредственно из каталога и обновляется вместе с ним.</p></div></div>
+    <div id="pricingProducts" class="pricing-grid"><div class="empty">Загружаем цены…</div></div>
+    <div class="legal-note"><b>Что входит в стоимость</b><p>Доступ к выбранному цифровому материалу в рамках аккаунта после подтверждения оплаты. Содержание конкретного материала, его цена и возможная скидка указываются в карточке товара до оформления заказа.</p></div>
+  </section>
+
+  <section id="view-support-info" class="view container page legal-page">
+    <div class="page-head"><div><span class="eyebrow">Обратная связь</span><h1>Поддержка</h1><p>Связаться с администрацией <span class="legal-app-name">Cruz-amazing</span> можно через тикет-систему сайта и дополнительные контакты, если они указаны администрацией.</p></div></div>
+    <div id="publicSupportContacts" class="contact-grid"></div>
+    <div class="legal-note"><b>Перед обращением</b><p>Для вопросов об оплате укажите номер заказа. Для вопросов о доступе — e-mail аккаунта и название материала. Не отправляйте пароли, паспортные данные или данные банковской карты.</p></div>
+  </section>
+
+  <section id="view-privacy" class="view container page legal-page">
+    <div class="page-head"><div><span class="eyebrow">Документы</span><h1>Политика конфиденциальности</h1><p>Редакция от 21 августа 2026 года</p></div></div>
+    <article class="legal-document">
+      <h2>1. Общие положения</h2><p>Настоящая Политика регулирует обработку информации пользователей сайта <b class="legal-app-name">Cruz-amazing</b> (далее — «Сервис»). Используя Сервис, Пользователь подтверждает ознакомление с Политикой. При несогласии с её условиями следует прекратить использование Сервиса.</p>
+      <h2>2. Какие данные могут обрабатываться</h2><p>Для работы аккаунта и функций Сервиса могут обрабатываться e-mail, никнейм, внутренний идентификатор аккаунта, история заказов и обращений в поддержку, сведения о балансе и действиях внутри Сервиса. Сервер и хостинг также могут технически обрабатывать IP-адрес, сведения о браузере, устройстве, cookies и идентификатор сессии.</p><p>Сервис не требует паспортные данные, фотографии документов для обычного использования сайта.</p>
+      <h2>3. Цели обработки</h2><p>Данные используются для регистрации и авторизации, предоставления доступа к приобретённым материалам, обработки заказов и баланса, работы бонусных и реферальных функций, предотвращения злоупотреблений, поддержки пользователей, внутренних уведомлений, анализа и улучшения Сервиса.</p><p>Для работы торговой площадки также обрабатываются объявления и запросы на бирже, предложения продавцов, история сделок, подтверждённые отзывы и ответы на них, подписки на продавцов, статусы удержания и выплат, сообщения в спорах и решения администрации. Подписки и история покупок могут использоваться для персональных рекомендаций. Переписка спора доступна покупателю, продавцу и уполномоченным сотрудникам Сервиса.</p>
+      <h2>4. Передача третьим лицам</h2><p>Информация может передаваться третьим лицам только в объёме, необходимом для работы хостинга, связи, платёжной инфраструктуры или исполнения требований применимого законодательства. Администрация не продаёт пользовательские данные.</p>
+      <h2>5. Хранение и защита</h2><p>Данные хранятся столько, сколько это необходимо для работы Сервиса, исполнения обязательств и соблюдения применимых требований. Администрация принимает разумные организационные и технические меры защиты, при этом абсолютная безопасность передачи информации через интернет не может быть гарантирована.</p>
+      <h2>6. Права пользователя</h2><p>Пользователь может обратиться в поддержку по вопросам своих данных, их уточнения или удаления, если сохранение конкретной информации не требуется для исполнения обязательств или по закону.</p>
+      <h2>7. Cookies и сессии</h2><p>Сервис использует технические cookies/идентификаторы сессии, необходимые для входа в аккаунт и сохранения авторизации. Отключение таких cookies может нарушить работу личного кабинета.</p>
+      <h2>8. Изменения Политики</h2><p>Актуальная редакция постоянно публикуется на этой странице. При существенных изменениях дата редакции обновляется.</p>
+      <h2>9. Контакты</h2><p>По вопросам конфиденциальности Пользователь может обратиться через раздел «Поддержка» и тикет-систему сайта.</p>
+    </article>
+  </section>
+
+  <section id="view-agreement" class="view container page legal-page">
+    <div class="page-head"><div><span class="eyebrow">Документы</span><h1>Пользовательское соглашение</h1><p>Редакция от 21 августа 2026 года</p></div></div>
+    <article class="legal-document">
+      <h2>1. Общие положения</h2><p>Настоящее Соглашение определяет правила использования сайта <b class="legal-app-name">Cruz-amazing</b> (далее — «Сервис»). Регистрация, оформление заказа, пополнение баланса или использование иных функций означает принятие условий Соглашения.</p>
+      <h2>2. Характер Сервиса</h2><p>Сервис предоставляет цифровые информационные материалы, связанные с игровым проектом Amazing Online: авторские подборки, памятки, инструкции, чек-листы и иные цифровые продукты. В разделе CRUZ Market Сервис предоставляет техническую площадку, на которой зарегистрированные пользователи могут размещать разрешённые цифровые товары после модерации. Сервис является независимым фан-проектом и не заявляет о своей официальной связи с Amazing Online или AMAZING.GG.</p>
+      <h2>3. Стоимость и порядок оплаты</h2><p>Актуальная стоимость указывается в разделе «Тарифы и цены», карточках товаров и корзине до оформления заказа. На бирже заказов цена определяется выбранным предложением продавца. До публикации продавцу доступен калькулятор комиссии, а комиссия и сумма к получению фиксируются в сделке до оплаты. Пользователь оплачивает только выбранные позиции по итоговой сумме, отображённой перед оформлением. Доступ к готовому материалу предоставляется после подтверждения оплаты; результат заказа с биржи передаётся продавцом через защищённую выдачу.</p>
+      <h2>4. Цифровые материалы</h2><p>Материалы предоставляются для личного использования в пределах аккаунта Пользователя. Запрещено без разрешения правообладателя массово копировать, перепродавать, публиковать или передавать платные материалы третьим лицам.</p><p>На торговой площадке запрещены вредоносные программы, исполняемые файлы и скрипты, архивы с запрещённым содержимым, фишинговые и внешние ссылки на загрузку, незаконные материалы, чужие персональные данные и товары, на распространение которых у продавца нет прав. Модерация и автоматическая проверка снижают риск, но не заменяют осторожность пользователя и не дают абсолютной гарантии отсутствия ранее неизвестных угроз.</p>
+      <h2>5. Ответственность и использование материалов</h2><p>Информационные материалы предоставляются в текущем виде и могут обновляться. Пользователь самостоятельно проверяет актуальность игровых правил и требований соответствующих организаций. Сервис не гарантирует получение должности, прохождение собеседования или иной конкретный игровой результат.</p><p>Отзыв на торговой площадке может оставить только покупатель после завершённой оплаченной сделки. Продавец вправе опубликовать один ответ. Администрация может скрыть или удалить отзыв, содержащий угрозы, персональные данные, рекламу, внешние ссылки, заведомо ложные сведения или иные нарушения, но не изменяет оценку вместо автора.</p>
+      <h2>6. Возвраты и спорные ситуации</h2><p>Вопросы возврата, ошибочного платежа или непредоставленного доступа рассматриваются через поддержку с учётом обстоятельств и требований применимого законодательства. Пользователю рекомендуется сообщить номер заказа и описание проблемы как можно быстрее.</p><p>В CRUZ Market вознаграждение продавца удерживается на защищённом статусе до подтверждения получения покупателем либо окончания указанного срока. До завершения защиты покупатель может открыть спор; к переписке подключается администрация. По результату проверки средства могут быть разблокированы продавцу либо возвращены покупателю на внутренний баланс Сервиса. Возврат на исходный платёжный инструмент, если он требуется, оформляется отдельно с учётом правил платёжного провайдера.</p>
+      <h2>7. Аккаунт и ограничения</h2><p>Пользователь отвечает за сохранность данных входа и не должен передавать пароль третьим лицам. Администрация вправе ограничить доступ при злоупотреблениях, попытках вмешательства в работу Сервиса, распространении платных материалов или иных нарушениях настоящего Соглашения.</p>
+      <h2>8. Поддержка</h2><p>Основной канал обратной связи — тикет-система в разделе «Поддержка». Дополнительные контакты отображаются там же, если они настроены администрацией.</p>
+      <h2>9. Изменение условий</h2><p>Актуальная редакция Соглашения постоянно доступна на сайте. При изменении условий дата редакции обновляется.</p>
+    </article>
+  </section>
+  <section id="view-library" class="view container page">
+    <div class="page-head"><div><span class="eyebrow">Личный кабинет</span><h1>Мои покупки</h1><p id="librarySubtitle">Войдите, чтобы увидеть купленные материалы.</p></div><button id="libraryLoginBtn" class="btn primary">Войти</button></div>
+    <div class="library-section-title"><div><span>CRUZ Store</span><h2>Покупки в основном магазине</h2></div><button class="btn ghost small nav-go" data-view="home" type="button">В каталог</button></div>
+    <div id="libraryGrid" class="library-grid"></div>
+    <div class="library-section-title market"><div><span>CRUZ Market</span><h2>Покупки у игроков</h2><p>Получение товара, подтверждение сделки и спор с участием администратора.</p></div><button class="btn primary small nav-go" data-view="marketplace" type="button">Открыть площадку</button></div>
+    <div id="libraryMarketplacePurchases" class="library-market-purchases"><div class="empty compact-empty">Покупки появятся после входа.</div></div>
+  </section>
+
+  <section id="view-admin" class="view container page">
+    <div class="page-head"><div><span class="eyebrow">Управление магазином</span><h1>Админ-панель</h1><p>Товары, продажи и пользователи в одном месте.</p></div></div>
+    <div id="adminDenied" class="empty hidden">У этого аккаунта нет доступа к админ-панели.</div>
+    <div id="adminArea" class="hidden">
+      <div id="staffRoleNotice" class="staff-role-notice hidden"></div>
+      <nav class="admin-section-nav" aria-label="Разделы админ-панели">
+        <button class="admin-section-btn active" type="button" data-admin-target="dashboard">📊 Главная</button>
+        <button class="admin-section-btn" type="button" data-admin-target="orders">🧾 Заказы</button>
+        <button class="admin-section-btn admin-only" type="button" data-admin-target="products">📦 Товары</button><button class="admin-section-btn admin-only" type="button" data-admin-target="randombox">🎁 Random Box</button>
+        <button class="admin-section-btn admin-only" type="button" data-admin-target="serverfiles">🗂️ Файлы серверов</button>
+        <button class="admin-section-btn admin-only" type="button" data-admin-target="users">👥 Пользователи</button>
+        <button class="admin-section-btn admin-only" type="button" data-admin-target="ahklicenses">🛡️ Госс AHK</button>
+        <button class="admin-section-btn admin-only" type="button" data-admin-target="crimeahklicenses">🟥 Крим AHK</button>
+        <button class="admin-section-btn admin-only" type="button" data-admin-target="youtubers">🎬 Ютуберы</button>
+        <button class="admin-section-btn admin-only" type="button" data-admin-target="marketing">⭐ Premium / Акции</button>
+        <button class="admin-section-btn admin-only" type="button" data-admin-target="promos">🏷️ Промокоды</button>
+        <button class="admin-section-btn admin-only" type="button" data-admin-target="broadcast">📣 Рассылка</button>
+        <button class="admin-section-btn admin-only" type="button" data-admin-target="finance">💳 Финансы</button>
+        <button class="admin-section-btn admin-only" type="button" data-admin-target="marketplace">🛒 Торговая площадка</button>
+        <button class="admin-section-btn" type="button" data-admin-target="support">💬 Поддержка</button>
+        <button class="admin-section-btn" type="button" data-admin-target="reviews">⭐ Отзывы / FAQ</button>
+        <button class="admin-section-btn admin-only" type="button" data-admin-target="updates">↻ Обновления</button>
+        <button class="admin-section-btn admin-only" type="button" data-admin-target="settings">⚙️ Настройки</button>
+        <button class="admin-section-btn admin-only" type="button" data-admin-target="audit">🛡️ Журнал</button>
+      </nav>
+
+      <section class="panel rb-admin-panel admin-only">
+        <div class="panel-head"><div><h2>🎁 RANDOM BOX</h2><p>Полное управление ценой, призами, шансами и анимацией.</p></div><span id="rbAdminMeta" class="badge"></span></div>
+        <div class="rb-admin-settings"><label class="check"><input id="rbAdminEnabled" type="checkbox"><span>Бокс доступен пользователям</span></label><label><span>Цена открытия, ₽</span><input id="rbAdminPrice" class="input" type="number" min="1" step="0.01"></label><label><span>Длительность анимации, мс</span><input id="rbAdminAnimation" class="input" type="number" min="2500" max="12000" step="100"></label><label><span>Задержка между открытиями, сек</span><input id="rbAdminCooldown" class="input" type="number" min="0" max="60" step="1"></label><label class="rb-admin-wide"><span>Название</span><input id="rbAdminTitle" class="input" maxlength="80"></label><label class="rb-admin-wide"><span>Описание</span><textarea id="rbAdminDescription" class="input" rows="2" maxlength="300"></textarea></label></div>
+        <div class="rb-admin-toolbar"><div><h3>Призы и шансы</h3><span id="rbAdminWeightMeta" class="rb-admin-weight-meta">Суммарный вес: 0</span></div><button id="rbAddPrizeBtn" class="btn primary small" type="button">＋ Добавить приз</button></div>
+        <div class="table-wrap"><table class="stats-detail-table"><thead><tr><th>Название</th><th>Тип</th><th>Сумма</th><th>Срок</th><th>Вес</th><th>Шанс</th><th>Редкость</th><th>Активен</th><th>Действия</th><th>Товар AHK</th></tr></thead><tbody id="rbAdminPrizes"></tbody></table></div>
+        <div class="rb-admin-tip">💡 <b>Шансы считаются автоматически</b> из веса активных призов. Для AHK можно выбрать конкретный товар Amazing Control; если оставить «Автоматически», система возьмёт активный AHK Гос.</div><div class="rb-admin-actions"><button id="rbSaveAdminBtn" class="btn primary" type="button">Сохранить настройки</button><button id="rbClearHistoryBtn" class="btn danger" type="button">Очистить историю</button></div>
+        <div class="rb-admin-toolbar"><h3>Последние открытия</h3><span id="rbAdminHistoryMeta"></span></div><div id="rbAdminHistory" class="rb-admin-history"></div>
+      </section>
+      <div id="adminStats" class="stats-grid"></div>
+      <div class="stats-reset-row admin-only"><div><b>Статистика заказов и выручки</b><small id="statsResetMeta">За всё время</small></div><button id="resetStatsBtn" class="btn danger small" type="button">Сбросить статистику</button></div>
+      <div class="stats-reset-row youtuber-stats-reset-row admin-only"><div><b>🎬 Статистика промокодов Ютуберов</b><small id="youtuberStatsResetMeta">За всё время</small></div><button id="resetYoutuberStatsBtn" class="btn creator small" type="button">Обнулить статистику Ютуберов</button></div>
+      <section class="panel advanced-stats-panel"><div class="panel-head"><div><h2>Расширенная статистика</h2><p>Заказы, оплаты, средний чек, популярные товары и промокоды.</p></div><span class="badge">МСК</span></div><div id="advancedPeriodStats" class="advanced-period-grid"></div><div class="advanced-stats-columns"><div><h3>Топ товаров</h3><div id="statsTopProducts" class="rank-list"></div></div><div><h3>Промокоды</h3><div id="statsTopPromos" class="rank-list"></div></div><div><h3>Способы оплаты</h3><div id="statsPayments" class="rank-list"></div></div></div></section>
+      <section class="panel sales-funnel-panel admin-only"><div class="panel-head"><div><h2>📈 Воронка продаж</h2><p>Показы товара → клики покупки → созданные заказы → подтверждённые оплаты.</p></div><button id="resetFunnelBtn" class="btn ghost small" type="button">Сбросить воронку</button></div><div id="funnelTotals" class="funnel-totals"></div><div class="table-wrap"><table class="stats-detail-table"><thead><tr><th>Товар</th><th>Показы</th><th>Клики</th><th>Заказы</th><th>Оплачено</th><th>Показ → оплата</th></tr></thead><tbody id="funnelProducts"></tbody></table></div><small id="funnelStartedAt" class="funnel-started"></small></section>
+      <section class="panel stats-detail-panel admin-only"><div class="panel-head"><div><h2>Статистика по рефералам</h2><p>Кто приглашает пользователей, сколько приглашённых покупают и какую выручку они приносят после последнего сброса статистики.</p></div><span class="badge">Рефералы</span></div><div class="table-wrap"><table class="stats-detail-table"><thead><tr><th>Партнёр</th><th>Приглашено</th><th>Покупателей</th><th>Заказов</th><th>Выручка</th><th>Бонус</th></tr></thead><tbody id="statsReferrals"></tbody></table></div></section>
+      <section class="panel stats-detail-panel admin-only"><div class="panel-head"><div><h2>Статистика по промокодам</h2><p>Использования за всё время и результаты оплаченных заказов после последнего сброса статистики.</p></div><span class="badge">Промо</span></div><div class="table-wrap"><table class="stats-detail-table"><thead><tr><th>Промокод</th><th>Использований</th><th>Оплачено</th><th>Скидок</th><th>Выручка</th><th>Средний чек</th></tr></thead><tbody id="statsPromoDetails"></tbody></table></div></section>
+      <section class="panel site-settings-panel admin-only">
+        <div class="panel-head"><div><h2>Настройки сайта и оплаты</h2><p>Основные параметры сайта, ссылка на сбор Т-Банка и уведомления администрации.</p></div></div>
+        <form id="siteSettingsForm" class="settings-form settings-form-wide">
+          <label class="settings-wide"><span>Название сайта</span><input id="siteNameInput" class="input" maxlength="60" required placeholder="GovTips AO"></label>
+          <div class="settings-wide site-icon-setting"><div><span>Иконка сайта</span><small>PNG, JPG или WebP до 300 КБ. Показывается вместо буквы в шапке.</small></div><div class="site-icon-controls"><span class="site-icon-preview" id="siteIconPreview">G</span><label class="btn ghost small" for="siteIconFile">Выбрать файл</label><input id="siteIconFile" type="file" accept="image/png,image/jpeg,image/webp" hidden><button id="removeSiteIconBtn" class="btn danger small" type="button">Удалить</button></div></div>
+          <div class="settings-divider settings-wide"><b>Первый экран главной страницы</b><small>Редактируйте заголовок, описание, кнопки, показатели и демонстрационную карточку справа. Изменения сразу увидят посетители.</small></div>
+          <label class="settings-wide"><span>Метка над заголовком</span><input id="heroEyebrowInput" class="input" maxlength="100" placeholder="● Независимый фан-сервис"></label>
+          <label><span>Заголовок — начало</span><input id="heroTitleBeforeInput" class="input" maxlength="100" placeholder="Подсказки для"></label>
+          <label><span>Цветная часть заголовка</span><input id="heroTitleAccentInput" class="input" maxlength="100" placeholder="гос. организаций"></label>
+          <label class="settings-wide"><span>Заголовок — окончание</span><input id="heroTitleAfterInput" class="input" maxlength="100" placeholder="Amazing Online"></label>
+          <label class="settings-wide"><span>Описание</span><textarea id="heroDescriptionInput" class="input" rows="3" maxlength="700"></textarea></label>
+          <label><span>Текст кнопки каталога</span><input id="heroPrimaryLabelInput" class="input" maxlength="60" placeholder="Смотреть каталог"></label>
+          <label><span>Текст кнопки библиотеки</span><input id="heroSecondaryLabelInput" class="input" maxlength="60" placeholder="Моя библиотека"></label>
+          <label><span>Подпись количества товаров</span><input id="heroStat1LabelInput" class="input" maxlength="60" placeholder="материалов"></label>
+          <label><span>Показатель №2</span><input id="heroStat2ValueInput" class="input" maxlength="40" placeholder="24/7"></label>
+          <label><span>Подпись показателя №2</span><input id="heroStat2LabelInput" class="input" maxlength="80" placeholder="доступ после покупки"></label>
+          <label><span>Показатель №3</span><input id="heroStat3ValueInput" class="input" maxlength="60" placeholder="Т-Банк + баланс"></label>
+          <label class="settings-wide"><span>Подпись показателя №3</span><input id="heroStat3LabelInput" class="input" maxlength="80" placeholder="режим оплаты"></label>
+          <div class="settings-divider settings-wide"><b>Карточка справа на первом экране</b><small>Это демонстрационный блок. Он не меняет реальные товары и библиотеку пользователя.</small></div>
+          <label class="settings-wide"><span>Заголовок карточки</span><input id="heroCardTitleInput" class="input" maxlength="100" placeholder="Личная библиотека"></label>
+          <label><span>Иконка примера №1</span><input id="heroCardItem1IconInput" class="input" maxlength="8" placeholder="🛡️"></label>
+          <label><span>Название примера №1</span><input id="heroCardItem1TitleInput" class="input" maxlength="120" placeholder="ФСБ — полный набор"></label>
+          <label><span>Статус примера №1</span><input id="heroCardItem1StatusInput" class="input" maxlength="100" placeholder="Куплено · доступ открыт"></label>
+          <label><span>Действие примера №1</span><input id="heroCardItem1ActionInput" class="input" maxlength="60" placeholder="Открыть →"></label>
+          <label><span>Иконка примера №2</span><input id="heroCardItem2IconInput" class="input" maxlength="8" placeholder="🚓"></label>
+          <label><span>Название примера №2</span><input id="heroCardItem2TitleInput" class="input" maxlength="120" placeholder="Полиция — RP-памятка"></label>
+          <label><span>Статус примера №2</span><input id="heroCardItem2StatusInput" class="input" maxlength="100" placeholder="Куплено · доступ открыт"></label>
+          <label><span>Действие примера №2</span><input id="heroCardItem2ActionInput" class="input" maxlength="60" placeholder="Открыть →"></label>
+          <label class="settings-wide"><span>Заголовок нижнего блока</span><input id="heroCardLockedTitleInput" class="input" maxlength="140" placeholder="🔐 Контент хранится на сервере"></label>
+          <label class="settings-wide"><span>Текст нижнего блока</span><textarea id="heroCardLockedTextInput" class="input" rows="3" maxlength="500"></textarea></label>
+          <div class="settings-divider settings-wide storefront-admin-divider"><b>🎛 Главная страница — каталог и нижние блоки</b><small>Редактирование элементов со 2-го и 3-го скриншота: поиск, вкладки, «Лучшие предложения», AMZ HUB и нижняя полоса преимуществ.</small></div>
+
+          <div class="storefront-admin-group settings-wide">
+            <h4>Поиск и заголовок каталога</h4>
+            <div class="storefront-admin-grid">
+              <label><span>Подсказка в поиске</span><input id="storeSearchPlaceholder" class="input" maxlength="120"></label>
+              <label><span>«Все организации»</span><input id="storeOrgAllLabel" class="input" maxlength="60"></label>
+              <label><span>Метка над каталогом</span><input id="storeCatalogEyebrow" class="input" maxlength="70"></label>
+              <label><span>Заголовок каталога</span><input id="storeCatalogTitle" class="input" maxlength="100"></label>
+              <label class="settings-wide"><span>Описание каталога</span><input id="storeCatalogDescription" class="input" maxlength="240"></label>
+            </div>
+          </div>
+
+          <div class="storefront-admin-group settings-wide">
+            <h4>Вкладки над каталогом</h4>
+            <small>Можно менять иконку, название и действие каждой из 6 кнопок.</small>
+            <div id="storeTabsAdmin" class="storefront-repeat-grid"></div>
+          </div>
+
+          <div class="storefront-admin-group settings-wide">
+            <h4>Лучшие предложения</h4>
+            <div class="storefront-admin-grid">
+              <label class="check"><input id="storeOffersEnabled" type="checkbox"><span>Показывать блок</span></label>
+              <label><span>Заголовок</span><input id="storeOffersTitle" class="input" maxlength="100"></label>
+              <label><span>Подзаголовок</span><input id="storeOffersSubtitle" class="input" maxlength="180"></label>
+              <label><span>Кнопка</span><input id="storeOffersButtonLabel" class="input" maxlength="70"></label>
+            </div>
+            <div id="storeOfferProductsAdmin" class="storefront-offer-selects"></div>
+          </div>
+
+          <div class="storefront-admin-group settings-wide">
+            <h4>AMZ HUB — Инструменты</h4>
+            <div class="storefront-admin-grid">
+              <label class="check"><input id="storeToolsEnabled" type="checkbox"><span>Показывать блок</span></label>
+              <label><span>Заголовок</span><input id="storeToolsTitle" class="input" maxlength="100"></label>
+              <label><span>Подзаголовок</span><input id="storeToolsSubtitle" class="input" maxlength="180"></label>
+              <label><span>Текст кнопки</span><input id="storeToolsButtonLabel" class="input" maxlength="70"></label>
+              <label><span>Поиск кнопки «Все инструменты»</span><input id="storeToolsButtonQuery" class="input" maxlength="80"></label>
+            </div>
+            <div id="storeToolsAdmin" class="storefront-repeat-grid"></div>
+            <h5>Нижняя строка блока AMZ HUB</h5>
+            <div id="storeToolsFooterAdmin" class="storefront-repeat-grid compact"></div>
+          </div>
+
+          <div class="storefront-admin-group settings-wide">
+            <h4>Нижняя полоса преимуществ</h4>
+            <label class="check"><input id="storeTrustEnabled" type="checkbox"><span>Показывать полосу</span></label>
+            <div id="storeTrustAdmin" class="storefront-repeat-grid compact"></div>
+          </div>
+
+          <div class="settings-divider settings-wide"><b>Объявление в верхней части сайта</b><small>Можно быстро сообщить об акции, обновлении материалов или технических работах.</small></div>
+          <label class="check settings-wide"><input id="announcementEnabled" type="checkbox"> <span>Показывать объявление всем посетителям</span></label>
+          <label><span>Стиль объявления</span><select id="announcementType" class="input"><option value="info">📣 Информация</option><option value="sale">🔥 Акция</option><option value="success">✅ Новость</option><option value="warning">⚠️ Важно</option></select></label>
+          <label><span>Текст объявления</span><input id="announcementTextInput" class="input" maxlength="300" placeholder="🔥 Скидка 20% на все материалы до воскресенья"></label>
+          <div class="settings-divider settings-wide"><b>Бонусная система</b><small>Проценты применяются к реально оплаченным заказам. Повторное подтверждение заказа не начисляет бонусы второй раз.</small></div>
+          <label><span>Кэшбэк покупателю, %</span><input id="cashbackPercent" class="input" type="number" min="0" max="100" step="0.1" value="5"></label>
+          <label><span>Реферальный бонус, %</span><input id="referralPercent" class="input" type="number" min="0" max="100" step="0.1" value="5"></label>
+          <label><span>Ежедневный бонус, ₽</span><input id="dailyBonusAmount" class="input" type="number" min="0" max="100000" step="1" value="10"></label>
+          <label class="check"><input id="dailyBonusEnabled" type="checkbox" checked> <span>Включить ежедневный бонус</span></label>
+          <div class="settings-divider settings-wide"><b>Публичные контакты поддержки</b><small>Отображаются на отдельной странице «Поддержка». Тикет-система доступна всегда.</small></div>
+          <label><span>Юзернейм / контакт</span><input id="supportUsername" class="input" maxlength="120" placeholder="Например: @cruz_support"></label>
+          <label><span>E-mail поддержки</span><input id="supportEmail" class="input" type="email" maxlength="160" placeholder="support@example.com"></label>
+          <div class="settings-divider settings-wide"><b>✈ Telegram Login</b><small>Привязка Telegram к аккаунту и быстрый вход без пароля. Токен не показывается обратно после сохранения.</small></div>
+          <label class="check settings-wide"><input id="telegramLoginEnabled" type="checkbox"> <span>Включить привязку и вход через Telegram</span></label>
+          <label><span>Username бота</span><input id="telegramBotUsername" class="input" maxlength="32" placeholder="например CruzAmazingBot"></label>
+          <label><span>Bot Token</span><input id="telegramBotToken" class="input" type="password" maxlength="200" autocomplete="new-password" placeholder="Оставьте пустым, чтобы не менять сохранённый токен"></label>
+          <div id="telegramLoginState" class="token-state settings-wide">Telegram Login ещё не настроен.</div>
+          <div class="settings-wide telegram-admin-help"><b>Перед включением:</b> откройте @BotFather → <code>/setdomain</code> → выберите бота → укажите домен сайта без https://. После сохранения нажмите тест.</div>
+          <div class="settings-wide"><button id="telegramTestBtn" class="btn ghost" type="button">✈ Проверить Telegram-бота</button></div>
+          <div class="settings-divider settings-wide"><b>📧 SMTP для восстановления пароля</b><small>Рекомендуемый способ отправки писем. Укажите SMTP вашего почтового ящика. Пароль не показывается обратно в браузере после сохранения.</small></div>
+          <label class="check settings-wide"><input id="smtpEnabled" type="checkbox"> <span>Отправлять письма восстановления через SMTP</span></label>
+          <label><span>SMTP-сервер</span><input id="smtpHost" class="input" maxlength="255" placeholder="smtp.example.com"></label>
+          <label><span>Порт</span><input id="smtpPort" class="input" type="number" min="1" max="65535" value="465"></label>
+          <label><span>Шифрование</span><select id="smtpEncryption" class="input"><option value="ssl">SSL/TLS (обычно 465)</option><option value="tls">STARTTLS (обычно 587)</option><option value="none">Без шифрования</option></select></label>
+          <label><span>SMTP-логин</span><input id="smtpUsername" class="input" maxlength="320" autocomplete="username" placeholder="support@example.com"></label>
+          <label><span>SMTP-пароль</span><input id="smtpPassword" class="input" type="password" maxlength="500" autocomplete="new-password" placeholder="Оставьте пустым, чтобы не менять"></label>
+          <label><span>E-mail отправителя</span><input id="smtpFromEmail" class="input" type="email" maxlength="320" placeholder="support@example.com"></label>
+          <label><span>Имя отправителя</span><input id="smtpFromName" class="input" maxlength="120" placeholder="Cruz-amazing.ru"></label>
+          <label class="settings-wide"><span>Куда отправить тестовое письмо</span><input id="smtpTestEmail" class="input" type="email" maxlength="320" placeholder="Ваш e-mail для проверки"></label>
+          <div id="smtpState" class="token-state settings-wide">SMTP ещё не настроен</div>
+          <div class="settings-wide smtp-test-row"><button id="smtpTestBtn" class="btn ghost" type="button">📨 Отправить тестовое письмо</button><small>Сначала сохраните SMTP-настройки, затем отправьте тест.</small></div>
+          <div class="settings-divider settings-wide"><b>💳 Оплата через Platega</b><small>Основной способ оплаты. MerchantId и Secret хранятся только на сервере в config.php. После CONFIRMED callback заказ или пополнение подтверждаются автоматически.</small></div>
+          <div class="token-state settings-wide" id="plategaState">Статус Platega загружается…</div>
+          <div class="tbank-payment-note settings-wide">⚙️ После загрузки укажите <b>platega_merchant_id</b> и <b>platega_secret</b> в <b>config.php</b>. В Platega добавьте callback: <b>https://ВАШ-ДОМЕН/api.php?action=platega_callback</b>.</div>
+          <div class="settings-divider settings-wide"><b>Резерв: сбор Т-Банка</b></div>
+          <label class="settings-wide"><span>Ссылка на сбор Т-Банка</span><input id="tbankFundUrl" class="input" type="url" maxlength="500" placeholder="https://www.tbank.ru/..."></label>
+          <div class="settings-divider settings-wide"><b>Уведомления администрации в VK</b><small>VK используется только для уведомлений вам о новых заказах и пополнениях. Покупатель оплачивает через сбор Т-Банка.</small></div>
+          <label class="check settings-wide"><input id="vkNotifyEnabled" type="checkbox"> <span>Присылать уведомление в VK при каждом новом заказе</span></label>
+          <label><span>Получатель VK</span><input id="vkNotifyRecipient" class="input" maxlength="120" placeholder="nikitaandreevdas или id123456"></label>
+          <label><span>Токен сообщества VK</span><input id="vkNotifyToken" class="input" type="password" autocomplete="new-password" placeholder="Оставьте пустым, чтобы не менять сохранённый токен"></label>
+          <div id="vkTokenState" class="token-state settings-wide">Токен ещё не настроен</div>
+          <div class="settings-actions settings-wide"><button class="btn primary" type="submit">Сохранить настройки</button><button id="vkTestBtn" class="btn ghost" type="button">Отправить тест в VK</button></div>
+        </form>
+      </section>
+      <div class="admin-layout admin-only products-admin-block">
+        <section class="panel"><div class="panel-head"><div><h2 id="productFormTitle">Новый товар</h2><p>Полный текст увидят только покупатели.</p></div><button id="resetProductBtn" class="btn ghost small">Сбросить</button></div>
+          <form id="productForm" class="form-grid">
+            <input id="productId" type="hidden">
+            <label><span>Раздел товара</span><select id="pProductType" class="input"><option value="material">Каталог материалов</option><option value="build">🎮 Сборка</option></select></label>
+            <label><span>Организация / категория</span><input id="pOrg" class="input" required placeholder="ФСБ или Игровая сборка"></label>
+            <label><span>Иконка</span><input id="pIcon" class="input" value="📘" maxlength="4"></label>
+            <label class="wide"><span>Фотографии товара</span><input id="pImageFile" class="input" type="file" accept="image/jpeg,image/png,image/webp" multiple><small>До 8 фотографий JPG, PNG или WebP, каждая до 5 МБ. Первое фото — обложка; порядок можно изменить после сохранения.</small></label>
+            <div id="pImageAdminBox" class="product-image-admin wide"><div id="pImagePreview" class="product-image-admin-preview"><span>🖼️</span><small>Фотографии не загружены</small></div><button id="pImageDeleteBtn" class="btn danger small hidden" type="button">Удалить все фото</button></div>
+            <label class="wide"><span>Название</span><input id="pTitle" class="input" required placeholder="ФСБ — новый набор"></label>
+            <label class="wide"><span>Описание</span><textarea id="pDescription" class="input" rows="3"></textarea></label>
+            <label><span>Цена со скидкой, ₽</span><input id="pPrice" class="input" type="number" min="0" value="149"></label>
+            <label><span>Обычная цена, ₽</span><input id="pOldPrice" class="input" type="number" min="0" value="199"></label>
+            <div class="access-options-admin wide">
+              <label class="check"><input id="pAccessOptionsEnabled" type="checkbox"> <span>⏱️ Два варианта покупки: на месяц или навсегда</span></label>
+              <div id="pAccessOptionsFields" class="access-options-fields hidden">
+                <label><span>Цена на месяц, ₽</span><input id="pAccessMonthPrice" class="input" type="number" min="0" value="100"></label>
+                <label><span>Цена навсегда, ₽</span><input id="pAccessLifetimePrice" class="input" type="number" min="0" value="199"></label>
+                <label><span>Доплата для апгрейда, ₽</span><input id="pAccessUpgradePrice" class="input" type="number" min="0" value="99"><small>Сколько платит владелец месячной версии, чтобы перейти на «Навсегда».</small></label>
+                <label><span>Срок месячного доступа, дней</span><input id="pAccessMonthDays" class="input" type="number" min="1" max="3650" value="30"></label>
+              </div>
+              <small>Для AHK эта функция включается автоматически даже у старого товара. Старые покупки AHK останутся бессрочными.</small>
+            </div>
+            <label class="wide"><span>Теги через запятую</span><input id="pTags" class="input" placeholder="RP, Собеседование, Памятка"></label>
+            <label class="wide"><span>Платный материал</span><textarea id="pContent" class="input mono" rows="9" placeholder="Введите полный текст подсказки..."></textarea></label>
+            <div class="product-flags wide">
+              <label class="check"><input id="pBestseller" type="checkbox"> <span>🔥 Хит продаж</span></label>
+              <label class="check"><input id="pNew" type="checkbox"> <span>✨ Новинка</span></label>
+              <label class="check"><input id="pRecommended" type="checkbox"> <span>⭐ Рекомендуем</span></label>
+              <label class="check featured-check"><input id="pFeatured" type="checkbox"> <span>👑 Выделенный товар</span></label>
+            </div>
+            <div class="featured-help wide">Выделенный товар всегда показывается первым и крупнее остальных. Одновременно выделенным может быть только один товар.</div>
+            <label class="check wide"><input id="pActive" type="checkbox" checked> <span>Показывать товар в выбранном разделе</span></label>
+            <button class="btn primary wide" type="submit">Сохранить товар</button>
+          </form>
+        </section>
+        <section class="panel"><div class="panel-head"><div><h2>Товары</h2><p>Редактирование и скрытие из каталога.</p></div></div><div id="adminProducts" class="admin-list"></div></section>
+      </div>
+      <section class="panel server-files-admin-panel admin-only">
+        <div class="panel-head"><div><h2>🗂️ Файлы материалов по серверам</h2><p>Для каждого товара загрузите отдельный файл под каждый сервер Amazing Online. Покупатель сможет скачать только файл того сервера, который выбрал при оформлении заказа.</p></div><span class="badge">12 серверов</span></div>
+        <div class="server-files-toolbar">
+          <label><span>Товар</span><select id="serverFilesProductSelect" class="input"></select></label>
+          <div id="serverFilesProductMeta" class="server-files-product-meta">Выберите товар</div>
+        </div>
+        <div id="serverFilesGrid" class="server-files-grid"></div>
+        <p class="admin-note">Разрешены PDF, TXT, MD, DOC, DOCX, RTF, ZIP, RAR и 7Z. Максимум 50 МБ на файл (дополнительно действует лимит <code>upload_max_filesize</code> вашего хостинга). Файлы не доступны по прямой ссылке: скачивание проверяет оплату и выбранный сервер.</p>
+      </section>
+      <div class="admin-layout admin-secondary admin-only promos-admin-block">
+        <section class="panel">
+          <div class="panel-head"><div><h2 id="promoFormTitle">Новый промокод</h2><p>Процентная или фиксированная скидка на весь заказ.</p></div><button id="resetPromoBtn" class="btn ghost small">Сбросить</button></div>
+          <form id="promoForm" class="form-grid promo-form">
+            <input id="promoId" type="hidden">
+            <label><span>Промокод</span><input id="promoCode" class="input" maxlength="32" required placeholder="AMAZING10"></label>
+            <label><span>Тип скидки</span><select id="promoType" class="input"><option value="percent">Процент, %</option><option value="fixed">Сумма, ₽</option></select></label>
+            <label><span>Размер скидки</span><input id="promoValue" class="input" type="number" min="1" value="10" required></label>
+            <label><span>Минимальный заказ, ₽</span><input id="promoMinOrder" class="input" type="number" min="0" value="0"></label>
+            <label class="wide"><span>Лимит использований (0 — без лимита)</span><input id="promoMaxUses" class="input" type="number" min="0" value="0"></label>
+            <label class="check wide"><input id="promoActive" type="checkbox" checked> <span>Промокод активен</span></label>
+            <button class="btn primary wide" type="submit">Сохранить промокод</button>
+          </form>
+        </section>
+        <section class="panel"><div class="panel-head"><div><h2>Промокоды</h2><p>Использования считаются при создании заказа.</p></div></div><div id="adminPromos" class="admin-list"></div></section>
+      </div>
+      <div class="admin-layout admin-secondary admin-only update-admin-layout">
+        <section class="panel">
+          <div class="panel-head"><div><h2 id="siteUpdateFormTitle">Добавить обновление</h2><p>Запись появится на публичной странице «Обновления».</p></div><button id="resetSiteUpdateBtn" class="btn ghost small" type="button">Сбросить</button></div>
+          <form id="siteUpdateForm" class="form-grid">
+            <input id="siteUpdateId" type="hidden">
+            <label><span>Версия</span><input id="siteUpdateVersion" class="input" maxlength="32" required placeholder="v2.2"></label>
+            <label><span>Дата</span><input id="siteUpdateDate" class="input" type="date" required></label>
+            <label class="wide"><span>Заголовок</span><input id="siteUpdateTitle" class="input" maxlength="120" required placeholder="Большое обновление каталога"></label>
+            <label class="wide"><span>Что изменилось</span><textarea id="siteUpdateBody" class="input" rows="6" maxlength="4000" required placeholder="Добавлено...&#10;Исправлено..."></textarea></label>
+            <label class="check wide"><input id="siteUpdateActive" type="checkbox" checked> <span>Показывать запись посетителям</span></label>
+            <button class="btn primary wide" type="submit">Сохранить обновление</button>
+          </form>
+        </section>
+        <section class="panel"><div class="panel-head"><div><h2>История обновлений</h2><p>Редактирование и скрытие записей.</p></div></div><div id="adminSiteUpdates" class="admin-list"></div></section>
+      </div>
+      <section class="panel quest-admin-panel admin-only">
+        <div class="panel-head"><div><h2>🕵️ Скрытый промокод-квест</h2><p>Посетители получают подсказку и ищут секретную метку. Только одна метка выдаёт промокод.</p></div><span class="badge">Квест</span></div>
+        <form id="questAdminForm" class="quest-admin-form">
+          <label class="check"><input id="questEnabled" type="checkbox"> <span>Квест активен</span></label>
+          <label><span>Промокод-награда</span><select id="questPromoCode" class="input"><option value="">Выберите промокод</option></select></label>
+          <label><span>Где спрятан код</span><select id="questSpot" class="input"><option value="hero">Первый экран</option><option value="catalog">Каталог</option><option value="faq">FAQ</option><option value="footer">Подвал сайта</option></select></label>
+          <label class="quest-hint-field"><span>Подсказка игрокам</span><input id="questHintInput" class="input" maxlength="500" placeholder="Например: ответ находится там, где обычно ищут помощь"></label>
+          <button class="btn primary" type="submit">Сохранить квест</button>
+        </form>
+        <p class="admin-note">Код промокода не передаётся посетителю заранее. Он раскрывается только после нажатия на правильную секретную метку.</p>
+      </section>
+      <section class="panel marketplace-admin-panel admin-only">
+        <div class="panel-head"><div><h2>🛒 Торговая площадка</h2><p>Модерация объявлений, продажи, комиссия, баланс продавцов и заявки на вывод.</p></div><span id="adminMarketplaceMeta" class="badge">0 на модерации</span></div>
+        <form id="marketplaceAdminSettingsForm" class="marketplace-admin-settings">
+          <label class="check"><input id="marketplaceEnabledAdmin" type="checkbox"><span>Площадка включена</span></label>
+          <label><span>Комиссия сайта, %</span><input id="marketplaceCommissionAdmin" class="input" type="number" min="0" max="50" step="0.1"></label>
+          <label><span>Минимальный вывод, ₽</span><input id="marketplaceMinWithdrawalAdmin" class="input" type="number" min="300" step="1"></label>
+          <label><span>Защита сделки, часов</span><input id="marketplaceHoldHoursAdmin" class="input" type="number" min="24" max="168" step="1"></label>
+          <label><span>Макс. файл, МБ</span><input id="marketplaceMaxFileAdmin" class="input" type="number" min="1" max="25" step="1"></label>
+          <label><span>Продаж без комиссии</span><input id="marketplaceCommissionFreeSalesAdmin" class="input" type="number" min="0" max="100" step="1"></label>
+          <label><span>Лимит первых продавцов</span><input id="marketplaceFounderLimitAdmin" class="input" type="number" min="0" max="10000" step="1"></label>
+          <label><span>Бесплатное продвижение, дней</span><input id="marketplaceFreeFeatureDaysAdmin" class="input" type="number" min="1" max="30" step="1"></label>
+          <label><span>Срок вывода, раб. дней</span><input id="marketplaceWithdrawalDaysAdmin" class="input" type="number" min="1" max="30" step="1"></label>
+          <label><span>Реферальный бонус, %</span><input id="marketplaceReferralBonusPercentAdmin" class="input" type="number" min="0" max="25" step="0.1"></label>
+          <label><span>Макс. реферальный бонус, ₽</span><input id="marketplaceReferralBonusMaxAdmin" class="input" type="number" min="0" max="100000" step="1"></label>
+          <label><span>Товаров в подборке недели</span><input id="marketplaceWeeklyPickLimitAdmin" class="input" type="number" min="1" max="12" step="1"></label>
+          <button class="btn primary" type="submit">Сохранить настройки</button>
+        </form>
+        <section class="marketplace-category-admin" aria-labelledby="marketplaceCategoryAdminTitle">
+          <div class="marketplace-category-admin-head">
+            <div><h3 id="marketplaceCategoryAdminTitle">🏷️ Категории товаров</h3><p>Этот список используется в объявлениях, фильтре каталога и на бирже заказов. Порядок сохраняется для покупателей и продавцов.</p></div>
+            <div><span id="adminMarketplaceCategoryCount" class="badge">0 / 50</span><button class="btn ghost small" type="button" onclick="addMarketplaceCategoryAdmin()">＋ Добавить</button></div>
+          </div>
+          <div id="adminMarketplaceCategories" class="marketplace-category-admin-list"></div>
+          <div class="marketplace-category-admin-footer">
+            <label><span>Куда переносить товары из удалённых категорий</span><select id="marketplaceCategoryFallbackAdmin" class="input"></select></label>
+            <p>Переименование и удаление безопасны: существующие объявления и запросы автоматически получат новую категорию.</p>
+            <button class="btn primary" type="button" onclick="saveMarketplaceCategories()">Сохранить категории</button>
+          </div>
+        </section>
+        <div id="adminMarketplaceStats" class="stats-grid marketplace-admin-stats"></div>
+        <div id="adminMarketplaceSecurity" class="marketplace-security-status"></div>
+        <div class="marketplace-admin-subhead"><h3>📦 Объявления и модерация</h3><p>Новые и изменённые товары сначала получают статус «На проверке».</p></div>
+        <div id="adminMarketplaceListings" class="marketplace-admin-list"></div>
+        <div class="marketplace-admin-subhead"><h3>💰 Продажи площадки</h3><p>Оплата покупателя, комиссия сайта и чистое начисление продавцу.</p></div>
+        <div class="table-wrap"><table class="users-table marketplace-admin-table"><thead><tr><th>#</th><th>Товар</th><th>Покупатель</th><th>Продавец</th><th>Сумма</th><th>Комиссия</th><th>Продавцу</th><th>Защита</th><th>Статус</th><th>Дата</th></tr></thead><tbody id="adminMarketplaceOrders"></tbody></table></div>
+        <div class="marketplace-admin-subhead"><h3>⚖️ Споры и арбитраж</h3><p>Чат покупателя и продавца, подключение администратора, возврат на баланс или разблокировка денег продавцу.</p></div>
+        <div id="adminMarketplaceDisputes" class="marketplace-admin-list"></div>
+        <div class="marketplace-admin-subhead"><h3>✦ Биржа заказов</h3><p>Запросы покупателей, предложения продавцов и связанные безопасные сделки.</p></div>
+        <div id="adminMarketplaceRequests" class="marketplace-admin-list"></div>
+        <div class="marketplace-admin-subhead"><h3>★ Честные отзывы</h3><p>Отзывы доступны только по завершённым покупкам. Администратор может скрыть нарушение или удалить отзыв навсегда.</p></div>
+        <div id="adminMarketplaceReviews" class="marketplace-admin-list"></div>
+        <div class="marketplace-admin-subhead"><h3>💸 Заявки на вывод</h3><p>Реквизиты продавца видны только администратору. После выплаты отметьте заявку как выплаченную.</p></div>
+        <div id="adminMarketplaceWithdrawals" class="marketplace-admin-list"></div>
+        <div class="marketplace-admin-subhead"><h3>🛡️ Журнал проверки загрузок</h3><p>Последние попытки, успешные проверки и отклонения файлов торговой площадки.</p></div>
+        <div id="adminMarketplaceSafetyEvents" class="marketplace-safety-log"></div>
+      </section>
+
+      <section class="panel users-admin-panel admin-only">
+        <div class="panel-head"><div><h2>Пользователи</h2><p>Роли, баланс и краткая статистика аккаунтов.</p></div><span id="usersMeta" class="badge">0 пользователей</span></div>
+        <div class="user-filters"><input id="userSearch" class="input" placeholder="Поиск по нику или e-mail"><select id="userRoleFilter" class="input"><option value="all">Все роли</option><option value="user">Покупатели</option><option value="vip">💎 VIP</option><option value="youtuber">🎬 Ютуберы</option><option value="moderator">Модераторы</option><option value="admin">Администраторы</option></select></div>
+        <div class="table-wrap"><table class="users-table"><thead><tr><th>Пользователь</th><th>Регистрация</th><th>Заказы</th><th>Оплачено</th><th>Роль</th><th>Баланс</th><th>Действия</th></tr></thead><tbody id="usersBody"></tbody></table></div>
+        <p class="admin-note">Администратор может менять баланс и роли. Модератор не имеет доступа к этому разделу.</p>
+      </section>
+
+      <section class="panel ahk-license-admin-panel admin-only">
+        <div class="panel-head">
+          <div>
+            <h2>🛡️ Amazing Control — Госс AHK</h2>
+            <p>Выдача лицензий, HWID, ключи и публикация новых AHK-архивов.</p>
+          </div>
+          <span id="acLicenseAdminMeta" class="badge">0 лицензий</span>
+        </div>
+
+        <div class="ac-admin-grid">
+          <form id="acGrantForm" class="ac-admin-card">
+            <h3>Выдать / продлить лицензию</h3>
+            <label>
+              <span>Пользователь</span>
+              <select id="acGrantUserSelect" class="input"></select>
+            </label>
+            <label>
+              <span>Тариф</span>
+              <select id="acGrantPlan" class="input">
+                <option value="month">30 дней</option>
+                <option value="lifetime">Навсегда</option>
+              </select>
+            </label>
+            <button class="btn primary full" type="submit">Выдать лицензию</button>
+            <small>Повторные 30 дней продлевают текущий месячный срок. «Навсегда» повышает активную месячную лицензию до бессрочной.</small>
+          </form>
+
+          <form id="acUpdateForm" class="ac-admin-card">
+            <h3>Опубликовать обновление Amazing Control</h3>
+            <label>
+              <span>Версия</span>
+              <input id="acReleaseVersion" class="input" required placeholder="0.7.3">
+            </label>
+            <label>
+              <span>Архив</span>
+              <input id="acReleaseFile" class="input" type="file" accept=".zip,application/zip" required>
+            </label>
+            <label>
+              <span>Что изменилось</span>
+              <textarea id="acReleaseNotes" class="input" rows="3" maxlength="1500" placeholder="Что изменилось в новой версии..."></textarea>
+            </label>
+            <button class="btn primary full" type="submit">Опубликовать обновление</button>
+            <div id="acReleaseProgress" class="admin-note" hidden></div>
+            <small>Загружайте только ZIP из BUILD_COMPILED_RELEASE.cmd. Внутри обязательно должен быть <b>AmazingControl.exe</b>; исходный .ahk через автообновление не публикуется. Сервер рассчитает SHA-256, привяжет архив к версии и уведомит активных пользователей.</small>
+          </form>
+
+          <form id="acAnnouncementForm" class="ac-admin-card">
+            <h3>📣 Уведомление в Amazing Control</h3>
+            <label>
+              <span>Тип</span>
+              <select id="acAnnouncementType" class="input">
+                <option value="info">📣 Информация</option>
+                <option value="important">⚠️ Важно</option>
+                <option value="news">✅ Новость</option>
+                <option value="update">🔄 Обновление</option>
+              </select>
+            </label>
+            <label>
+              <span>Заголовок</span>
+              <input id="acAnnouncementTitle" class="input" maxlength="100" required placeholder="Например: Важная информация">
+            </label>
+            <label>
+              <span>Сообщение</span>
+              <textarea id="acAnnouncementMessage" class="input" rows="4" maxlength="1500" required placeholder="Текст появится прямо в Amazing Control у активных пользователей."></textarea>
+            </label>
+            <button class="btn primary full" type="submit">📣 Отправить в Amazing Control</button>
+            <small>Клиент проверяет новые сообщения примерно раз в 30 секунд. Каждое уведомление показывается на конкретном ПК один раз.</small>
+            <div id="acAnnouncementRecent" class="admin-note"></div>
+          </form>
+
+          <form id="acCommunityForm" class="ac-admin-card">
+            <h3>💬 Общая беседа Amazing Control</h3>
+            <label>
+              <span>Ссылка на VK-беседу</span>
+              <input id="acCommunityUrl" class="input" type="url" maxlength="500" placeholder="https://vk.me/join/...">
+            </label>
+            <button class="btn primary full" type="submit">Сохранить ссылку VK</button>
+            <small>Кнопка будет находиться в самом низу главной страницы AHK под основными кнопками. Ссылку можно менять здесь без перекомпиляции Amazing Control.</small>
+          </form>
+        </div>
+
+        <div id="acReleaseCurrent" class="ac-release-current"></div>
+        <div id="acReleaseHistory" class="ac-release-current"></div>
+
+        <div class="table-wrap">
+          <table class="users-table ac-license-table">
+            <thead>
+              <tr>
+                <th>Пользователь</th>
+                <th>Тариф</th>
+                <th>Ключ</th>
+                <th>Компьютер</th>
+                <th>Последняя проверка</th>
+                <th>Действия</th>
+              </tr>
+            </thead>
+            <tbody id="acLicensesBody">
+              <tr><td colspan="6">Загрузка...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="panel crime-ahk-license-admin-panel admin-only">
+        <div class="panel-head"><div><h2>🟥 Cruz Helper — Crime Edition</h2><p>Отдельная база ключей, отдельный 1-дневный тест и отдельные обновления Crime AHK.</p></div><span id="crimeLicenseAdminMeta" class="badge crime-badge">0 лицензий</span></div>
+        <div class="crime-admin-product-row"><div><b>Товар Crime Edition</b><small>Создаётся отдельно и отображается рядом с Госс AHK.</small></div><button id="crimeInstallProductBtn" class="btn crime-admin-btn" type="button">Создать / проверить товар</button></div>
+        <div class="ac-admin-grid">
+          <form id="crimeGrantForm" class="ac-admin-card crime-admin-card"><h3>Выдать / продлить Crime</h3><label><span>Пользователь</span><select id="crimeGrantUserSelect" class="input"></select></label><label><span>Тариф</span><select id="crimeGrantPlan" class="input"><option value="month">30 дней</option><option value="lifetime">Навсегда</option></select></label><button class="btn crime-admin-btn full" type="submit">Выдать Crime-лицензию</button><small>Ключ имеет префикс CRIME- и не подходит к Госс AHK.</small></form>
+          <form id="crimeUpdateForm" class="ac-admin-card crime-admin-card"><h3>Опубликовать Crime-обновление</h3><label><span>Версия</span><input id="crimeReleaseVersion" class="input" required placeholder="0.6.0"></label><label><span>Архив</span><input id="crimeReleaseFile" class="input" type="file" accept=".zip,application/zip" required></label><label><span>Что изменилось</span><textarea id="crimeReleaseNotes" class="input" rows="3" maxlength="1500" placeholder="Что изменилось в Crime Edition..."></textarea></label><button class="btn crime-admin-btn full" type="submit">Опубликовать Crime-обновление</button><div id="crimeReleaseProgress" class="admin-note" hidden></div><small>Внутри ZIP обязателен <b>CruzHelperCrime.exe</b>. Архивы с .ahk исходниками сервер отклоняет.</small></form>
+        </div>
+        <div id="crimeReleaseCurrent" class="ac-release-current crime-release-current"></div><div id="crimeReleaseHistory" class="ac-release-current"></div>
+        <div class="table-wrap"><table class="users-table ac-license-table"><thead><tr><th>Пользователь</th><th>Тариф</th><th>Crime-ключ</th><th>Компьютер</th><th>Последняя проверка</th><th>Действия</th></tr></thead><tbody id="crimeLicensesBody"><tr><td colspan="6">Загрузка...</td></tr></tbody></table></div>
+        <p class="admin-note">Бесплатный тест Crime Edition — 24 часа, отдельно от теста Госс AHK. Защита: аккаунт + HWID + IP.</p>
+      </section>
+      <section class="panel marketing-admin-panel admin-only">
+        <div class="panel-head"><div><h2>⭐ Premium, Flash Sale и бесплатная неделя</h2><p>Настройки подписки и автоматических промо-механик.</p></div><span class="badge">Маркетинг</span></div>
+        <form id="marketingSettingsForm" class="marketing-settings-form">
+          <div class="marketing-settings-group">
+            <h3>⭐ Premium-доступ</h3>
+            <label class="check"><input id="premiumEnabledAdmin" type="checkbox"> <span>Premium доступен пользователям</span></label>
+            <label><span>Цена, ₽</span><input id="premiumPriceAdmin" class="input" type="number" min="0" step="1"></label>
+            <label><span>Срок, дней</span><input id="premiumDaysAdmin" class="input" type="number" min="1" max="3650"></label>
+          </div>
+          <div class="marketing-settings-group">
+            <h3>⚡ Flash Sale</h3>
+            <label class="check"><input id="flashSaleEnabledAdmin" type="checkbox"> <span>Автоматическая акция включена</span></label>
+            <label><span>Товар</span><select id="flashSaleProductAdmin" class="input"></select></label>
+            <label><span>Дополнительная скидка, %</span><input id="flashSalePercentAdmin" class="input" type="number" min="1" max="99"></label>
+            <label><span>Начало</span><input id="flashSaleStartAdmin" class="input" type="datetime-local"></label>
+            <label><span>Окончание</span><input id="flashSaleEndAdmin" class="input" type="datetime-local"></label>
+          </div>
+          <div class="marketing-settings-group">
+            <h3>🎁 Бесплатный материал недели</h3>
+            <label class="check"><input id="freeWeekEnabledAdmin" type="checkbox"> <span>Бесплатный материал включён</span></label>
+            <label><span>Товар</span><select id="freeWeekProductAdmin" class="input"></select></label>
+            <label><span>Начало</span><input id="freeWeekStartAdmin" class="input" type="datetime-local"></label>
+            <label><span>Окончание</span><input id="freeWeekEndAdmin" class="input" type="datetime-local"></label>
+          </div>
+          <div class="marketing-settings-group">
+            <h3>💸 Выплаты Ютуберам</h3>
+            <label><span>Минимальная сумма запроса, ₽</span><input id="youtuberMinPayoutAdmin" class="input" type="number" min="0" step="1"></label>
+          </div>
+          <div class="marketing-settings-group">
+            <h3>🛡️ Антифрод Ютуберов</h3>
+            <label class="check"><input id="youtuberAntifraudEnabledAdmin" type="checkbox" checked> <span>Проверять подозрительные партнёрские продажи</span></label>
+            <label><span>Макс. заказов одного покупателя за 24 ч.</span><input id="youtuberAntifraudMaxBuyerOrders24hAdmin" class="input" type="number" min="1" max="20" value="3"></label>
+            <small>Самопокупки и бесплатные выдачи блокируются всегда. При превышении лимита комиссия ждёт ручной проверки администратора.</small>
+          </div>
+          <button class="btn primary" type="submit">Сохранить маркетинг</button>
+        </form>
+        <p class="admin-note">Flash Sale и бесплатный материал включаются/выключаются автоматически по указанным датам. Цена в заказе рассчитывается на сервере.</p>
+      </section>
+      <section class="panel youtubers-admin-panel admin-only">
+        <div class="panel-head"><div><h2>🎬 Ютуберы 2.0</h2><p>Промокоды, комиссия, заработок и история выплат партнёрам.</p></div><span id="youtubersMeta" class="badge">0 Ютуберов</span></div>
+        <div class="table-wrap"><table class="youtubers-table"><thead><tr><th>#</th><th>Ютубер</th><th>Промокод / ставка</th><th>Продажи / переходы</th><th>План</th><th>Заработано</th><th>К выплате</th><th>Действия</th></tr></thead><tbody id="youtubersBody"></tbody></table></div>
+        <h3 class="admin-subtitle">Запросы на выплату</h3><div id="youtuberPayoutRequests" class="youtuber-payout-request-list"><div class="empty compact-empty">Заявок пока нет.</div></div>
+        <h3 class="admin-subtitle">🛡️ Антифрод партнёрки</h3><div id="youtuberFraudFlags" class="youtuber-fraud-list"><div class="empty compact-empty">Подозрительных заказов пока нет.</div></div>
+        <p class="admin-note">Самопокупки и бесплатные выдачи не дают комиссию. Если один покупатель создаёт слишком много заказов по одному промокоду за 24 часа, комиссия ставится на проверку до решения администратора.</p>
+      </section>
+      <section class="panel broadcast-admin-panel admin-only">
+        <div class="panel-head"><div><h2>Массовая рассылка уведомлений</h2><p>Сообщение появится в колокольчике 🔔 у выбранной группы пользователей.</p></div><span class="badge">Рассылка</span></div>
+        <form id="broadcastForm" class="broadcast-form">
+          <label><span>Кому отправить</span><select id="broadcastAudience" class="input"><option value="all">Всем пользователям</option><option value="user">Только покупателям</option><option value="vip">💎 Только VIP</option><option value="youtuber">🎬 Только Ютуберам</option><option value="moderator">Только модераторам</option><option value="admin">Только администраторам</option></select></label>
+          <label><span>Заголовок</span><input id="broadcastTitle" class="input" maxlength="100" required placeholder="Например: Новые материалы уже доступны"></label>
+          <label class="broadcast-message"><span>Сообщение</span><textarea id="broadcastMessage" class="input" rows="4" maxlength="1500" required placeholder="Введите текст уведомления..."></textarea></label>
+          <button class="btn primary" type="submit">📣 Отправить уведомление</button>
+        </form>
+        <p class="admin-note">Рассылку может отправлять только администратор. Факт отправки и количество получателей сохраняются в журнале действий.</p>
+      </section>
+      <section class="panel topups-admin-panel admin-only">
+        <div class="panel-head"><div><h2>Заявки на пополнение</h2><p>Platega зачисляет подтверждённые платежи автоматически. При необходимости можно принудительно сверить статус или выполнить ручное действие.</p></div><span id="topupsMeta" class="badge">0 заявок</span></div>
+        <div class="table-wrap"><table class="topups-table"><thead><tr><th># / дата</th><th>Пользователь</th><th>Сумма</th><th>VK</th><th>Статус</th></tr></thead><tbody id="topupsBody"></tbody></table></div>
+      </section>
+
+      <section class="panel support-admin-panel">
+        <div class="panel-head"><div><h2>Поддержка и чат</h2><p>Обращения пользователей. Администраторы и модераторы могут отвечать прямо на сайте.</p></div><span id="supportMeta" class="badge">0 открытых</span></div>
+        <div id="adminSupportTickets" class="support-admin-list"><div class="empty compact-empty">Обращений пока нет.</div></div>
+      </section>
+      <section class="panel admin-only material-requests-admin-panel">
+        <div class="panel-head"><div><h2>Запросы на новые материалы</h2><p>Идеи пользователей и статус их подготовки.</p></div><span id="materialRequestsMeta" class="badge">0 новых</span></div>
+        <div id="adminMaterialRequests" class="material-request-admin-list"><div class="empty compact-empty">Запросов пока нет.</div></div>
+      </section>
+      <section class="panel admin-only gift-admin-panel">
+        <div class="panel-head"><div><h2>Подарочные сертификаты</h2><p>Созданные пользователями сертификаты и их активации.</p></div><span id="giftCertificatesMeta" class="badge">0 сертификатов</span></div>
+        <div class="table-wrap"><table class="gift-admin-table"><thead><tr><th>Код</th><th>Сумма</th><th>Создал</th><th>Получатель</th><th>Статус</th></tr></thead><tbody id="giftCertificatesBody"></tbody></table></div>
+      </section>
+
+      <section class="panel reviews-admin-panel"><div class="panel-head"><div><h2>Отзывы покупателей</h2><p>Новые отзывы сначала попадают на модерацию и не видны в каталоге.</p></div><span id="pendingReviewsMeta" class="badge">0 на проверке</span></div><div id="adminReviews" class="review-admin-list"></div></section>
+      <div class="admin-layout admin-secondary admin-only faq-admin-block">
+        <section class="panel">
+          <div class="panel-head"><div><h2 id="faqFormTitle">Новый пункт FAQ</h2><p>Инструкции отображаются на главной странице.</p></div><button id="resetFaqBtn" class="btn ghost small" type="button">Сбросить</button></div>
+          <form id="faqForm" class="form-grid">
+            <input id="faqId" type="hidden">
+            <label class="wide"><span>Вопрос</span><input id="faqQuestion" class="input" maxlength="180" required placeholder="Как пополнить баланс?"></label>
+            <label class="wide"><span>Ответ</span><textarea id="faqAnswer" class="input" rows="5" maxlength="3000" required></textarea></label>
+            <label class="check wide"><input id="faqActive" type="checkbox" checked> <span>Показывать на сайте</span></label>
+            <button class="btn primary wide" type="submit">Сохранить FAQ</button>
+          </form>
+        </section>
+        <section class="panel"><div class="panel-head"><div><h2>FAQ</h2><p>Редактирование и удаление инструкций.</p></div></div><div id="adminFaqs" class="admin-list"></div></section>
+      </div>
+
+      <section class="panel audit-admin-panel admin-only">
+        <div class="panel-head"><div><h2>Журнал действий администрации</h2><p>Фиксируются важные действия администраторов и модераторов.</p></div><span id="auditMeta" class="badge">0 записей</span></div>
+        <div id="auditList" class="audit-list"></div>
+      </section>
+
+      <section class="panel orders-panel">
+        <div class="panel-head"><div><h2>История заказов</h2><p>Кто купил, для какого сервера, какие товары, промокод, способ оплаты, бонусы и текущий статус.</p></div><span id="ordersMeta" class="badge">0 заказов</span></div>
+        <div class="order-filters"><input id="orderSearch" class="input" placeholder="Поиск: # заказа, сервер, ник, e-mail, товар или промокод"><select id="orderStatusFilter" class="input"><option value="all">Все статусы</option><option value="pending">Ожидают оплаты</option><option value="paid">Оплачено</option><option value="canceled">Отменено</option><option value="chargebacked">Возврат</option><option value="error">Ошибка</option></select></div>
+        <div class="table-wrap"><table class="orders-table"><thead><tr><th># / дата</th><th>Покупатель</th><th>Сервер</th><th>Товары</th><th>До скидки</th><th>Промокод</th><th>Скидка</th><th>Итого</th><th>Статус</th></tr></thead><tbody id="ordersBody"></tbody></table></div>
+      </section>
+    </div>
+  </section>
 </main>
-<footer>
-<b>⚡ PPS HELP AMAZING</b><p>Независимый фан-проект. Не является официальным ресурсом Amazing Online.</p>
-<button class="plain" onclick="go('support')">Поддержка</button><button class="plain" onclick="go('faq')">FAQ</button>
-<p>© 2026 · PPS Help Amazing</p>
-</footer>
 
-<div class="modal" id="loginModal">
-<div class="modal-box">
-<div class="modal-head"><h2>Войти</h2><button class="close" onclick="closeLogin()">×</button></div>
-<p class="muted">Демонстрационный вход без серверной регистрации.</p>
-<form onsubmit="doLogin(event)">
-<div class="field"><label>Электронная почта</label><input id="email" type="email" required></div>
-<div class="field"><label>Никнейм</label><input id="nick" required></div>
-<button class="primary" style="width:100%">Продолжить</button>
-</form>
-<p class="small">Не вводи настоящий пароль в демонстрационную форму.</p>
-</div>
-</div>
+<nav id="mobileDock" class="mobile-dock" aria-label="Быстрая мобильная навигация">
+  <button class="mobile-dock-btn nav-go active" type="button" data-view="home" aria-label="Главная"><span aria-hidden="true">⌂</span><small>Главная</small></button>
+  <button id="mobileCatalogBtn" class="mobile-dock-btn" type="button" aria-label="Каталог товаров"><span aria-hidden="true">⌕</span><small>Каталог</small></button>
+  <button class="mobile-dock-btn nav-go" type="button" data-view="library" aria-label="Мои покупки"><span aria-hidden="true">▣</span><small>Покупки</small></button>
+  <button id="mobileProfileBtn" class="mobile-dock-btn" type="button" aria-label="Личный кабинет"><span aria-hidden="true">◉</span><small>Профиль</small></button>
+  <button id="mobileCartBtn" class="mobile-dock-btn mobile-dock-cart" type="button" aria-label="Корзина"><span aria-hidden="true">🛒</span><small>Корзина</small><em id="mobileCartCount">0</em></button>
+</nav>
+
+<footer><div class="container footer"><div><b id="siteNameFooter">GovTips AO</b><span>Независимый фан-проект · © 2026 · Не связан с AMAZING.GG</span></div><div class="footer-legal-links"><button class="nav-go" data-view="pricing">Тарифы и цены</button><button class="nav-go" data-view="privacy">Политика конфиденциальности</button><button class="nav-go" data-view="agreement">Пользовательское соглашение</button><button class="nav-go" data-view="support-info">Поддержка</button></div></div><button class="quest-hidden-mark quest-footer-mark hidden" data-quest-spot="footer" type="button" aria-label="Секрет">✦</button></footer>
+
+<div id="modal" class="modal hidden" aria-hidden="true"><div class="modal-backdrop" data-close></div><div class="modal-card"><button class="modal-close" data-close>×</button><div id="modalBody"></div></div></div>
+<div id="toast" class="toast"></div>
 
 <script>
-const products=[
-{id:1,name:"PPS AHK Starter",cat:"AHK",price:199,icon:"⌨️",desc:"Стартовый шаблон AutoHotkey v2.",tag:"ПОПУЛЯРНО"},
-{id:2,name:"PPS Tools",cat:"Tools",price:249,icon:"⚙️",desc:"Набор инструментов для проекта.",tag:"TOOLS"},
-{id:3,name:"AHK Guide",cat:"Guide",price:99,icon:"📘",desc:"Инструкция по основам AutoHotkey v2.",tag:"ГАЙД"},
-{id:4,name:"PPS Config Pack",cat:"AHK",price:149,icon:"🧩",desc:"Пример конфигурации скрипта.",tag:"CONFIG"},
-{id:5,name:"UI Template",cat:"Tools",price:299,icon:"🎨",desc:"Шаблон интерфейса проекта.",tag:"НОВИНКА"},
-{id:6,name:"AHK Advanced",cat:"AHK",price:399,icon:"⚡",desc:"Расширенный шаблон для настройки.",tag:"AHK"}
-];
-const builds=[
-{id:7,name:"Базовая сборка",cat:"Build",price:299,icon:"🖥️",desc:"Демонстрационный товар сборки.",tag:"BUILD"},
-{id:8,name:"Комплект инструментов",cat:"Build",price:499,icon:"📦",desc:"Пример комплекта цифровых материалов.",tag:"PACK"},
-{id:9,name:"Настройки проекта",cat:"Build",price:199,icon:"🛠️",desc:"Демонстрационный набор настроек.",tag:"CONFIG"}
-];
-let cart=[],user=null;
-function money(n){return Number(n).toLocaleString("ru-RU")+" ₽"}
-function card(p){return `<article class="card"><div class="art">${p.icon}</div><div class="body"><span class="tag">${p.tag}</span><h3>${p.name}</h3><p>${p.desc}</p><div class="product-foot"><span class="price">${money(p.price)}</span><button class="primary" onclick="add(${p.id})">В корзину</button></div></div></article>`}
-function render(){
-const q=((document.getElementById("shopSearch")?.value||document.getElementById("homeSearch")?.value||"")).toLowerCase();
-const cat=document.getElementById("category")?.value||"all";
-const filtered=products.filter(p=>(cat==="all"||p.cat===cat)&&(p.name+" "+p.desc).toLowerCase().includes(q));
-document.getElementById("products").innerHTML=filtered.map(card).join("")||"<p>Ничего не найдено.</p>";
-document.getElementById("featured").innerHTML=products.slice(0,3).map(card).join("");
-}
-function renderBuilds(){
-const q=(document.getElementById("buildSearch")?.value||"").toLowerCase();
-document.getElementById("buildGrid").innerHTML=builds.filter(p=>p.name.toLowerCase().includes(q)).map(card).join("");
-}
-function add(id){const p=[...products,...builds].find(p=>p.id===id);if(p)cart.push(p);renderCart()}
-function removeItem(i){cart.splice(i,1);renderCart()}
-function renderCart(){
-document.getElementById("count").textContent=cart.length;
-document.getElementById("total").textContent=money(cart.reduce((s,p)=>s+p.price,0));
-document.getElementById("cartList").innerHTML=cart.length?cart.map((p,i)=>`<div class="item"><span>${p.name}<br><span class="small">${money(p.price)}</span></span><button class="outline" onclick="removeItem(${i})">Удалить</button></div>`).join(""):"Корзина пуста.";
-}
-function checkout(){alert(cart.length?"Демонстрация: оплата не подключена.":"Сначала добавь товар в корзину.")}
-function go(id){document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));document.getElementById(id)?.classList.add("active");document.querySelectorAll("nav button").forEach(b=>b.classList.toggle("active",b.dataset.page===id));if(id==="cart")renderCart();if(id==="purchases")document.getElementById("purchasesText").textContent=user?"Покупок пока нет.":"Войди в аккаунт, чтобы увидеть свою библиотеку.";window.scrollTo({top:0,behavior:"smooth"})}
-document.querySelectorAll("nav button").forEach(b=>b.onclick=()=>go(b.dataset.page));
-function login(){if(user){go("profile");return}document.getElementById("loginModal").classList.add("open")}
-function closeLogin(){document.getElementById("loginModal").classList.remove("open")}
-function doLogin(e){e.preventDefault();user={nick:document.getElementById("nick").value};document.getElementById("welcome").textContent="Привет, "+user.nick+"!";closeLogin();go("profile")}
-function logout(){user=null;go("home")}
-function calcSeller(){let n=Math.max(0,Number(document.getElementById("sellerPrice").value)||0);document.getElementById("fee").textContent=money(n*.05);document.getElementById("sellerNet").textContent=money(n*.95)}
-document.getElementById("loginModal").addEventListener("click",e=>{if(e.target.id==="loginModal")closeLogin()});
-render();renderBuilds();renderCart();calcSeller();
+/* CRUZ v1.6.5.2 emergency bootstrap shim.
+   This makes an old cached app.js unable to crash on applySiteName. */
+var applySiteName = window.applySiteName || function(name){
+  var value=String(name||'Cruz-amazing.ru').trim()||'Cruz-amazing.ru';
+  document.title=value+' — Amazing Online Store';
+  var brand=document.getElementById('siteNameText');
+  var footer=document.getElementById('siteNameFooter');
+  var input=document.getElementById('siteNameInput');
+  var tagline=document.getElementById('siteTaglineText');
+  if(brand)brand.textContent=value.replace(/^https?:\/\//,'').replace(/\/+$/,'');
+  if(footer)footer.textContent=value;
+  if(input)input.value=value;
+  if(tagline)tagline.textContent='AMAZING ONLINE STORE';
+  if(typeof window.applySiteIcon==='function'){
+    try{ window.applySiteIcon((window.state&&window.state.siteIconData)||''); }catch(_e){}
+  }
+};
+window.CRUS_SITE_BUILD='1.9.2';
 </script>
+
+<script src="public/qrcode.min.js?v=20260811"></script>
+<script src="public/app-v171.js?v=194"></script>
 </body>
 </html>
