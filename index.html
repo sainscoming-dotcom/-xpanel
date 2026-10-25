@@ -1,191 +1,357 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>CRUZ — магазин и торговая площадка Amazing Online</title>
-  <meta name="description" content="CRUZ — игровые материалы, AHK, сборки и защищённая торговая площадка Amazing Online.">
-  <meta property="og:title" content="CRUZ Market — игровые решения Amazing Online">
-  <meta property="og:description" content="Биржа товаров и заказов Amazing Online: модерация, отзывы и подписки.">
-  <link id="siteFavicon" rel="icon" href="public/assets/branding/cruz-favicon-v165.ico" sizes="any">
-  <link id="siteFavicon32" rel="icon" type="image/png" sizes="32x32" href="public/assets/branding/cruz-favicon-v165-32.png">
-  <link id="siteFavicon64" rel="icon" type="image/png" sizes="64x64" href="public/assets/branding/cruz-favicon-v165-64.png">
-  <link id="siteFavicon180" rel="apple-touch-icon" sizes="180x180" href="public/assets/branding/cruz-favicon-v165-180.png">
-  <link rel="manifest" href="site.webmanifest?v=165">
-  <meta name="theme-color" content="#8b2cff">
-  <meta name="cruz-build" content="1.9.1">
-  <link rel="preconnect" href="https://telegram.org" crossorigin>
-  <link rel="dns-prefetch" href="//telegram.org">
-  <link rel="preload" href="public/styles-v171.css?v=191" as="style">
-  <link rel="stylesheet" href="public/styles-v171.css?v=191">
-  <link rel="stylesheet" href="public/readability.css?v=20260813-product-issue-v1">
-  <link rel="stylesheet" href="public/mobile.css?v=20260813-mobile-parity-v1">
-  <link rel="stylesheet" href="public/gallery.css?v=20260813-product-gallery-v1">
-
-  <style id="ac-license-module-styles">.ac-admin-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-bottom:16px}.ac-admin-card{border:1px solid #283651;background:#0d1422;border-radius:14px;padding:16px}.ac-admin-card h3{margin:0 0 14px}.ac-admin-card label{display:block;margin-bottom:10px}.ac-admin-card label>span{display:block;color:#93a1b6;font-size:12px;margin-bottom:6px}.ac-admin-card small{display:block;color:#8492a8;margin-top:9px;line-height:1.45}.ac-release-current{margin:12px 0 16px;padding:13px 15px;border:1px solid #273750;border-radius:12px;background:#0b1220;color:#9eabc0}.ac-release-current b{color:#eef4ff}.ac-license-key{font-family:Consolas,monospace;word-break:break-all;color:#d6ccff}.ac-license-status-active{color:#42d9aa}.ac-license-status-expired{color:#f0b95b}.ac-license-status-blocked{color:#ff7183}.ac-profile-license-card{border-color:#3b4d78!important;background:linear-gradient(145deg,#101a2d,#0b1221)!important}.ac-profile-license-card .ac-key-mini{font-family:Consolas,monospace;color:#cfc4ff}.ac-license-modal-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:15px 0}.ac-license-modal-cell{border:1px solid #27364f;background:#0a111e;border-radius:12px;padding:12px}.ac-license-modal-cell small{display:block;color:#8f9db3;margin-bottom:5px}.ac-license-modal-cell b{display:block}.ac-license-modal-key{padding:12px;border-radius:12px;border:1px solid #394867;background:#0a101b;font:700 14px/1.5 Consolas,monospace;word-break:break-all;color:#dcd4ff;margin:12px 0}@media(max-width:800px){.ac-admin-grid,.ac-license-modal-grid{grid-template-columns:1fr}.ac-license-table{min-width:900px}}</style>
-  <style id="ac-trial-styles">.trial-btn{background:linear-gradient(135deg,#12b886,#5f7dff);border:0;color:#fff;font-weight:850}.trial-btn:hover{filter:brightness(1.08)}.ac-trial-note{margin-top:10px;padding:10px 12px;border-radius:11px;border:1px solid #28524c;background:#0d211f;color:#a8c8c2}</style>
-  <style id="ac-trial-card-fix">.product-trial-offer{margin-top:12px;padding:12px;border:1px solid rgba(53,211,169,.30);border-radius:13px;background:linear-gradient(135deg,rgba(12,38,34,.82),rgba(28,25,72,.82))}.product-trial-offer .trial-btn{width:100%;min-height:46px;font-size:15px}.product-trial-offer small{display:block;margin-top:8px;text-align:center;color:#9eb4b1}.cruz-pop-trial{margin-top:10px}.cruz-pop-trial .trial-btn{width:100%}</style>
-  <style id="ac-trial-ux-fix">.ac-license-owned-btn{background:linear-gradient(135deg,rgba(24,153,111,.22),rgba(55,105,214,.22));border:1px solid rgba(69,214,168,.38);color:#b9ffe6;font-weight:850}</style>
-  <style id="cruz-random-box-css">.rb-shell{margin-top:28px}.rb-hero{display:grid;grid-template-columns:1.05fr 1fr .9fr;gap:18px;padding:22px;border:1px solid rgba(124,92,246,.35);border-radius:24px;background:radial-gradient(circle at 18% 40%,rgba(124,58,237,.24),transparent 35%),linear-gradient(135deg,rgba(8,12,25,.96),rgba(16,9,32,.96));box-shadow:0 20px 70px rgba(50,20,120,.18);overflow:hidden}.rb-box-art{min-height:280px;display:grid;place-items:center;position:relative}.rb-glow{position:absolute;width:210px;height:210px;border-radius:50%;background:rgba(124,58,237,.35);filter:blur(45px);animation:rbpulse 2.5s infinite}.rb-question{z-index:1;width:180px;height:180px;border-radius:32px;display:grid;place-items:center;font-size:100px;font-weight:950;color:#fff;background:linear-gradient(145deg,#32106b,#111a45);border:2px solid rgba(170,120,255,.7);box-shadow:0 0 40px rgba(124,58,237,.65),inset 0 0 30px rgba(255,255,255,.08);transform:rotate(-4deg)}.rb-copy{padding:20px 10px}.rb-copy h2{font-size:42px;margin:8px 0}.rb-copy p{color:#aab4c9}.rb-price{display:flex;align-items:baseline;gap:9px;margin:22px 0}.rb-price b{font-size:34px}.rb-price span,.rb-note{color:#8390a8}.rb-open-btn{font-size:16px;padding:14px 22px}.rb-note{display:block;margin-top:12px}.rb-prizes{padding:18px;background:rgba(5,8,18,.55);border:1px solid rgba(70,90,150,.3);border-radius:18px}.rb-panel-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}.rb-prize-list{display:grid;gap:8px;max-height:270px;overflow:auto}.rb-prize{display:grid;grid-template-columns:34px 1fr auto;gap:9px;align-items:center;padding:9px 10px;border-radius:12px;background:rgba(18,25,43,.8);border:1px solid rgba(60,80,130,.25)}.rb-prize .chance{font-size:11px;color:#9ca9c1}.rb-recent{margin-top:14px;padding:16px;border:1px solid rgba(70,90,150,.25);border-radius:18px;background:rgba(7,11,22,.75)}.rb-recent-list{display:flex;gap:10px;overflow:auto}.rb-win{min-width:180px;padding:11px;border-radius:12px;background:rgba(16,23,40,.9);border:1px solid rgba(70,90,150,.25)}.rb-stage{position:relative;margin-top:14px;padding:32px 16px 20px;border:1px solid rgba(170,100,255,.55);border-radius:20px;background:radial-gradient(circle at center,rgba(100,40,180,.22),rgba(4,7,16,.98));overflow:hidden}.rb-track{display:flex;gap:12px;transform:translateX(0);will-change:transform}.rb-card{flex:0 0 150px;height:130px;border-radius:16px;border:1px solid rgba(80,100,180,.5);display:grid;place-items:center;text-align:center;padding:10px;background:linear-gradient(145deg,#10172c,#0b0e1a);box-shadow:0 10px 30px rgba(0,0,0,.3)}.rb-card b{font-size:13px}.rb-card span{font-size:32px}.rb-pointer{position:absolute;z-index:3;left:50%;top:8px;transform:translateX(-50%);width:0;height:0;border-left:12px solid transparent;border-right:12px solid transparent;border-top:20px solid #fff;filter:drop-shadow(0 0 10px #8b5cf6)}.rb-stage-status{text-align:center;margin-top:16px;color:#aeb9cf}.rb-admin-settings{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.rb-admin-settings label span{display:block;color:#94a1b8;font-size:12px;margin-bottom:6px}.rb-admin-wide{grid-column:span 2}.rb-admin-toolbar{display:flex;justify-content:space-between;align-items:center;margin:20px 0 10px}.rb-admin-prize-input{min-width:120px}.rb-admin-actions{display:flex;gap:10px;margin-top:18px}.rb-admin-history{display:grid;gap:8px}.rb-admin-history .history-row{display:flex;justify-content:space-between;gap:12px;padding:10px;border-radius:10px;background:#0d1422}.rb-admin-history .history-row small{display:block;color:#8492a8}@keyframes rbpulse{50%{transform:scale(1.18);opacity:.7}}@media(max-width:1050px){.rb-hero{grid-template-columns:1fr}.rb-admin-settings{grid-template-columns:1fr 1fr}.rb-admin-wide{grid-column:span 2}}@media(max-width:650px){.rb-question{width:140px;height:140px;font-size:80px}.rb-copy h2{font-size:32px}.rb-admin-settings{grid-template-columns:1fr}.rb-admin-wide{grid-column:auto}.rb-card{flex-basis:120px}}.admin-section-hidden{display:none!important}</style>
-  <style id="cruz-v3-visual-overhaul">:root{--cruz-bg:#060812;--cruz-panel:rgba(12,16,30,.78);--cruz-panel2:rgba(16,20,38,.9);--cruz-line:rgba(128,104,255,.22);--cruz-purple:#8b5cf6;--cruz-blue:#4f7cff;--cruz-text:#f5f7ff;--cruz-muted:#8995ad}html{background:var(--cruz-bg);scroll-behavior:smooth}body{background:radial-gradient(900px 500px at 12% -5%,rgba(104,55,255,.13),transparent 60%),radial-gradient(800px 500px at 100% 15%,rgba(32,104,255,.09),transparent 58%),#060812;color:var(--cruz-text)}body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;background-image:linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.014) 1px,transparent 1px);background-size:44px 44px;mask-image:linear-gradient(to bottom,#000,transparent 80%)}.topbar{background:rgba(5,7,15,.78)!important;border-bottom:1px solid rgba(126,105,255,.18)!important;backdrop-filter:blur(18px)!important;box-shadow:0 10px 40px rgba(0,0,0,.2)}.brand-copy strong{letter-spacing:-.03em}.nav button{transition:all .2s ease}.nav button:hover{transform:translateY(-1px)}.neo-hero-card,.neo-glow-card,.neo-offers-panel,.neo-tools-panel,.neo-stat-card,.neo-trust-strip,.panel,.rb-hero,.rb-recent,.rb-stage{background-color:var(--cruz-panel)!important;border-color:var(--cruz-line)!important;box-shadow:0 24px 80px rgba(0,0,0,.24),inset 0 1px 0 rgba(255,255,255,.025)!important;backdrop-filter:blur(18px)}.neo-hero-card{border-radius:28px!important}.neo-stat-card{border-radius:20px!important}.panel{border-radius:20px!important}.btn.primary,.neo-primary{box-shadow:0 10px 32px rgba(111,70,255,.28)!important}.btn.primary:hover,.neo-primary:hover{box-shadow:0 14px 42px rgba(111,70,255,.4)!important;transform:translateY(-1px)}.neo-home-bg i{filter:blur(70px);opacity:.6}.section-title h2,.neo-panel-head b{letter-spacing:-.025em}.product-card,.neo-product-card{border-radius:20px!important;background:linear-gradient(145deg,rgba(16,21,38,.95),rgba(9,12,23,.95))!important;border-color:rgba(113,102,188,.2)!important;transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease!important}.product-card:hover,.neo-product-card:hover{transform:translateY(-5px)!important;border-color:rgba(139,92,246,.5)!important;box-shadow:0 20px 50px rgba(0,0,0,.32),0 0 35px rgba(102,62,222,.1)!important}.rb-shell{margin-top:34px!important}.rb-hero{grid-template-columns:minmax(250px,.82fr) minmax(300px,1.15fr) minmax(260px,.9fr)!important;padding:24px!important;border-radius:28px!important;background:radial-gradient(circle at 8% 50%,rgba(124,58,237,.24),transparent 30%),radial-gradient(circle at 88% 20%,rgba(45,108,255,.16),transparent 35%),linear-gradient(145deg,rgba(9,12,25,.96),rgba(15,9,31,.96))!important}.rb-box-art{min-height:320px}.rb-box-art:after{content:"";position:absolute;width:230px;height:230px;border:1px solid rgba(158,117,255,.2);border-radius:50%;box-shadow:0 0 0 22px rgba(139,92,246,.025),0 0 0 44px rgba(139,92,246,.018);animation:rbOrbit 7s linear infinite}.rb-question{width:200px!important;height:200px!important;font-size:112px!important;border-radius:40px!important;background:linear-gradient(145deg,#351078,#111b4c)!important;box-shadow:0 0 65px rgba(124,58,237,.7),inset 0 0 35px rgba(255,255,255,.1)!important;animation:rbFloat 3s ease-in-out infinite}.rb-copy{padding:22px 10px}.rb-copy h2{font-size:clamp(38px,4vw,58px)!important;line-height:1;margin:12px 0!important;background:linear-gradient(90deg,#fff,#d8c7ff 55%,#8bb7ff);-webkit-background-clip:text;background-clip:text;color:transparent}.rb-copy p{font-size:16px;line-height:1.6}.rb-kickers{display:flex;gap:9px;align-items:center;flex-wrap:wrap}.rb-live-chip{font-size:10px;font-weight:900;letter-spacing:.12em;color:#9bf4cf;border:1px solid rgba(63,211,164,.25);background:rgba(36,130,101,.1);padding:7px 9px;border-radius:999px}.rb-price{padding:15px 17px;border-radius:16px;background:rgba(255,255,255,.035);border:1px solid rgba(139,92,246,.18);width:max-content;min-width:150px}.rb-price b{font-size:38px}.rb-open-btn{min-width:235px;border-radius:14px!important;font-weight:900!important}.rb-feature-pills{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px}.rb-feature-pills span{font-size:11px;color:#b8c2d7;padding:7px 9px;border-radius:999px;background:rgba(255,255,255,.035);border:1px solid rgba(100,115,160,.18)}.rb-prizes{background:rgba(3,6,15,.5)!important;border-color:rgba(100,115,170,.22)!important}.rb-prize{padding:11px!important;border-color:rgba(90,105,155,.2)!important;background:linear-gradient(90deg,rgba(21,28,49,.8),rgba(13,18,32,.8))!important;transition:.18s}.rb-prize:hover{border-color:rgba(139,92,246,.35)!important;transform:translateX(2px)}.rb-prize strong{font-variant-numeric:tabular-nums;color:#d9ccff}.rb-recent{background:rgba(7,10,20,.72)!important}.rb-win{border-color:rgba(96,110,160,.2)!important;transition:.18s}.rb-win:hover{transform:translateY(-2px);border-color:rgba(139,92,246,.35)!important}.rb-stage{padding:40px 16px 22px!important;background:radial-gradient(circle at center,rgba(100,40,180,.2),rgba(4,7,16,.98))!important;box-shadow:0 0 60px rgba(124,58,237,.12),inset 0 0 80px rgba(45,82,190,.08)!important}.rb-track{will-change:transform}.rb-card{border-color:rgba(103,112,190,.34)!important;background:linear-gradient(145deg,#111a33,#090d19)!important}.rb-card small{display:block;color:#7f8ba5;font-size:10px;margin-top:4px}.rb-target-card{border-color:rgba(255,201,87,.75)!important;box-shadow:0 0 35px rgba(255,186,70,.22),inset 0 0 30px rgba(255,191,80,.07)!important}.rb-win-modal{position:relative;text-align:center;overflow:hidden;padding:12px}.rb-win-icon{width:116px;height:116px;margin:0 auto 16px;display:grid;place-items:center;font-size:58px;border-radius:30px;background:linear-gradient(145deg,rgba(124,58,237,.28),rgba(41,101,220,.2));border:1px solid rgba(177,142,255,.55);box-shadow:0 0 55px rgba(124,58,237,.35)}.rb-win-burst{position:absolute;inset:0;pointer-events:none;font-size:22px;color:#d9c7ff;opacity:.7;animation:rbBurst 1.6s ease-out infinite}.rb-win-actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:20px}.rb-win-actions .btn{min-width:150px}.rb-admin-panel{overflow:hidden}.rb-admin-settings{padding:16px;border-radius:18px;background:rgba(4,7,15,.42);border:1px solid rgba(100,115,160,.18)}.rb-admin-toolbar{padding-top:4px}.rb-admin-weight-meta{display:block;color:#7f8ca5;font-size:12px;margin-top:4px}.rb-admin-tip{margin-top:14px;padding:12px 14px;border-radius:14px;background:rgba(79,124,255,.07);border:1px solid rgba(79,124,255,.18);color:#9caaca;font-size:12px;line-height:1.5}.rb-admin-panel .table-wrap{overflow:auto;border-radius:16px;border:1px solid rgba(80,95,140,.18)}.rb-admin-panel table{min-width:1180px}.rb-admin-panel th{position:sticky;top:0;background:#0b1020;z-index:2}.rb-admin-panel td,.rb-admin-panel th{border-color:rgba(80,95,140,.16)!important}.rb-admin-panel td{vertical-align:middle}.rb-admin-panel td .input{min-width:105px}.rb-admin-panel .rb-p-title{min-width:190px}.rb-admin-panel .rb-p-product{min-width:220px}.rb-admin-panel .rb-p-chance{font-weight:900;color:#cdbdff;white-space:nowrap}.rb-admin-panel .rb-is-ahk{background:rgba(75,116,255,.035)}@keyframes rbFloat{0%,100%{transform:rotate(-4deg) translateY(0)}50%{transform:rotate(3deg) translateY(-10px)}}@keyframes rbOrbit{to{transform:rotate(360deg)}}@keyframes rbBurst{0%{transform:scale(.8);opacity:0}30%{opacity:.8}100%{transform:scale(1.35);opacity:0}}@media(max-width:1050px){.rb-hero{grid-template-columns:1fr 1fr!important}.rb-box-art{grid-row:span 2}.rb-copy{padding-left:0}.rb-prizes{grid-column:2}}@media(max-width:720px){.topbar{backdrop-filter:blur(16px)!important}.rb-hero{grid-template-columns:1fr!important;padding:16px!important}.rb-box-art{grid-row:auto;min-height:250px}.rb-question{width:160px!important;height:160px!important;font-size:88px!important}.rb-copy h2{font-size:39px!important}.rb-open-btn{width:100%;min-width:0}.rb-price{width:100%}.rb-prizes{grid-column:auto}.rb-feature-pills span{font-size:10px}.rb-admin-settings{grid-template-columns:1fr!important}.rb-admin-wide{grid-column:auto!important}.rb-admin-panel .table-wrap{margin-left:-4px;margin-right:-4px}.rb-admin-panel table{min-width:1050px}}@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.001ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition:none!important}}</style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#080914">
+<title>CRUZ Market — Amazing Online</title>
+<style>
+:root {
+  --bg:#080914;
+  --panel:#111426;
+  --line:#292746;
+  --purple:#8b5cf6;
+  --blue:#4f7cff;
+  --text:#f5f5ff;
+  --muted:#9ca3bd;
+  --green:#39d9a5;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:
+  radial-gradient(ellipse at top left,#25144b 0,transparent 42%),
+  radial-gradient(ellipse at top right,#101c43 0,transparent 38%),
+  var(--bg);
+  color:var(--text);font:15px Arial,sans-serif
+}
+button,input,select{font:inherit}
+button{cursor:pointer}
+a{color:inherit;text-decoration:none}
+.container{width:min(1180px,92%);margin:auto}
+header{
+  position:sticky;top:0;z-index:10;
+  background:#090a15ed;backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--line)
+}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:17px 0;flex-wrap:wrap}
+.logo{font-size:25px;font-weight:900;letter-spacing:-1px}
+.logo span{color:var(--purple)}
+nav{display:flex;gap:8px;flex-wrap:wrap}
+nav a,.btn{
+  display:inline-block;padding:11px 15px;border-radius:10px;
+  border:1px solid var(--line);background:#15172a;color:white
+}
+nav a:hover,.btn:hover{border-color:var(--purple)}
+.btn.primary{background:linear-gradient(120deg,#7436e9,#456cff);border:0;font-weight:bold}
+.hero{padding:64px 0 38px}
+.hero-card{
+  display:grid;grid-template-columns:1.2fr .8fr;gap:25px;
+  align-items:center;padding:42px;border:1px solid #48326d;
+  border-radius:25px;background:linear-gradient(125deg,#17132d,#10172b);
+  box-shadow:0 25px 90px #0005
+}
+.eyebrow{color:#bca5ff;font-size:12px;font-weight:bold;letter-spacing:2px}
+h1{font-size:clamp(36px,5vw,60px);line-height:1.04;margin:16px 0}
+h1 span{color:#a88aff}
+p{color:var(--muted);line-height:1.7}
+.hero-art{min-height:240px;display:grid;place-items:center;font-size:120px;
+  border-radius:20px;background:radial-gradient(circle,#4b2585,#15162d 65%)}
+.section{padding:30px 0 50px}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:15px;flex-wrap:wrap;margin-bottom:22px}
+h2{font-size:29px;margin:8px 0}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:22px}
+input,select{background:#111426;border:1px solid var(--line);color:white;padding:13px;border-radius:10px}
+input{flex:1;min-width:200px}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:17px}
+.card{overflow:hidden;border:1px solid var(--line);border-radius:17px;background:linear-gradient(145deg,#15172a,#0e1020);transition:.2s}
+.card:hover{transform:translateY(-4px);border-color:#8055d9}
+.product-image{height:155px;display:grid;place-items:center;font-size:64px;
+  background:radial-gradient(circle at 50% 80%,#5633a3,#17162d 70%)}
+.card-body{padding:18px}
+.tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.tag{font-size:10px;font-weight:bold;padding:6px 8px;border-radius:6px;background:#38245c;color:#d5c2ff}
+.tag.green{background:#123d34;color:#72f1c6}
+.card h3{font-size:19px;margin:10px 0}
+.description{font-size:13px;min-height:65px}
+.rating{font-size:13px;color:#ffd36a;margin:12px 0}
+.price{display:flex;align-items:center;gap:10px;margin:15px 0}
+.price strong{font-size:24px}
+.old-price{text-decoration:line-through;color:#737b96}
+.card-actions{display:flex;gap:8px}
+.card-actions button{flex:1}
+.btn.small{padding:10px;font-size:13px}
+.panel{border:1px solid var(--line);border-radius:20px;background:#111426b8;padding:25px;margin-bottom:20px}
+.random{display:grid;grid-template-columns:1fr 1fr;gap:25px;align-items:center}
+.random-art{display:grid;place-items:center;min-height:230px;border-radius:18px;background:radial-gradient(circle,#572b9c,#101426 70%);font-size:100px}
+.pills{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.pills span{padding:8px 10px;background:#1b2035;border-radius:20px;color:#c4cce1;font-size:12px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.stat{padding:20px;border:1px solid var(--line);border-radius:14px;background:#111426}
+.stat b{display:block;margin-bottom:8px}
+.activity{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.activity-item{padding:15px;border-radius:12px;background:#14172a;border:1px solid var(--line)}
+.activity-item small{display:block;color:var(--muted);margin-top:8px}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+.step{padding:20px;border:1px solid var(--line);border-radius:14px;background:#111426}
+.step strong{font-size:28px;color:var(--purple)}
+details{padding:16px;border-bottom:1px solid var(--line)}
+summary{cursor:pointer;font-weight:bold}
+footer{margin-top:30px;padding:30px 0;border-top:1px solid var(--line);color:var(--muted)}
+footer .container{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}
+.notice{padding:15px;border:1px solid #55402b;background:#211a14;border-radius:12px;color:#eacb9e}
+.empty{grid-column:1/-1;padding:30px;text-align:center;color:var(--muted)}
+@media(max-width:850px){
+ .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .hero-card{grid-template-columns:1fr;padding:25px}
+ .hero-art{min-height:150px;font-size:85px}
+ .stats,.activity{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:540px){
+ .grid,.steps,.random{grid-template-columns:1fr}
+ .stats,.activity{grid-template-columns:1fr 1fr}
+ .hero{padding-top:30px}
+ h2{font-size:24px}
+ .nav{align-items:flex-start}
+ nav{width:100%}
+ nav a{padding:9px;font-size:12px}
+}
+</style>
 </head>
 <body>
-  <header class="topbar">
-    <div class="container nav">
-      <button class="brand nav-go" data-view="home" aria-label="На главную">
-        <span class="logo" id="siteLogo"><span id="siteLogoLetter">A</span><img id="siteLogoImage" class="site-logo-image hidden" alt=""></span>
-        <span class="brand-copy neo-wordmark"><strong id="siteNameText">Cruz-amazing.online</strong><small id="siteTaglineText">AMAZING ONLINE STORE</small></span>
-      </button>
-      <button id="mobileMenuBtn" class="mobile-menu-btn" type="button" aria-label="Открыть меню" aria-controls="mainNav" aria-expanded="false">☰</button>
-      <nav id="mainNav">
-        <button class="nav-go" data-view="home">Главная</button>
-        <button id="catalogNavBtn" type="button">Магазин</button>
-        <button class="nav-go marketplace-nav-btn" data-view="marketplace">Площадка</button>
-        <button class="nav-go" data-view="builds">Сборки</button>
-        <button id="faqNavBtn" class="faq-scroll-btn">FAQ</button>
-        <button id="adminNav" class="nav-go hidden" data-view="admin">Админ</button>
-      </nav>
-      <div class="nav-actions neo-nav-actions">
-        <button class="neo-status-chip nav-go" data-view="updates" type="button"><span>◉</span><div><b>Обновления</b><small>Регулярно</small></div></button>
-        <button class="neo-status-chip nav-go" data-view="support-info" type="button"><span>◌</span><div><b>Поддержка</b><small>24/7 онлайн</small></div></button>
-        <button id="notificationBtn" class="icon-btn notification-btn" type="button" title="Уведомления" aria-label="Уведомления">🔔<span id="notificationCount" class="notification-count hidden">0</span></button>
-        <button id="mobileAccountBtn" class="icon-btn mobile-account-btn" type="button" title="Личный кабинет" aria-label="Личный кабинет"><span id="mobileAccountIcon">👤</span></button>
-        <button id="accountBtn" class="account-chip">Войти</button>
+<header>
+  <div class="container nav">
+    <a class="logo" href="#">CRUZ<span>.</span>MARKET</a>
+    <nav>
+      <a href="#home">Главная</a>
+      <a href="#catalog">Магазин</a>
+      <a href="#random">Random Box</a>
+      <a href="#activity">Активность</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="hero container" id="home">
+  <div class="hero-card">
+    <div>
+      <div class="eyebrow">⚡ CRUZ AMAZING STORE</div>
+      <h1>Игровые решения <span>нового поколения</span></h1>
+      <p>Гайды, игровые материалы и инструменты для Amazing Online. Выбирай нужный продукт и изучай описание.</p>
+      <a class="btn primary" href="#catalog">Перейти в каталог →</a>
+      <div class="pills">
+        <span>◇ Качественные материалы</span>
+        <span>♢ Поддержка</span>
+        <span>✓ Подробные инструкции</span>
       </div>
     </div>
-  </header>
+    <div class="hero-art">🎮</div>
+  </div>
+</section>
 
-  <div id="siteAnnouncement" class="site-announcement hidden" role="status">
-    <div class="container site-announcement-inner"><span id="announcementIcon">📣</span><b id="announcementText"></b></div>
+<section class="section container" id="catalog">
+  <div class="section-head">
+    <div><div class="eyebrow">CRUZ / STORE</div><h2>Каталог товаров</h2><p>Подборка гайдов и подсказок для игроков.</p></div>
   </div>
 
-  <main>
-    <section id="view-home" class="view active neo-home-view">
-      <div class="neo-home-bg" aria-hidden="true"><i></i><i></i><i></i></div>
-      <div class="container neo-hero-layout">
-        <section class="neo-hero-card neo-glow-card" id="neoHeroCard">
-          <div class="neo-hero-copy">
-            <span class="neo-mini-kicker" id="heroEyebrow">⚡ CRUZ AMAZING STORE</span>
-            <h1><span id="heroTitleBefore">Игровые решения</span><span id="heroTitleAccent">нового поколения</span><span id="heroTitleAfter" class="neo-title-tail"></span></h1>
-            <p id="heroDescription">Премиальные AHK-скрипты, приватные сборки и инструменты для тех, кто играет на шаг впереди.</p>
-            <div class="neo-hero-actions">
-              <a id="heroPrimaryButton" class="btn primary neo-primary" href="#catalog">Перейти в каталог</a>
-            </div>
-            <div class="neo-hero-mini-features">
-              <div><span id="heroCardItem1Icon">◇</span><p><b id="heroCardItem1Title">Качество</b><small id="heroCardItem1Status">Проверено пользователями</small></p><em id="heroCardItem1Action">✓</em></div>
-              <div><span>♢</span><p><b>Безопасность</b><small id="heroCardLockedText">Приватные решения</small></p></div>
-              <div><span id="heroCardItem2Icon">◌</span><p><b id="heroCardItem2Title">Поддержка</b><small id="heroCardItem2Status">Помощь 24/7</small></p><em id="heroCardItem2Action">24/7</em></div>
-            </div>
-            <button class="quest-hidden-mark hidden" data-quest-spot="hero" type="button" aria-label="Секрет">✦</button>
-            <span id="heroCardTitle" class="hidden">CRUZ AMAZING</span><span id="heroCardLockedTitle" class="hidden">Безопасность</span>
-          </div>
-          <div class="neo-hero-art" aria-hidden="true">
-            <div class="neo-art-triangle"></div>
-            <img src="public/assets/hero-figure.webp" alt="" decoding="async" fetchpriority="high">
-            <div id="heroShowcaseImageWrap" class="hero-showcase-image-wrap neo-admin-showcase hidden"><img id="heroShowcaseImage" alt=""></div>
-          </div>
-        </section>
+  <div class="toolbar">
+    <input id="search" placeholder="Поиск товаров..." aria-label="Поиск товаров">
+    <select id="category" aria-label="Категория">
+      <option value="all">Все категории</option>
+      <option value="фарм">Фарм</option>
+      <option value="Правительство">Правительство</option>
+      <option value="ФСИН">ФСИН</option>
+      <option value="МВД">МВД</option>
+      <option value="ЕСС">ЕСС</option>
+      <option value="Воинская часть">Воинская часть</option>
+      <option value="ГАИ">ГАИ</option>
+    </select>
+  </div>
 
-        <aside class="neo-hero-stats" aria-label="Преимущества магазина">
-          <div class="neo-stat-card"><strong id="heroProducts">0</strong><span id="heroStat1Label">товаров<br>в каталоге</span><i>◎</i></div>
-          <div class="neo-stat-card"><strong>2</strong><span>отдельные<br>AHK-линейки</span><i>◈</i></div>
-          <div class="neo-stat-card"><strong id="heroStat2Value">24/7</strong><span id="heroStat2Label">поддержка<br>и доступ</span><i>ϟ</i></div>
-        </aside>
+  <div class="grid" id="products"></div>
+</section>
+
+<section class="section container" id="random">
+  <div class="panel random">
+    <div>
+      <div class="eyebrow">● LIVE DROP · CRUZ / RANDOM</div>
+      <h2>🎁 RANDOM BOX</h2>
+      <p>Ознакомься с концепцией случайных призов. Открытие коробки и реальные платежи не подключены в этой демоверсии.</p>
+      <div class="price"><strong>50 ₽</strong><span class="old-price">за открытие</span></div>
+      <button class="btn primary" id="randomBtn">Посмотреть призы</button>
+      <div class="pills">
+        <span>⚡ Демо-режим</span>
+        <span>🛡️ Без списания средств</span>
+        <span>🎯 Без реальных ставок</span>
       </div>
+      <p id="randomResult" aria-live="polite"></p>
+    </div>
+    <div class="random-art">🎁</div>
+  </div>
+</section>
 
-      <section class="container marketplace-spotlight neo-glow-card" aria-labelledby="marketplaceSpotlightTitle">
-        <div class="marketplace-spotlight-copy">
-          <span class="market-live-dot">LIVE MARKET</span>
-          <h2 id="marketplaceSpotlightTitle">Игровые материалы и предложения — CRUZ Market</h2>
-          <p>Каталог цифровых товаров для игроков Amazing Online с поддержкой и проверенными файлами.</p>
-          <div class="marketplace-spotlight-actions">
-            <button class="btn primary nav-go" data-view="marketplace" type="button">Открыть площадку</button>
-          </div>
-        </div>
-        <div class="marketplace-spotlight-proof">
-          <div><b>🛡️</b><span>Проверка файлов</span><small>Безопасные решения</small></div>
-          <div><b>⏳</b><span>Гарантия качества</span><small>Только проверенный софт</small></div>
-          <div><b>⚖️</b><span>Поддержка</span><small>Помощь в настройке</small></div>
-        </div>
-        <div id="marketplaceHomePicks" class="marketplace-home-picks" aria-live="polite"></div>
-      </section>
+<section class="section container">
+  <div class="section-head"><div><div class="eyebrow">CRUZ / BENEFITS</div><h2>Преимущества магазина</h2></div></div>
+  <div class="stats">
+    <div class="stat"><b>⚗ Бесплатный тест</b><span>Ознакомление с материалами</span></div>
+    <div class="stat"><b>♢ Качество</b><span>Подробные описания товаров</span></div>
+    <div class="stat"><b>ϟ Доступ</b><span>Информация о получении доступа</span></div>
+    <div class="stat"><b>↻ Поддержка</b><span>Помощь по вопросам заказа</span></div>
+  </div>
+</section>
 
-      <div id="catalog" class="container neo-catalog-shell">
-        <div class="neo-search-row">
-          <label class="neo-search-box"><span>⌕</span><input id="search" class="input" placeholder="Поиск по каталогу: AHK, сборки, софт..."></label>
-          <select id="orgFilter" class="input neo-org-select"><option value="all">Все организации</option></select>
-        </div>
+<section class="section container" id="activity">
+  <div class="section-head"><div><div class="eyebrow">CRUZ / ACTIVITY</div><h2>Активность магазина</h2><p>Примеры товаров в демонстрационной ленте.</p></div></div>
+  <div class="activity" id="activityList"></div>
+</section>
 
-        <div class="neo-category-tabs" id="neoCategoryTabs">
-          <button class="active" type="button" data-quick="popular">☆ <span>Популярные</span></button>
-          <button class="nav-go" data-view="builds" type="button">🎮 <span>Игровые сборки</span></button>
-          <button type="button" data-quick="ahk">‹/› <span>Приватные AHK</span></button>
-          <button type="button" data-quick="hub">△ <span>AMZ HUB</span></button>
-          <button type="button" data-quick="packs">▱ <span>Бандлы</span></button>
-          <button type="button" data-quick="other">••• <span>Другое</span></button>
-        </div>
+<section class="section container">
+  <div class="section-head"><div><div class="eyebrow">ПРОСТО И ПОНЯТНО</div><h2>Как работает магазин</h2></div></div>
+  <div class="steps">
+    <div class="step"><strong>01</strong><h3>Выберите продукт</h3><p>Найдите нужный гайд или подсказку.</p></div>
+    <div class="step"><strong>02</strong><h3>Ознакомьтесь</h3><p>Прочитайте описание и условия получения.</p></div>
+    <div class="step"><strong>03</strong><h3>Свяжитесь с поддержкой</h3><p>Уточните доступность и порядок получения.</p></div>
+  </div>
+</section>
 
-        <div class="section-title neo-catalog-title">
-          <div><span id="catalogEyebrow" class="eyebrow">CRUZ / STORE</span><h2 id="catalogTitle">Лучшие решения</h2><p id="catalogDescription">Два флагманских AHK и остальные продукты.</p></div>
-          <span id="catalogMeta"></span>
-        </div>
-        <div id="products" class="product-grid neo-product-grid"></div>
-        <div class="quest-mark-row"><button class="quest-hidden-mark hidden" data-quest-spot="catalog" type="button" aria-label="Секрет">✦</button></div>
-      </div>
+<section class="section container" id="faq">
+  <div class="section-head"><div><div class="eyebrow">ПОМОЩЬ</div><h2>FAQ и инструкции</h2></div></div>
+  <div class="panel">
+    <details open>
+      <summary>Как купить подсказку?</summary>
+      <p>Изучите описание продукта и уточните порядок приобретения у администрации магазина.</p>
+    </details>
+    <details>
+      <summary>Когда откроется материал?</summary>
+      <p>Способ передачи и сроки доступа необходимо согласовать с поддержкой.</p>
+    </details>
+    <details>
+      <summary>Как пополнить баланс?</summary>
+      <p>Пополнение баланса в этой версии сайта отключено.</p>
+    </details>
+    <details>
+      <summary>Как работает кэшбэк?</summary>
+      <p>Функция кэшбэка пока не подключена.</p>
+    </details>
+  </div>
+</section>
 
-      <section class="container neo-split-panels">
-        <div id="neoOffersPanel" class="neo-offers-panel neo-glow-card">
-          <div class="neo-panel-head"><div><span class="neo-panel-icon">♨</span><b id="offersPanelTitle">ПОПУЛЯРНЫЕ РЕШЕНИЯ</b><small id="offersPanelSubtitle">Лучшие предложения каталога</small></div><button id="catalogFocusBtn" class="neo-outline-link" type="button">Перейти в каталог →</button></div>
-          <div id="popularProducts" class="neo-popular-mini-grid"></div>
-        </div>
-        <div id="neoToolsPanel" class="neo-tools-panel neo-glow-card">
-          <div class="neo-panel-head"><div><span class="neo-panel-icon">▱</span><b id="toolsPanelTitle">AMZ HUB — ИНСТРУМЕНТЫ</b><small id="toolsPanelSubtitle">Инструменты для игры и настройки</small></div><button id="toolsPanelButton" class="neo-outline-link" type="button">Все инструменты →</button></div>
-          <div id="neoToolGrid" class="neo-tool-grid"></div>
-          <div id="neoToolsFoot" class="neo-tools-foot"></div>
-        </div>
-      </section>
+<section class="section container">
+  <div class="notice">⚠️ Неофициальный фан-проект. Не является официальным ресурсом Amazing Online.</div>
+</section>
+</main>
 
-      <div id="neoTrustStrip" class="container neo-trust-strip"></div>
+<footer>
+  <div class="container">
+    <div><b>CRUZ Market</b><p>Независимый фан-проект · © 2026</p></div>
+    <div>Тарифы и цены · Политика конфиденциальности · Пользовательское соглашение</div>
+  </div>
+</footer>
 
-      <div class="container how neo-lower-section">
-        <div class="section-title"><div><h2>Как получить доступ</h2><p>Выбор → знакомство → получение через поддержку.</p></div></div>
-        <div class="steps">
-          <article><strong>01</strong><h3>Выберите продукт</h3><p>Найдите подходящий AHK или сборку в каталоге.</p></article>
-          <article><strong>02</strong><h3>Ознакомьтесь</h3><p>Прочитайте инструкции и системные требования.</p></article>
-          <article><strong>03</strong><h3>Напишите нам</h3><p>Свяжитесь с поддержкой для получения файла и инструкции.</p></article>
-        </div>
-      </div>
+<script>
+const products = [
+  {
+    name:"ФЕРМА PRO", category:"фарм", icon:"🌱",
+    description:"Как выйти на максимальный доход: теплицы, гены, лучшие культуры, температура, вода, маршрут, расчёт прибыли, ошибки новичков и обновления.",
+    price:49, old:150, rating:"Нет отзывов", tags:["НОВИНКА","РЕКОМЕНДУЕМ"]
+  },
+  {
+    name:"Рыбалка PRO", category:"фарм", icon:"🎣",
+    description:"Как выйти на максимальный доход: удочка → сеть → катер → максимальный фарм.",
+    price:49, old:150, rating:"Нет отзывов", tags:["НОВИНКА","РЕКОМЕНДУЕМ"]
+  },
+  {
+    name:"Гайд для новичков", category:"фарм", icon:"🧭",
+    description:"Первые 10 минут, первый час, первые 5 часов и первый день: куда ехать, какие команды использовать, какую работу выбрать и как накопить деньги.",
+    price:15, old:50, rating:"★ 5.0 (2)", tags:["НОВИНКА","РЕКОМЕНДУЕМ"]
+  },
+  ...[
+    ["Правительство","🏛️",2],
+    ["ФСИН","🔒",1],
+    ["МВД","🚔",3],
+    ["ЕСС","🛡️",1],
+    ["Воинская часть","🎖️",1],
+    ["ГАИ","🚘",3]
+  ].map(([name,icon,reviews])=>({
+    name:name+" — Подсказка для любого сервера",
+    category:name,icon,
+    description:"Актуальная подсказка. Материал для ознакомления и помощи в игре.",
+    price:69,old:199,rating:"★ 5.0 ("+reviews+")",tags:[]
+  }))
+];
 
-      <div id="faq" class="container faq-section neo-lower-section">
-        <div class="section-title"><div><span class="eyebrow">Помощь</span><h2>FAQ и инструкции</h2><p>Ответы на основные вопросы о настройке и работе продуктов.</p></div></div>
-        <div id="faqList" class="faq-list"><div class="empty">Загружаем инструкции…</div></div>
-        <div class="quest-mark-row"><button class="quest-hidden-mark hidden" data-quest-spot="faq" type="button" aria-label="Секрет">✦</button></div>
-      </div>
+const productsEl = document.getElementById("products");
+const searchEl = document.getElementById("search");
+const categoryEl = document.getElementById("category");
 
-      <div class="container disclaimer neo-disclaimer"><span>⚠️</span><div><b>Неофициальный фан-проект.</b><p>Не является официальным ресурсом Amazing Online.</p></div></div>
-    </section>
+function renderProducts(){
+  const query = searchEl.value.trim().toLowerCase();
+  const category = categoryEl.value;
+  const filtered = products.filter(p =>
+    (p.name+" "+p.description+" "+p.category).toLowerCase().includes(query) &&
+    (category==="all" || p.category===category)
+  );
 
-    <section id="view-marketplace" class="view container page marketplace-page">
-      <div class="marketplace-hero">
-        <div class="marketplace-hero-copy">
-          <span class="eyebrow">⚡ CRUZ MARKET · PLAYER TO PLAYER</span>
-          <h1>Площадка Amazing Online</h1>
-          <p>База готовых материалов и скриптов с поддержкой и проверенной работоспособностью.</p>
-          <div class="marketplace-trust-chips"><span>✓ Модерация</span><span>✓ Проверка файлов</span><span>✓ Помощь 24/7</span></div>
-        </div>
-      </div>
+  productsEl.innerHTML = "";
 
-      <div class="marketplace-toolbar">
-        <label class="marketplace-search">
-          <span>⌕</span>
-          <input id="marketplaceSearch" class="input" placeholder="Поиск по площадке...">
-        </label>
-      </div>
-    </section>
-  </main>
+  if(!filtered.length){
+    productsEl.innerHTML='<div class="empty">Ничего не найдено. Попробуйте изменить поиск.</div>';
+    return;
+  }
+
+  filtered.forEach(p=>{
+    const card=document.createElement("article");
+    card.className="card";
+    const tags=p.tags.map(t=>'<span class="tag">'+t+'</span>').join("");
+    card.innerHTML=`
+      <div class="product-image">${p.icon}</div>
+      <div class="card-body">
+        <div class="tags">${tags}<span class="tag green">${p.category}</span></div>
+        <h3>${p.name}</h3>
+        <div class="description">${p.description}</div>
+        <div class="rating">${p.rating}</div>
+        <div class="price"><strong>${p.price} ₽</strong><span class="old-price">${p.old} ₽</span></div>
+        <div class="card-actions">
+          <button class="btn small details-btn">Подробнее</button>
+          <button class="btn small primary cart-btn">В корзину</button>
+        </div>`;
+    card.querySelector(".details-btn").addEventListener("click",()=>{
+      alert(p.name+"\\n\\n"+p.description+"\\n\\nЦена: "+p.price+" ₽\\n\\nДемо-версия: оформление покупки отключено.");
+    });
+    card.querySelector(".cart-btn").addEventListener("click",()=>{
+      alert("Товар: "+p.name+"\\nЦена: "+p.price+" ₽\\n\\nКорзина и оплата не подключены. Свяжитесь с поддержкой для получения товара.");
+    });
+    productsEl.appendChild(card);
+  });
+}
+
+searchEl.addEventListener("input",renderProducts);
+categoryEl.addEventListener("change",renderProducts);
+renderProducts();
+
+document.getElementById("randomBtn").addEventListener("click",()=>{
+  document.getElementById("randomResult").textContent =
+    "Демонстрационный режим: реальные открытия коробок и списание средств отключены.";
+});
+
+const activity=[
+  ["АХК","Приватный АХК для госс организаций","3 ч. назад"],
+  ["АХК","Приватный АХК для госс организаций","20 ч. назад"],
+  ["АХК","Приватный АХК для госс организаций","21 ч. назад"],
+  ["Фарм","Рыбалка PRO","23 ч. назад"],
+  ["Фарм","ФЕРМА PRO","23 ч. назад"],
+  ["АХК","Приватный АХК для госс организаций","вчера"],
+  ["Фарм","Гайд для новичков","вчера"],
+  ["АХК","Приватный АХК для госс организаций","вчера"]
+];
+
+document.getElementById("activityList").innerHTML=activity.map(item=>`
+  <div class="activity-item">
+    <span class="tag">${item[0]}</span>
+    <p>${item[1]}</p>
+    <small>${item[2]} · Демонстрационная запись</small>
+  </div>`).join("");
+</script>
 </body>
 </html>
-/* Принудительное скрытие элементов корзины и оплаты через стили */
-#cartBtn, #purchasesQuickBtn, .cart-chip, .purchases-chip, .product-trial-offer, .rb-open-btn {
-  display: none !important;
-}
