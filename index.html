@@ -1,357 +1,60 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#080914">
-<title>CRUZ Market — Amazing Online</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CRUZ — магазин Amazing Online</title>
+<meta name="description" content="CRUZ Market — игровые гайды, материалы и инструменты для Amazing Online.">
 <style>
-:root {
-  --bg:#080914;
-  --panel:#111426;
-  --line:#292746;
-  --purple:#8b5cf6;
-  --blue:#4f7cff;
-  --text:#f5f5ff;
-  --muted:#9ca3bd;
-  --green:#39d9a5;
-}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{
-  margin:0;background:
-  radial-gradient(ellipse at top left,#25144b 0,transparent 42%),
-  radial-gradient(ellipse at top right,#101c43 0,transparent 38%),
-  var(--bg);
-  color:var(--text);font:15px Arial,sans-serif
-}
-button,input,select{font:inherit}
-button{cursor:pointer}
-a{color:inherit;text-decoration:none}
-.container{width:min(1180px,92%);margin:auto}
-header{
-  position:sticky;top:0;z-index:10;
-  background:#090a15ed;backdrop-filter:blur(16px);
-  border-bottom:1px solid var(--line)
-}
-.nav{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:17px 0;flex-wrap:wrap}
-.logo{font-size:25px;font-weight:900;letter-spacing:-1px}
-.logo span{color:var(--purple)}
-nav{display:flex;gap:8px;flex-wrap:wrap}
-nav a,.btn{
-  display:inline-block;padding:11px 15px;border-radius:10px;
-  border:1px solid var(--line);background:#15172a;color:white
-}
-nav a:hover,.btn:hover{border-color:var(--purple)}
-.btn.primary{background:linear-gradient(120deg,#7436e9,#456cff);border:0;font-weight:bold}
-.hero{padding:64px 0 38px}
-.hero-card{
-  display:grid;grid-template-columns:1.2fr .8fr;gap:25px;
-  align-items:center;padding:42px;border:1px solid #48326d;
-  border-radius:25px;background:linear-gradient(125deg,#17132d,#10172b);
-  box-shadow:0 25px 90px #0005
-}
-.eyebrow{color:#bca5ff;font-size:12px;font-weight:bold;letter-spacing:2px}
-h1{font-size:clamp(36px,5vw,60px);line-height:1.04;margin:16px 0}
-h1 span{color:#a88aff}
-p{color:var(--muted);line-height:1.7}
-.hero-art{min-height:240px;display:grid;place-items:center;font-size:120px;
-  border-radius:20px;background:radial-gradient(circle,#4b2585,#15162d 65%)}
-.section{padding:30px 0 50px}
-.section-head{display:flex;justify-content:space-between;align-items:end;gap:15px;flex-wrap:wrap;margin-bottom:22px}
-h2{font-size:29px;margin:8px 0}
-.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:22px}
-input,select{background:#111426;border:1px solid var(--line);color:white;padding:13px;border-radius:10px}
-input{flex:1;min-width:200px}
-.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:17px}
-.card{overflow:hidden;border:1px solid var(--line);border-radius:17px;background:linear-gradient(145deg,#15172a,#0e1020);transition:.2s}
-.card:hover{transform:translateY(-4px);border-color:#8055d9}
-.product-image{height:155px;display:grid;place-items:center;font-size:64px;
-  background:radial-gradient(circle at 50% 80%,#5633a3,#17162d 70%)}
-.card-body{padding:18px}
-.tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
-.tag{font-size:10px;font-weight:bold;padding:6px 8px;border-radius:6px;background:#38245c;color:#d5c2ff}
-.tag.green{background:#123d34;color:#72f1c6}
-.card h3{font-size:19px;margin:10px 0}
-.description{font-size:13px;min-height:65px}
-.rating{font-size:13px;color:#ffd36a;margin:12px 0}
-.price{display:flex;align-items:center;gap:10px;margin:15px 0}
-.price strong{font-size:24px}
-.old-price{text-decoration:line-through;color:#737b96}
-.card-actions{display:flex;gap:8px}
-.card-actions button{flex:1}
-.btn.small{padding:10px;font-size:13px}
-.panel{border:1px solid var(--line);border-radius:20px;background:#111426b8;padding:25px;margin-bottom:20px}
-.random{display:grid;grid-template-columns:1fr 1fr;gap:25px;align-items:center}
-.random-art{display:grid;place-items:center;min-height:230px;border-radius:18px;background:radial-gradient(circle,#572b9c,#101426 70%);font-size:100px}
-.pills{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
-.pills span{padding:8px 10px;background:#1b2035;border-radius:20px;color:#c4cce1;font-size:12px}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-.stat{padding:20px;border:1px solid var(--line);border-radius:14px;background:#111426}
-.stat b{display:block;margin-bottom:8px}
-.activity{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-.activity-item{padding:15px;border-radius:12px;background:#14172a;border:1px solid var(--line)}
-.activity-item small{display:block;color:var(--muted);margin-top:8px}
-.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
-.step{padding:20px;border:1px solid var(--line);border-radius:14px;background:#111426}
-.step strong{font-size:28px;color:var(--purple)}
-details{padding:16px;border-bottom:1px solid var(--line)}
-summary{cursor:pointer;font-weight:bold}
-footer{margin-top:30px;padding:30px 0;border-top:1px solid var(--line);color:var(--muted)}
-footer .container{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}
-.notice{padding:15px;border:1px solid #55402b;background:#211a14;border-radius:12px;color:#eacb9e}
-.empty{grid-column:1/-1;padding:30px;text-align:center;color:var(--muted)}
-@media(max-width:850px){
- .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
- .hero-card{grid-template-columns:1fr;padding:25px}
- .hero-art{min-height:150px;font-size:85px}
- .stats,.activity{grid-template-columns:repeat(2,1fr)}
-}
-@media(max-width:540px){
- .grid,.steps,.random{grid-template-columns:1fr}
- .stats,.activity{grid-template-columns:1fr 1fr}
- .hero{padding-top:30px}
- h2{font-size:24px}
- .nav{align-items:flex-start}
- nav{width:100%}
- nav a{padding:9px;font-size:12px}
-}
+:root{--bg:#070914;--panel:#101426;--panel2:#151a30;--line:#292d4b;--purple:#8b5cf6;--blue:#4f7cff;--text:#f5f6ff;--muted:#9ba4bf;--green:#46dfb0}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(900px 500px at 8% -10%,#42208a55,transparent 65%),radial-gradient(700px 500px at 100% 15%,#183c8950,transparent 60%),var(--bg);font-family:Inter,Segoe UI,Arial,sans-serif;color:var(--text)}button,input{font:inherit}button,a{transition:.2s}a{color:inherit;text-decoration:none}.container{width:min(1180px,calc(100% - 32px));margin:auto}.topbar{position:sticky;top:0;z-index:20;background:#070914dc;backdrop-filter:blur(18px);border-bottom:1px solid #292d4b}.nav{display:flex;align-items:center;gap:24px;min-height:76px}.brand{display:flex;align-items:center;gap:11px;background:none;border:0;color:white;cursor:pointer;text-align:left}.logo{width:43px;height:43px;display:grid;place-items:center;border-radius:14px;background:linear-gradient(135deg,var(--purple),var(--blue));font-weight:950;font-size:22px;box-shadow:0 8px 30px #7548ff55}.brand strong{display:block;font-size:17px}.brand small{display:block;color:var(--muted);font-size:10px;letter-spacing:.14em;margin-top:4px}nav{display:flex;gap:7px;flex:1}nav a,.nav-pill{border:0;background:transparent;color:#c5cbe0;padding:10px 12px;border-radius:10px;font-size:13px;cursor:pointer}nav a:hover,.nav-pill:hover{background:#ffffff0c;color:white}.nav-right{display:flex;gap:8px}.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid var(--line);background:#ffffff08;color:white;padding:12px 16px;border-radius:12px;font-weight:750;cursor:pointer}.btn:hover{transform:translateY(-2px);border-color:#7160c9}.btn.primary{border:0;background:linear-gradient(135deg,#8b5cf6,#4f7cff);box-shadow:0 10px 28px #694bdf35}.btn:disabled{opacity:.55;cursor:not-allowed;transform:none}.hero{padding:48px 0 30px;display:grid;grid-template-columns:1.25fr .75fr;gap:22px}.hero-copy,.hero-art,.panel,.product,.stat,.step,.faq-item,.activity-card{border:1px solid var(--line);background:linear-gradient(145deg,#12172bed,#0c1020f2);border-radius:24px;box-shadow:0 20px 70px #0002}.hero-copy{padding:clamp(25px,5vw,54px);position:relative;overflow:hidden}.eyebrow{color:#c4b4ff;font-size:11px;font-weight:900;letter-spacing:.15em;text-transform:uppercase}.hero h1{font-size:clamp(36px,5vw,62px);line-height:1.02;letter-spacing:-.045em;margin:17px 0}.gradient-text{background:linear-gradient(90deg,#fff,#c9b5ff 55%,#8bb7ff);background-clip:text;color:transparent}.hero p{max-width:590px;color:var(--muted);line-height:1.7}.hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin:25px 0}.trust-points{display:flex;gap:16px;flex-wrap:wrap;color:#c5cbe0;font-size:12px}.hero-art{overflow:hidden;min-height:370px;position:relative}.hero-art img{width:100%;height:100%;position:absolute;inset:0;object-fit:cover;opacity:.83}.hero-art:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,#0b0e1e 0%,transparent 75%),linear-gradient(90deg,#0b0e1e55,transparent)}.art-caption{position:absolute;z-index:1;bottom:24px;left:24px;right:24px}.art-caption b{font-size:23px;display:block}.art-caption span{color:#b9c1d8;font-size:13px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:12px auto 34px}.stat{padding:18px 20px;border-radius:17px}.stat b{font-size:25px;display:block}.stat span{font-size:12px;color:var(--muted)}section.block{padding:28px 0 38px}.section-head{display:flex;justify-content:space-between;align-items:end;gap:18px;margin-bottom:20px}.section-head h2{font-size:clamp(25px,3vw,35px);letter-spacing:-.03em;margin:8px 0}.section-head p{color:var(--muted);margin:0;line-height:1.55}.filters{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0}.filters input{flex:1;min-width:200px}.input{background:#0b1020;border:1px solid var(--line);border-radius:12px;padding:13px 14px;color:white;outline:none}.input:focus{border-color:#8b5cf6}.chips{display:flex;gap:8px;flex-wrap:wrap}.chip{padding:9px 12px;border:1px solid var(--line);border-radius:999px;background:#ffffff06;color:#bdc5db;font-size:12px;cursor:pointer}.chip.active,.chip:hover{background:#8b5cf625;border-color:#8b5cf6;color:#fff}.products{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.product{overflow:hidden;border-radius:20px;transition:.22s}.product:hover{transform:translateY(-4px);border-color:#6f5cbd;box-shadow:0 22px 50px #0004}.product-image{height:170px;position:relative;overflow:hidden;background:#161a30}.product-image img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .35s}.product:hover .product-image img{transform:scale(1.05)}.badges{position:absolute;left:12px;top:12px;display:flex;gap:6px;flex-wrap:wrap}.badge{font-size:9px;letter-spacing:.06em;font-weight:900;padding:6px 8px;border-radius:7px;background:#8b5cf6;color:white}.badge.green{background:#14785d}.badge.gold{background:#8b5b14}.product-body{padding:17px}.category{color:#a99aff;font-size:10px;font-weight:900;letter-spacing:.12em;text-transform:uppercase}.product h3{margin:8px 0;font-size:19px}.description{color:var(--muted);font-size:13px;line-height:1.55;min-height:60px}.rating{font-size:12px;color:#ffd37b;margin:10px 0}.rating span{color:var(--muted)}.price-row{display:flex;align-items:baseline;gap:9px;margin:15px 0}.price{font-size:24px;font-weight:900}.old-price{color:#77819c;text-decoration:line-through;font-size:14px}.product-actions{display:flex;gap:8px}.product-actions .btn{flex:1;padding:10px;font-size:12px}.product-actions .details{background:transparent}.market-banner{display:grid;grid-template-columns:1fr .75fr;gap:20px;align-items:center;padding:27px;border:1px solid #55448c;border-radius:24px;background:radial-gradient(circle at 10% 20%,#6237b344,transparent 45%),linear-gradient(135deg,#11152a,#0d1020)}.market-banner h2{font-size:32px;margin:10px 0}.market-banner p{color:var(--muted);line-height:1.65}.market-banner img{width:100%;height:220px;object-fit:cover;border-radius:17px;border:1px solid #ffffff18}.box-panel{display:grid;grid-template-columns:.9fr 1.1fr;gap:22px;padding:26px;border:1px solid #48386e;border-radius:24px;background:radial-gradient(circle at 15% 45%,#5724a444,transparent 45%),#0d1020}.box-art{display:grid;place-items:center;min-height:230px;background:radial-gradient(circle,#6736bd44,transparent 65%);font-size:100px}.box-panel h3{font-size:30px;margin:8px 0}.box-panel p{color:var(--muted);line-height:1.6}.box-notice{font-size:12px;color:#d8c7ff;border:1px solid #5b438b;background:#8b5cf615;border-radius:12px;padding:12px;line-height:1.5}.mini-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.mini-product{padding:16px;border:1px solid var(--line);border-radius:16px;background:#111629}.mini-product img{width:100%;height:92px;object-fit:cover;border-radius:10px}.mini-product b{display:block;margin:10px 0 6px;font-size:13px}.mini-product span{color:#c9b8ff;font-weight:850}.feature-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.feature{padding:18px;border:1px solid var(--line);border-radius:16px;background:#101426}.feature i{font-style:normal;font-size:24px}.feature b{display:block;margin:10px 0 5px}.feature p{color:var(--muted);font-size:12px;line-height:1.5;margin:0}.activity{display:grid;grid-template-columns:1fr 1fr;gap:16px}.activity-card{padding:20px;border-radius:18px}.activity-row{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid #ffffff0d}.activity-row:last-child{border-bottom:0}.activity-icon{width:38px;height:38px;border-radius:11px;background:#8b5cf622;display:grid;place-items:center}.activity-row b{display:block;font-size:13px}.activity-row small{color:var(--muted);font-size:11px}.activity-status{margin-left:auto;color:var(--green);font-size:11px}.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.step{padding:22px;border-radius:18px}.step strong{font-size:27px;color:#a68cff}.step h3{margin:14px 0 8px}.step p{color:var(--muted);font-size:13px;line-height:1.6}.faq-list{display:grid;grid-template-columns:1fr 1fr;gap:10px}.faq-item{padding:0;border-radius:14px;overflow:hidden}.faq-item summary{padding:17px;cursor:pointer;font-weight:750;list-style:none}.faq-item summary:after{content:'+';float:right;color:#bda9ff}.faq-item[open] summary:after{content:'−'}.faq-item p{padding:0 17px 17px;margin:0;color:var(--muted);font-size:13px;line-height:1.6}.disclaimer{display:flex;gap:14px;align-items:flex-start;padding:17px;border:1px solid #5b482c;background:#211b12;border-radius:15px;color:#f2d5a1;margin:20px auto 35px}.disclaimer p{margin:5px 0 0;color:#c6b89d;font-size:12px}.footer{border-top:1px solid var(--line);padding:27px 0 38px;color:var(--muted);font-size:12px}.footer-inner{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}.footer-links{display:flex;gap:16px;flex-wrap:wrap}.toast{position:fixed;right:18px;bottom:18px;background:#171d32;border:1px solid #51447d;padding:14px 17px;border-radius:13px;box-shadow:0 15px 50px #0007;z-index:50;display:none;max-width:320px}.toast.show{display:block;animation:fade .2s ease}@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}.empty{grid-column:1/-1;padding:30px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:15px}.cart-count{display:inline-grid;place-items:center;min-width:19px;height:19px;border-radius:50%;background:#8b5cf6;font-size:11px;margin-left:4px}
+@media(max-width:900px){.nav{flex-wrap:wrap;padding:12px 0;gap:10px}.nav nav{order:3;flex-basis:100%;overflow:auto}.nav-right{margin-left:auto}.hero{grid-template-columns:1fr}.hero-art{min-height:270px}.products{grid-template-columns:repeat(2,minmax(0,1fr))}.mini-grid,.feature-grid{grid-template-columns:repeat(2,1fr)}.market-banner{grid-template-columns:1fr}.market-banner img{height:200px}.stats{grid-template-columns:repeat(3,1fr)}}@media(max-width:580px){.container{width:min(100% - 22px,1180px)}.nav{min-height:auto}.brand strong{font-size:14px}.nav-right .secondary{display:none}nav a{white-space:nowrap;padding:8px}.hero{padding-top:20px}.hero-copy{padding:25px}.hero-art{min-height:220px}.stats{gap:7px}.stat{padding:12px}.stat b{font-size:20px}.stat span{font-size:10px}.products{grid-template-columns:1fr}.product-image{height:190px}.section-head{align-items:start;flex-direction:column}.box-panel{grid-template-columns:1fr;padding:18px}.box-art{min-height:130px;font-size:70px}.activity,.steps,.faq-list{grid-template-columns:1fr}.mini-grid,.feature-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.mini-product{padding:10px}.mini-product img{height:70px}.mini-product b{font-size:11px}.market-banner{padding:20px}.market-banner h2{font-size:27px}.footer-inner{flex-direction:column}}
 </style>
 </head>
 <body>
-<header>
-  <div class="container nav">
-    <a class="logo" href="#">CRUZ<span>.</span>MARKET</a>
-    <nav>
-      <a href="#home">Главная</a>
-      <a href="#catalog">Магазин</a>
-      <a href="#random">Random Box</a>
-      <a href="#activity">Активность</a>
-      <a href="#faq">FAQ</a>
-    </nav>
-  </div>
-</header>
-
-<main>
-<section class="hero container" id="home">
-  <div class="hero-card">
-    <div>
-      <div class="eyebrow">⚡ CRUZ AMAZING STORE</div>
-      <h1>Игровые решения <span>нового поколения</span></h1>
-      <p>Гайды, игровые материалы и инструменты для Amazing Online. Выбирай нужный продукт и изучай описание.</p>
-      <a class="btn primary" href="#catalog">Перейти в каталог →</a>
-      <div class="pills">
-        <span>◇ Качественные материалы</span>
-        <span>♢ Поддержка</span>
-        <span>✓ Подробные инструкции</span>
-      </div>
-    </div>
-    <div class="hero-art">🎮</div>
-  </div>
+<header class="topbar"><div class="container nav">
+<a class="brand" href="#home"><span class="logo">C</span><span><strong>Cruz-amazing.online</strong><small>AMAZING ONLINE STORE</small></span></a>
+<nav aria-label="Главная навигация"><a href="#home">Главная</a><a href="#catalog">Магазин</a><a href="#marketplace">Площадка</a><a href="#random">Random Box</a><a href="#faq">FAQ</a></nav>
+<div class="nav-right"><a class="btn secondary" href="#support">Поддержка</a><button class="btn primary" id="cartButton">Корзина <span id="cartCount" class="cart-count">0</span></button></div>
+</div></header>
+<main id="home">
+<div class="container hero">
+<div class="hero-copy"><span class="eyebrow">⚡ CRUZ AMAZING STORE</span><h1>Игровые решения <span class="gradient-text">нового поколения</span></h1><p>Гайды, материалы и инструменты для Amazing Online. Собрали полезную информацию, чтобы быстрее разобраться в игровых механиках и планировать свой прогресс.</p><div class="hero-actions"><a class="btn primary" href="#catalog">Перейти в каталог →</a><a class="btn" href="#marketplace">Открыть площадку</a></div><div class="trust-points"><span>◇ Подробные инструкции</span><span>♢ Удобный каталог</span><span>◌ Поддержка пользователей</span></div></div>
+<div class="hero-art"><img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1000&q=85" alt="Игровое пространство и компьютерная техника"><div class="art-caption"><b>CRUZ Market</b><span>Материалы для игроков Amazing Online</span></div></div>
+</div>
+<div class="container stats"><div class="stat"><b>9+</b><span>гайдов и подсказок</span></div><div class="stat"><b>24/7</b><span>информация доступна онлайн</span></div><div class="stat"><b>PRO</b><span>подборки для фарма</span></div></div>
+<section class="block container" id="catalog"><div class="section-head"><div><span class="eyebrow">CRUZ / STORE</span><h2>Каталог товаров</h2><p>Выберите нужный материал и откройте подробное описание.</p></div></div>
+<div class="filters"><input id="searchInput" class="input" type="search" placeholder="Поиск: ферма, рыбалка, МВД…" aria-label="Поиск товаров"><div class="chips" id="categoryChips"><button class="chip active" data-category="all">Все товары</button><button class="chip" data-category="фарм">Фарм</button><button class="chip" data-category="Правительство">Правительство</button><button class="chip" data-category="ФСИН">ФСИН</button><button class="chip" data-category="МВД">МВД</button><button class="chip" data-category="ЕСС">ЕСС</button><button class="chip" data-category="Воинская часть">Воинская часть</button><button class="chip" data-category="ГАИ">ГАИ</button></div></div>
+<div class="products" id="products"></div>
 </section>
-
-<section class="section container" id="catalog">
-  <div class="section-head">
-    <div><div class="eyebrow">CRUZ / STORE</div><h2>Каталог товаров</h2><p>Подборка гайдов и подсказок для игроков.</p></div>
-  </div>
-
-  <div class="toolbar">
-    <input id="search" placeholder="Поиск товаров..." aria-label="Поиск товаров">
-    <select id="category" aria-label="Категория">
-      <option value="all">Все категории</option>
-      <option value="фарм">Фарм</option>
-      <option value="Правительство">Правительство</option>
-      <option value="ФСИН">ФСИН</option>
-      <option value="МВД">МВД</option>
-      <option value="ЕСС">ЕСС</option>
-      <option value="Воинская часть">Воинская часть</option>
-      <option value="ГАИ">ГАИ</option>
-    </select>
-  </div>
-
-  <div class="grid" id="products"></div>
-</section>
-
-<section class="section container" id="random">
-  <div class="panel random">
-    <div>
-      <div class="eyebrow">● LIVE DROP · CRUZ / RANDOM</div>
-      <h2>🎁 RANDOM BOX</h2>
-      <p>Ознакомься с концепцией случайных призов. Открытие коробки и реальные платежи не подключены в этой демоверсии.</p>
-      <div class="price"><strong>50 ₽</strong><span class="old-price">за открытие</span></div>
-      <button class="btn primary" id="randomBtn">Посмотреть призы</button>
-      <div class="pills">
-        <span>⚡ Демо-режим</span>
-        <span>🛡️ Без списания средств</span>
-        <span>🎯 Без реальных ставок</span>
-      </div>
-      <p id="randomResult" aria-live="polite"></p>
-    </div>
-    <div class="random-art">🎁</div>
-  </div>
-</section>
-
-<section class="section container">
-  <div class="section-head"><div><div class="eyebrow">CRUZ / BENEFITS</div><h2>Преимущества магазина</h2></div></div>
-  <div class="stats">
-    <div class="stat"><b>⚗ Бесплатный тест</b><span>Ознакомление с материалами</span></div>
-    <div class="stat"><b>♢ Качество</b><span>Подробные описания товаров</span></div>
-    <div class="stat"><b>ϟ Доступ</b><span>Информация о получении доступа</span></div>
-    <div class="stat"><b>↻ Поддержка</b><span>Помощь по вопросам заказа</span></div>
-  </div>
-</section>
-
-<section class="section container" id="activity">
-  <div class="section-head"><div><div class="eyebrow">CRUZ / ACTIVITY</div><h2>Активность магазина</h2><p>Примеры товаров в демонстрационной ленте.</p></div></div>
-  <div class="activity" id="activityList"></div>
-</section>
-
-<section class="section container">
-  <div class="section-head"><div><div class="eyebrow">ПРОСТО И ПОНЯТНО</div><h2>Как работает магазин</h2></div></div>
-  <div class="steps">
-    <div class="step"><strong>01</strong><h3>Выберите продукт</h3><p>Найдите нужный гайд или подсказку.</p></div>
-    <div class="step"><strong>02</strong><h3>Ознакомьтесь</h3><p>Прочитайте описание и условия получения.</p></div>
-    <div class="step"><strong>03</strong><h3>Свяжитесь с поддержкой</h3><p>Уточните доступность и порядок получения.</p></div>
-  </div>
-</section>
-
-<section class="section container" id="faq">
-  <div class="section-head"><div><div class="eyebrow">ПОМОЩЬ</div><h2>FAQ и инструкции</h2></div></div>
-  <div class="panel">
-    <details open>
-      <summary>Как купить подсказку?</summary>
-      <p>Изучите описание продукта и уточните порядок приобретения у администрации магазина.</p>
-    </details>
-    <details>
-      <summary>Когда откроется материал?</summary>
-      <p>Способ передачи и сроки доступа необходимо согласовать с поддержкой.</p>
-    </details>
-    <details>
-      <summary>Как пополнить баланс?</summary>
-      <p>Пополнение баланса в этой версии сайта отключено.</p>
-    </details>
-    <details>
-      <summary>Как работает кэшбэк?</summary>
-      <p>Функция кэшбэка пока не подключена.</p>
-    </details>
-  </div>
-</section>
-
-<section class="section container">
-  <div class="notice">⚠️ Неофициальный фан-проект. Не является официальным ресурсом Amazing Online.</div>
-</section>
+<section class="block container" id="marketplace"><div class="market-banner"><div><span class="eyebrow">LIVE MARKET · CRUZ</span><h2>Игровые материалы и предложения</h2><p>Каталог гайдов и подсказок для игроков. Описания помогают понять, что входит в материал, до оформления заказа.</p><a class="btn primary" href="#catalog">Смотреть товары →</a></div><img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=900&q=85" alt="Игровой контроллер и игровая атмосфера" loading="lazy"></div></section>
+<section class="block container" id="random"><div class="section-head"><div><span class="eyebrow">CRUZ / RANDOM</span><h2>Random Box</h2><p>Информационный блок о случайных призах.</p></div><span class="badge green">● LIVE DROP</span></div><div class="box-panel"><div class="box-art" aria-hidden="true">🎁</div><div><span class="eyebrow">RANDOM BOX</span><h3>Открой коробку и получи случайный приз</h3><p>Возможные призы, правила и вероятности должны быть опубликованы прозрачно и проверяться на серверной стороне.</p><div class="box-notice">Демо-режим: платное открытие и случайная выдача отключены. Этот блок можно использовать для описания акции, но не для приёма платежей.</div><div class="hero-actions"><button class="btn" disabled>Открытие отключено</button><a class="btn" href="#faq">Подробнее о правилах</a></div><div class="trust-points"><span>🎁 Список призов</span><span>🛡️ Прозрачные правила</span><span>🎯 Вероятности должны быть открыты</span></div></div></div></section>
+<section class="block container"><div class="section-head"><div><span class="eyebrow">♨ CRUZ PICKS</span><h2>Лучшие предложения</h2><p>Популярные товары с кратким описанием.</p></div><a class="btn" href="#catalog">Перейти в магазин →</a></div><div class="mini-grid" id="popularProducts"></div></section>
+<section class="block container"><div class="section-head"><div><span class="eyebrow">Преимущества</span><h2>Понятно и удобно</h2></div></div><div class="feature-grid"><div class="feature"><i>⚗</i><b>Бесплатный тест</b><p>Перед покупкой изучите описание и доступные примеры.</p></div><div class="feature"><i>♢</i><b>Качество материалов</b><p>Содержимое и назначение описаны на странице товара.</p></div><div class="feature"><i>ϟ</i><b>Получение доступа</b><p>Инструкции по выдаче публикуются после настройки заказа.</p></div><div class="feature"><i>↻</i><b>Поддержка по вопросам</b><p>Если возникла проблема, обратитесь через указанные контакты.</p></div></div></section>
+<section class="block container"><div class="section-head"><div><span class="eyebrow">Активность магазина</span><h2>Недавно добавлено</h2><p>Примеры карточек активности. Здесь нет реальных данных о покупках.</p></div></div><div class="activity"><div class="activity-card"><h3>Новые материалы</h3><div class="activity-row"><div class="activity-icon">🌱</div><div><b>ФЕРМА PRO</b><small>Гайд по теплицам и культурам</small></div><span class="activity-status">Добавлено</span></div><div class="activity-row"><div class="activity-icon">🎣</div><div><b>Рыбалка PRO</b><small>Маршрут и способы фарма</small></div><span class="activity-status">Добавлено</span></div><div class="activity-row"><div class="activity-icon">📘</div><div><b>Гайд для новичков</b><small>Первые шаги и развитие</small></div><span class="activity-status">Добавлено</span></div><div class="activity-row"><div class="activity-icon">🏛️</div><div><b>Подсказки организаций</b><small>Правительство, ФСИН, МВД и другие</small></div><span class="activity-status">В каталоге</span></div></div><div class="activity-card"><h3>Категории каталога</h3><div class="activity-row"><div class="activity-icon">🌱</div><div><b>Фарм</b><small>Ферма PRO и Рыбалка PRO</small></div></div><div class="activity-row"><div class="activity-icon">🚔</div><div><b>Государственные организации</b><small>Подсказки для разных направлений</small></div></div><div class="activity-row"><div class="activity-icon">🧭</div><div><b>Новичкам</b><small>План первых минут, часов и дней</small></div></div></div></div></section>
+<section class="block container"><div class="section-head"><div><span class="eyebrow">Как работает магазин</span><h2>Выбор → заказ → получение доступа</h2><p>Платёжная система в этой HTML-версии не подключена.</p></div></div><div class="steps"><article class="step"><strong>01</strong><h3>Выберите продукт</h3><p>Найдите нужный гайд или подсказку в каталоге и откройте подробности.</p></article><article class="step"><strong>02</strong><h3>Сформируйте список</h3><p>Добавьте товары в демо-корзину. Она нужна для просмотра выбранных позиций.</p></article><article class="step"><strong>03</strong><h3>Настройте выдачу</h3><p>Подключение оплаты и выдачи доступа требует отдельной серверной интеграции.</p></article></div></section>
+<section class="block container" id="faq"><div class="section-head"><div><span class="eyebrow">Помощь</span><h2>FAQ и инструкции</h2><p>Ответы на основные вопросы о каталоге и заказах.</p></div></div><div class="faq-list"><details class="faq-item"><summary>Как купить подсказку?</summary><p>Добавьте материал в демо-корзину. Для реальной покупки нужно подключить серверную обработку заказа и платёжный сервис.</p></details><details class="faq-item"><summary>Когда откроется материал?</summary><p>В текущей версии доступ не выдаётся автоматически. После настройки магазина можно добавить выдачу через личный кабинет.</p></details><details class="faq-item"><summary>Как пополнить баланс?</summary><p>Пополнение баланса не подключено. Не вводите платёжные данные в эту демонстрационную страницу.</p></details><details class="faq-item"><summary>Как работает возврат?</summary><p>Условия возврата нужно описать в правилах магазина и реализовать на стороне используемого платёжного провайдера.</p></details></div></section>
+<div class="container disclaimer"><span>⚠️</span><div><b>Неофициальный фан-проект.</b><p>CRUZ не является официальным ресурсом Amazing Online. Изображения на странице используются как визуальные примеры.</p></div></div>
 </main>
-
-<footer>
-  <div class="container">
-    <div><b>CRUZ Market</b><p>Независимый фан-проект · © 2026</p></div>
-    <div>Тарифы и цены · Политика конфиденциальности · Пользовательское соглашение</div>
-  </div>
-</footer>
-
+<footer class="footer"><div class="container footer-inner"><div><b style="color:white">Cruz-amazing.online</b><p>Независимый фан-проект · © <span id="year"></span> · Не связан с AMAZING.GG</p></div><div class="footer-links"><a href="#catalog">Тарифы и цены</a><a href="#faq">Политика конфиденциальности</a><a href="#faq">Пользовательское соглашение</a><a href="#support" id="support">Поддержка</a></div></div></footer>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 <script>
-const products = [
-  {
-    name:"ФЕРМА PRO", category:"фарм", icon:"🌱",
-    description:"Как выйти на максимальный доход: теплицы, гены, лучшие культуры, температура, вода, маршрут, расчёт прибыли, ошибки новичков и обновления.",
-    price:49, old:150, rating:"Нет отзывов", tags:["НОВИНКА","РЕКОМЕНДУЕМ"]
-  },
-  {
-    name:"Рыбалка PRO", category:"фарм", icon:"🎣",
-    description:"Как выйти на максимальный доход: удочка → сеть → катер → максимальный фарм.",
-    price:49, old:150, rating:"Нет отзывов", tags:["НОВИНКА","РЕКОМЕНДУЕМ"]
-  },
-  {
-    name:"Гайд для новичков", category:"фарм", icon:"🧭",
-    description:"Первые 10 минут, первый час, первые 5 часов и первый день: куда ехать, какие команды использовать, какую работу выбрать и как накопить деньги.",
-    price:15, old:50, rating:"★ 5.0 (2)", tags:["НОВИНКА","РЕКОМЕНДУЕМ"]
-  },
-  ...[
-    ["Правительство","🏛️",2],
-    ["ФСИН","🔒",1],
-    ["МВД","🚔",3],
-    ["ЕСС","🛡️",1],
-    ["Воинская часть","🎖️",1],
-    ["ГАИ","🚘",3]
-  ].map(([name,icon,reviews])=>({
-    name:name+" — Подсказка для любого сервера",
-    category:name,icon,
-    description:"Актуальная подсказка. Материал для ознакомления и помощи в игре.",
-    price:69,old:199,rating:"★ 5.0 ("+reviews+")",tags:[]
-  }))
+const products=[
+{id:'farm',name:'ФЕРМА PRO',category:'фарм',description:'Как выйти на максимальный доход: все теплицы, гены, лучшие культуры, температура, вода, маршрут, расчёт прибыли и ошибки новичков.',price:49,old:150,badges:['НОВИНКА','РЕКОМЕНДУЕМ'],rating:'Нет отзывов',image:'https://images.unsplash.com/photo-1416879595412-9c0cbd8e5f1a?auto=format&fit=crop&w=800&q=80'},
+{id:'fishing',name:'Рыбалка PRO',category:'фарм',description:'Как выйти на максимальный доход: удочка → сеть → катер → максимальный фарм.',price:49,old:150,badges:['НОВИНКА','РЕКОМЕНДУЕМ'],rating:'Нет отзывов',image:'https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=800&q=80'},
+{id:'newbie',name:'Гайд для новичков',category:'фарм',description:'Первые 10 минут, первый час, первые 5 часов и первый день: что открыть, какую работу выбрать, что купить и сколько накопить.',price:15,old:50,badges:['НОВИНКА','РЕКОМЕНДУЕМ'],rating:'★ 5.0 (2)',image:'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=800&q=80'},
+{id:'government',name:'Правительство — Подсказка для любого сервера',category:'Правительство',description:'Актуальная подсказка по направлению «Правительство».',price:69,old:199,badges:[],rating:'★ 5.0 (2)',image:'https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?auto=format&fit=crop&w=800&q=80'},
+{id:'fsin',name:'ФСИН — Подсказка для любого сервера',category:'ФСИН',description:'Актуальная подсказка по направлению ФСИН.',price:69,old:199,badges:[],rating:'★ 5.0 (1)',image:'https://images.unsplash.com/photo-1453873531674-2151bcd01707?auto=format&fit=crop&w=800&q=80'},
+{id:'mvd',name:'МВД — Подсказка для любого сервера',category:'МВД',description:'Актуальная подсказка по направлению МВД.',price:69,old:199,badges:[],rating:'★ 5.0 (3)',image:'https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=800&q=80'},
+{id:'ess',name:'ЕСС — Подсказка для любого сервера',category:'ЕСС',description:'Актуальная подсказка по направлению ЕСС.',price:69,old:199,badges:[],rating:'★ 5.0 (1)',image:'https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=800&q=80'},
+{id:'army',name:'Воинская часть — Подсказка для любого сервера',category:'Воинская часть',description:'Актуальная подсказка по направлению воинской части.',price:69,old:199,badges:[],rating:'★ 5.0 (1)',image:'https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=800&q=80'},
+{id:'gai',name:'ГАИ — Подсказка для любого сервера',category:'ГАИ',description:'Актуальная подсказка по направлению ГАИ.',price:69,old:199,badges:[],rating:'★ 5.0 (3)',image:'https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?auto=format&fit=crop&w=800&q=80'}
 ];
-
-const productsEl = document.getElementById("products");
-const searchEl = document.getElementById("search");
-const categoryEl = document.getElementById("category");
-
-function renderProducts(){
-  const query = searchEl.value.trim().toLowerCase();
-  const category = categoryEl.value;
-  const filtered = products.filter(p =>
-    (p.name+" "+p.description+" "+p.category).toLowerCase().includes(query) &&
-    (category==="all" || p.category===category)
-  );
-
-  productsEl.innerHTML = "";
-
-  if(!filtered.length){
-    productsEl.innerHTML='<div class="empty">Ничего не найдено. Попробуйте изменить поиск.</div>';
-    return;
-  }
-
-  filtered.forEach(p=>{
-    const card=document.createElement("article");
-    card.className="card";
-    const tags=p.tags.map(t=>'<span class="tag">'+t+'</span>').join("");
-    card.innerHTML=`
-      <div class="product-image">${p.icon}</div>
-      <div class="card-body">
-        <div class="tags">${tags}<span class="tag green">${p.category}</span></div>
-        <h3>${p.name}</h3>
-        <div class="description">${p.description}</div>
-        <div class="rating">${p.rating}</div>
-        <div class="price"><strong>${p.price} ₽</strong><span class="old-price">${p.old} ₽</span></div>
-        <div class="card-actions">
-          <button class="btn small details-btn">Подробнее</button>
-          <button class="btn small primary cart-btn">В корзину</button>
-        </div>`;
-    card.querySelector(".details-btn").addEventListener("click",()=>{
-      alert(p.name+"\\n\\n"+p.description+"\\n\\nЦена: "+p.price+" ₽\\n\\nДемо-версия: оформление покупки отключено.");
-    });
-    card.querySelector(".cart-btn").addEventListener("click",()=>{
-      alert("Товар: "+p.name+"\\nЦена: "+p.price+" ₽\\n\\nКорзина и оплата не подключены. Свяжитесь с поддержкой для получения товара.");
-    });
-    productsEl.appendChild(card);
-  });
-}
-
-searchEl.addEventListener("input",renderProducts);
-categoryEl.addEventListener("change",renderProducts);
-renderProducts();
-
-document.getElementById("randomBtn").addEventListener("click",()=>{
-  document.getElementById("randomResult").textContent =
-    "Демонстрационный режим: реальные открытия коробок и списание средств отключены.";
-});
-
-const activity=[
-  ["АХК","Приватный АХК для госс организаций","3 ч. назад"],
-  ["АХК","Приватный АХК для госс организаций","20 ч. назад"],
-  ["АХК","Приватный АХК для госс организаций","21 ч. назад"],
-  ["Фарм","Рыбалка PRO","23 ч. назад"],
-  ["Фарм","ФЕРМА PRO","23 ч. назад"],
-  ["АХК","Приватный АХК для госс организаций","вчера"],
-  ["Фарм","Гайд для новичков","вчера"],
-  ["АХК","Приватный АХК для госс организаций","вчера"]
-];
-
-document.getElementById("activityList").innerHTML=activity.map(item=>`
-  <div class="activity-item">
-    <span class="tag">${item[0]}</span>
-    <p>${item[1]}</p>
-    <small>${item[2]} · Демонстрационная запись</small>
-  </div>`).join("");
+let category='all',cart=[];const productsEl=document.getElementById('products'),searchEl=document.getElementById('searchInput'),toastEl=document.getElementById('toast');
+function escapeHTML(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function productCard(p){return `<article class="product"><div class="product-image"><img src="${p.image}" alt="Иллюстрация: ${escapeHTML(p.name)}" loading="lazy"><div class="badges">${p.badges.map((b,i)=>`<span class="badge ${i?'green':''}">${b}</span>`).join('')}</div></div><div class="product-body"><span class="category">${escapeHTML(p.category)}</span><h3>${escapeHTML(p.name)}</h3><p class="description">${escapeHTML(p.description)}</p><div class="rating">${escapeHTML(p.rating)}</div><div class="price-row"><span class="price">${p.price} ₽</span><span class="old-price">${p.old} ₽</span></div><div class="product-actions"><button class="btn details" data-details="${p.id}">Подробнее</button><button class="btn primary" data-add="${p.id}">В корзину</button></div></div></article>`}
+function render(){const q=searchEl.value.trim().toLowerCase();const list=products.filter(p=>(category==='all'||p.category===category)&&(`${p.name} ${p.category} ${p.description}`.toLowerCase().includes(q)));productsEl.innerHTML=list.length?list.map(productCard).join(''):'<div class="empty">Ничего не найдено. Попробуйте изменить поиск.</div>';document.getElementById('popularProducts').innerHTML=products.slice(0,4).map(p=>`<div class="mini-product"><img src="${p.image}" alt="" loading="lazy"><b>${escapeHTML(p.name)}</b><span>${p.price} ₽</span><button class="btn" style="width:100%;margin-top:10px;padding:8px" data-add="${p.id}">В корзину</button></div>`).join('');}
+function notify(msg){toastEl.textContent=msg;toastEl.classList.add('show');clearTimeout(notify.timer);notify.timer=setTimeout(()=>toastEl.classList.remove('show'),2800)}
+function updateCart(){document.getElementById('cartCount').textContent=cart.reduce((n,p)=>n+p.qty,0)}
+document.addEventListener('click',e=>{const add=e.target.closest('[data-add]');if(add){const p=products.find(x=>x.id===add.dataset.add);const existing=cart.find(x=>x.id===p.id);if(existing)existing.qty++;else cart.push({...p,qty:1});updateCart();notify(`${p.name} добавлен в демо-корзину.`);return}const details=e.target.closest('[data-details]');if(details){const p=products.find(x=>x.id===details.dataset.details);notify(`${p.name}: ${p.description}`);return}const chip=e.target.closest('[data-category]');if(chip){category=chip.dataset.category;document.querySelectorAll('[data-category]').forEach(x=>x.classList.toggle('active',x===chip));render()}});
+searchEl.addEventListener('input',render);document.getElementById('cartButton').addEventListener('click',()=>{if(!cart.length){notify('Демо-корзина пока пуста.');return}const total=cart.reduce((n,p)=>n+p.price*p.qty,0);const lines=cart.map(p=>`${p.name} × ${p.qty} — ${p.price*p.qty} ₽`).join('\n');alert('ДЕМО-КОРЗИНА\n\n'+lines+'\n\nИтого: '+total+' ₽\n\nОплата не подключена — заказ не создан.');});document.getElementById('year').textContent=new Date().getFullYear();render();
 </script>
-</body>
-</html>
+</body></html>
