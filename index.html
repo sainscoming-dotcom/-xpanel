@@ -1,90 +1,640 @@
 <!doctype html>
 <html lang="ru">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>DEVIL Tools</title>
 <style>
-:root{--site-primary:#7657f6;--site-secondary:#20213a;--site-background:#0e1020;--site-on-primary:#ffffff;--site-on-secondary:#f5f4ff;--site-on-background:#f4f3ff;--site-font-body:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;--site-font-heading:Inter,ui-sans-serif,system-ui,sans-serif;--site-heading-scale:1;--site-spacing-scale:1;--site-radius-scale:1;--site-decoration-opacity:1;--panel:#171a30;--panel2:#1d2039;--muted:#a4a8c5;--line:#303452;--green:#4fd1a1;--amber:#f2bf68;--red:#f17b8b}
-*{box-sizing:border-box}body{margin:0;background:var(--site-background);color:var(--site-on-background);font-family:var(--site-font-body)}button,input,select{font:inherit}.app{min-height:100vh;background:var(--site-background);overflow:hidden}.top{height:72px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 32px;background:#121429}.brand{display:flex;align-items:center;gap:12px;font-weight:850;letter-spacing:.7px}.logo{width:38px;height:38px;border-radius:12px;background:linear-gradient(140deg,var(--site-primary),#a18aff);display:grid;place-items:center;font-weight:900;color:white;box-shadow:0 8px 28px #7657f644}.brand small{display:block;color:var(--muted);font-size:10px;letter-spacing:2px;margin-top:2px}.top-right{display:flex;align-items:center;gap:12px;color:var(--muted);font-size:13px}.pill{border:1px solid var(--line);border-radius:999px;padding:7px 12px}.layout{display:grid;grid-template-columns:245px 1fr;min-height:calc(100vh - 72px)}aside{background:#121429;border-right:1px solid var(--line);padding:24px 16px}.nav-label{font-size:10px;color:#777d9f;font-weight:800;letter-spacing:1.7px;padding:12px 12px 8px}.nav{display:flex;align-items:center;gap:12px;padding:12px;border-radius:11px;color:#b7bad2;cursor:pointer;margin:3px 0;font-size:14px}.nav.active,.nav:hover{background:#292448;color:white}.nav.active{box-shadow:inset 3px 0 var(--site-primary)}.nav .ico{width:20px;text-align:center}.side-foot{position:sticky;top:calc(100vh - 90px);margin-top:45px;padding:14px;border:1px solid var(--line);border-radius:13px;color:var(--muted);font-size:11px;line-height:1.6}.main{padding:32px;max-width:1450px;width:100%;margin:auto}.eyebrow{color:#a99aff;text-transform:uppercase;font-size:11px;letter-spacing:2px;font-weight:800}.heading{font-size:calc(30px * var(--site-heading-scale));font-weight:850;margin:8px 0 6px;letter-spacing:-.8px}.sub{color:var(--muted);font-size:14px}.headrow{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:26px}.btn{border:0;border-radius:10px;background:var(--site-primary);color:white;padding:11px 16px;font-weight:750;cursor:pointer}.btn.secondary{background:#292d4b;border:1px solid #3a3f63}.btn:hover{filter:brightness(1.12)}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:22px}.stat,.card{background:var(--panel);border:1px solid var(--line);border-radius:15px;padding:19px}.stat-top{display:flex;justify-content:space-between;color:var(--muted);font-size:12px}.stat-num{font-size:29px;font-weight:850;margin-top:13px}.stat-note{font-size:11px;color:var(--green);margin-top:4px}.grid2{display:grid;grid-template-columns:1.35fr 1fr;gap:16px}.card-title{font-size:15px;font-weight:800;margin-bottom:16px}.table-wrap{overflow:auto}table{width:100%;border-collapse:collapse;text-align:left;min-width:500px}th{font-size:10px;color:#858ba9;text-transform:uppercase;letter-spacing:1px;padding:11px 9px;border-bottom:1px solid var(--line)}td{padding:14px 9px;border-bottom:1px solid #282b46;font-size:12px;color:#d8d9eb}tr:last-child td{border:0}.user{display:flex;align-items:center;gap:9px;font-weight:700}.avatar{width:30px;height:30px;border-radius:9px;background:#34305a;color:#c7bbff;display:grid;place-items:center;font-size:11px}.tag{font-size:10px;padding:5px 8px;border-radius:6px;background:#2d2850;color:#c6baff;display:inline-block}.tag.green{background:#173b37;color:#70e0b8}.tag.amber{background:#44351e;color:#f4cb7b}.activity{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid #282b46}.activity:last-child{border:0}.dot{width:8px;height:8px;border-radius:50%;background:var(--site-primary);margin-top:5px;flex:none}.activity b{font-size:12px}.activity p{margin:4px 0;color:var(--muted);font-size:11px}.activity time{margin-left:auto;color:#7f85a4;font-size:10px;white-space:nowrap}.section{display:none}.section.show{display:block}.toolbar{display:flex;gap:10px;margin-bottom:15px}.toolbar input,.field input,.field select{background:#11142a;border:1px solid var(--line);border-radius:9px;color:white;padding:11px 12px;outline:none}.toolbar input{width:min(340px,100%)}.role-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.role-card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px}.role-card h3{margin:0 0 7px;font-size:14px}.role-card p{margin:0 0 14px;color:var(--muted);font-size:11px}.perm{display:flex;justify-content:space-between;padding:9px 0;border-top:1px solid #2b2e49;font-size:11px;color:#d5d6e7}.on{color:var(--green)}.off{color:#747b99}.login{min-height:calc(100vh - 72px);display:grid;place-items:center;padding:25px}.loginbox{width:min(430px,100%);background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:30px;box-shadow:0 25px 90px #0005}.loginbox h1{font-size:25px;margin:10px 0}.loginbox p{color:var(--muted);font-size:13px;line-height:1.6}.field{display:grid;gap:7px;margin:16px 0}.field label{font-size:11px;color:#aeb2cd;font-weight:700}.field input,.field select{width:100%}.hint{font-size:10px;color:#858ba9;line-height:1.5;margin-top:12px}.notice{border:1px solid #65512b;background:#302817;color:#f0cd84;border-radius:10px;padding:12px;font-size:11px;line-height:1.5;margin-top:15px}.hidden{display:none!important}.mobile-menu{display:none}
-@media(max-width:900px){.layout{grid-template-columns:1fr}aside{display:none}.stats{grid-template-columns:repeat(2,1fr)}.grid2{grid-template-columns:1fr}.role-grid{grid-template-columns:repeat(2,1fr)}.main{padding:22px}.mobile-menu{display:inline-flex}.top{padding:0 18px}}
-@media(max-width:560px){.stats{grid-template-columns:1fr 1fr;gap:8px}.stat{padding:13px}.stat-num{font-size:23px}.role-grid{grid-template-columns:1fr}.top-right .pill{display:none}.headrow{align-items:flex-start;flex-direction:column}.main{padding:18px}.heading{font-size:25px}}
-</style></head>
-<body><div class="app">
-<header class="top"><div class="brand"><div class="logo">D</div><div>DEVIL <span style="color:#a99aff">TOOLS</span><small>STAFF CONTROL SYSTEM</small></div></div><div class="top-right"><span class="pill">● Система управления составом</span><span id="topUser">Гостевой доступ</span></div></header>
-<div id="loginView" class="login"><div class="loginbox"><div class="eyebrow">Закрытая платформа</div><h1>Вход в систему</h1><p>Выберите категорию доступа и введите персональный специальный код, выданный руководством проекта.</p><div class="field"><label>ТИП ДОСТУПА</label><select id="accessType"><option value="admin">Администрация</option><option value="leader">Лидер / заместитель организации</option></select></div><div class="field"><label>СПЕЦИАЛЬНЫЙ КОД</label><input id="accessCode" type="password" placeholder="Введите код доступа"></div><button class="btn" style="width:100%" onclick="login()">Войти в DEVIL Tools →</button><div class="notice">Демонстрационный макет: вход ниже работает на тестовых кодах. Для настоящей авторизации нужны сервер, база данных и защищённая проверка кодов.</div><div class="hint">Тестовые коды макета: ADMIN-DEMO · LEADER-DEMO</div><div id="loginError" style="color:#ff929e;font-size:12px;margin-top:10px"></div></div></div>
-<div id="appView" class="layout hidden"><aside><div class="nav-label">РАБОЧЕЕ ПРОСТРАНСТВО</div><div class="nav active" data-page="overview" onclick="go('overview',this)"><span class="ico">▦</span>Обзор</div><div class="nav" data-page="staff" onclick="go('staff',this)"><span class="ico">♙</span>Состав</div><div class="nav" data-page="positions" onclick="go('positions',this)"><span class="ico">▤</span>Должности</div><div class="nav" data-page="permissions" onclick="go('permissions',this)"><span class="ico">◈</span>Разрешения</div><div class="nav" data-page="organizations" onclick="go('organizations',this)"><span class="ico">⌂</span>Организации</div><div class="nav-label" style="margin-top:18px">АККАУНТ</div><div class="nav" onclick="logout()"><span class="ico">⇥</span>Выйти из системы</div><div class="side-foot">DEVIL MANAGEMENT<br>Внутренняя система проекта<br><span style="color:#a99aff">Версия макета 1.0</span></div></aside>
-<main class="main"><section id="overview" class="section show"><div class="headrow"><div><div class="eyebrow">Панель управления</div><div class="heading">Добро пожаловать!</div><div class="sub">Общая информация о составе проекта и последних изменениях.</div></div><button class="btn" onclick="go('staff')">＋ Управление составом</button></div><div class="stats"><div class="stat"><div class="stat-top">Всего сотрудников <span>♙</span></div><div class="stat-num" id="statStaff">24</div><div class="stat-note">● Учитываются все подразделения</div></div><div class="stat"><div class="stat-top">Администрация <span>◈</span></div><div class="stat-num">8</div><div class="stat-note">Основной состав</div></div><div class="stat"><div class="stat-top">Лидеры организаций <span>⌂</span></div><div class="stat-num">10</div><div class="stat-note">Лидеры и заместители</div></div><div class="stat"><div class="stat-top">Организации <span>▤</span></div><div class="stat-num">6</div><div class="stat-note">Подключённые структуры</div></div></div><div class="grid2"><div class="card"><div class="card-title">Последние сотрудники</div><div class="table-wrap"><table><thead><tr><th>Сотрудник</th><th>Должность</th><th>Подразделение</th></tr></thead><tbody><tr><td><div class="user"><span class="avatar">DK</span>Diazz_Kaneki</div></td><td>Главный администратор</td><td><span class="tag">Администрация</span></td></tr><tr><td><div class="user"><span class="avatar">AK</span>Alex_King</div></td><td>Заместитель лидера</td><td><span class="tag green">LSPD</span></td></tr><tr><td><div class="user"><span class="avatar">MR</span>Mark_River</div></td><td>Лидер организации</td><td><span class="tag green">FBI</span></td></tr><tr><td><div class="user"><span class="avatar">NS</span>Nikita_Snow</div></td><td>Администратор 2 уровня</td><td><span class="tag">Администрация</span></td></tr></tbody></table></div></div><div class="card"><div class="card-title">Журнал активности</div><div class="activity"><span class="dot"></span><div><b>Изменена должность</b><p>Обновлена должность сотрудника</p></div><time>Сегодня</time></div><div class="activity"><span class="dot" style="background:var(--green)"></span><div><b>Добавлен сотрудник</b><p>Новый участник внесён в состав</p></div><time>Вчера</time></div><div class="activity"><span class="dot" style="background:var(--amber)"></span><div><b>Обновлены разрешения</b><p>Изменён доступ к разделам</p></div><time>Вчера</time></div></div></div></section>
-<section id="staff" class="section"><div class="headrow"><div><div class="eyebrow">Персонал проекта</div><div class="heading">Состав</div><div class="sub">Никнеймы, должности, подразделения и статус сотрудников.</div></div><button class="btn" onclick="addStaff()">＋ Добавить сотрудника</button></div><div class="toolbar"><input id="searchStaff" placeholder="Поиск по никнейму или должности…" oninput="filterStaff()"><select id="filterType" onchange="filterStaff()"><option value="all">Все подразделения</option><option>Администрация</option><option>Лидерский состав</option></select></div><div class="card table-wrap"><table><thead><tr><th>Никнейм</th><th>Должность</th><th>Подразделение</th><th>Разрешения</th><th>Статус</th></tr></thead><tbody id="staffRows"><tr><td><div class="user"><span class="avatar">DK</span>Diazz_Kaneki</div></td><td>Главный администратор</td><td>Администрация</td><td>Полный доступ</td><td><span class="tag green">Активен</span></td></tr><tr><td><div class="user"><span class="avatar">AK</span>Alex_King</div></td><td>Заместитель лидера</td><td>Лидерский состав</td><td>Управление организацией</td><td><span class="tag green">Активен</span></td></tr><tr><td><div class="user"><span class="avatar">MR</span>Mark_River</div></td><td>Лидер организации</td><td>Лидерский состав</td><td>Состав и отчёты</td><td><span class="tag green">Активен</span></td></tr><tr><td><div class="user"><span class="avatar">NS</span>Nikita_Snow</div></td><td>Администратор 2 уровня</td><td>Администрация</td><td>Модерация</td><td><span class="tag amber">На проверке</span></td></tr></tbody></table></div></section>
-<section id="positions" class="section"><div class="eyebrow">Структура проекта</div><div class="heading">Должности</div><div class="sub" style="margin-bottom:20px">Иерархия DEVIL Tools: от руководства проекта до состава организаций. Для каждой должности предусмотрен отдельный набор разрешений.</div><div class="role-grid"><div class="role-card"><h3>Владелец проекта</h3><p>Полное управление проектом, составами и настройками системы.</p><span class="tag">Руководство проекта</span></div><div class="role-card"><h3>Заместитель владельца</h3><p>Помощь владельцу и контроль ключевых направлений проекта.</p><span class="tag">Руководство проекта</span></div><div class="role-card"><h3>Главный администратор</h3><p>Общее руководство административным составом.</p><span class="tag">Администрация</span></div><div class="role-card"><h3>Заместитель главного администратора</h3><p>Контроль работы администрации и выполнение поручений руководства.</p><span class="tag">Администрация</span></div><div class="role-card"><h3>Следящий за администрацией</h3><p>Контроль работы администраторов, отчётов и дисциплины.</p><span class="tag">Администрация</span></div><div class="role-card"><h3>Куратор администрации</h3><p>Координация направлений и помощь административному составу.</p><span class="tag">Администрация</span></div><div class="role-card"><h3>Следящий за организациями</h3><p>Контроль лидеров, сроков полномочий и работы организаций.</p><span class="tag green">Организации</span></div><div class="role-card"><h3>Куратор организаций</h3><p>Проверка отчётов и координация лидерского состава.</p><span class="tag green">Организации</span></div><div class="role-card"><h3>Лидер организации</h3><p>Руководство своей организацией и управление её составом.</p><span class="tag green">Лидерский состав</span></div><div class="role-card"><h3>Заместитель лидера</h3><p>Помощь лидеру и выполнение обязанностей по управлению организацией.</p><span class="tag green">Лидерский состав</span></div><div class="role-card"><h3>Администратор</h3><p>Выполнение игровых обязанностей в рамках выданного уровня доступа.</p><span class="tag">Администрация</span></div></div></section>
-<section id="permissions" class="section"><div class="eyebrow">Контроль доступа</div><div class="heading">Разрешения</div><div class="sub" style="margin-bottom:20px">Каждой должности назначается собственный набор прав. В реальной версии права проверяются сервером.</div><div class="role-grid"><div class="role-card"><h3>Главная администрация</h3><p>Расширенный уровень управления</p><div class="perm"><span>Управление сотрудниками</span><b class="on">✓</b></div><div class="perm"><span>Назначение должностей</span><b class="on">✓</b></div><div class="perm"><span>Настройка разрешений</span><b class="on">✓</b></div><div class="perm"><span>Просмотр журнала</span><b class="on">✓</b></div></div><div class="role-card"><h3>Администрация</h3><p>Рабочий доступ администратора</p><div class="perm"><span>Просмотр состава</span><b class="on">✓</b></div><div class="perm"><span>Модерация</span><b class="on">✓</b></div><div class="perm"><span>Назначение должностей</span><b class="off">—</b></div><div class="perm"><span>Настройка разрешений</span><b class="off">—</b></div></div><div class="role-card"><h3>Лидер / заместитель</h3><p>Доступ только к своей организации</p><div class="perm"><span>Просмотр своего состава</span><b class="on">✓</b></div><div class="perm"><span>Работа с отчётами</span><b class="on">✓</b></div><div class="perm"><span>Управление чужими составами</span><b class="off">—</b></div><div class="perm"><span>Админ-панель</span><b class="off">—</b></div></div></div></section>
-<section id="organizations" class="section"><div class="eyebrow">Подразделения проекта</div><div class="heading">Организации</div><div class="sub" style="margin-bottom:20px">Список организаций, для которых назначаются лидеры и заместители.</div><div class="role-grid"><div class="role-card"><h3>LSPD</h3><p>Полицейский департамент</p><span class="tag green">Лидер назначен</span></div><div class="role-card"><h3>FBI</h3><p>Федеральное бюро</p><span class="tag green">Лидер назначен</span></div><div class="role-card"><h3>Army</h3><p>Вооружённые силы</p><span class="tag amber">Нужен заместитель</span></div><div class="role-card"><h3>МЗ</h3><p>Министерство здравоохранения</p><span class="tag green">Лидер назначен</span></div><div class="role-card"><h3>Правительство</h3><p>Государственная структура</p><span class="tag green">Лидер назначен</span></div><div class="role-card"><h3>СМИ</h3><p>Средства массовой информации</p><span class="tag amber">Набор открыт</span></div></div></section>
-</main></div></div>
-<script>
-let currentRole='',leaderOrg='';
-const starterRows=()=>Array.from(document.querySelectorAll('#staffRows tr')).map(r=>({nick:r.querySelector('.user')?.innerText||'',position:r.cells[1]?.innerText||'',unit:r.cells[2]?.innerText||'Администрация',permission:r.cells[3]?.innerText||'Не назначены',status:r.cells[4]?.innerText||'Активен'}));
-let staff=[];
-function saveStaff(){try{localStorage.setItem('devilToolsStaff',JSON.stringify(staff))}catch(e){} }
-function loadStaff(){try{const saved=localStorage.getItem('devilToolsStaff');staff=saved?JSON.parse(saved):starterRows()}catch(e){staff=starterRows()}renderStaff()}
-function login(){const type=document.getElementById('accessType').value,code=document.getElementById('accessCode').value.trim();const codes={admin:['ADMIN-DEMO','CHIEF-DEMO'],leader:['LEADER-DEMO']};if(!codes[type]?.includes(code)){document.getElementById('loginError').textContent='Неверный код для выбранной категории доступа.';return}currentRole=code==='CHIEF-DEMO'?'chief':type;if(currentRole==='leader'){leaderOrg=prompt('Введите название вашей организации:','LSPD');if(!leaderOrg){currentRole='';return}}document.getElementById('loginView').classList.add('hidden');document.getElementById('appView').classList.remove('hidden');document.getElementById('topUser').textContent=({chief:'Главный администратор',admin:'Администратор',leader:'Лидер: '+leaderOrg})[currentRole];document.querySelector('[data-page="permissions"]').style.display=currentRole==='chief'?'':'none';document.querySelector('[data-page="positions"]').style.display=currentRole==='chief'?'':'none';document.querySelector('[data-page="organizations"]').style.display=currentRole==='leader'?'none':'';const add=document.querySelector('#staff .headrow .btn');add.style.display='';loadStaff();go('overview')}
-function logout(){currentRole='';leaderOrg='';document.getElementById('appView').classList.add('hidden');document.getElementById('loginView').classList.remove('hidden');document.getElementById('accessCode').value='';document.getElementById('topUser').textContent='Гостевой доступ'}
-function go(id,el){document.querySelectorAll('.section').forEach(x=>x.classList.remove('show'));document.getElementById(id).classList.add('show');document.querySelectorAll('.nav[data-page]').forEach(x=>x.classList.remove('active'));const nav=el||document.querySelector('[data-page="'+id+'"]');if(nav)nav.classList.add('active')}
-function renderStaff(){const rows=document.getElementById('staffRows');rows.innerHTML='';staff.forEach((s,i)=>{if(currentRole==='leader'&&s.unit!==leaderOrg)return;const tr=document.createElement('tr');const td=document.createElement('td');const u=document.createElement('div');u.className='user';const a=document.createElement('span');a.className='avatar';a.textContent=s.nick.slice(0,2).toUpperCase();u.append(a,document.createTextNode(s.nick));td.append(u);tr.append(td);[s.position,s.unit,s.permission].forEach(v=>{const c=document.createElement('td');c.textContent=v;tr.append(c)});const st=document.createElement('td');const tag=document.createElement('span');tag.className='tag '+(s.status==='Активен'?'green':'amber');tag.textContent=s.status;st.append(tag);tr.append(st);if(currentRole!=='leader'){const act=document.createElement('td');const del=document.createElement('button');del.className='btn secondary';del.textContent='Удалить';del.style.padding='6px 9px';del.onclick=()=>removeStaff(i);act.append(del);tr.append(act)}rows.append(tr)});updateStats()}
-function updateStats(){const total=staff.length,admins=staff.filter(s=>s.unit==='Администрация').length,leaders=staff.filter(s=>s.unit!=='Администрация').length,orgs=new Set(staff.filter(s=>s.unit!=='Администрация').map(s=>s.unit)).size;document.getElementById('statStaff').textContent=total;const nums=document.querySelectorAll('.stats .stat-num');if(nums[1])nums[1].textContent=admins;if(nums[2])nums[2].textContent=leaders;if(nums[3])nums[3].textContent=orgs}
-function addStaff(){if(!['chief','admin','leader'].includes(currentRole))return alert('Нет разрешения на добавление сотрудников.');const nick=prompt('Игровой никнейм сотрудника:');if(!nick?.trim())return;if(staff.some(s=>s.nick.toLowerCase()===nick.trim().toLowerCase()))return alert('Такой сотрудник уже существует.');const position=prompt('Должность сотрудника:','Администратор')||'Не назначена';const unit=currentRole==='leader'?leaderOrg:(prompt('Подразделение (Администрация или название организации):','Администрация')||'Администрация');const permission=currentRole==='leader'?'Состав и отчёты':(prompt('Разрешения:','Просмотр состава')||'Не назначены');staff.push({nick:nick.trim(),position,unit,permission,status:'Активен'});saveStaff();renderStaff();addActivity('Добавлен сотрудник',nick.trim()+' — '+position);}
-function removeStaff(i){if(currentRole!=='chief'&&currentRole!=='admin')return alert('Удалять сотрудников может только администрация.');if(!confirm('Удалить сотрудника '+staff[i].nick+'?'))return;const name=staff[i].nick;staff.splice(i,1);saveStaff();renderStaff();addActivity('Удалён сотрудник',name)}
-function addActivity(title,desc){const box=document.querySelector('#overview .card:nth-child(2)');if(!box)return;const item=document.createElement('div');item.className='activity';item.innerHTML='<span class="dot"></span>';const content=document.createElement('div'),b=document.createElement('b'),p=document.createElement('p'),time=document.createElement('time');b.textContent=title;p.textContent=desc;time.textContent='Сейчас';content.append(b,p);item.append(content,time);box.append(item)}
-function filterStaff(){const q=document.getElementById('searchStaff').value.toLowerCase(),type=document.getElementById('filterType').value;document.querySelectorAll('#staffRows tr').forEach(r=>{const txt=r.innerText.toLowerCase();r.style.display=(txt.includes(q)&&(type==='all'||txt.includes(type.toLowerCase())))?'':'none'})}
-loadStaff();
-</script>
-<style>
-.faction-overlay{position:fixed;inset:0;z-index:50;background:#080a18ed;display:none;place-items:center;padding:20px}.faction-box{width:min(760px,100%);max-height:90vh;overflow:auto;background:#171a30;border:1px solid #3b3e60;border-radius:20px;padding:26px;box-shadow:0 30px 100px #0009}.faction-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:18px 0}.faction-choice{background:#20233e;border:1px solid #373b5d;border-radius:12px;padding:15px;color:#fff;text-align:left;cursor:pointer}.faction-choice:hover{border-color:#9b86ff;background:#29264b}.faction-choice b{display:block;font-size:14px}.faction-choice small{display:block;color:#a4a8c5;margin-top:5px}.subunit-row{display:flex;justify-content:space-between;align-items:center;padding:12px;border-bottom:1px solid #303452;font-size:12px}.subunit-row:last-child{border:0}@media(max-width:600px){.faction-grid{grid-template-columns:repeat(2,1fr)}}
+:root {
+  --primary: #7657f6;
+  --background: #0e1020;
+  --panel: #171a30;
+  --line: #303452;
+  --muted: #a4a8c5;
+  --green: #4fd1a1;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--background);
+  color: #f4f3ff;
+  font-family: Inter, Arial, sans-serif;
+}
+button,input,select { font: inherit; }
+button {
+  cursor: pointer;
+  border: 0;
+  border-radius: 9px;
+  padding: 10px 15px;
+  color: white;
+  background: var(--primary);
+}
+input,select {
+  width: 100%;
+  padding: 11px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: #11142a;
+  color: white;
+}
+.top {
+  padding: 20px 30px;
+  background: #121429;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.brand { font-size: 21px; font-weight: 900; }
+.brand span { color: #a99aff; }
+.layout { display: grid; grid-template-columns: 230px 1fr; min-height: 90vh; }
+aside { background: #121429; padding: 20px; }
+.nav {
+  padding: 12px;
+  margin: 4px 0;
+  border-radius: 9px;
+  cursor: pointer;
+  color: #b7bad2;
+}
+.nav:hover,.nav.active { background: #292448; color: white; }
+main { padding: 30px; max-width: 1400px; width: 100%; }
+.section { display: none; }
+.section.show { display: block; }
+.heading { font-size: 30px; font-weight: 850; margin: 10px 0; }
+.sub { color: var(--muted); font-size: 13px; }
+.eyebrow { color: #a99aff; font-size: 11px; letter-spacing: 2px; }
+.card,.stat,.role-card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 18px;
+  margin-bottom: 15px;
+}
+.stats { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; }
+.stat-num { font-size: 28px; font-weight: 850; margin-top: 10px; }
+.grid2,.role-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 15px; }
+.role-grid { grid-template-columns: repeat(3,1fr); }
+.card-title { font-weight: 800; margin-bottom: 15px; }
+.field { display: grid; gap: 7px; margin: 15px 0; }
+.field label { color: #aeb2cd; font-size: 11px; }
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; min-width: 500px; }
+td,th { padding: 12px; text-align: left; border-bottom: 1px solid var(--line); font-size: 12px; }
+th { color: var(--muted); }
+.activity { display: flex; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+.activity p { color: var(--muted); font-size: 12px; margin: 5px 0; }
+.tag { background: #292448; padding: 5px 8px; border-radius: 6px; font-size: 11px; }
+.login { min-height: 80vh; display: grid; place-items: center; padding: 20px; }
+.loginbox { width: min(430px,100%); background: var(--panel); border: 1px solid var(--line); border-radius: 18px; padding: 28px; }
+.loginbox h1 { font-size: 25px; }
+.notice { background: #302817; border: 1px solid #65512b; padding: 12px; border-radius: 9px; font-size: 11px; color: #f0cd84; }
+.hidden { display: none !important; }
+.faction-overlay {
+  position: fixed; inset: 0; z-index: 50;
+  background: #080a18ed; display: none;
+  place-items: center; padding: 20px;
+}
+.faction-box {
+  width: min(760px,100%); max-height: 90vh; overflow: auto;
+  background: var(--panel); border: 1px solid #3b3e60;
+  border-radius: 20px; padding: 26px;
+}
+.faction-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin: 18px 0; }
+.faction-choice {
+  background: #20233e; border: 1px solid #373b5d;
+  border-radius: 12px; padding: 15px; color: white; text-align: left;
+}
+.faction-choice b,.faction-choice small { display: block; }
+.faction-choice small { color: var(--muted); margin-top: 5px; }
+.subunit-row { display: flex; justify-content: space-between; padding: 12px; border-bottom: 1px solid var(--line); }
+@media(max-width:900px) {
+  .layout { grid-template-columns: 1fr; }
+  .stats { grid-template-columns: repeat(2,1fr); }
+  .role-grid { grid-template-columns: repeat(2,1fr); }
+}
+@media(max-width:560px) {
+  .grid2,.role-grid,.faction-grid { grid-template-columns: 1fr; }
+  main { padding: 15px; }
+  .top { padding: 15px; }
+}
 </style>
-<div id="factionPicker" class="faction-overlay"><div class="faction-box"><div class="eyebrow">Amazing Online · DEVIL Tools</div><div class="heading">Выберите фракцию</div><div class="sub">После выбора откроется рабочее пространство выбранной организации.</div><div id="factionChoices" class="faction-grid"></div><button class="btn secondary" onclick="cancelFactionPick()">Отмена</button></div></div>
+</head>
+<body>
+<div class="top">
+  <div class="brand">DEVIL <span>TOOLS</span></div>
+  <div id="topUser">Гостевой доступ</div>
+</div>
+
+<div id="loginView" class="login">
+  <div class="loginbox">
+    <div class="eyebrow">ЗАКРЫТАЯ ПЛАТФОРМА</div>
+    <h1>Вход в систему</h1>
+    <p class="sub">Выберите тип доступа и введите тестовый код.</p>
+    <div class="field">
+      <label>ТИП ДОСТУПА</label>
+      <select id="accessType">
+        <option value="admin">Администрация</option>
+        <option value="leader">Лидер / заместитель</option>
+      </select>
+    </div>
+    <div class="field">
+      <label>КОД ДОСТУПА</label>
+      <input id="accessCode" type="password" placeholder="Введите код">
+    </div>
+    <button style="width:100%" onclick="login()">Войти в DEVIL Tools</button>
+    <div class="notice" style="margin-top:15px">
+      Демонстрационная версия. Для настоящей авторизации необходим сервер.
+    </div>
+    <p class="sub">Тестовые коды: ADMIN-DEMO · CHIEF-DEMO · LEADER-DEMO</p>
+    <div id="loginError" style="color:#ff929e"></div>
+  </div>
+</div>
+
+<div id="appView" class="layout hidden">
+  <aside>
+    <div class="nav active" data-page="overview" onclick="go('overview',this)">▦ Обзор</div>
+    <div class="nav" data-page="staff" onclick="go('staff',this)">♙ Состав</div>
+    <div class="nav" data-page="positions" onclick="go('positions',this)">▤ Должности</div>
+    <div class="nav" data-page="permissions" onclick="go('permissions',this)">◈ Разрешения</div>
+    <div class="nav" data-page="organizations" onclick="go('organizations',this)">⌂ Организации</div>
+    <div class="nav" data-page="applications" onclick="go('applications',this)">✉ Заявки</div>
+    <div class="nav" data-page="ranks" onclick="go('ranks',this)">⇧ Управление рангами</div>
+    <div class="nav" data-page="audit" onclick="go('audit',this)">◷ Журнал действий</div>
+    <div class="nav" onclick="logout()">⇥ Выйти</div>
+  </aside>
+
+  <main>
+    <section id="overview" class="section show">
+      <div class="eyebrow">ПАНЕЛЬ УПРАВЛЕНИЯ</div>
+      <div class="heading">Добро пожаловать!</div>
+      <p class="sub">Управление составом проекта DEVIL.</p>
+      <div class="stats">
+        <div class="stat">Сотрудники<div class="stat-num" id="statStaff">0</div></div>
+        <div class="stat">Администрация<div class="stat-num">0</div></div>
+        <div class="stat">Лидеры<div class="stat-num">0</div></div>
+        <div class="stat">Организации<div class="stat-num">12</div></div>
+      </div>
+      <div class="card">
+        <div class="card-title">Последние действия</div>
+        <div id="overviewLogs"></div>
+      </div>
+    </section>
+
+    <section id="staff" class="section">
+      <div class="heading">Состав организации</div>
+      <p class="sub">Управление сотрудниками выбранной фракции.</p>
+      <button onclick="addStaff()">＋ Добавить сотрудника</button>
+      <div class="card table-wrap" style="margin-top:15px">
+        <table>
+          <thead><tr><th>Никнейм</th><th>Должность</th><th>Подразделение</th><th>Разрешения</th><th>Статус</th><th></th></tr></thead>
+          <tbody id="staffRows"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="positions" class="section">
+      <div class="heading">Должности</div>
+      <div class="role-grid">
+        <div class="role-card"><b>Главный администратор</b><p class="sub">Полное управление системой.</p></div>
+        <div class="role-card"><b>Администратор</b><p class="sub">Работа с составом.</p></div>
+        <div class="role-card"><b>Следящий</b><p class="sub">Контроль подразделений.</p></div>
+        <div class="role-card"><b>Куратор</b><p class="sub">Координация состава.</p></div>
+        <div class="role-card"><b>Лидер организации</b><p class="sub">Управление фракцией.</p></div>
+        <div class="role-card"><b>Заместитель лидера</b><p class="sub">Помощь лидеру.</p></div>
+      </div>
+    </section>
+
+    <section id="permissions" class="section">
+      <div class="heading">Разрешения</div>
+      <div class="card">
+        <p>Главная администрация — полный доступ.</p>
+        <p>Администратор — управление сотрудниками.</p>
+        <p>Лидер — управление своей фракцией.</p>
+      </div>
+    </section>
+
+    <section id="organizations" class="section">
+      <div class="heading" id="organizationTitle">Организация</div>
+      <button onclick="createSubunit()">＋ Создать подразделение</button>
+      <button onclick="pickFaction()" class="secondary">Сменить фракцию</button>
+      <div class="card" style="margin-top:15px">
+        <div class="card-title">Подразделения</div>
+        <div id="subunitList"></div>
+      </div>
+    </section>
+
+    <section id="applications" class="section">
+      <div class="heading">Заявки</div>
+      <div class="card">
+        <div class="card-title">Подать заявку</div>
+        <div class="field"><label>НИКНЕЙМ</label><input id="appNick" placeholder="Name_Surname"></div>
+        <div class="field"><label>ЖЕЛАЕМАЯ ДОЛЖНОСТЬ</label><input id="appPosition" placeholder="Должность"></div>
+        <div class="field"><label>КОММЕНТАРИЙ</label><input id="appComment" placeholder="Комментарий"></div>
+        <button onclick="sendApplication()">Отправить заявку</button>
+      </div>
+      <div class="card"><div class="card-title">Список заявок</div><div id="applicationList"></div></div>
+    </section>
+
+    <section id="ranks" class="section">
+      <div class="heading">Управление рангами</div>
+      <div class="card">
+        <div class="field"><label>СОТРУДНИК</label><select id="rankPerson"></select></div>
+        <div class="field"><label>НОВАЯ ДОЛЖНОСТЬ</label><input id="rankValue" placeholder="Например, 5 ранг"></div>
+        <button onclick="saveRank()">Сохранить должность</button>
+      </div>
+    </section>
+
+    <section id="audit" class="section">
+      <div class="heading">Журнал действий</div>
+      <div class="card"><div id="auditList"></div></div>
+    </section>
+  </main>
+</div>
+
+<div id="factionPicker" class="faction-overlay">
+  <div class="faction-box">
+    <div class="eyebrow">AMAZING ONLINE</div>
+    <div class="heading">Выберите фракцию</div>
+    <div id="factionChoices" class="faction-grid"></div>
+    <button onclick="cancelFactionPick()">Отмена</button>
+  </div>
+</div>
+
 <script>
-(()=>{
-const factions=[['Государственные организации','Воинская часть','Военная организация AMAZING ONLINE'],['Государственные организации','ППС','Патрульно-постовая служба'],['Государственные организации','ДПС','Дорожно-патрульная служба'],['Государственные организации','ЕСС','Единая служба спасения'],['Государственные организации','ФСИН','Федеральная служба исполнения наказаний'],['Государственные организации','Правительство области','Органы управления областью'],['Государственные организации','ФСБ','Федеральная служба безопасности'],['Отдельная организация','Телерадиокомпания','Новости и эфиры'],['Криминальные организации','Русская мафия','Криминальная организация'],['Криминальные организации','Кавказская мафия','Криминальная организация'],['Криминальные организации','Скинхеды','Уличная группировка'],['Криминальные организации','Байкеры','Байкерская группировка']];
-let role='',activeFaction='',subunits={};
-try{subunits=JSON.parse(localStorage.getItem('devilToolsSubunits')||'{}')}catch(e){subunits={}}
-const oldLogout=window.logout;
-function persistSubs(){localStorage.setItem('devilToolsSubunits',JSON.stringify(subunits))}
-function pickFaction(){const host=document.getElementById('factionChoices');host.innerHTML='';let group='';factions.forEach(([category,name,desc])=>{if(category!==group){group=category;const h=document.createElement('div');h.style.cssText='grid-column:1/-1;color:#a99aff;font-size:11px;font-weight:800;letter-spacing:1.4px;text-transform:uppercase;padding:12px 2px 2px';h.textContent=category;host.append(h)}const b=document.createElement('button');b.className='faction-choice';b.innerHTML='<b></b><small></small>';b.querySelector('b').textContent=name;b.querySelector('small').textContent=desc;b.onclick=()=>enterFaction(name);host.append(b)});document.getElementById('factionPicker').style.display='grid'}
-window.cancelFactionPick=()=>{document.getElementById('factionPicker').style.display='none';document.getElementById('loginView').classList.remove('hidden');document.getElementById('appView').classList.add('hidden')};
-window.login=function(){const type=document.getElementById('accessType').value,code=document.getElementById('accessCode').value.trim();const valid=type==='admin'?['ADMIN-DEMO','CHIEF-DEMO'].includes(code):code==='LEADER-DEMO';if(!valid){document.getElementById('loginError').textContent='Неверный код для выбранной категории доступа.';return}role=code==='CHIEF-DEMO'?'chief':type;pickFaction()};
-function enterFaction(name){activeFaction=name;document.getElementById('factionPicker').style.display='none';document.getElementById('loginView').classList.add('hidden');document.getElementById('appView').classList.remove('hidden');document.getElementById('topUser').textContent=({chief:'Главный администратор',admin:'Администратор',leader:'Лидер / заместитель'})[role]+' · '+name;document.querySelector('[data-page="permissions"]').style.display=role==='chief'?'':'none';document.querySelector('[data-page="positions"]').style.display=role==='chief'?'':'none';document.querySelector('[data-page="organizations"]').style.display='';const add=document.querySelector('#staff .headrow .btn');add.style.display='';loadStaff();renderFactionPage();go('overview')}
-window.logout=function(){role='';activeFaction='';oldLogout();document.getElementById('factionPicker').style.display='none'};
-window.renderStaff=function(){const rows=document.getElementById('staffRows');rows.innerHTML='';staff.forEach((s,i)=>{if(!String(s.unit).startsWith(activeFaction))return;const tr=document.createElement('tr');const td=document.createElement('td');const u=document.createElement('div');u.className='user';const a=document.createElement('span');a.className='avatar';a.textContent=s.nick.slice(0,2).toUpperCase();u.append(a,document.createTextNode(s.nick));td.append(u);tr.append(td);[s.position,s.unit,s.permission].forEach(v=>{const c=document.createElement('td');c.textContent=v;tr.append(c)});const st=document.createElement('td');const tag=document.createElement('span');tag.className='tag '+(s.status==='Активен'?'green':'amber');tag.textContent=s.status;st.append(tag);tr.append(st);if(role!=='leader'){const act=document.createElement('td'),del=document.createElement('button');del.className='btn secondary';del.textContent='Удалить';del.style.padding='6px 9px';del.onclick=()=>removeStaff(i);act.append(del);tr.append(act)}rows.append(tr)});const h=document.querySelector('#staff .sub');if(h)h.textContent='Фракция: '+activeFaction+' · сотрудники и подразделения';updateStats()};
-window.addStaff=function(){if(!['chief','admin','leader'].includes(role))return;const nick=prompt('Игровой никнейм сотрудника:');if(!nick?.trim())return;if(staff.some(s=>s.nick.toLowerCase()===nick.trim().toLowerCase()))return alert('Такой никнейм уже есть в системе.');const units=subunits[activeFaction]||[];const options=['Основной состав',...units];const chosen=prompt('Подразделение сотрудника:\n'+options.map((x,i)=>(i+1)+'. '+x).join('\n'),'Основной состав');if(chosen===null)return;const unit=activeFaction+' / '+(options.includes(chosen)?chosen:'Основной состав');const position=prompt('Должность сотрудника:','Сотрудник')||'Сотрудник';staff.push({nick:nick.trim(),position,unit,permission:role==='leader'?'Управление в рамках фракции':'Просмотр и управление',status:'Активен'});saveStaff();renderStaff();if(typeof addActivity==='function')addActivity('Добавлен сотрудник',nick.trim()+' · '+unit)};
-window.removeStaff=function(i){if(!['chief','admin'].includes(role))return alert('Недостаточно прав.');if(!confirm('Удалить '+staff[i].nick+'?'))return;staff.splice(i,1);saveStaff();renderStaff()};
-function renderFactionPage(){const section=document.getElementById('organizations');section.innerHTML='<div class="eyebrow">Amazing Online · структура</div><div class="heading">'+activeFaction+'</div><div class="sub" style="margin-bottom:18px">Управление подразделениями выбранной фракции.</div><div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px"><button class="btn" id="createSubunit">＋ Создать подразделение</button><button class="btn secondary" id="switchFaction">Сменить фракцию</button></div><div class="card"><div class="card-title">Подразделения фракции</div><div id="subunitList"></div></div>';document.getElementById('createSubunit').onclick=createSubunit;document.getElementById('switchFaction').onclick=pickFaction;renderSubunits()}
-function renderSubunits(){const list=document.getElementById('subunitList');if(!list)return;list.innerHTML='';const values=subunits[activeFaction]||[];if(!values.length){list.textContent='Подразделений пока нет. Создайте первое подразделение.';return}values.forEach((name,i)=>{const row=document.createElement('div');row.className='subunit-row';const span=document.createElement('span');span.textContent=name;row.append(span);if(role!=='leader'){const b=document.createElement('button');b.className='btn secondary';b.textContent='Удалить';b.style.padding='6px 9px';b.onclick=()=>{if(confirm('Удалить подразделение '+name+'?')){values.splice(i,1);persistSubs();renderSubunits()}};row.append(b)}list.append(row)})}
-function createSubunit(){if(!['chief','admin','leader'].includes(role))return;const name=prompt('Название нового подразделения:');if(!name?.trim())return;subunits[activeFaction]=subunits[activeFaction]||[];if(subunits[activeFaction].some(x=>x.toLowerCase()===name.trim().toLowerCase()))return alert('Такое подразделение уже существует.');subunits[activeFaction].push(name.trim());persistSubs();renderSubunits();if(typeof addActivity==='function')addActivity('Создано подразделение',activeFaction+' / '+name.trim())}
-})();
-</script><script>
-(()=>{
-const $=id=>document.getElementById(id);
-const read=(key,fallback=[])=>{try{return JSON.parse(localStorage.getItem(key)||'null')??fallback}catch(e){return fallback}};
-let applications=read('devilToolsApplications'),logs=read('devilToolsLogs');
-const save=(key,value)=>localStorage.setItem(key,JSON.stringify(value));
-function log(title,detail){logs.unshift({title,detail,at:new Date().toLocaleString('ru-RU')});logs=logs.slice(0,100);save('devilToolsLogs',logs);renderLogs()}
-function addPage(id,label,icon){const nav=document.createElement('div');nav.className='nav';nav.dataset.page=id;nav.innerHTML='<span class="ico">'+icon+'</span>'+label;nav.onclick=()=>window.go(id,nav);document.querySelector('aside .nav-label').after(nav);const section=document.createElement('section');section.id=id;section.className='section';$('overview').parentElement.insertBefore(section,$('overview').nextSibling);return section}
-const appPage=addPage('applications','Заявки','✉');
-appPage.innerHTML='<div class="eyebrow">Кадровый отдел</div><div class="heading">Заявки</div><div class="sub" style="margin-bottom:18px">Подача и рассмотрение заявок на вступление и повышение.</div><div class="card" style="margin-bottom:16px"><div class="card-title">Подать заявку</div><div class="field"><label>ИГРОВОЙ НИКНЕЙМ</label><input id="appNick" placeholder="Name_Surname"></div><div class="field"><label>ЖЕЛАЕМАЯ ДОЛЖНОСТЬ</label><input id="appPosition" placeholder="Например, младший состав"></div><div class="field"><label>КОММЕНТАРИЙ</label><input id="appComment" placeholder="Краткая информация"></div><button class="btn" id="sendApplication">Отправить заявку</button></div><div class="card"><div class="card-title">Список заявок</div><div id="applicationList"></div></div>';
-const rankPage=addPage('ranks','Управление рангами','⇧');
-rankPage.innerHTML='<div class="eyebrow">Кадровый отдел</div><div class="heading">Управление рангами</div><div class="sub" style="margin-bottom:18px">Назначение должностей и уровней сотрудникам выбранной фракции.</div><div class="card"><div class="field"><label>СОТРУДНИК</label><select id="rankPerson"></select></div><div class="field"><label>НОВАЯ ДОЛЖНОСТЬ / РАНГ</label><input id="rankValue" placeholder="Например, 5 ранг — заместитель"></div><button class="btn" id="saveRank">Сохранить должность</button></div>';
-const logPage=addPage('audit','Журнал действий','◷');
-logPage.innerHTML='<div class="eyebrow">Контроль системы</div><div class="heading">Журнал действий</div><div class="sub" style="margin-bottom:18px">История заявок, назначений и кадровых изменений на этом устройстве.</div><div class="card"><div id="auditList"></div></div>';
-function renderApps(){const host=$('applicationList');if(!host)return;host.innerHTML='';if(!applications.length){host.textContent='Заявок пока нет.';return}applications.forEach((a,i)=>{const row=document.createElement('div');row.className='activity';const body=document.createElement('div');const b=document.createElement('b'),p=document.createElement('p'),meta=document.createElement('p');b.textContent=a.nick+' — '+a.position;p.textContent=a.comment||'Без комментария';meta.textContent=a.faction+' · '+a.status+' · '+a.at;body.append(b,p,meta);row.append(body);if(a.status==='На рассмотрении'&&['chief','admin'].includes(role)){['Одобрить','Отклонить'].forEach((label,j)=>{const btn=document.createElement('button');btn.className='btn '+(j?'secondary':'');btn.textContent=label;btn.style.padding='7px 9px';btn.onclick=()=>{a.status=j?'Отклонена':'Одобрена';save('devilToolsApplications',applications);log(j?'Заявка отклонена':'Заявка одобрена',a.nick+' · '+a.faction);renderApps()};row.append(btn)})}host.append(row)})}
-function renderRanks(){const select=$('rankPerson');if(!select)return;select.innerHTML='';staff.filter(s=>String(s.unit).startsWith(activeFaction)).forEach((s,i)=>{const o=document.createElement('option');o.value=staff.indexOf(s);o.textContent=s.nick+' — '+s.position;select.append(o)});if(!select.options.length){const o=document.createElement('option');o.textContent='Нет сотрудников в этой фракции';o.value='';select.append(o)}}
-function renderLogs(){const host=$('auditList');if(!host)return;host.innerHTML='';if(!logs.length){host.textContent='Записей пока нет.';return}logs.forEach(x=>{const row=document.createElement('div');row.className='activity';const dot=document.createElement('span');dot.className='dot';const body=document.createElement('div'),b=document.createElement('b'),p=document.createElement('p'),time=document.createElement('time');b.textContent=x.title;p.textContent=x.detail;time.textContent=x.at;body.append(b,p);row.append(dot,body,time);host.append(row)})}
-$('sendApplication').onclick=()=>{const nick=$('appNick').value.trim(),position=$('appPosition').value.trim();if(!nick||!position)return alert('Заполните никнейм и желаемую должность.');applications.unshift({nick,position,comment:$('appComment').value.trim(),faction:activeFaction,status:'На рассмотрении',at:new Date().toLocaleString('ru-RU')});save('devilToolsApplications',applications);$('appNick').value='';$('appPosition').value='';$('appComment').value='';log('Подана заявка',nick+' · '+activeFaction);renderApps()};
-$('saveRank').onclick=()=>{if(!['chief','admin'].includes(role))return alert('Назначать должности может только администрация.');const i=Number($('rankPerson').value),value=$('rankValue').value.trim();if(!value||!staff[i])return alert('Выберите сотрудника и укажите должность.');const old=staff[i].position;staff[i].position=value;saveStaff();renderStaff();renderRanks();log('Изменена должность',staff[i].nick+': '+old+' → '+value);$('rankValue').value=''};
-const oldRender=window.renderStaff;window.renderStaff=function(){oldRender();renderRanks()};
-const oldAdd=window.addStaff;window.addStaff=function(){oldAdd();renderRanks()};
-const oldRemove=window.removeStaff;window.removeStaff=function(i){const name=staff[i]?.nick;oldRemove(i);if(name)log('Удалён сотрудник',name);renderRanks()};
-const oldCreate=document.getElementById('createSubunit');
-const observer=new MutationObserver(()=>{const button=$('createSubunit');if(button&&!button.dataset.audit){button.dataset.audit='1';button.addEventListener('click',()=>setTimeout(()=>log('Обновлена структура',activeFaction+' · подразделения'),0))}});observer.observe($('organizations'),{childList:true,subtree:true});
-const originalGo=window.go;window.go=function(id,el){originalGo(id,el);if(id==='applications')renderApps();if(id==='ranks')renderRanks();if(id==='audit')renderLogs()};
-const originalEnter=window.login; // login is supplied by the faction selector; pages render on first open
-renderApps();renderLogs();
-})();
-</script></body></html>
+let role = '';
+let activeFaction = '';
+let staff = JSON.parse(localStorage.getItem('devilToolsStaff') || '[]');
+let applications = JSON.parse(localStorage.getItem('devilToolsApplications') || '[]');
+let logs = JSON.parse(localStorage.getItem('devilToolsLogs') || '[]');
+let subunits = JSON.parse(localStorage.getItem('devilToolsSubunits') || '{}');
+
+const factions = [
+  ['Государственные организации','Воинская часть','Военная организация'],
+  ['Государственные организации','ППС','Патрульно-постовая служба'],
+  ['Государственные организации','ДПС','Дорожно-патрульная служба'],
+  ['Государственные организации','ЕСС','Единая служба спасения'],
+  ['Государственные организации','ФСИН','Служба исполнения наказаний'],
+  ['Государственные организации','Правительство области','Органы управления'],
+  ['Государственные организации','ФСБ','Федеральная служба безопасности'],
+  ['Отдельная организация','Телерадиокомпания','Новости и эфиры'],
+  ['Криминальные организации','Русская мафия','Криминальная организация'],
+  ['Криминальные организации','Кавказская мафия','Криминальная организация'],
+  ['Криминальные организации','Скинхеды','Уличная группировка'],
+  ['Криминальные организации','Байкеры','Байкерская группировка']
+];
+
+function saveAll() {
+  localStorage.setItem('devilToolsStaff', JSON.stringify(staff));
+  localStorage.setItem('devilToolsApplications', JSON.stringify(applications));
+  localStorage.setItem('devilToolsLogs', JSON.stringify(logs));
+  localStorage.setItem('devilToolsSubunits', JSON.stringify(subunits));
+}
+
+function logAction(title, detail) {
+  logs.unshift({title, detail, time:new Date().toLocaleString('ru-RU')});
+  logs = logs.slice(0,100);
+  saveAll();
+  renderLogs();
+}
+
+function login() {
+  const type = document.getElementById('accessType').value;
+  const code = document.getElementById('accessCode').value.trim();
+  const valid = type === 'admin'
+    ? ['ADMIN-DEMO','CHIEF-DEMO'].includes(code)
+    : code === 'LEADER-DEMO';
+
+  if (!valid) {
+    document.getElementById('loginError').textContent = 'Неверный код доступа.';
+    return;
+  }
+
+  role = code === 'CHIEF-DEMO' ? 'chief' : type;
+  pickFaction();
+}
+
+function pickFaction() {
+  const host = document.getElementById('factionChoices');
+  host.innerHTML = '';
+  let group = '';
+
+  factions.forEach(([category,name,description]) => {
+    if (category !== group) {
+      group = category;
+      const heading = document.createElement('div');
+      heading.style.gridColumn = '1/-1';
+      heading.style.color = '#a99aff';
+      heading.textContent = category;
+      host.append(heading);
+    }
+
+    const button = document.createElement('button');
+    button.className = 'faction-choice';
+    button.innerHTML = '<b></b><small></small>';
+    button.querySelector('b').textContent = name;
+    button.querySelector('small').textContent = description;
+    button.onclick = () => enterFaction(name);
+    host.append(button);
+  });
+
+  document.getElementById('factionPicker').style.display = 'grid';
+}
+
+function enterFaction(name) {
+  activeFaction = name;
+  document.getElementById('factionPicker').style.display = 'none';
+  document.getElementById('loginView').classList.add('hidden');
+  document.getElementById('appView').classList.remove('hidden');
+  document.getElementById('topUser').textContent =
+    (role === 'chief' ? 'Главный администратор' :
+    role === 'admin' ? 'Администратор' : 'Лидер / заместитель')
+    + ' · ' + name;
+
+  document.getElementById('organizationTitle').textContent = name;
+  renderStaff();
+  renderSubunits();
+  renderApplications();
+  renderRanks();
+  renderLogs();
+  go('overview');
+}
+
+function cancelFactionPick() {
+  document.getElementById('factionPicker').style.display = 'none';
+}
+
+function logout() {
+  role = '';
+  activeFaction = '';
+  document.getElementById('appView').classList.add('hidden');
+  document.getElementById('loginView').classList.remove('hidden');
+  document.getElementById('accessCode').value = '';
+}
+
+function go(id,element) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('show'));
+  document.getElementById(id).classList.add('show');
+  document.querySelectorAll('.nav').forEach(n => n.classList.remove('active'));
+  if (element) element.classList.add('active');
+  else {
+    const nav = document.querySelector('[data-page="'+id+'"]');
+    if (nav) nav.classList.add('active');
+  }
+}
+
+function renderStaff() {
+  const rows = document.getElementById('staffRows');
+  rows.innerHTML = '';
+
+  staff.forEach((person,index) => {
+    if (!String(person.unit).startsWith(activeFaction)) return;
+
+    const tr = document.createElement('tr');
+    [person.nick,person.position,person.unit,person.permission,person.status].forEach(value => {
+      const td = document.createElement('td');
+      td.textContent = value;
+      tr.append(td);
+    });
+
+    const action = document.createElement('td');
+    if (role !== 'leader') {
+      const button = document.createElement('button');
+      button.textContent = 'Удалить';
+      button.onclick = () => removeStaff(index);
+      action.append(button);
+    }
+    tr.append(action);
+    rows.append(tr);
+  });
+
+  document.getElementById('statStaff').textContent = staff.length;
+  renderRanks();
+}
+
+function addStaff() {
+  const nick = prompt('Игровой никнейм сотрудника:');
+  if (!nick || !nick.trim()) return;
+
+  if (staff.some(s => s.nick.toLowerCase() === nick.trim().toLowerCase())) {
+    alert('Такой никнейм уже существует.');
+    return;
+  }
+
+  const options = ['Основной состав',...(subunits[activeFaction] || [])];
+  const unitChoice = prompt('Подразделение:\n' + options.join('\n'),'Основной состав');
+  if (unitChoice === null) return;
+
+  const position = prompt('Должность сотрудника:','Сотрудник') || 'Сотрудник';
+
+  staff.push({
+    nick:nick.trim(),
+    position,
+    unit:activeFaction+' / '+unitChoice,
+    permission:role === 'leader' ? 'Управление своей фракцией' : 'Просмотр и управление',
+    status:'Активен'
+  });
+
+  saveAll();
+  renderStaff();
+  logAction('Добавлен сотрудник',nick);
+}
+
+function removeStaff(index) {
+  if (!['chief','admin'].includes(role)) {
+    alert('Недостаточно прав.');
+    return;
+  }
+  if (!confirm('Удалить сотрудника '+staff[index].nick+'?')) return;
+  const nick = staff[index].nick;
+  staff.splice(index,1);
+  saveAll();
+  renderStaff();
+  logAction('Удалён сотрудник',nick);
+}
+
+function createSubunit() {
+  const name = prompt('Название подразделения:');
+  if (!name || !name.trim()) return;
+
+  subunits[activeFaction] = subunits[activeFaction] || [];
+
+  if (subunits[activeFaction].some(x => x.toLowerCase() === name.trim().toLowerCase())) {
+    alert('Такое подразделение уже существует.');
+    return;
+  }
+
+  subunits[activeFaction].push(name.trim());
+  saveAll();
+  renderSubunits();
+  logAction('Создано подразделение',activeFaction+' / '+name);
+}
+
+function renderSubunits() {
+  const host = document.getElementById('subunitList');
+  host.innerHTML = '';
+
+  (subunits[activeFaction] || []).forEach((name,index) => {
+    const row = document.createElement('div');
+    row.className = 'subunit-row';
+    const label = document.createElement('span');
+    label.textContent = name;
+    row.append(label);
+
+    if (role !== 'leader') {
+      const button = document.createElement('button');
+      button.textContent = 'Удалить';
+      button.onclick = () => {
+        if (!confirm('Удалить подразделение?')) return;
+        subunits[activeFaction].splice(index,1);
+        saveAll();
+        renderSubunits();
+      };
+      row.append(button);
+    }
+    host.append(row);
+  });
+}
+
+function sendApplication() {
+  const nick = document.getElementById('appNick').value.trim();
+  const position = document.getElementById('appPosition').value.trim();
+  const comment = document.getElementById('appComment').value.trim();
+
+  if (!nick || !position) {
+    alert('Заполните никнейм и должность.');
+    return;
+  }
+
+  applications.unshift({
+    nick,position,comment,
+    faction:activeFaction,
+    status:'На рассмотрении',
+    time:new Date().toLocaleString('ru-RU')
+  });
+
+  saveAll();
+  document.getElementById('appNick').value = '';
+  document.getElementById('appPosition').value = '';
+  document.getElementById('appComment').value = '';
+  renderApplications();
+  logAction('Подана заявка',nick+' · '+activeFaction);
+}
+
+function renderApplications() {
+  const host = document.getElementById('applicationList');
+  host.innerHTML = '';
+
+  applications.forEach((app,index) => {
+    if (app.faction !== activeFaction) return;
+
+    const row = document.createElement('div');
+    row.className = 'activity';
+    const content = document.createElement('div');
+    const title = document.createElement('b');
+    title.textContent = app.nick+' — '+app.position;
+    const info = document.createElement('p');
+    info.textContent = app.comment+' · '+app.status+' · '+app.time;
+    content.append(title,info);
+    row.append(content);
+
+    if (app.status === 'На рассмотрении' && ['chief','admin'].includes(role)) {
+      ['Одобрить','Отклонить'].forEach((label,choice) => {
+        const button = document.createElement('button');
+        button.textContent = label;
+        button.onclick = () => {
+          app.status = choice ? 'Отклонена' : 'Одобрена';
+          saveAll();
+          renderApplications();
+          logAction('Изменён статус заявки',app.nick+' · '+app.status);
+        };
+        row.append(button);
+      });
+    }
+    host.append(row);
+  });
+
+  if (!host.children.length) host.textContent = 'Заявок пока нет.';
+}
+
+function renderRanks() {
+  const select = document.getElementById('rankPerson');
+  if (!select) return;
+  select.innerHTML = '';
+
+  staff.forEach((person,index) => {
+    if (!String(person.unit).startsWith(activeFaction)) return;
+    const option = document.createElement('option');
+    option.value = index;
+    option.textContent = person.nick+' — '+person.position;
+    select.append(option);
+  });
+
+  if (!select.options.length) {
+    const option = document.createElement('option');
+    option.value = '';
+    option.textContent = 'Нет сотрудников';
+    select.append(option);
+  }
+}
+
+function saveRank() {
+  if (!['chief','admin'].includes(role)) {
+    alert('Назначать должности может только администрация.');
+    return;
+  }
+
+  const index = Number(document.getElementById('rankPerson').value);
+  const value = document.getElementById('rankValue').value.trim();
+
+  if (!value || !staff[index]) {
+    alert('Выберите сотрудника и укажите должность.');
+    return;
+  }
+
+  const old = staff[index].position;
+  staff[index].position = value;
+  saveAll();
+  renderStaff();
+  renderRanks();
+  document.getElementById('rankValue').value = '';
+  logAction('Изменена должность',staff[index].nick+': '+old+' → '+value);
+}
+
+function renderLogs() {
+  const host = document.getElementById('auditList');
+  const overview = document.getElementById('overviewLogs');
+  if (!host || !overview) return;
+
+  host.innerHTML = '';
+  overview.innerHTML = '';
+
+  logs.forEach(item => {
+    const row = document.createElement('div');
+    row.className = 'activity';
+    const text = document.createElement('div');
+    const title = document.createElement('b');
+    title.textContent = item.title;
+    const detail = document.createElement('p');
+    detail.textContent = item.detail+' · '+item.time;
+    text.append(title,detail);
+    row.append(text);
+    host.append(row);
+  });
+
+  logs.slice(0,5).forEach(item => {
+    const row = document.createElement('div');
+    row.className = 'activity';
+    row.textContent = item.title+' — '+item.detail;
+    overview.append(row);
+  });
+
+  if (!logs.length) {
+    host.textContent = 'Записей пока нет.';
+    overview.textContent = 'Действий пока нет.';
+  }
+}
+
+renderLogs();
+</script>
+</body>
+</html>
