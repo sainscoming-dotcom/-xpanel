@@ -5,40 +5,66 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>DEVIL Tools</title>
 <style>
-:root{--site-primary:#7657f6;--site-secondary:#20213a;--site-background:#0e1020;--site-on-primary:#fff;--site-on-secondary:#f5f4ff;--site-on-background:#f4f3ff;--panel:#171a30;--panel2:#1d2039;--muted:#a4a8c5;--line:#303452;--green:#4fd1a1;--amber:#f2bf68;--red:#f17b8b}
+:root{
+--site-primary:#7657f6;
+--site-secondary:#20213a;
+--site-background:#0e1020;
+--site-on-primary:#ffffff;
+--site-on-secondary:#f5f4ff;
+--site-on-background:#f4f3ff;
+--panel:#171a30;
+--panel2:#1d2039;
+--muted:#a4a8c5;
+--line:#303452;
+--green:#4fd1a1;
+--amber:#f2bf68;
+--red:#f17b8b
+}
 *{box-sizing:border-box}
-body{margin:0;background:var(--site-background);color:var(--site-on-background);font-family:Inter,system-ui,sans-serif}
+body{
+margin:0;
+background:var(--site-background);
+color:var(--site-on-background);
+font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif
+}
 button,input,select{font:inherit}
-button{cursor:pointer}
-.app{min-height:100vh}
-.top{height:72px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 32px;background:#121429}
-.brand{display:flex;align-items:center;gap:12px;font-weight:850}
-.logo{width:38px;height:38px;border-radius:12px;background:linear-gradient(140deg,#7657f6,#a18aff);display:grid;place-items:center;font-weight:900}
-.brand small{display:block;color:var(--muted);font-size:10px;letter-spacing:2px}
-.top-right{display:flex;gap:12px;color:var(--muted);font-size:13px}
+.app{min-height:100vh;background:var(--site-background);overflow:hidden}
+.top{
+height:72px;
+border-bottom:1px solid var(--line);
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:0 32px;
+background:#121429
+}
+.brand{display:flex;align-items:center;gap:12px;font-weight:850;letter-spacing:.7px}
+.logo{
+width:38px;height:38px;border-radius:12px;
+background:linear-gradient(140deg,var(--site-primary),#a18aff);
+display:grid;place-items:center;font-weight:900;color:white;
+box-shadow:0 8px 28px #7657f644
+}
+.brand small{display:block;color:var(--muted);font-size:10px;letter-spacing:2px;margin-top:2px}
+.top-right{display:flex;align-items:center;gap:12px;color:var(--muted);font-size:13px}
 .pill{border:1px solid var(--line);border-radius:999px;padding:7px 12px}
 .layout{display:grid;grid-template-columns:245px 1fr;min-height:calc(100vh - 72px)}
 aside{background:#121429;border-right:1px solid var(--line);padding:24px 16px}
-.nav-label{font-size:10px;color:#777d9f;font-weight:800;letter-spacing:1.7px;padding:12px}
-.nav{display:flex;gap:12px;padding:12px;border-radius:11px;color:#b7bad2;cursor:pointer;margin:3px 0;font-size:14px}
+.nav-label{font-size:10px;color:#777d9f;font-weight:800;letter-spacing:1.7px;padding:12px 12px 8px}
+.nav{display:flex;align-items:center;gap:12px;padding:12px;border-radius:11px;color:#b7bad2;cursor:pointer;margin:3px 0;font-size:14px}
 .nav.active,.nav:hover{background:#292448;color:white}
-.nav.active{box-shadow:inset 3px 0 #7657f6}
+.nav.active{box-shadow:inset 3px 0 var(--site-primary)}
 .nav .ico{width:20px;text-align:center}
-.side-foot{margin-top:45px;padding:14px;border:1px solid var(--line);border-radius:13px;color:var(--muted);font-size:11px;line-height:1.6}
 .main{padding:32px;max-width:1450px;width:100%;margin:auto}
 .eyebrow{color:#a99aff;text-transform:uppercase;font-size:11px;letter-spacing:2px;font-weight:800}
-.heading{font-size:30px;font-weight:850;margin:8px 0 6px}
+.heading{font-size:30px;font-weight:850;margin:8px 0 6px;letter-spacing:-.8px}
 .sub{color:var(--muted);font-size:14px}
 .headrow{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:26px}
-.btn{border:0;border-radius:10px;background:#7657f6;color:white;padding:11px 16px;font-weight:750}
+.btn{border:0;border-radius:10px;background:var(--site-primary);color:white;padding:11px 16px;font-weight:750;cursor:pointer}
 .btn.secondary{background:#292d4b;border:1px solid #3a3f63}
-.btn.danger{background:#7d3045}
-.btn.success{background:#176b53}
-.btn:hover{filter:brightness(1.15)}
+.btn:hover{filter:brightness(1.12)}
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:22px}
 .stat,.card{background:var(--panel);border:1px solid var(--line);border-radius:15px;padding:19px}
-.stat{cursor:pointer}
-.stat:hover{border-color:#7657f6}
 .stat-top{display:flex;justify-content:space-between;color:var(--muted);font-size:12px}
 .stat-num{font-size:29px;font-weight:850;margin-top:13px}
 .stat-note{font-size:11px;color:var(--green);margin-top:4px}
@@ -48,277 +74,43 @@ aside{background:#121429;border-right:1px solid var(--line);padding:24px 16px}
 table{width:100%;border-collapse:collapse;text-align:left;min-width:500px}
 th{font-size:10px;color:#858ba9;text-transform:uppercase;letter-spacing:1px;padding:11px 9px;border-bottom:1px solid var(--line)}
 td{padding:14px 9px;border-bottom:1px solid #282b46;font-size:12px;color:#d8d9eb}
+tr:last-child td{border:0}
 .user{display:flex;align-items:center;gap:9px;font-weight:700}
 .avatar{width:30px;height:30px;border-radius:9px;background:#34305a;color:#c7bbff;display:grid;place-items:center;font-size:11px}
 .tag{font-size:10px;padding:5px 8px;border-radius:6px;background:#2d2850;color:#c6baff;display:inline-block}
 .tag.green{background:#173b37;color:#70e0b8}
 .tag.amber{background:#44351e;color:#f4cb7b}
-.tag.red{background:#4b2635;color:#ff9aaa}
-.activity{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid #282b46;align-items:center}
-.dot{width:8px;height:8px;border-radius:50%;background:#7657f6;flex:none}
-.activity b{font-size:12px}
-.activity p{margin:4px 0;color:var(--muted);font-size:11px}
-.activity time{margin-left:auto;color:#7f85a4;font-size:10px}
 .section{display:none}
 .section.show{display:block}
-.toolbar{display:flex;gap:10px;margin-bottom:15px;flex-wrap:wrap}
-.toolbar input,.toolbar select,.field input,.field select{background:#11142a;border:1px solid var(--line);border-radius:9px;color:white;padding:11px 12px;outline:none}
+.toolbar{display:flex;gap:10px;margin-bottom:15px}
+.toolbar input,.field input,.field select{background:#11142a;border:1px solid var(--line);border-radius:9px;color:white;padding:11px 12px;outline:none}
 .toolbar input{width:min(340px,100%)}
 .role-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
 .role-card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px}
 .role-card h3{margin:0 0 7px;font-size:14px}
 .role-card p{margin:0 0 14px;color:var(--muted);font-size:11px}
-.perm{display:flex;justify-content:space-between;padding:9px 0;border-top:1px solid #2b2e49;font-size:11px}
-.on{color:var(--green)}
-.off{color:#747b99}
-.login{min-height:calc(100vh - 72px);display:grid;place-items:center;padding:25px}
-.loginbox{width:min(430px,100%);background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:30px}
-.loginbox h1{font-size:25px;margin:10px 0}
-.loginbox p{color:var(--muted);font-size:13px;line-height:1.6}
 .field{display:grid;gap:7px;margin:16px 0}
 .field label{font-size:11px;color:#aeb2cd;font-weight:700}
 .field input,.field select{width:100%}
-.hint{font-size:10px;color:#858ba9;line-height:1.5;margin-top:12px}
-.notice{border:1px solid #65512b;background:#302817;color:#f0cd84;border-radius:10px;padding:12px;font-size:11px;margin-top:15px}
+.login{min-height:calc(100vh - 72px);display:grid;place-items:center;padding:25px}
+.loginbox{width:min(430px,100%);background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:30px;box-shadow:0 25px 90px #0005}
+.loginbox h1{font-size:25px;margin:10px 0}
+.loginbox p{color:var(--muted);font-size:13px;line-height:1.6}
 .hidden{display:none!important}
-.faction-overlay{position:fixed;inset:0;z-index:50;background:#080a18ed;display:none;place-items:center;padding:20px}
-.faction-box{width:min(760px,100%);max-height:90vh;overflow:auto;background:#171a30;border:1px solid #3b3e60;border-radius:20px;padding:26px}
-.faction-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:18px 0}
-.faction-choice{background:#20233e;border:1px solid #373b5d;border-radius:12px;padding:15px;color:#fff;text-align:left}
-.faction-choice:hover{border-color:#9b86ff;background:#29264b}
-.faction-choice b{display:block;font-size:14px}
-.faction-choice small{display:block;color:#a4a8c5;margin-top:5px}
-.subunit-row{display:flex;justify-content:space-between;align-items:center;padding:12px;border-bottom:1px solid #303452;font-size:12px}
-@media(max-width:900px){.layout{grid-template-columns:1fr}aside{display:none}.stats{grid-template-columns:repeat(2,1fr)}.grid2{grid-template-columns:1fr}.role-grid{grid-template-columns:repeat(2,1fr)}.main{padding:22px}}
-@media(max-width:560px){.stats{grid-template-columns:1fr 1fr;gap:8px}.role-grid{grid-template-columns:1fr}.main{padding:18px}.heading{font-size:25px}.faction-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:900px){
+.layout{grid-template-columns:1fr}
+aside{display:none}
+.stats{grid-template-columns:repeat(2,1fr)}
+.grid2{grid-template-columns:1fr}
+.role-grid{grid-template-columns:repeat(2,1fr)}
+.main{padding:22px}
+.top{padding:0 18px}
+}
+@media(max-width:560px){
+.stats{grid-template-columns:1fr 1fr;gap:8px}
+.role-grid{grid-template-columns:1fr}
+.main{padding:18px}
+.heading{font-size:25px}
+}
 </style>
 </head>
-<body>
-<div class="app">
-<header class="top">
- <div class="brand"><div class="logo">D</div><div>DEVIL <span style="color:#a99aff">TOOLS</span><small>STAFF CONTROL SYSTEM</small></div></div>
- <div class="top-right"><span class="pill">● Система управления составом</span><span id="topUser">Гостевой доступ</span></div>
-</header>
-
-<div id="loginView" class="login">
- <div class="loginbox">
-  <div class="eyebrow">Закрытая платформа</div>
-  <h1>Вход в систему</h1>
-  <p>Выберите категорию доступа и введите специальный код.</p>
-  <div class="field"><label>ТИП ДОСТУПА</label><select id="accessType"><option value="admin">Администрация</option><option value="leader">Лидер / заместитель</option></select></div>
-  <div class="field"><label>СПЕЦИАЛЬНЫЙ КОД</label><input id="accessCode" type="password" placeholder="Введите код доступа"></div>
-  <button class="btn" style="width:100%" onclick="login()">Войти в DEVIL Tools →</button>
-  <div class="notice">Демонстрационный макет. Для настоящей авторизации нужна серверная проверка.</div>
-  <div class="hint">Тестовые коды: ADMIN-DEMO · CHIEF-DEMO · LEADER-DEMO</div>
-  <div id="loginError" style="color:#ff929e;font-size:12px;margin-top:10px"></div>
- </div>
-</div>
-
-<div id="appView" class="layout hidden">
-<aside>
- <div class="nav-label">РАБОЧЕЕ ПРОСТРАНСТВО</div>
- <div class="nav active" data-page="overview" onclick="go('overview',this)">▦ Обзор</div>
- <div class="nav" data-page="staff" onclick="go('staff',this)">♙ Состав</div>
- <div class="nav" data-page="positions" onclick="go('positions',this)">▤ Должности</div>
- <div class="nav" data-page="permissions" onclick="go('permissions',this)">◈ Разрешения</div>
- <div class="nav" data-page="organizations" onclick="go('organizations',this)">⌂ Организации</div>
- <div class="nav-label" style="margin-top:18px">КАДРОВЫЙ ОТДЕЛ</div>
- <div class="nav" data-page="applications" onclick="go('applications',this)">✉ Заявки</div>
- <div class="nav" data-page="ranks" onclick="go('ranks',this)">⇧ Управление рангами</div>
- <div class="nav" data-page="audit" onclick="go('audit',this)">◷ Журнал действий</div>
- <div class="nav-label" style="margin-top:18px">АККАУНТ</div>
- <div class="nav" onclick="logout()">⇥ Выйти из системы</div>
- <div class="side-foot">DEVIL MANAGEMENT<br>Внутренняя система проекта<br><span style="color:#a99aff">Версия 2.0</span></div>
-</aside>
-
-<main class="main">
-<section id="overview" class="section show">
- <div class="headrow"><div><div class="eyebrow">Панель управления</div><div class="heading">Добро пожаловать!</div><div class="sub">Общая информация о составе проекта.</div></div><button class="btn" onclick="go('staff')">＋ Управление составом</button></div>
- <div class="stats">
-  <div class="stat" onclick="go('staff')"><div class="stat-top">Всего сотрудников</div><div class="stat-num" id="statStaff">0</div><div class="stat-note">● Все подразделения</div></div>
-  <div class="stat" onclick="go('staff')"><div class="stat-top">Администрация</div><div class="stat-num" id="statAdmins">0</div><div class="stat-note">Основной состав</div></div>
-  <div class="stat" onclick="go('staff')"><div class="stat-top">Лидерский состав</div><div class="stat-num" id="statLeaders">0</div><div class="stat-note">Лидеры и заместители</div></div>
-  <div class="stat" onclick="go('organizations')"><div class="stat-top">Организации</div><div class="stat-num" id="statOrgs">12</div><div class="stat-note">Подключённые структуры</div></div>
- </div>
- <div class="grid2"><div class="card"><div class="card-title">Последние сотрудники</div><div id="recentStaff"></div></div><div class="card"><div class="card-title">Журнал активности</div><div id="recentLogs"></div></div></div>
-</section>
-
-<section id="staff" class="section">
- <div class="headrow"><div><div class="eyebrow">Персонал проекта</div><div class="heading">Состав</div><div class="sub">Управление сотрудниками выбранной фракции.</div></div><button class="btn" onclick="addStaff()">＋ Добавить сотрудника</button></div>
- <div class="toolbar"><input id="searchStaff" placeholder="Поиск по никнейму..." oninput="renderStaff()"><select id="filterStatus" onchange="renderStaff()"><option value="all">Все статусы</option><option>Активен</option><option>Исключён</option></select></div>
- <div class="card table-wrap"><table><thead><tr><th>Никнейм</th><th>Должность</th><th>Подразделение</th><th>Статус</th><th>Действия</th></tr></thead><tbody id="staffRows"></tbody></table></div>
-</section>
-
-<section id="positions" class="section">
- <div class="eyebrow">Структура проекта</div><div class="heading">Должности</div><div class="sub" style="margin-bottom:20px">Иерархия DEVIL Tools.</div>
- <div class="role-grid" id="positionCards"></div>
-</section>
-
-<section id="permissions" class="section">
- <div class="eyebrow">Контроль доступа</div><div class="heading">Разрешения</div><div class="sub" style="margin-bottom:20px">Доступ зависит от роли пользователя.</div>
- <div class="role-grid"><div class="role-card"><h3>Главная администрация</h3><p>Полное управление системой</p><div class="perm"><span>Управление сотрудниками</span><b class="on">✓</b></div><div class="perm"><span>Исключение сотрудников</span><b class="on">✓</b></div><div class="perm"><span>Управление должностями</span><b class="on">✓</b></div></div><div class="role-card"><h3>Администрация</h3><p>Рабочий доступ администратора</p><div class="perm"><span>Просмотр состава</span><b class="on">✓</b></div><div class="perm"><span>Исключение сотрудников</span><b class="on">✓</b></div></div><div class="role-card"><h3>Лидер организации</h3><p>Доступ к выбранной фракции</p><div class="perm"><span>Управление своим составом</span><b class="on">✓</b></div><div class="perm"><span>Управление чужими составами</span><b class="off">—</b></div></div></div>
-</section>
-
-<section id="organizations" class="section">
- <div class="eyebrow">Подразделения проекта</div><div class="heading" id="orgHeading">Организации</div><div class="sub" style="margin-bottom:20px">Управление фракциями и подразделениями.</div>
- <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px"><button class="btn" onclick="createSubunit()">＋ Создать подразделение</button><button class="btn secondary" onclick="pickFaction()">Сменить фракцию</button></div>
- <div class="card"><div class="card-title">Подразделения</div><div id="subunitList"></div></div>
-</section>
-
-<section id="applications" class="section">
- <div class="eyebrow">Кадровый отдел</div><div class="heading">Заявки</div>
- <div class="card" style="margin:18px 0"><div class="card-title">Подать заявку</div><div class="field"><label>НИКНЕЙМ</label><input id="appNick" placeholder="Name_Surname"></div><div class="field"><label>ЖЕЛАЕМАЯ ДОЛЖНОСТЬ</label><input id="appPosition" placeholder="Должность"></div><div class="field"><label>КОММЕНТАРИЙ</label><input id="appComment" placeholder="Комментарий"></div><button class="btn" onclick="sendApplication()">Отправить заявку</button></div>
- <div class="card"><div class="card-title">Список заявок</div><div id="applicationList"></div></div>
-</section>
-
-<section id="ranks" class="section">
- <div class="eyebrow">Кадровый отдел</div><div class="heading">Управление рангами</div>
- <div class="card" style="margin-top:18px"><div class="field"><label>СОТРУДНИК</label><select id="rankPerson"></select></div><div class="field"><label>НОВАЯ ДОЛЖНОСТЬ / РАНГ</label><input id="rankValue" placeholder="Например, 5 ранг"></div><button class="btn" onclick="saveRank()">Сохранить должность</button></div>
-</section>
-
-<section id="audit" class="section">
- <div class="eyebrow">Контроль системы</div><div class="heading">Журнал действий</div><div class="card" style="margin-top:18px"><div id="auditList"></div></div>
-</section>
-</main>
-</div>
-</div>
-
-<div id="factionPicker" class="faction-overlay"><div class="faction-box"><div class="eyebrow">DEVIL Tools · управление</div><div class="heading">Выберите фракцию</div><div class="sub">Выберите организацию для входа.</div><div id="factionChoices" class="faction-grid"></div><button class="btn secondary" onclick="cancelFactionPick()">Отмена</button></div></div>
-
-<script>
-const factions=[
-['Государственные организации','Воинская часть','Военная организация'],
-['Государственные организации','ППС','Патрульно-постовая служба'],
-['Государственные организации','ДПС','Дорожно-патрульная служба'],
-['Государственные организации','ЕСС','Единая служба спасения'],
-['Государственные организации','ФСИН','Служба исполнения наказаний'],
-['Государственные организации','Правительство области','Органы управления'],
-['Государственные организации','ФСБ','Федеральная служба безопасности'],
-['Отдельная организация','Телерадиокомпания','Новости и эфиры'],
-['Криминальные организации','Русская мафия','Криминальная организация'],
-['Криминальные организации','Кавказская мафия','Криминальная организация'],
-['Криминальные организации','Скинхеды','Уличная группировка'],
-['Криминальные организации','Байкеры','Байкерская группировка']
-];
-const $=id=>document.getElementById(id);
-let role='',activeFaction='',staff=[],logs=[],applications=[],subunits={};
-const load=(k,d)=>{try{return JSON.parse(localStorage.getItem(k))??d}catch{return d}};
-const save=(k,v)=>localStorage.setItem(k,JSON.stringify(v));
-staff=load('devilToolsStaff',[]);
-logs=load('devilToolsLogs',[]);
-applications=load('devilToolsApplications',[]);
-subunits=load('devilToolsSubunits',{});
-function log(title,detail){logs.unshift({title,detail,at:new Date().toLocaleString('ru-RU')});save('devilToolsLogs',logs);renderLogs()}
-function login(){
- const type=$('accessType').value,code=$('accessCode').value.trim();
- if(type==='admin'&&!['ADMIN-DEMO','CHIEF-DEMO'].includes(code)){return $('loginError').textContent='Неверный код доступа'}
- if(type==='leader'&&code!=='LEADER-DEMO'){return $('loginError').textContent='Неверный код доступа'}
- role=code==='CHIEF-DEMO'?'chief':type;
- pickFaction();
-}
-function pickFaction(){
- const host=$('factionChoices');host.innerHTML='';let group='';
- const list=role==='leader'?factions:factions;
- list.forEach(([category,name,desc])=>{
-  if(group!==category){group=category;const h=document.createElement('div');h.style.cssText='grid-column:1/-1;color:#a99aff;font-size:11px;font-weight:800;padding:12px 2px';h.textContent=category;host.append(h)}
-  const b=document.createElement('button');b.className='faction-choice';const title=document.createElement('b'),small=document.createElement('small');title.textContent=name;small.textContent=desc;b.append(title,small);b.onclick=()=>enterFaction(name);host.append(b);
- });
- if(role!=='leader'){const b=document.createElement('button');b.className='faction-choice';b.innerHTML='<b>Администрация</b><small>Администраторы и руководство</small>';b.onclick=()=>enterFaction('Администрация');host.append(b)}
- $('factionPicker').style.display='grid';
-}
-function cancelFactionPick(){$('factionPicker').style.display='none';$('loginView').classList.remove('hidden')}
-function enterFaction(name){
- activeFaction=name;$('factionPicker').style.display='none';$('loginView').classList.add('hidden');$('appView').classList.remove('hidden');
- $('topUser').textContent=(role==='chief'?'Главный администратор':role==='admin'?'Администратор':'Лидер')+' · '+name;
- $('permissions').style.display=role==='chief'?'':'none';$('positions').style.display=role==='chief'?'':'none';
- $('orgHeading').textContent=name;renderAll();go('overview');
-}
-function logout(){role='';activeFaction='';$('appView').classList.add('hidden');$('loginView').classList.remove('hidden');$('accessCode').value='';$('topUser').textContent='Гостевой доступ'}
-function go(id,el){document.querySelectorAll('.section').forEach(x=>x.classList.remove('show'));$(id).classList.add('show');document.querySelectorAll('.nav[data-page]').forEach(x=>x.classList.remove('active'));(el||document.querySelector('[data-page="'+id+'"]'))?.classList.add('active');renderAll()}
-function renderStaff(){
- const host=$('staffRows');host.innerHTML='';const q=$('searchStaff').value.toLowerCase(),status=$('filterStatus').value;
- staff.forEach((s,i)=>{
-  if(!String(s.unit).startsWith(activeFaction)||!s.nick.toLowerCase().includes(q)||(status!=='all'&&s.status!==status))return;
-  const tr=document.createElement('tr');
-  [s.nick,s.position,s.unit].forEach((v,j)=>{const td=document.createElement('td');if(j===0){const u=document.createElement('div');u.className='user';const a=document.createElement('span');a.className='avatar';a.textContent=s.nick.slice(0,2).toUpperCase();u.append(a,document.createTextNode(v));td.append(u)}else td.textContent=v;tr.append(td)});
-  const st=document.createElement('td'),tag=document.createElement('span');tag.className='tag '+(s.status==='Активен'?'green':'red');tag.textContent=s.status;st.append(tag);tr.append(st);
-  const actions=document.createElement('td');
-  if(role!=='leader'){
-   const toggle=document.createElement('button');toggle.className='btn '+(s.status==='Активен'?'danger':'success');toggle.textContent=s.status==='Активен'?'Исключить':'Восстановить';toggle.style.padding='6px 9px';toggle.onclick=()=>{s.status=s.status==='Активен'?'Исключён':'Активен';save('devilToolsStaff',staff);log(s.status==='Активен'?'Сотрудник восстановлен':'Сотрудник исключён',s.nick);renderAll()};
-   const del=document.createElement('button');del.className='btn secondary';del.textContent='Удалить';del.style.cssText='padding:6px 9px;margin-left:5px';del.onclick=()=>{if(confirm('Полностью удалить '+s.nick+'?')){staff.splice(i,1);save('devilToolsStaff',staff);log('Сотрудник удалён',s.nick);renderAll()}};
-   actions.append(toggle,del);
-  }else{const edit=document.createElement('button');edit.className='btn secondary';edit.textContent='Изменить';edit.onclick=()=>{const p=prompt('Новая должность',s.position);if(p){s.position=p;save('devilToolsStaff',staff);renderAll()}};actions.append(edit)}
-  tr.append(actions);host.append(tr);
- });
- updateStats();
-}
-function addStaff(){
- const nick=prompt('Игровой никнейм:');if(!nick?.trim())return;
- if(staff.some(s=>s.nick.toLowerCase()===nick.trim().toLowerCase()))return alert('Такой сотрудник уже существует');
- const units=['Основной состав',...(subunits[activeFaction]||[])];
- const unit=activeFaction+' / '+(prompt('Подразделение:\n'+units.join('\n'),'Основной состав')||'Основной состав');
- const position=prompt('Должность:','Сотрудник')||'Сотрудник';
- staff.push({nick:nick.trim(),position,unit,status:'Активен'});
- save('devilToolsStaff',staff);log('Добавлен сотрудник',nick+' · '+activeFaction);renderAll();
-}
-function updateStats(){
- $('statStaff').textContent=staff.length;
- $('statAdmins').textContent=staff.filter(s=>s.unit.startsWith('Администрация')).length;
- $('statLeaders').textContent=staff.filter(s=>!s.unit.startsWith('Администрация')).length;
- $('statOrgs').textContent=factions.length;
-}
-function createSubunit(){
- const name=prompt('Название подразделения:');if(!name?.trim())return;
- subunits[activeFaction]=subunits[activeFaction]||[];
- if(subunits[activeFaction].some(x=>x.toLowerCase()===name.trim().toLowerCase()))return alert('Такое подразделение уже есть');
- subunits[activeFaction].push(name.trim());save('devilToolsSubunits',subunits);log('Создано подразделение',name);renderSubunits();
-}
-function renderSubunits(){
- const host=$('subunitList');host.innerHTML='';
- (subunits[activeFaction]||[]).forEach((name,i)=>{
-  const row=document.createElement('div');row.className='subunit-row';const label=document.createElement('span');label.textContent=name;row.append(label);
-  const btn=document.createElement('button');btn.className='btn secondary';btn.textContent='Удалить';btn.onclick=()=>{if(confirm('Удалить подразделение?')){subunits[activeFaction].splice(i,1);save('devilToolsSubunits',subunits);renderSubunits();log('Удалено подразделение',name)}};row.append(btn);host.append(row);
- });
- if(!host.children.length)host.textContent='Подразделений пока нет.';
-}
-function sendApplication(){
- const nick=$('appNick').value.trim(),position=$('appPosition').value.trim();if(!nick||!position)return alert('Заполните никнейм и должность');
- applications.unshift({nick,position,comment:$('appComment').value.trim(),faction:activeFaction,status:'На рассмотрении',at:new Date().toLocaleString('ru-RU')});
- save('devilToolsApplications',applications);$('appNick').value='';$('appPosition').value='';$('appComment').value='';log('Подана заявка',nick);renderApplications();
-}
-function renderApplications(){
- const host=$('applicationList');host.innerHTML='';
- applications.filter(a=>a.faction===activeFaction).forEach((a)=>{
-  const row=document.createElement('div');row.className='activity';const body=document.createElement('div');const b=document.createElement('b'),p=document.createElement('p');b.textContent=a.nick+' — '+a.position;p.textContent=a.comment+' · '+a.status;body.append(b,p);row.append(body);
-  if(['chief','admin'].includes(role)&&a.status==='На рассмотрении'){['Одобрить','Отклонить'].forEach((t,i)=>{const btn=document.createElement('button');btn.className='btn '+(i?'secondary':'');btn.textContent=t;btn.onclick=()=>{a.status=i?'Отклонена':'Одобрена';save('devilToolsApplications',applications);log('Заявка обработана',a.nick+' · '+a.status);renderApplications()};row.append(btn)})}
-  host.append(row);
- });
- if(!host.children.length)host.textContent='Заявок пока нет.';
-}
-function renderRanks(){
- const select=$('rankPerson');select.innerHTML='';
- staff.forEach((s,i)=>{if(!s.unit.startsWith(activeFaction))return;const o=document.createElement('option');o.value=i;o.textContent=s.nick+' — '+s.position;select.append(o)});
- if(!select.options.length){const o=document.createElement('option');o.value='';o.textContent='Нет сотрудников';select.append(o)}
-}
-function saveRank(){
- if(!['chief','admin'].includes(role))return alert('Недостаточно прав');
- const s=staff[Number($('rankPerson').value)],value=$('rankValue').value.trim();if(!s||!value)return alert('Выберите сотрудника и укажите должность');
- const old=s.position;s.position=value;save('devilToolsStaff',staff);log('Изменена должность',s.nick+': '+old+' → '+value);$('rankValue').value='';renderAll();
-}
-function renderLogs(){
- const host=$('auditList');host.innerHTML='';
- logs.forEach(x=>{const row=document.createElement('div');row.className='activity';const body=document.createElement('div'),b=document.createElement('b'),p=document.createElement('p'),t=document.createElement('time');b.textContent=x.title;p.textContent=x.detail;t.textContent=x.at;body.append(b,p);row.append(body,t);host.append(row)});
- $('recentLogs').innerHTML='';logs.slice(0,5).forEach(x=>{const p=document.createElement('p');p.textContent=x.title+' — '+x.detail;$('recentLogs').append(p)});
-}
-function renderPositions(){
- const names=['Владелец проекта','Заместитель владельца','Главный администратор','Заместитель главного администратора','Следящий за администрацией','Куратор администрации','Следящий за организациями','Куратор организаций','Лидер организации','Заместитель лидера','Администратор'];
- $('positionCards').innerHTML='';names.forEach(n=>{const c=document.createElement('div');c.className='role-card';const h=document.createElement('h3');h.textContent=n;c.append(h);$('positionCards').append(c)});
-}
-function renderRecent(){
- const host=$('recentStaff');host.innerHTML='';staff.slice(-5).reverse().forEach(s=>{const p=document.createElement('p');p.textContent=s.nick+' — '+s.position;host.append(p)});if(!host.children.length)host.textContent='Сотрудников пока нет.';
-}
-function renderAll(){renderStaff();renderSubunits();renderApplications();renderRanks();renderLogs();renderPositions();renderRecent()}
-renderAll();
-</script>
-</body>
-</html>
