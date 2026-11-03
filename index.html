@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arizona No Name | Главная</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+            position: relative;
+            background-color: #121212;
+            color: #fff;
+            overflow-x: hidden;
+            background-image: url('img/fon.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(18, 18, 18, 0.8), rgba(52, 152, 219, 0.2));
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .nav-wrapper {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+            padding: 20px 0;
+        }
+
+        .nav-wrapper nav {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .nav-wrapper nav a {
+            font-size: 18px;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 10px 20px;
+            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-wrapper nav a:hover {
+            color: #3498db;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .content {
+            text-align: center;
+            margin: 40px 0;
+            padding: 30px;
+            border-radius: 20px;
+            background: rgba(18, 18, 18, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 1s ease-out;
+        }
+
+        .text h1 {
+            font-size: 48px;
+            color: #fff;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+        }
+
+        .text p {
+            font-size: 20px;
+            line-height: 1.8;
+            color: #ccc;
+            max-width: 800px;
+            margin: 0 auto;
+            font-weight: 300;
+        }
+
+        .image {
+            margin: 30px 0;
+        }
+
+        .image img {
+            width: 250px;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            transition: transform 0.5s ease;
+        }
+
+        .image img:hover {
+            transform: scale(1.05) rotate(2deg);
+        }
+
+        .buttons {
+            display: flex;
+            gap: 30px;
+            margin-top: 50px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .button, .button-two {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px 20px;
+            font-size: 18px;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            color: #fff;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            transition: all 0.4s ease-in-out;
+            box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3);
+            width: 280px;
+            height: 60px;
+            text-align: center;
+        }
+
+        .button:hover, .button-two:hover {
+            background: linear-gradient(135deg, #1d4ed8, #1e40af);
+            transform: scale(1.05) translateY(-5px);
+            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.5);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        .button i, .button-two i {
+            font-size: 36px;
+            margin-right: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .button:hover i, .button-two:hover i {
+            transform: rotate(360deg);
+        }
+
+        .button-text {
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+
+        .button-platform {
+            font-size: 14px;
+            opacity: 0.9;
+            margin-top: 5px;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 60px 0;
+        }
+
+        .feature {
+            background: rgba(18, 18, 18, 0.7);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .feature:hover {
+            transform: translateY(-10px);
+            background: rgba(30, 30, 30, 0.8);
+        }
+
+        .feature i {
+            font-size: 40px;
+            color: #3498db;
+            margin-bottom: 20px;
+        }
+
+        .feature h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+
+        .feature p {
+            color: #ccc;
+            line-height: 1.6;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            padding: 30px;
+            background: rgba(18, 18, 18, 0.8);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        footer p {
+            color: #ccc;
+            margin: 10px 0;
+        }
+
+        .year-badge {
+            display: inline-block;
+            background: linear-gradient(45deg, #3498db, #9b59b6);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+            margin-left: 10px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            .buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .text h1 {
+                font-size: 36px;
+            }
+            
+            .text p {
+                font-size: 18px;
+            }
+            
+            .nav-wrapper nav {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .button, .button-two {
+                width: 250px;
+                height: 90px;
+                padding: 20px;
+            }
+            
+            .button i, .button-two i {
+                font-size: 32px;
+                margin-right: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="nav-wrapper">
+            <nav>
+                <a href="https://vk.com/" target="_blank"><i class="fab fa-vk"></i> Мы в VK</a>
+                <a href="https://t.me/" target="_blank"><i class="fab fa-telegram"></i> Телеграм</a>
+                <a href="info.html"><i class="fa fa-info-circle"></i> Информация</a>
+            </nav>
+        </div>
+
+        <div class="content">
+            <div class="text">
+                <h1>ARIZONA NO NAME</h1>
+                <p>Добро пожаловать в будущее игровых развлечений! Обновленный лаунчер 2025 года предлагает революционный опыт погружения в игровые миры с улучшенной графикой и повышенной производительностью.</p>
+            </div>
+            <div class="image">
+                <img src="img/logo.png" alt="Arizona No Name Logo">
+            </div>
+        </div>
+
+        <div class="features">
+            <div class="feature">
+                <i class="fas fa-bolt"></i>
+                <h3>Мгновенный запуск</h3>
+                <p>Новая технология быстрой загрузки сокращает время ожидания на 70%</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-shield-alt"></i>
+                <h3>Защита нового поколения</h3>
+                <p>Усовершенствованная система безопасности с ДДОС-защитой от угроз</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-sync-alt"></i>
+                <h3>Умные обновления</h3>
+                <p>Технология предсказания обновлений загружает контент до выхода патчей</p>
+            </div>
+        </div>
+
+        <div class="buttons">
+            <a href="game/" class="button">
+                <i class="fa-solid fa-laptop"></i>
+                <div class="button-text">
+                    <span>Скачать лаунчер</span>
+                    <span class="button-platform">[PC]</span>
+                </div>
+            </a>
+            <a href="game/" class="button-two">
+                <i class="fa-solid fa-mobile-screen-button"></i>
+                <div class="button-text">
+                    <span>Скачать лаунчер</span>
+                    <span class="button-platform">[Mobile]</span>
+                </div>
+            </a>
+        </div>
+
+        <footer>
+            <p>© 2025 Arizona No Name. Все права защищены.</p>
+            <p>Контакты: support@arizonanoname.com</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css';
+            document.head.appendChild(link);
+            const yearElements = document.querySelectorAll('.year-badge');
+            const currentYear = new Date().getFullYear();
+            if (currentYear > 2025) {
+                yearElements.forEach(el => {
+                    if (el.textContent === '2025') {
+                        el.textContent = currentYear;
+                    }
+                });
+                document.querySelector('footer p').innerHTML = `© ${currentYear} Arizona No Name. Все права защищены. <span class="year-badge">Версия ${currentYear}</span>`;
+            }
+        });
+    </script>
+
+</body>
+</html>
