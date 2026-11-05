@@ -1,2 +1,0 @@
-# -xpanel
-XPanel Arizona RP
