@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CRUZ Store — Amazing Online</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0614;--panel:#150d26;--line:#2a1b4a;--pur:#8b2cff;--pur2:#b46bff;--cy:#3de1ff;--tx:#f2ecff;--mut:#a595c8;--hd:rgba(10,6,20,.82);--c2:#1c1034;--glow:rgba(139,44,255,.25);color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{background:var(--bg);color:var(--tx);font:400 16px/1.55 Manrope,system-ui,sans-serif;overflow-x:hidden}
+h1,h2,h3{font-family:Unbounded,system-ui,sans-serif;line-height:1.15}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1120px;margin:0 auto;padding:0 18px}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--hd);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+header .wrap{display:flex;align-items:center;gap:18px;height:60px}
+.logo{font-family:Unbounded;font-weight:700;font-size:15px}.logo b{color:var(--pur2)}
+nav{display:flex;gap:16px;margin-left:auto;font-size:14px;color:var(--mut);overflow-x:auto;white-space:nowrap}
+nav a:hover{color:var(--tx)}
+.cart{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:6px 12px;font-size:14px;font-weight:600;white-space:nowrap}
+.hero{position:relative;min-height:600px;display:grid;align-items:center;overflow:hidden}
+#gl{position:absolute;inset:0;width:100%;height:100%}
+.hero .wrap{position:relative;pointer-events:none}
+.hero .txt{max-width:560px;padding:56px 0}
+.badge{display:inline-block;border:1px solid var(--pur);color:var(--pur2);border-radius:99px;padding:4px 14px;font-size:13px;margin-bottom:18px;background:rgba(139,44,255,.12)}
+h1{font-size:clamp(32px,6vw,56px)}
+h1 span{background:linear-gradient(90deg,var(--pur2),var(--cy));-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{color:var(--mut);margin:18px 0 26px;max-width:46ch}
+.btns{display:flex;gap:12px;flex-wrap:wrap;pointer-events:auto}
+.btn{background:var(--pur);color:#fff;border:0;border-radius:12px;padding:13px 22px;font:700 15px Manrope;cursor:pointer;box-shadow:0 0 28px rgba(139,44,255,.5);transition:transform .15s}
+.btn:hover{transform:translateY(-2px)}.btn:focus-visible,.tab:focus-visible{outline:2px solid var(--cy);outline-offset:2px}
+.btn.ghost{background:transparent;border:1px solid var(--line);box-shadow:none}
+.stats{display:flex;gap:28px;margin-top:34px;color:var(--mut);font-size:14px}.stats b{display:block;color:var(--tx);font:700 20px Unbounded}
+section{padding:56px 0}
+h2{font-size:clamp(24px,4vw,34px);margin-bottom:8px}.sub{color:var(--mut);margin-bottom:26px}
+.tabs{display:flex;gap:8px;overflow-x:auto;margin-bottom:22px;padding-bottom:4px}
+.tab{background:var(--panel);border:1px solid var(--line);color:var(--mut);border-radius:99px;padding:8px 16px;font:600 14px Manrope;cursor:pointer;white-space:nowrap}
+.tab.on{background:var(--pur);color:#fff;border-color:var(--pur)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px;perspective:900px}
+.card{background:linear-gradient(160deg,var(--c2),var(--panel));border:1px solid var(--line);border-radius:18px;padding:22px;transform-style:preserve-3d;transition:transform .12s,border-color .2s;position:relative}
+.card:hover{border-color:var(--pur)}
+.card.hit::after{content:"Хит";position:absolute;top:14px;right:14px;background:var(--pur);border-radius:8px;padding:2px 10px;font-size:12px;font-weight:800}
+.ico{width:48px;height:48px;border-radius:14px;background:rgba(139,44,255,.2);display:grid;place-items:center;font-size:24px;margin-bottom:14px;transform:translateZ(30px)}
+.card h3{font-size:16px;margin-bottom:6px;transform:translateZ(20px)}.card p{color:var(--mut);font-size:14px;min-height:62px}
+.price{display:flex;align-items:baseline;gap:8px;margin:14px 0}.price b{font:700 22px Unbounded}.price s{color:var(--mut);font-size:13px}
+.card .btn{width:100%;padding:10px}
+.box{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:24px;padding:32px}
+.cube{width:150px;height:150px;margin:auto;position:relative;transform-style:preserve-3d;animation:spin 9s linear infinite}
+.cube i{position:absolute;inset:0;border:2px solid var(--pur2);background:rgba(139,44,255,.18);display:grid;place-items:center;font-size:48px;font-style:normal}
+.cube i:nth-child(1){transform:translateZ(75px)}.cube i:nth-child(2){transform:rotateY(180deg) translateZ(75px)}
+.cube i:nth-child(3){transform:rotateY(90deg) translateZ(75px)}.cube i:nth-child(4){transform:rotateY(-90deg) translateZ(75px)}
+.cube i:nth-child(5){transform:rotateX(90deg) translateZ(75px)}.cube i:nth-child(6){transform:rotateX(-90deg) translateZ(75px)}
+@keyframes spin{to{transform:rotateX(-20deg) rotateY(360deg)}}
+.cubewrap{perspective:700px;height:200px;display:grid;place-items:center}
+#res{margin-top:14px;min-height:26px;font-weight:800;color:var(--cy)}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+.step{border-left:3px solid var(--pur);padding:4px 0 4px 16px}.step h3{font-size:16px;margin-bottom:4px}.step p{color:var(--mut);font-size:14px}
+details{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px 18px;margin-bottom:10px}
+summary{cursor:pointer;font-weight:700}details p{color:var(--mut);margin-top:8px;font-size:15px}
+footer{border-top:1px solid var(--line);padding:28px 0 40px;color:var(--mut);font-size:13px}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translate(-50%,120px);background:var(--pur);padding:10px 20px;border-radius:12px;font-weight:700;transition:transform .25s;z-index:30}
+.toast.on{transform:translate(-50%,0)}
+.admbar{display:flex;gap:12px;align-items:center;flex-wrap:wrap;padding:10px 18px;background:var(--c2);border-bottom:1px solid var(--pur);font-size:14px}.admbar span{color:var(--mut);flex:1}.admbar .btn{padding:8px 14px;font-size:14px}
+.card.adm{display:flex;flex-direction:column;gap:8px}.in{width:100%;background:var(--bg);border:1px solid var(--line);border-radius:10px;color:var(--tx);padding:8px 10px;font:600 14px Manrope}textarea.in{resize:vertical;font-weight:400}.in.ic{width:70px}.row{display:flex;gap:8px}.np{color:var(--mut);font-size:14px}.card.adm label{font-size:14px;color:var(--mut)}
+[data-t=rose]{--bg:#fff4fb;--panel:#fff;--line:#f0cfe8;--pur:#b43cf0;--pur2:#d04ac0;--cy:#ff5fa8;--tx:#3a1840;--mut:#8a6a92;--hd:rgba(255,244,251,.85);--c2:#fde6f5;--glow:rgba(180,60,240,.18);color-scheme:light}
+[data-t=mocha]{--bg:#140d0a;--panel:#201510;--line:#4a3226;--pur:#c07a3c;--pur2:#e0a56a;--cy:#f5d2a0;--tx:#f7ebdd;--mut:#b49a85;--hd:rgba(20,13,10,.85);--c2:#2c1c14;--glow:rgba(192,122,60,.25)}
+.themes{display:flex;gap:6px;margin-left:8px}.themes button{width:22px;height:22px;border-radius:50%;border:2px solid var(--line);cursor:pointer;transition:transform .2s}.themes button:hover{transform:scale(1.25)}.themes button.on{border-color:var(--tx)}
+.themes [data-th=violet]{background:linear-gradient(135deg,#8b2cff,#3de1ff)}.themes [data-th=rose]{background:linear-gradient(135deg,#ff9fd6,#b43cf0)}.themes [data-th=mocha]{background:linear-gradient(135deg,#c07a3c,#f5d2a0)}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(60% 60% at 75% 40%,var(--glow),transparent);animation:pulse 6s ease-in-out infinite}
+@keyframes pulse{50%{opacity:.35}}@keyframes gs{50%{background-position:100% 100%}}@keyframes fl{50%{transform:translate(-50%,-58%)}}@keyframes bob{50%{transform:translateY(-12px)}}@keyframes rise{from{opacity:0;transform:translateY(26px) scale(.95)}}@keyframes shine{60%,100%{left:140%}}@keyframes mq{to{transform:translateX(-50%)}}
+.hero h1 span{background-size:200% 100%;animation:gs 6s ease-in-out infinite}
+.btn{position:relative;overflow:hidden}.btn::after{content:"";position:absolute;top:0;left:-80%;width:50%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.35),transparent);transform:skewX(-20deg);animation:shine 3.5s infinite}
+.grid .card{animation:rise .6s cubic-bezier(.2,.7,.2,1) backwards}.grid .card:nth-child(2){animation-delay:.08s}.grid .card:nth-child(3){animation-delay:.16s}.grid .card:nth-child(4){animation-delay:.24s}.grid .card:nth-child(5){animation-delay:.32s}.grid .card:nth-child(6){animation-delay:.4s}
+.art{height:130px;margin:-22px -22px 16px;border-radius:18px 18px 0 0;position:relative;overflow:hidden;background:linear-gradient(135deg,hsl(var(--h) 75% 42%),hsl(calc(var(--h) + 55) 85% 60%));background-size:200% 200%;animation:gs 8s ease-in-out infinite;transform:translateZ(10px)}
+.art span{position:absolute;left:50%;top:50%;font-size:56px;transform:translate(-50%,-50%);animation:fl 3.5s ease-in-out infinite;filter:drop-shadow(0 8px 12px rgba(0,0,0,.35))}
+.art i{position:absolute;border-radius:50%;background:rgba(255,255,255,.22);width:70px;height:70px;left:-14px;top:-20px;animation:bob 5s ease-in-out infinite}.art i+i{width:46px;height:46px;left:auto;right:18px;top:auto;bottom:-10px;animation-duration:4s}
+[data-t=mocha] .art{filter:sepia(.75) saturate(1.3)}
+.chips{position:absolute;inset:0;pointer-events:none}.chip{position:absolute;padding:10px 16px;border-radius:14px;background:color-mix(in srgb,var(--panel) 70%,transparent);border:1px solid var(--line);backdrop-filter:blur(10px);font-weight:700;font-size:14px;animation:bob 5s ease-in-out infinite}.c1{right:8%;top:22%}.c2{right:30%;bottom:16%;animation-delay:-2s}.c3{right:4%;bottom:30%;animation-delay:-3.5s}
+.mq{overflow:hidden;border-block:1px solid var(--line);background:var(--panel);padding:12px 0;white-space:nowrap}.mqt{display:inline-block;animation:mq 30s linear infinite;color:var(--mut);font-weight:600}
+.rv{opacity:0;transform:translateY(28px);transition:opacity .8s,transform .8s}.rv.in{opacity:1;transform:none}
+.toast{color:#fff}
+@media(prefers-reduced-motion:reduce){.rv{opacity:1!important;transform:none!important}*{animation-duration:.01ms!important;animation-iteration-count:1!important}}
+@media(max-width:720px){.chips{display:none}nav{display:none}.box{grid-template-columns:1fr;padding:22px}.hero{min-height:560px}.hero .txt{padding-top:30px}}
+@media(prefers-reduced-motion:reduce){.cube{animation:none}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+<a class="logo" href="#top">CRUZ<b>/</b>STORE</a>
+<nav><a href="#catalog">Магазин</a><a href="#box">Random Box</a><a href="#how">Как купить</a><a href="#faq">FAQ</a></nav>
+<div class="themes" role="group" aria-label="Тема"><button data-th="violet" title="Фиолетовая" aria-label="Фиолетовая тема"></button><button data-th="rose" title="Светло-розовая" aria-label="Светло-розовая тема"></button><button data-th="mocha" title="Коричневая" aria-label="Коричневая тема"></button></div>
+<div class="cart">🛒 Корзина <span id="cnt">0</span></div>
+</div></header>
+
+<div id="adminbar"></div>
+<div class="hero" id="top">
+<canvas id="gl"></canvas>
+<div class="chips"><div class="chip c1">🛡️ AHK Госс</div><div class="chip c2">⚡ Авто-выдача</div><div class="chip c3">💬 Поддержка 24/7</div></div>
+<div class="wrap"><div class="txt">
+<span class="badge">⚡ Amazing Online Store</span>
+<h1>Игровые решения <span>нового поколения</span></h1>
+<p class="lead">Премиальные AHK-скрипты, приватные сборки, подсказки и услуги для тех, кто играет на шаг впереди.</p>
+<div class="btns"><a class="btn" href="#catalog">Перейти в магазин</a><a class="btn ghost" href="#how">Как это работает</a></div>
+<div class="stats"><div><b>12</b>серверов</div><div><b>24/7</b>поддержка</div><div><b>Авто</b>выдача</div></div>
+</div></div>
+</div>
+
+<div class="mq"><div class="mqt"><span>⚡ Автоматическая выдача &nbsp;•&nbsp; 🛡️ Защита данных &nbsp;•&nbsp; 💬 Поддержка 24/7 &nbsp;•&nbsp; 🎁 Random Box &nbsp;•&nbsp; 🔄 Регулярные обновления &nbsp;•&nbsp; </span><span>⚡ Автоматическая выдача &nbsp;•&nbsp; 🛡️ Защита данных &nbsp;•&nbsp; 💬 Поддержка 24/7 &nbsp;•&nbsp; 🎁 Random Box &nbsp;•&nbsp; 🔄 Регулярные обновления &nbsp;•&nbsp; </span></div></div>
+<section id="catalog"><div class="wrap">
+<h2>Каталог</h2><p class="sub">Выберите категорию и добавьте товар в корзину. Названия и цены — примеры, замените на свои.</p>
+<div class="tabs" role="tablist" id="tabs"></div>
+<div class="grid" id="grid"></div>
+</div></section>
+
+<section id="box"><div class="wrap"><div class="box">
+<div class="cubewrap"><div class="cube"><i>🎁</i><i>⚡</i><i>🎁</i><i>⚡</i><i>🎁</i><i>⚡</i></div></div>
+<div>
+<h2>Random Box</h2><p class="sub">Откройте коробку и получите случайный приз. Шансы указаны открыто.</p>
+<button class="btn" id="open">Открыть за 50 ₽</button>
+<div id="res" aria-live="polite"></div>
+</div>
+</div></div></section>
+
+<section id="how"><div class="wrap">
+<h2>Как это работает</h2><p class="sub">Выбор, оплата, доступ в личном кабинете.</p>
+<div class="steps">
+<div class="step"><h3>1. Выберите товар</h3><p>Добавьте в корзину и выберите срок: месяц или навсегда.</p></div>
+<div class="step"><h3>2. Оплатите</h3><p>С баланса или удобным платёжным способом.</p></div>
+<div class="step"><h3>3. Получите доступ</h3><p>Покупка сразу появляется в личном кабинете.</p></div>
+</div></div></section>
+
+<section id="faq"><div class="wrap">
+<h2>FAQ</h2><p class="sub">Ответы на частые вопросы.</p>
+<details><summary>Как получить товар после оплаты?</summary><p>Он автоматически появится в разделе «Мои покупки».</p></details>
+<details><summary>Можно ли обновить месячную версию до «Навсегда»?</summary><p>Да, нужно доплатить разницу — она указана в карточке товара.</p></details>
+<details><summary>Что делать, если возникла проблема?</summary><p>Напишите в поддержку и укажите номер заказа.</p></details>
+</div></section>
+
+<footer><div class="wrap">Независимый фан-проект. Не связан с AMAZING.GG и не является официальным ресурсом Amazing Online.</div></footer>
+<div class="toast" id="toast"></div>
+
+<script id="data" type="application/json"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+let adm=false,cur='all';const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const seed=[
+{c:'ahk',i:'🛡️',t:'AHK Госс',d:'Помощник для работы в гос. организациях: биндеры, отыгровки, быстрые команды.',p:null,o:null,h:1},
+{c:'ahk',i:'🟥',t:'AHK Крим',d:'Набор макросов и подсказок для криминальных фракций.',p:null,o:null,h:1},
+{c:'build',i:'🎮',t:'Игровая сборка',d:'Готовая сборка клиента: интерфейс, текстуры, настройки.',p:null,o:null},
+{c:'tips',i:'💡',t:'Подсказки по заработку',d:'Пошаговый гайд: где и как зарабатывать на вашем сервере.',p:null,o:null},
+{c:'svc',i:'🧰',t:'Услуга на заказ',d:'Индивидуальная настройка или скрипт под вашу задачу.',p:null,o:null},
+{c:'bundle',i:'📦',t:'Бандл «Всё сразу»',d:'AHK + сборка + подсказки со скидкой.',p:null,o:null,h:1}
+];
+const _t=document.getElementById('data').textContent.trim();let items=_t?JSON.parse(_t):seed;const H={ahk:270,build:200,tips:45,svc:320,bundle:150};
+const cats=[['all','Все'],['ahk','AHK'],['build','Сборки'],['tips','Подсказки'],['svc','Услуги'],['bundle','Бандлы']];
+const $=s=>document.querySelector(s);let n=0;
+function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(toast.k);toast.k=setTimeout(()=>t.classList.remove('on'),1800)}
+function render(c){cur=c;if(adm)return renderAdm(c);$('#grid').innerHTML=items.filter(x=>c=='all'||x.c==c).map((x,k)=>`<div class="card ${x.h?'hit':''}"><div class="art" style="--h:${H[x.c]||270}"><span>${esc(x.i)}</span><i></i><i></i></div><h3>${esc(x.t)}</h3><p>${esc(x.d)}</p>${x.p?`<div class="price"><b>${x.p} ₽</b>${x.o?`<s>${x.o} ₽</s>`:''}</div>`:'<div class="price"><span class="np">Цена по запросу</span></div>'}<button class="btn" data-t="${esc(x.t)}">В корзину</button></div>`).join('');
+document.querySelectorAll('.card').forEach(e=>{e.onmousemove=ev=>{const r=e.getBoundingClientRect(),x=(ev.clientX-r.left)/r.width-.5,y=(ev.clientY-r.top)/r.height-.5;e.style.transform=`rotateY(${x*14}deg) rotateX(${-y*14}deg)`};e.onmouseleave=()=>e.style.transform=''});
+document.querySelectorAll('.card .btn').forEach(b=>b.onclick=()=>{$('#cnt').textContent=++n;toast('Добавлено: '+b.dataset.t)})}
+$('#tabs').innerHTML=cats.map((c,i)=>`<button class="tab ${i?'':'on'}" data-c="${c[0]}">${c[1]}</button>`).join('');
+document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));b.classList.add('on');render(b.dataset.c)});
+render('all');initAdmin();
+async function initAdmin(){try{const u=await claude.use('user');if(!u||!(u.isOwner()||u.canEdit()))return;const a=await claude.use('artifact');if(!a)return;window._art=a;adm=true;bar();render(cur)}catch(e){}}
+function bar(){$('#adminbar').innerHTML='<div class="admbar"><b>Режим админа</b><span>Меняйте названия и цены прямо в карточках</span><button class="btn" id="add">＋ Товар</button><button class="btn" id="save">Сохранить на сайт</button></div>';$('#add').onclick=()=>{items.push({c:cur=='all'?'ahk':cur,i:'🎮',t:'Новый товар',d:'Описание',p:null,o:null});render(cur)};$('#save').onclick=save}
+function renderAdm(c){const g=$('#grid');g.innerHTML=items.map((x,k)=>(c=='all'||x.c==c)?`<div class="card adm" data-k="${k}"><input data-f="i" value="${esc(x.i)}" class="in ic" maxlength="4"><input data-f="t" value="${esc(x.t)}" class="in"><textarea data-f="d" class="in" rows="3">${esc(x.d)}</textarea><div class="row"><input data-f="p" type="number" min="0" placeholder="Цена ₽" value="${x.p??''}" class="in"><input data-f="o" type="number" min="0" placeholder="Старая ₽" value="${x.o??''}" class="in"></div><select data-f="c" class="in">${cats.slice(1).map(a=>`<option value="${a[0]}" ${a[0]==x.c?'selected':''}>${a[1]}</option>`).join('')}</select><label><input type="checkbox" data-f="h" ${x.h?'checked':''}> Хит</label><button class="btn ghost" data-del="${k}">Удалить</button></div>`:'').join('');
+g.oninput=g.onchange=e=>{const el=e.target,f=el.dataset.f;if(!f)return;const k=el.closest('.card').dataset.k;let v=el.type=='checkbox'?(el.checked?1:0):el.value;if(f=='p'||f=='o')v=v===''?null:+v;items[k][f]=v};
+g.onclick=e=>{const d=e.target.dataset.del;if(d!==undefined&&confirm('Удалить товар?')){items.splice(+d,1);render(cur)}}}
+async function save(){const b=$('#save');b.disabled=true;toast('Сохраняю…');const d=document.documentElement.cloneNode(true);d.querySelector('#data').textContent=JSON.stringify(items).replace(/</g,'\\u003c');['#grid','#tabs','#adminbar','#res'].forEach(s=>d.querySelector(s).innerHTML='');d.querySelector('#cnt').textContent='0';d.removeAttribute('data-t');const t=d.querySelector('#toast');t.className='toast';t.textContent='';try{await window._art.publish('<!DOCTYPE html>'+d.outerHTML)}catch(e){b.disabled=false;toast(e&&e.code=='conflict'?'Страница изменилась, обновите':'Не удалось сохранить')}}
+function setTh(k){document.documentElement.dataset.t=k;try{localStorage.setItem('th',k)}catch(e){}if(window._th)window._th(k);document.querySelectorAll('.themes button').forEach(b=>b.classList.toggle('on',b.dataset.th==k))}
+document.querySelectorAll('.themes button').forEach(b=>b.onclick=()=>setTh(b.dataset.th));
+let k0='violet';try{k0=localStorage.getItem('th')||'violet'}catch(e){}setTh(k0);
+try{const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.1});document.querySelectorAll('section .wrap>*,.mq').forEach(e=>{e.classList.add('rv');io.observe(e)})}catch(e){}
+const prizes=['+25 ₽ на баланс','+100 ₽ на баланс','Скидка 10%','Скидка 30%','AHK на 1 день','Premium на 3 дня'];
+$('#open').onclick=()=>{const r=$('#res');r.textContent='Открываем коробку…';setTimeout(()=>r.textContent='🎉 Вы выиграли: '+prizes[Math.floor(Math.random()*prizes.length)]+' (демо)',900)};
+
+try{
+const cv=$('#gl'),ren=new THREE.WebGLRenderer({canvas:cv,alpha:true,antialias:true});
+ren.setPixelRatio(Math.min(devicePixelRatio,2));
+const sc=new THREE.Scene(),cam=new THREE.PerspectiveCamera(45,1,.1,100);cam.position.z=7;
+sc.add(new THREE.AmbientLight(0x6a3aa8,.8));
+const l1=new THREE.PointLight(0x8b2cff,2.4,40);l1.position.set(4,3,5);sc.add(l1);
+const l2=new THREE.PointLight(0x3de1ff,1.6,40);l2.position.set(-5,-2,4);sc.add(l2);
+const g=new THREE.Group();sc.add(g);
+const core=new THREE.Mesh(new THREE.IcosahedronGeometry(1.5,0),new THREE.MeshStandardMaterial({color:0x7a22e8,metalness:.7,roughness:.25,flatShading:true}));g.add(core);
+const wire=new THREE.Mesh(new THREE.IcosahedronGeometry(2.1,1),new THREE.MeshBasicMaterial({color:0xb46bff,wireframe:true,transparent:true,opacity:.35}));g.add(wire);
+const ring=new THREE.Mesh(new THREE.TorusGeometry(2.8,.025,8,120),new THREE.MeshBasicMaterial({color:0x3de1ff}));ring.rotation.x=1.2;g.add(ring);
+const ring2=ring.clone();ring2.rotation.set(.4,1,0);ring2.scale.setScalar(1.15);g.add(ring2);
+const orb=new THREE.Group();for(let i=0;i<8;i++){const m=new THREE.Mesh(new THREE.OctahedronGeometry(.16),new THREE.MeshStandardMaterial({color:0xb46bff,metalness:.6,roughness:.3,flatShading:true})),a=i/8*6.283;m.position.set(Math.cos(a)*3.3,Math.sin(a*2)*.8,Math.sin(a)*3.3);orb.add(m)}g.add(orb);
+const pg=new THREE.BufferGeometry(),N=300,pos=new Float32Array(N*3);
+for(let i=0;i<N*3;i++)pos[i]=(Math.random()-.5)*20;
+pg.setAttribute('position',new THREE.BufferAttribute(pos,3));
+const pts=new THREE.Points(pg,new THREE.PointsMaterial({color:0xb46bff,size:.04}));sc.add(pts);
+const T={violet:[0x7a22e8,0xb46bff,0x3de1ff,0xb46bff,0x8b2cff,0x3de1ff],rose:[0xd04ac0,0xff8fd0,0xb43cf0,0xff8fd0,0xff5fa8,0xb43cf0],mocha:[0xc07a3c,0xe0a56a,0xf5d2a0,0xe0a56a,0xffa050,0xf5d2a0]};
+window._th=k=>{const c=T[k]||T.violet;core.material.color.setHex(c[0]);wire.material.color.setHex(c[1]);ring.material.color.setHex(c[2]);pts.material.color.setHex(c[3]);l1.color.setHex(c[4]);l2.color.setHex(c[5]);orb.children.forEach(m=>m.material.color.setHex(c[1]))};window._th(document.documentElement.dataset.t||'violet');
+let mx=0,my=0;addEventListener('pointermove',e=>{mx=e.clientX/innerWidth-.5;my=e.clientY/innerHeight-.5});
+const rm=matchMedia('(prefers-reduced-motion:reduce)').matches;
+function size(){const w=cv.clientWidth,h=cv.clientHeight;ren.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix();g.position.x=w>720?2.6:0;g.position.y=w>720?0:1.6;g.scale.setScalar(w>720?1:.7)}
+size();addEventListener('resize',size);
+(function loop(t){requestAnimationFrame(loop);const s=rm?0:t*.001;
+core.rotation.set(s*.4,s*.6,0);wire.rotation.set(-s*.2,s*.3,0);ring.rotation.z=s*.5;orb.rotation.y=s*.35;ring2.rotation.z=-s*.4;pts.rotation.y=s*.03;
+g.rotation.y+=(mx*.8-g.rotation.y)*.05;g.rotation.x+=(my*.5-g.rotation.x)*.05;
+ren.render(sc,cam)})(0);
+}catch(e){console.warn('WebGL unavailable',e)}
+</script>
+</body>
+</html>
