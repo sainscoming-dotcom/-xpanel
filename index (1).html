@@ -3,141 +3,136 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Портфолио сайтов</title>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8C%8C%3C/text%3E%3C/svg%3E">
+<title>Arizona Black — игровой сервер</title>
 <style>
-:root{--bg:#04050d;--fg:#eef0ff;--mut:#9aa0c8;--a:#8b5cf6;--b:#22d3ee;--card:rgba(20,22,48,.55);--line:rgba(139,92,246,.35);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-html{scroll-behavior:smooth;background:var(--bg)}
-*{box-sizing:border-box;margin:0}
-body{background:radial-gradient(ellipse at 50% 0,#17124a 0,var(--bg) 62%) fixed;color:var(--fg);font-family:Inter,system-ui,Segoe UI,Arial,sans-serif;overflow-x:hidden}
-#stars{position:fixed;inset:0;width:100%;height:100%;z-index:0}
-.w{position:relative;z-index:1}
-nav{display:flex;justify-content:space-between;align-items:center;padding:18px 6vw}
-.logo{font-weight:800;letter-spacing:.25em;background:linear-gradient(90deg,var(--a),var(--b));-webkit-background-clip:text;background-clip:text;color:transparent}
-.hero{min-height:82vh;display:grid;place-items:center;text-align:center;padding:30px 6vw}
-.orb{width:150px;height:150px;margin:0 auto 34px;perspective:800px}
-.cube{width:100%;height:100%;position:relative;transform-style:preserve-3d;animation:spin 16s linear infinite}
-.cube i{position:absolute;inset:0;border:1px solid var(--b);background:rgba(139,92,246,.12);box-shadow:inset 0 0 30px rgba(34,211,238,.35),0 0 24px rgba(139,92,246,.45)}
-.cube i:nth-child(1){transform:translateZ(75px)}.cube i:nth-child(2){transform:rotateY(90deg) translateZ(75px)}.cube i:nth-child(3){transform:rotateY(180deg) translateZ(75px)}.cube i:nth-child(4){transform:rotateY(-90deg) translateZ(75px)}.cube i:nth-child(5){transform:rotateX(90deg) translateZ(75px)}.cube i:nth-child(6){transform:rotateX(-90deg) translateZ(75px)}
-@keyframes spin{to{transform:rotateX(360deg) rotateY(360deg)}}
-h1{font-size:clamp(40px,8vw,90px);line-height:1.05;font-weight:800}
-h1 span{background:linear-gradient(90deg,var(--a),var(--b),var(--a));background-size:200%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:flow 6s linear infinite}
-@keyframes flow{to{background-position:200%}}
-.hero p{color:var(--mut);max-width:540px;margin:18px auto 28px;font-size:18px}
-.btn{display:inline-block;border:0;cursor:pointer;padding:13px 30px;border-radius:99px;background:linear-gradient(90deg,var(--a),var(--b));color:#fff;text-decoration:none;font:600 15px inherit;font-family:inherit;box-shadow:0 0 28px rgba(139,92,246,.55);transition:.3s}
-.btn:hover{transform:translateY(-3px) scale(1.04);box-shadow:0 0 48px rgba(34,211,238,.65)}
-.btn.g{background:rgba(255,255,255,.08);box-shadow:none;border:1px solid var(--line)}
-section{padding:60px 6vw 90px}
-h2{text-align:center;font-size:clamp(28px,4vw,44px);margin-bottom:22px}
-#filters{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:38px}
-.chip{padding:8px 18px;border-radius:99px;border:1px solid var(--line);background:transparent;color:var(--mut);cursor:pointer;font:inherit;font-size:14px;transition:.25s}
-.chip.on,.chip:hover{color:#fff;background:rgba(139,92,246,.35)}
-#grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:28px;max-width:1200px;margin:auto;perspective:1100px}
-.card{position:relative;background:var(--card);border:1px solid var(--line);border-radius:22px;overflow:hidden;backdrop-filter:blur(12px);transform-style:preserve-3d;transition:transform .15s,box-shadow .3s;animation:up .7s both}
-@keyframes up{from{opacity:0;translate:0 40px}}
-.card:hover{box-shadow:0 0 44px rgba(139,92,246,.5)}
-.pv{height:160px;display:grid;place-items:center;font-size:64px;position:relative;overflow:hidden}
-.pv b{transform:translateZ(50px);filter:drop-shadow(0 8px 14px rgba(0,0,0,.5));animation:fl 4s ease-in-out infinite}
-@keyframes fl{50%{translate:0 -8px}}
-.bd{padding:22px;transform:translateZ(20px)}
-.tag{font-size:12px;color:var(--b);letter-spacing:.12em;text-transform:uppercase}
-.card h3{margin:6px 0 8px;font-size:22px}
-.card p{color:var(--mut);font-size:14px;line-height:1.5;margin-bottom:16px;min-height:42px}
-.card .btn{padding:9px 20px;font-size:14px}
-.del{position:absolute;top:10px;right:10px;width:32px;height:32px;border-radius:50%;border:0;background:rgba(0,0,0,.6);color:#fff;cursor:pointer;z-index:3}
-.empty{text-align:center;color:var(--mut);grid-column:1/-1}
-#adm{position:fixed;display:flex;gap:10px;right:18px;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:20}
-#dl{background:#0c0e26}
-#modal{position:fixed;inset:0;z-index:30;display:none;place-items:center;background:rgba(2,3,10,.75);backdrop-filter:blur(6px);padding:20px}
-#modal.open{display:grid}
-.box{width:min(440px,100%);background:#0c0e26;border:1px solid var(--line);border-radius:22px;padding:26px;display:grid;gap:12px;box-shadow:0 0 60px rgba(139,92,246,.4)}
-.box input,.box textarea{width:100%;padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.05);color:#fff;font:inherit}
-.box textarea{min-height:80px;resize:vertical}
-.row{display:flex;gap:10px;justify-content:flex-end}
-footer{text-align:center;padding:34px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
-@media(prefers-reduced-motion:reduce){*{animation:none!important}}
+:root{--bg:#0a0a0c;--surface:#131317;--surface2:#1b1b21;--text:#f2f2f4;--muted:#9a9aa5;--accent:#e5202e;--accent2:#ff5a4d;--line:#2a2a32;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.6}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:rgba(10,10,12,.88);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;height:60px}
+.logo{font-weight:800;letter-spacing:.06em;text-transform:uppercase}
+.logo b{color:var(--accent)}
+nav{display:flex;gap:20px;font-size:14px;color:var(--muted)}
+nav a:hover{color:var(--text)}
+.btn{display:inline-block;background:var(--accent);color:#fff;font-weight:700;padding:12px 26px;border-radius:10px;border:0;cursor:pointer;font-size:15px;transition:.2s}
+.btn:hover{background:var(--accent2);transform:translateY(-1px)}
+.btn.ghost{background:transparent;border:1px solid var(--line);color:var(--text)}
+.btn.ghost:hover{border-color:var(--accent);background:transparent}
+.hero{padding:90px 0 70px;text-align:center;background:radial-gradient(ellipse at 50% 0%,rgba(229,32,46,.25),transparent 60%)}
+.hero h1{font-size:clamp(38px,8vw,76px);margin:0 0 12px;line-height:1.05;text-transform:uppercase;letter-spacing:.02em}
+.hero h1 span{color:var(--accent)}
+.hero p{color:var(--muted);max-width:560px;margin:0 auto 28px;font-size:17px}
+.actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.online{display:inline-flex;align-items:center;gap:10px;margin-top:34px;padding:10px 18px;background:var(--surface);border:1px solid var(--line);border-radius:999px;font-size:14px}
+.dot{width:9px;height:9px;border-radius:50%;background:#2ecc71;box-shadow:0 0 10px #2ecc71}
+section{padding:64px 0}
+h2{font-size:clamp(26px,5vw,38px);margin:0 0 8px;text-transform:uppercase;letter-spacing:.03em}
+h2::after{content:"";display:block;width:48px;height:3px;background:var(--accent);margin-top:10px;border-radius:2px}
+.lead{color:var(--muted);margin:14px 0 30px;max-width:640px}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px;transition:.2s}
+.card:hover{border-color:var(--accent);transform:translateY(-3px)}
+.card h3{margin:0 0 6px;font-size:18px}
+.card p{margin:0;color:var(--muted);font-size:14.5px}
+.ico{font-size:26px;margin-bottom:10px}
+.news .date{font-size:12px;color:var(--accent2);text-transform:uppercase;letter-spacing:.08em}
+.price{font-size:30px;font-weight:800;margin:8px 0}
+.price small{font-size:14px;color:var(--muted);font-weight:500}
+.card ul{padding-left:18px;margin:10px 0 18px;color:var(--muted);font-size:14.5px}
+.card.hot{border-color:var(--accent);background:linear-gradient(180deg,rgba(229,32,46,.12),var(--surface))}
+.dl{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.dl .card{text-align:center}
+.steps{counter-reset:s;display:grid;gap:12px;margin:0;padding:0;list-style:none}
+.steps li{counter-increment:s;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px 14px 56px;position:relative;color:var(--muted)}
+.steps li::before{content:counter(s);position:absolute;left:14px;top:50%;transform:translateY(-50%);width:28px;height:28px;border-radius:50%;background:var(--accent);color:#fff;font-weight:700;display:grid;place-items:center;font-size:14px}
+footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-size:13px;text-align:center}
+@media(max-width:720px){nav{display:none}.hero{padding:64px 0 50px}section{padding:46px 0}}
 </style>
 </head>
 <body>
-<canvas id="stars"></canvas>
-<div class="w">
-<nav><div class="logo">PORTFOLIO</div><a class="btn g" href="#work">Проекты</a></nav>
-<header class="hero"><div>
-<div class="orb"><div class="cube"><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
-<h1>Мои сайты<br>в <span>космосе</span></h1>
-<p>Коллекция моих проектов. Выбирай и заходи.</p>
-<a class="btn" href="#work">Смотреть работы</a>
+<header><div class="wrap">
+  <a class="logo" href="#top">Arizona <b>Black</b></a>
+  <nav><a href="#about">О сервере</a><a href="#news">Новости</a><a href="#donate">Донат</a><a href="#community">Сообщество</a><a href="#download">Скачать</a></nav>
+  <a class="btn" href="#download">Играть</a>
 </div></header>
-<section id="work"><h2>Проекты</h2><div id="filters"></div><div id="grid"></div></section>
-<footer>© 2026 · Все проекты мои</footer>
-</div>
 
-<div id="adm"><button id="admin" class="btn" hidden>＋ Добавить сайт</button> <button id="dl" class="btn g" hidden>⬇ Скачать index.html</button></div>
-<div id="modal"><div class="box">
-<h3>Новый сайт</h3>
-<input id="f-t" placeholder="Название">
-<input id="f-u" placeholder="Ссылка (https://...)">
-<input id="f-g" placeholder="Категория (например: Магазин)">
-<input id="f-e" placeholder="Эмодзи (например: 🚀)" maxlength="4">
-<textarea id="f-d" placeholder="Короткое описание"></textarea>
-<div class="row"><button class="btn g" id="cancel">Отмена</button><button class="btn" id="save">Опубликовать</button></div>
+<main id="top">
+<div class="hero"><div class="wrap">
+  <h1>Arizona <span>Black</span></h1>
+  <p>Тёмная сторона ролевой игры: свой путь, свои правила, живая экономика и сильное сообщество.</p>
+  <div class="actions"><a class="btn" href="#download">Играть сейчас</a><a class="btn ghost" href="#about">О сервере</a></div>
+  <div class="online"><span class="dot"></span><span>Онлайн: <b id="on">—</b> игроков</span></div>
 </div></div>
 
-<script id="data" type="application/json">[{"t":"Пример сайта","u":"https://example.com","g":"Магазин","e":"🚀","d":"Это пример карточки. Нажми «Добавить сайт», чтобы добавить свои проекты."}]</script>
+<section id="about"><div class="wrap">
+  <h2>О сервере</h2>
+  <p class="lead">Arizona Black — проект для тех, кто любит серьёзный RP. Выбери профессию, вступи в организацию или создай собственный бизнес.</p>
+  <div class="grid">
+    <div class="card"><div class="ico">🏙️</div><h3>Живой город</h3><p>Работы, бизнесы, недвижимость и транспорт для любого стиля игры.</p></div>
+    <div class="card"><div class="ico">🛡️</div><h3>Организации</h3><p>Государственные структуры, банды и мафии со своей иерархией.</p></div>
+    <div class="card"><div class="ico">💰</div><h3>Экономика</h3><p>Торговля, аукционы и заработок за счёт своих решений.</p></div>
+    <div class="card"><div class="ico">🤝</div><h3>Администрация</h3><p>Справедливые правила и быстрая поддержка игроков.</p></div>
+  </div>
+</div></section>
+
+<section id="news" style="background:var(--surface)"><div class="wrap">
+  <h2>Новости</h2>
+  <p class="lead">Обновления, события и анонсы проекта.</p>
+  <div class="grid news">
+    <div class="card"><div class="date">Дата новости</div><h3>Заголовок первой новости</h3><p>Короткое описание обновления. Замени этот текст на свой.</p></div>
+    <div class="card"><div class="date">Дата новости</div><h3>Заголовок второй новости</h3><p>Опиши событие, конкурс или изменение на сервере.</p></div>
+    <div class="card"><div class="date">Дата новости</div><h3>Заголовок третьей новости</h3><p>Здесь может быть анонс будущего обновления.</p></div>
+  </div>
+</div></section>
+
+<section id="donate"><div class="wrap">
+  <h2>Донат</h2>
+  <p class="lead">Поддержи проект и получи дополнительные возможности. Названия и цены — примерные, подставь свои.</p>
+  <div class="grid">
+    <div class="card"><h3>Старт</h3><div class="price">199 ₽ <small>/ пакет</small></div><ul><li>Игровая валюта</li><li>Стартовый набор</li></ul><a class="btn ghost" href="#community">Выбрать</a></div>
+    <div class="card hot"><h3>Стандарт</h3><div class="price">499 ₽ <small>/ пакет</small></div><ul><li>Больше валюты</li><li>Уникальный транспорт</li><li>Приоритет в очереди</li></ul><a class="btn" href="#community">Выбрать</a></div>
+    <div class="card"><h3>Максимум</h3><div class="price">999 ₽ <small>/ пакет</small></div><ul><li>Максимум валюты</li><li>Эксклюзивные предметы</li></ul><a class="btn ghost" href="#community">Выбрать</a></div>
+  </div>
+</div></section>
+
+<section id="community" style="background:var(--surface)"><div class="wrap">
+  <h2>Сообщество</h2>
+  <p class="lead">Общайся с игроками, следи за новостями и обращайся в поддержку.</p>
+  <div class="grid">
+    <a class="card" href="#" id="dc"><div class="ico">💬</div><h3>Discord</h3><p>Чат игроков, розыгрыши и анонсы.</p></a>
+    <a class="card" href="#" id="fr"><div class="ico">📚</div><h3>Форум</h3><p>Правила, заявки в организации, жалобы.</p></a>
+    <a class="card" href="#" id="tg"><div class="ico">✈️</div><h3>Telegram</h3><p>Быстрые новости проекта.</p></a>
+  </div>
+</div></section>
+
+<section id="download"><div class="wrap">
+  <h2>Скачать и играть</h2>
+  <p class="lead">Установи клиент и подключись к серверу за пару минут.</p>
+  <div class="dl">
+    <a class="card" href="#" id="dl-pc"><div class="ico">🖥️</div><h3>Windows</h3><p>Клиент для ПК</p></a>
+    <a class="card" href="#" id="dl-and"><div class="ico">📱</div><h3>Android</h3><p>Мобильная версия</p></a>
+  </div>
+  <h3 style="margin:34px 0 14px">Как начать</h3>
+  <ol class="steps">
+    <li>Скачай и установи клиент.</li>
+    <li>Запусти игру и выбери сервер Black.</li>
+    <li>Создай персонажа и придумай его историю.</li>
+  </ol>
+</div></section>
+</main>
+
+<footer><div class="wrap">© Arizona Black. Неофициальный фан-проект. Все названия принадлежат их владельцам.</div></footer>
+
 <script>
-const D=JSON.parse(document.getElementById('data').textContent);
-const $=s=>document.querySelector(s);let owner=false,flt='Все';
-function hue(s){let h=0;for(const c of s)h=(h*31+c.charCodeAt(0))%360;return h}
-function render(){
-const tags=['Все',...new Set(D.map(p=>p.g).filter(Boolean))];
-const F=$('#filters');F.innerHTML='';
-tags.forEach(t=>{const b=document.createElement('button');b.className='chip'+(t===flt?' on':'');b.textContent=t;b.onclick=()=>{flt=t;render()};F.appendChild(b)});
-const G=$('#grid');G.innerHTML='';
-const L=D.filter(p=>flt==='Все'||p.g===flt);
-if(!L.length){G.innerHTML='<p class="empty">Пока пусто</p>';return}
-L.forEach((p,i)=>{
-const h=hue(p.t),c=document.createElement('div');c.className='card';c.style.animationDelay=i*.08+'s';
-const pv=document.createElement('div');pv.className='pv';pv.style.background=`linear-gradient(135deg,hsl(${h} 70% 30%),hsl(${(h+60)%360} 70% 14%))`;
-const em=document.createElement('b');em.textContent=p.e||'🌌';pv.appendChild(em);
-const bd=document.createElement('div');bd.className='bd';
-const tg=document.createElement('div');tg.className='tag';tg.textContent=p.g||'Сайт';
-const t=document.createElement('h3');t.textContent=p.t;
-const d=document.createElement('p');d.textContent=p.d||'';
-const a=document.createElement('a');a.className='btn';a.textContent='Открыть сайт';a.href=/^https?:\/\//.test(p.u)?p.u:'#';a.target='_blank';a.rel='noopener';
-bd.append(tg,t,d,a);c.append(pv,bd);
-if(owner){const x=document.createElement('button');x.className='del';x.textContent='✕';x.title='Удалить';x.onclick=()=>{if(confirm('Удалить «'+p.t+'»?')){D.splice(D.indexOf(p),1);persist()}};c.appendChild(x)}
-c.addEventListener('mousemove',e=>{const r=c.getBoundingClientRect(),X=(e.clientX-r.left)/r.width-.5,Y=(e.clientY-r.top)/r.height-.5;c.style.transform=`rotateY(${X*18}deg) rotateX(${-Y*18}deg)`});
-c.addEventListener('mouseleave',()=>c.style.transform='');
-G.appendChild(c)})}
-function persist(){try{localStorage.setItem('pf_data',JSON.stringify(D))}catch(e){}render()}
-function build(){
-const cl=document.documentElement.cloneNode(true);
-cl.querySelector('#data').textContent=JSON.stringify(D,null,1).replace(/</g,'\\u003c');
-cl.querySelector('#grid').innerHTML='';cl.querySelector('#filters').innerHTML='';
-cl.querySelector('#modal').classList.remove('open');cl.querySelector('#admin').hidden=true;cl.querySelector('#dl').hidden=true;
-['f-t','f-u','f-g','f-e','f-d'].forEach(i=>{const e=cl.querySelector('#'+i);e.removeAttribute('value');e.textContent=''});
-return '<!DOCTYPE html>\n'+cl.outerHTML}
-function download(){const b=new Blob([build()],{type:'text/html'}),a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='index.html';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),2000)}
-$('#admin').onclick=()=>$('#modal').classList.add('open');
-$('#cancel').onclick=()=>$('#modal').classList.remove('open');
-$('#save').onclick=()=>{
-const t=$('#f-t').value.trim(),u=$('#f-u').value.trim();
-if(!t||!/^https?:\/\//.test(u)){alert('Нужны название и ссылка, начинающаяся с https://');return}
-D.unshift({t,u,g:$('#f-g').value.trim(),e:$('#f-e').value.trim(),d:$('#f-d').value.trim()});
-$('#modal').classList.remove('open');persist()};
-function admin(){if(location.hash!=='#admin')return;owner=true;
-try{const L=JSON.parse(localStorage.getItem('pf_data')||'null');if(Array.isArray(L)){D.length=0;D.push(...L)}}catch(e){}
-$('#admin').hidden=false;$('#dl').hidden=false;render()}
-$('#dl').onclick=download;
-addEventListener('hashchange',()=>location.reload());
-render();admin();
-const c=$('#stars'),x=c.getContext('2d');let W,H,S=[],mx=0,my=0;
-function size(){W=c.width=innerWidth;H=c.height=innerHeight;S=Array.from({length:Math.min(280,W/5)},()=>({x:Math.random()*W,y:Math.random()*H,z:Math.random()*2+.3,t:Math.random()*6}))}
-addEventListener('resize',size);size();
-addEventListener('mousemove',e=>{mx=e.clientX/W-.5;my=e.clientY/H-.5});
-(function loop(){x.clearRect(0,0,W,H);for(const s of S){s.t+=.02;s.y+=s.z*.15;if(s.y>H){s.y=0;s.x=Math.random()*W}
-x.globalAlpha=.4+.6*Math.abs(Math.sin(s.t));x.fillStyle=s.z>1.6?'#a5f3fc':'#fff';x.beginPath();x.arc(s.x-mx*s.z*30,s.y-my*s.z*30,s.z*.8,0,6.3);x.fill()}
-requestAnimationFrame(loop)})();
+// Настройки: замени на свои значения
+var CONFIG={online:null,links:{dc:"#",fr:"#",tg:"#","dl-pc":"#","dl-and":"#"}};
+try{
+  if(CONFIG.online!==null)document.getElementById("on").textContent=CONFIG.online;
+  for(var k in CONFIG.links){var el=document.getElementById(k);if(el)el.href=CONFIG.links[k];}
+}catch(e){}
 </script>
 </body>
 </html>
