@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>РАДАР СТАРОЇ</title>
+<meta name="description" content="Офіційна сторінка Telegram-каналу РАДАР СТАРОЇ">
+<meta name="theme-color" content="#04020b">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;700&family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+@property --a{syntax:'<angle>';initial-value:0deg;inherits:false}
+:root{--space:#04020b;--violet:#8b3dff;--magenta:#d04bff;--cyan:#5ce1ff;--text:#f4ecff;--muted:#b9a6d6}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  min-height:100vh;display:flex;align-items:center;justify-content:center;
+  padding:max(24px,env(safe-area-inset-top)) 18px max(24px,env(safe-area-inset-bottom));
+  font-family:'Manrope',system-ui,Arial,sans-serif;color:var(--text);background:var(--space);
+  overflow-x:hidden;position:relative;perspective:1200px;
+}
+/* туманності + аврора */
+.nebula{position:fixed;inset:-25%;z-index:0;pointer-events:none;
+  background:
+   radial-gradient(ellipse 45% 38% at 18% 12%,rgba(139,61,255,.5),transparent 70%),
+   radial-gradient(ellipse 40% 36% at 88% 28%,rgba(208,75,255,.32),transparent 70%),
+   radial-gradient(ellipse 55% 40% at 55% 105%,rgba(92,225,255,.2),transparent 70%);
+  animation:drift 38s ease-in-out infinite alternate}
+@keyframes drift{to{transform:translate3d(-4%,3%,0) scale(1.1) rotate(2deg)}}
+.aurora{position:fixed;left:-10%;right:-10%;top:-8%;height:45%;z-index:0;pointer-events:none;filter:blur(50px);opacity:.55;
+  background:linear-gradient(100deg,transparent 5%,rgba(92,225,255,.35) 30%,rgba(139,61,255,.45) 55%,rgba(208,75,255,.3) 75%,transparent 95%);
+  animation:wave 14s ease-in-out infinite alternate}
+@keyframes wave{from{transform:translateX(-6%) skewY(-3deg)}to{transform:translateX(6%) skewY(3deg)}}
+#stars{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+
+/* планета з кільцем */
+.planet{position:fixed;z-index:0;pointer-events:none;right:-130px;bottom:-130px;width:380px;height:380px;border-radius:50%;
+  background:radial-gradient(circle at 30% 28%,#c58bff 0,#7a2fd6 28%,#2a0d57 62%,#0a0418 100%);
+  box-shadow:inset -40px -30px 80px rgba(0,0,0,.75),0 0 90px rgba(139,61,255,.45);animation:float 12s ease-in-out infinite alternate}
+.planet::before{content:"";position:absolute;left:-30%;right:-30%;top:42%;height:16%;border-radius:50%;
+  border:3px solid rgba(220,170,255,.55);box-shadow:0 0 18px rgba(208,75,255,.55);transform:rotate(-18deg)}
+.moon{position:fixed;z-index:0;pointer-events:none;left:6%;top:9%;width:54px;height:54px;border-radius:50%;
+  background:radial-gradient(circle at 32% 30%,#e8fbff,#7cc8e6 45%,#1c3b5c);box-shadow:inset -10px -8px 18px rgba(0,0,0,.65),0 0 28px rgba(92,225,255,.4);animation:float 9s ease-in-out infinite alternate-reverse}
+@keyframes float{to{transform:translateY(-22px)}}
+
+/* карточка */
+.card{
+  position:relative;z-index:1;width:100%;max-width:450px;padding:40px 26px 26px;text-align:center;border-radius:30px;
+  background:linear-gradient(165deg,rgba(44,18,84,.6),rgba(9,4,22,.8));
+  -webkit-backdrop-filter:blur(20px) saturate(140%);backdrop-filter:blur(20px) saturate(140%);
+  box-shadow:0 35px 90px rgba(0,0,0,.65),0 0 80px rgba(139,61,255,.3);
+  transform-style:preserve-3d;transition:transform .25s ease-out;animation:appear 1.2s cubic-bezier(.2,.8,.2,1) both;
+}
+.card::before{ /* рухома райдужна рамка */
+  content:"";position:absolute;inset:0;border-radius:inherit;padding:1.5px;pointer-events:none;
+  background:conic-gradient(from var(--a),#8b3dff,#5ce1ff,#d04bff,#3a1a7a,#8b3dff);animation:turn 7s linear infinite;
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude}
+@keyframes turn{to{--a:360deg}}
+@keyframes appear{from{opacity:0;transform:translateY(30px) scale(.96)}to{opacity:1;transform:none}}
+
+.status{display:inline-flex;align-items:center;gap:8px;margin-bottom:22px;padding:6px 14px;border-radius:99px;font-size:12px;font-weight:700;letter-spacing:.08em;
+  color:#bff3ff;background:rgba(92,225,255,.1);border:1px solid rgba(92,225,255,.35)}
+.status i{width:8px;height:8px;border-radius:50%;background:#5ce1ff;box-shadow:0 0 0 0 rgba(92,225,255,.8);animation:ping 1.8s infinite}
+@keyframes ping{70%{box-shadow:0 0 0 10px rgba(92,225,255,0)}100%{box-shadow:0 0 0 0 rgba(92,225,255,0)}}
+
+/* радар */
+.radar-wrap{position:relative;width:190px;height:190px;margin:0 auto 22px}
+.ring-text{position:absolute;inset:0;width:100%;height:100%;animation:spin 30s linear infinite;overflow:visible}
+.ring-text text{font:700 10.5px 'Manrope',Arial,sans-serif;letter-spacing:4.2px;fill:rgba(216,170,255,.85)}
+.radar{position:absolute;inset:28px;border-radius:50%;border:2px solid rgba(92,225,255,.6);
+  background:radial-gradient(circle,rgba(92,225,255,.25) 0 2px,transparent 3px),
+   repeating-radial-gradient(circle,transparent 0 17px,rgba(92,225,255,.28) 17px 18px),radial-gradient(circle,#1f0c42,#06030f 75%);
+  box-shadow:0 0 30px rgba(92,225,255,.4),0 0 70px rgba(139,61,255,.5),inset 0 0 26px rgba(139,61,255,.55)}
+.radar::before{content:"";position:absolute;inset:0;border-radius:50%;
+  background:linear-gradient(rgba(92,225,255,.25),rgba(92,225,255,.25)) center/1px 100% no-repeat,linear-gradient(rgba(92,225,255,.25),rgba(92,225,255,.25)) center/100% 1px no-repeat}
+.sweep{position:absolute;inset:0;border-radius:50%;animation:spin 3.6s linear infinite;
+  background:conic-gradient(from 0deg,transparent 0 250deg,rgba(92,225,255,.55) 358deg,#c8f5ff 360deg)}
+@keyframes spin{to{transform:rotate(360deg)}}
+.blip{position:absolute;width:7px;height:7px;border-radius:50%;background:#fff;box-shadow:0 0 10px 3px var(--cyan);opacity:0;animation:blip 3.6s linear infinite}
+.b1{top:28%;left:66%;animation-delay:.2s}.b2{top:68%;left:32%;animation-delay:1.9s}.b3{top:44%;left:22%;animation-delay:2.9s}
+@keyframes blip{0%{opacity:0;transform:scale(.4)}8%{opacity:1;transform:scale(1.4)}40%{opacity:0}100%{opacity:0}}
+
+h1{font-family:'Unbounded','Arial Black',sans-serif;font-weight:700;font-size:clamp(25px,7.6vw,33px);line-height:1.2;letter-spacing:.04em;
+  background:linear-gradient(95deg,#fff 5%,#e6b8ff 40%,#8fe9ff 70%,#fff 100%);background-size:200% 100%;
+  -webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 6s linear infinite;filter:drop-shadow(0 0 18px rgba(176,92,255,.65))}
+@keyframes shine{to{background-position:-200% 0}}
+.subtitle{margin-top:14px;color:var(--muted);font-size:15px;line-height:1.7}
+.line{height:1px;width:74%;margin:24px auto;background:linear-gradient(90deg,transparent,var(--magenta),var(--cyan),transparent)}
+
+.buttons{display:flex;flex-direction:column;gap:12px}
+.btn{position:relative;display:flex;align-items:center;gap:14px;overflow:hidden;padding:14px 18px;border-radius:18px;text-align:left;text-decoration:none;color:#fff;
+  background:linear-gradient(100deg,#6a22c9,#b043f5);border:1px solid rgba(220,170,255,.6);box-shadow:0 8px 28px rgba(139,61,255,.45);transition:transform .3s,box-shadow .3s}
+.btn::after{content:"";position:absolute;top:0;left:-70%;width:45%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.35),transparent);transform:skewX(-20deg);transition:left .7s}
+.btn:hover,.btn:focus-visible{transform:translateY(-4px) scale(1.015);box-shadow:0 14px 40px rgba(176,67,245,.75)}
+.btn:hover::after,.btn:focus-visible::after{left:130%}
+.btn:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+.ico{flex:none;display:grid;place-items:center;width:44px;height:44px;border-radius:14px;background:rgba(255,255,255,.16);box-shadow:inset 0 0 0 1px rgba(255,255,255,.25)}
+.ico svg{width:22px;height:22px}
+.btn b{display:block;font-size:15px;font-weight:700;letter-spacing:.06em}
+.btn small{display:block;margin-top:2px;font-size:12.5px;color:rgba(255,255,255,.78)}
+.chat{background:linear-gradient(100deg,#3a2bb8,#2f8fd8);border-color:rgba(140,225,255,.6);box-shadow:0 8px 28px rgba(60,150,230,.4)}
+.chat:hover,.chat:focus-visible{box-shadow:0 14px 40px rgba(92,200,255,.65)}
+.owner{background:linear-gradient(100deg,rgba(35,15,66,.9),rgba(70,30,120,.9));border-color:rgba(92,225,255,.45);box-shadow:0 8px 28px rgba(92,225,255,.15)}
+.owner:hover,.owner:focus-visible{box-shadow:0 14px 40px rgba(92,225,255,.4)}
+
+.info{margin-top:26px;color:var(--muted);font-size:14px;line-height:1.8}
+footer{margin-top:20px;padding-top:14px;border-top:1px solid rgba(190,120,255,.18);color:#8a6aad;font-size:11px;letter-spacing:.05em}
+.galaxy{position:fixed;left:-240px;top:-240px;width:660px;height:660px;border-radius:50%;z-index:0;pointer-events:none;filter:blur(40px);opacity:.75;
+  background:conic-gradient(from 0deg,transparent 0,rgba(139,61,255,.45) 12%,transparent 28%,rgba(92,225,255,.3) 52%,transparent 70%,rgba(208,75,255,.4) 88%,transparent);
+  -webkit-mask:radial-gradient(circle,#000 20%,transparent 68%);mask:radial-gradient(circle,#000 20%,transparent 68%);animation:spin 100s linear infinite}
+.grid{position:fixed;left:-50%;right:-50%;bottom:0;height:40%;z-index:0;pointer-events:none;opacity:.55;transform:perspective(480px) rotateX(64deg);transform-origin:50% 100%;
+  background:linear-gradient(rgba(139,61,255,.5) 1px,transparent 1px) 0 0/64px 64px,linear-gradient(90deg,rgba(92,225,255,.4) 1px,transparent 1px) 0 0/64px 64px;
+  -webkit-mask:linear-gradient(transparent,#000 90%);mask:linear-gradient(transparent,#000 90%);animation:gridmove 3.2s linear infinite}
+@keyframes gridmove{to{background-position:0 64px,0 0}}
+.glow{position:fixed;left:0;top:0;width:560px;height:560px;margin:-280px 0 0 -280px;border-radius:50%;z-index:0;pointer-events:none;
+  background:radial-gradient(circle,rgba(150,80,255,.26),rgba(92,225,255,.07) 45%,transparent 68%);will-change:transform}
+.glare{position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .3s;
+  background:radial-gradient(420px circle at var(--mx,50%) var(--my,0%),rgba(255,255,255,.16),transparent 55%)}
+.card:hover .glare{opacity:1}
+@keyframes rise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+.card>*:not(.glare){animation:rise .9s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--i,0)*.09s + .35s)}
+@keyframes breathe{50%{box-shadow:0 10px 42px rgba(190,90,255,.85),0 0 0 4px rgba(190,90,255,.14)}}
+.btn:first-child{animation:breathe 3s ease-in-out infinite}
+.btn:first-child:hover{animation:none}
+.dock{position:fixed;z-index:5;top:max(14px,env(safe-area-inset-top));right:14px;display:flex;align-items:center;gap:8px;padding:6px;border-radius:99px;
+  background:rgba(20,8,44,.55);border:1px solid rgba(190,120,255,.35);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:0 8px 30px rgba(0,0,0,.4)}
+.dock button{all:unset;cursor:pointer;box-sizing:border-box;border-radius:50%;transition:transform .2s,box-shadow .2s}
+.dock button:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
+.dock button:hover{transform:scale(1.12)}
+.dock .dot{width:20px;height:20px;border:2px solid rgba(255,255,255,.35)!important}
+.dock .dot[aria-pressed="true"]{border-color:#fff!important;box-shadow:0 0 12px currentColor}
+.dock .d0{background:linear-gradient(135deg,#8b3dff,#d04bff);color:#b45cff}
+.dock .d1{background:linear-gradient(135deg,#2f6bff,#5ce1ff);color:#4aa8ff}
+.dock .d2{background:linear-gradient(135deg,#19b86b,#8bffc4);color:#3fe69a}
+.dock .d3{background:linear-gradient(135deg,#ff4d7a,#ffb36b);color:#ff7a8f}
+.snd{display:grid!important;place-items:center;width:34px;height:34px;color:#e9d7ff;background:rgba(139,61,255,.3);border:1px solid rgba(190,120,255,.5)!important}
+.snd svg{width:18px;height:18px}
+.snd[aria-pressed="true"]{background:linear-gradient(135deg,#8b3dff,#5ce1ff);color:#fff;box-shadow:0 0 16px rgba(92,225,255,.6)}
+.snd .off{display:none}.snd[aria-pressed="false"] .on{display:none}.snd[aria-pressed="false"] .off{display:block}
+html{transition:filter .6s}
+@media (max-width:480px){.planet{width:260px;height:260px;right:-100px;bottom:-100px}.moon{width:38px;height:38px}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.blip{opacity:.8}}
+</style>
+</head>
+<body>
+<div class="nebula"></div><div class="aurora"></div>
+<canvas id="stars" aria-hidden="true"></canvas>
+<div class="galaxy" aria-hidden="true"></div><div class="grid" aria-hidden="true"></div><div class="glow" id="glow" aria-hidden="true"></div>
+<div class="planet" aria-hidden="true"></div><div class="moon" aria-hidden="true"></div>
+
+<main class="card" id="card">
+  <i class="glare" aria-hidden="true"></i>
+  <div class="status"><i></i>НА ЗВ’ЯЗКУ 24/7</div>
+
+  <div class="radar-wrap" aria-hidden="true">
+    <svg class="ring-text" viewBox="0 0 200 200"><defs><path id="c" d="M100,100 m-90,0 a90,90 0 1,1 180,0 a90,90 0 1,1 -180,0"/></defs>
+      <text><textPath href="#c">ІНФОРМАЦІЯ • СПОВІЩЕННЯ • НОВИНИ • РАДАР •</textPath></text></svg>
+    <div class="radar"><div class="sweep"></div><span class="blip b1"></span><span class="blip b2"></span><span class="blip b3"></span></div>
+  </div>
+
+  <h1>РАДАР СТАРОЇ</h1>
+  <p class="subtitle">Офіційна сторінка Telegram-каналу<br>🇺🇦 Інформація • Сповіщення • Новини</p>
+  <div class="line"></div>
+
+  <nav class="buttons">
+    <a class="btn" href="https://t.me/+NwMc1WkQK3JlODNi" target="_blank" rel="noopener noreferrer">
+      <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 2 11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg></span>
+      <span><b>ПЕРЕЙТИ ДО КАНАЛУ</b><small>Новини та сповіщення в Telegram</small></span>
+    </a>
+    <a class="btn chat" href="https://t.me/+Uv95vAYfrkVmZTFi" target="_blank" rel="noopener noreferrer">
+      <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L3 20.5l1.5-4.8A8 8 0 1 1 21 12z"/><path d="M8.5 11h7M8.5 14.5h4"/></svg></span>
+      <span><b>ЧАТ СПІЛЬНОТИ</b><small>Спілкуйтесь разом з усіма</small></span>
+    </a>
+    <a class="btn owner" href="https://t.me/naisti" target="_blank" rel="noopener noreferrer">
+      <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6"/></svg></span>
+      <span><b>ЗВ’ЯЗОК ІЗ ВЛАСНИКОМ</b><small>Питання та співпраця</small></span>
+    </a>
+  </nav>
+
+  <p class="info">💜 Дякуємо, що ви з нами!<br>Бережіть себе та своїх близьких 🇺🇦</p>
+  <footer>© 2026 РАДАР СТАРОЇ | УСІ ПРАВА ЗАХИЩЕНО</footer>
+</main>
+
+<div class="dock" role="toolbar" aria-label="Налаштування">
+  <button class="dot d0" data-h="0" aria-pressed="true" aria-label="Фіолетова тема"></button>
+  <button class="dot d1" data-h="-55" aria-pressed="false" aria-label="Синя тема"></button>
+  <button class="dot d2" data-h="-130" aria-pressed="false" aria-label="Зелена тема"></button>
+  <button class="dot d3" data-h="75" aria-pressed="false" aria-label="Рожево-помаранчева тема"></button>
+  <button class="snd" id="snd" aria-pressed="false" aria-label="Космічний звук" title="Космічний звук">
+    <svg class="on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.500 5.500a9 9 0 0 1 0 13"/></svg>
+    <svg class="off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M22 9l-6 6M16 9l6 6"/></svg>
+  </button>
+</div>
+
+<script>
+(function(){
+  // кольорові теми
+  var dots=document.querySelectorAll('.dot'),root=document.documentElement;
+  function theme(h){root.style.filter=h==0?'':'hue-rotate('+h+'deg)';
+    dots.forEach(function(d){d.setAttribute('aria-pressed',String(d.dataset.h==h))});
+    try{localStorage.setItem('radar-h',h)}catch(e){}}
+  dots.forEach(function(d){d.addEventListener('click',function(){theme(+d.dataset.h)})});
+  try{var h0=localStorage.getItem('radar-h');if(h0!==null)theme(+h0)}catch(e){}
+  // космічний звук (генерується в браузері, без файлів)
+  var btn=document.getElementById('snd'),ac,master,timer,on=false;
+  function build(){
+    ac=new (window.AudioContext||window.webkitAudioContext)();
+    master=ac.createGain();master.gain.value=0;
+    var lp=ac.createBiquadFilter();lp.type='lowpass';lp.frequency.value=650;
+    master.connect(lp);lp.connect(ac.destination);
+    [[110,'sine'],[164.81,'sine'],[220,'triangle'],[277.18,'sine']].forEach(function(n,i){
+      var o=ac.createOscillator(),g=ac.createGain();o.type=n[1];o.frequency.value=n[0];o.detune.value=(i-1.5)*5;g.gain.value=.22;
+      o.connect(g);g.connect(master);o.start()});
+    var lfo=ac.createOscillator(),lg=ac.createGain();lfo.frequency.value=.07;lg.gain.value=300;lfo.connect(lg);lg.connect(lp.frequency);lfo.start();
+  }
+  function ping(){
+    var t=ac.currentTime,o=ac.createOscillator(),g=ac.createGain();o.type='sine';o.frequency.value=1320;
+    g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.05,t+.01);g.gain.exponentialRampToValueAtTime(.0001,t+1.5);
+    o.connect(g);g.connect(ac.destination);o.start(t);o.stop(t+1.6)}
+  btn.addEventListener('click',function(){
+    on=!on;btn.setAttribute('aria-pressed',String(on));
+    if(on){if(!ac)build();ac.resume();master.gain.setTargetAtTime(.13,ac.currentTime,1.2);ping();timer=setInterval(ping,3600)}
+    else{clearInterval(timer);master.gain.setTargetAtTime(0,ac.currentTime,.5)}
+  });
+})();
+</script>
+<script>
+(function(){
+  var px=0,py=0,tx=0,ty=0;var c=document.getElementById('stars'),x=c.getContext('2d'),W,H,stars=[],shoots=[];
+  var still=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  function size(){var d=devicePixelRatio||1;W=innerWidth;H=innerHeight;c.width=W*d;c.height=H*d;x.setTransform(d,0,0,d,0,0);
+    var n=Math.min(280,Math.floor(W*H/6000));stars=[];
+    for(var i=0;i<n;i++)stars.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.4+.2,p:Math.random()*6.28,s:Math.random()*.02+.005,v:Math.random()*.12+.02})}
+  function frame(){x.clearRect(0,0,W,H);px+=(tx-px)*.05;py+=(ty-py)*.05;
+    stars.forEach(function(s){s.p+=s.s;s.y+=s.v;if(s.y>H){s.y=0;s.x=Math.random()*W}
+      x.globalAlpha=.35+.65*Math.abs(Math.sin(s.p));x.fillStyle=s.r>1.1?'#cfe9ff':'#fff';x.beginPath();x.arc(s.x+px*s.r,s.y+py*s.r,s.r,0,6.28);x.fill()});
+    if(!still&&Math.random()<.01&&shoots.length<2)shoots.push({x:Math.random()*W,y:Math.random()*H*.5,l:0});
+    shoots=shoots.filter(function(m){m.x-=9;m.y+=5;m.l++;var g=x.createLinearGradient(m.x,m.y,m.x+80,m.y-44);
+      g.addColorStop(0,'rgba(255,255,255,.95)');g.addColorStop(1,'rgba(255,255,255,0)');x.globalAlpha=1;x.strokeStyle=g;x.lineWidth=1.7;
+      x.beginPath();x.moveTo(m.x,m.y);x.lineTo(m.x+80,m.y-44);x.stroke();x.fillStyle='#fff';x.beginPath();x.arc(m.x,m.y,2.2,0,6.28);x.fill();return m.l<60});
+    if(!still)requestAnimationFrame(frame)}
+  addEventListener('resize',size);size();frame();
+  // світло за курсором, паралакс зірок, блик на карточці
+  var glow=document.getElementById('glow'),card0=document.getElementById('card');
+  Array.prototype.forEach.call(card0.children,function(el,i){el.style.setProperty('--i',i)});
+  glow.style.transform='translate('+innerWidth/2+'px,'+innerHeight/3+'px)';
+  addEventListener('pointermove',function(e){
+    glow.style.transform='translate('+e.clientX+'px,'+e.clientY+'px)';
+    tx=(e.clientX/W-.5)*-16;ty=(e.clientY/H-.5)*-16;
+    var r=card0.getBoundingClientRect();card0.style.setProperty('--mx',(e.clientX-r.left)+'px');card0.style.setProperty('--my',(e.clientY-r.top)+'px');
+  });
+  // 3D-нахил карточки за курсором
+  var card=document.getElementById('card');
+  if(!still&&matchMedia('(hover:hover) and (pointer:fine)').matches){
+    addEventListener('mousemove',function(e){var rx=(e.clientY/innerHeight-.5)*-6,ry=(e.clientX/innerWidth-.5)*6;
+      card.style.transform='rotateX('+rx+'deg) rotateY('+ry+'deg)'});
+    addEventListener('mouseleave',function(){card.style.transform=''});
+  }
+})();
+</script>
+</body>
+</html>
